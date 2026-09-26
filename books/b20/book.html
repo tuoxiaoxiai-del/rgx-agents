@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>《一天一点经济学》</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1c1c1c; font-size: 14px; line-height: 1.78;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .wrap { width: 100%; }
+  h1, h2, h3 { font-weight: 800; letter-spacing: .5px; }
+  h2 { font-size: 19px; color: #143a32; margin: 26px 0 12px;
+       padding-left: 11px; border-left: 5px solid #c08438; }
+  h3 { font-size: 15.5px; color: #143a32; margin: 16px 0 6px; }
+
+  /* 封面（顶部块，不强制分页） */
+  .cover { border: 1px solid #e3ddd0; border-radius: 14px; padding: 22px 24px;
+           background: linear-gradient(135deg,#143a32 0%,#1d5247 100%); color: #fff;
+           margin-bottom: 22px; }
+  .cover .dim { display: inline-block; font-size: 12px; background: #c08438; color: #1c1c1c;
+           padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 1px; }
+  .cover h1 { font-size: 25px; margin: 12px 0 8px; line-height: 1.35; }
+  .cover .pos { font-size: 14.5px; opacity: .95; margin: 0; }
+  .cover .sign { margin-top: 14px; font-size: 12.5px; opacity: .85; }
+
+  .lead { background: #f6f3ec; border-radius: 10px; padding: 14px 16px; margin: 4px 0 6px; }
+  .lead b { color: #143a32; }
+
+  /* 心智模型卡片 */
+  .models { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mcard { border: 1px solid #e3ddd0; border-radius: 10px; padding: 12px 14px;
+           background: #fcfbf7; break-inside: avoid; }
+  .mcard .mt { font-weight: 800; color: #143a32; font-size: 14.5px; margin-bottom: 4px; }
+  .mcard .md { font-size: 13px; color: #3a3a3a; margin: 0; }
+  .mcard .mu { font-size: 12.5px; color: #7a6a4a; margin: 6px 0 0; }
+
+  /* 提纲 */
+  .outline { padding-left: 0; }
+  .ochap { break-inside: avoid; margin: 10px 0; }
+  .ochap .ot { font-weight: 800; color: #143a32; font-size: 14.5px; }
+  .ochap ul { margin: 4px 0 0; padding-left: 20px; }
+  .ochap li { margin: 2px 0; }
+
+  /* 精讲 */
+  .lect .blk { break-inside: avoid; margin: 10px 0; }
+  .lect p { margin: 5px 0; }
+  .lect .k { color: #c08438; font-weight: 700; }
+
+  /* 自测卷 */
+  .quiz .q { break-inside: avoid; border: 1px solid #e3ddd0; border-radius: 10px;
+             padding: 12px 14px; margin: 10px 0; background: #fcfbf7; }
+  .quiz .qt { font-weight: 700; margin-bottom: 7px; }
+  .quiz label { display: block; padding: 4px 8px; border-radius: 6px; margin: 3px 0;
+                cursor: pointer; }
+  .quiz label:hover { background: #f0ece1; }
+  .quiz input { margin-right: 8px; }
+  .quiz .ans { font-size: 12.5px; color: #1d7a4d; margin-top: 6px; display: none; }
+  .quizbar { margin: 12px 0; }
+  .quizbar button { background: #143a32; color: #fff; border: 0; border-radius: 8px;
+                    padding: 9px 18px; font-size: 14px; cursor: pointer; font-weight: 700; }
+  .score { font-size: 16px; font-weight: 800; color: #143a32; margin-left: 12px; }
+
+  /* 打卡 */
+  .check li { margin: 6px 0; break-inside: avoid; }
+  .check .day { font-weight: 800; color: #c08438; }
+
+  footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #e3ddd0;
+           font-size: 12.5px; color: #6a6a6a; text-align: center; }
+  footer .cta { display: flex; align-items: center; justify-content: center; gap: 18px;
+                background: #f6f3ec; border: 1px solid #e3ddd0; border-radius: 12px;
+                padding: 14px 18px; margin-bottom: 14px; }
+  footer .ctaqr { width: 92px; height: 92px; border-radius: 8px; }
+  footer .ctatxt { text-align: left; }
+  footer .ctabig { font-size: 16px; font-weight: 800; color: #143a32; }
+  footer .ctasub { font-size: 12.5px; color: #6a6a6a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ COVER ============ -->
+  <section class="cover">
+    <span class="dim">财富管理</span>
+    <h1>《一天一点经济学》</h1>
+    <p class="pos">把经济学还原成日常常识，花钱、挣钱、看懂政策都有依据</p>
+    <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+  </section>
+
+  <!-- ============ 解决什么 ============ -->
+  <section>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">明明努力工作、省吃俭用，钱却总不见涨；新闻里满屏利率、通胀、政策，看得云里雾里，做决定只能靠感觉和运气。这份资料用大白话把经济学还原成"精炼的常识"，让你在消费、求职、投资、理解政策时，每一步都从"凭感觉"变成"有依据"。</div>
+  </section>
+
+  <!-- ============ 心智模型 ============ -->
+  <section>
+    <h2>核心心智模型</h2>
+    <div class="models">
+      <div class="mcard">
+        <div class="mt">稀缺取舍</div>
+        <p class="md">一切决策的本质是"选了 A 就要放弃 B"，钱、时间、注意力都是稀缺的。</p>
+        <p class="mu">用法：花钱、花时间之前，先问自己一句——我因此放弃了什么？</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">供需定价</div>
+        <p class="md">价格和收入不看"应不应该"，只看稀缺程度：供小于求则贵，供大于求则贱。</p>
+        <p class="mu">用法：想让收入涨，先让自己变稀缺，挤进供小于求的位置。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">激励导向</div>
+        <p class="md">人会跟着激励走：补贴让某类行为变多，重税让某类行为变少。</p>
+        <p class="mu">用法：看懂任何制度，先看它奖励什么、惩罚什么，再预测大家会怎么做。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">理解边界</div>
+        <p class="md">复杂程度超出你理解能力的投资，风险远大于机会。</p>
+        <p class="mu">用法：一句话讲不清的钱不赚，"高回报、轻描风险"的推销直接警惕。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">善意陷阱</div>
+        <p class="md">出发点好的安排，结果未必好；评价任何政策要看结果，不看动机。</p>
+        <p class="mu">用法：听到"这是为大家好"，先问一句：谁受益、谁买单、行为会怎么变？</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 提纲 ============ -->
+  <section>
+    <h2>内容提纲</h2>
+    <div class="outline">
+      <div class="ochap">
+        <div class="ot">第一章 · 常识即学问</div>
+        <ul>
+          <li>经济学是什么：研究稀缺条件下的理性决策</li>
+          <li>理性决定的两个要素：目标明确 + 资源省着用</li>
+          <li>微观管你我怎么决策，宏观管整体经济怎么走</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第二章 · 职场的价格</div>
+        <ul>
+          <li>收入差距的本质：稀缺程度，而不是努力程度</li>
+          <li>人力资本投资：教育、培训与经验的回报率</li>
+          <li>消除职场偏见的最好办法是提升生产力</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第三章 · 消费与市场</div>
+        <ul>
+          <li>信息不对称：好东西为什么卖不上价</li>
+          <li>同物不同价的门道：价格歧视与空座经济学</li>
+          <li>"看不见的手"：利己行为如何造福所有人</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第四章 · 看懂政策</div>
+        <ul>
+          <li>税收与补贴如何悄悄改变人的行为</li>
+          <li>好心办坏事：价格管制的意外后果</li>
+          <li>救助与道德风险：为什么冒险的人越来越大胆</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第五章 · 钱与银行</div>
+        <ul>
+          <li>CPI：生活成本的风向标</li>
+          <li>利率是钱的价格，由市场决定</li>
+          <li>对冲基金与复杂产品：普通人的清醒剂</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第六章 · 把经济学用进每一天</div>
+        <ul>
+          <li>决策四步：目标 → 资源 → 替代方案 → 激励</li>
+          <li>讨价还价的有效方法</li>
+          <li>别为小概率的坏消息瞎操心</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 精讲 ============ -->
+  <section>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="lect">
+      <div class="blk">
+        <h3>模块一 · 经济学是精炼的常识</h3>
+        <p><span class="k">结论先行：</span>经济学不是一堆数据和曲线，而是一种决策方式——目标清楚，资源省着用。</p>
+        <p>所谓"理性行为"只要满足两个条件：一是你的目标不自相矛盾；二是用尽可能少的资源去实现它。这就是全部秘密。</p>
+        <p>稀缺是常态。买了车可能就不去度假，做了这一行就干不了那一行。你选了什么不重要，重要的是知道自己放弃了什么。</p>
+        <p>微观经济学管你和小公司怎么决策，宏观经济学管整个经济怎么走。对普通人来说，微观的那套更实用、根基也更扎实。</p>
+      </div>
+      <div class="blk">
+        <h3>模块二 · 你的身价由供需决定</h3>
+        <p><span class="k">结论先行：</span>收入差距的本质是稀缺度，不是努力程度，更不是道德高低。</p>
+        <p>明星收入高，是因为这类人供小于求、又难被替代，还能为雇主带来可观利润；普通岗位供大于求，随时有人能顶上，议价能力自然弱。</p>
+        <p>想涨薪只有两条路：练出少有人会的能力，或者走进利润厚、付得起的行业。抱怨市场没有用，市场只认稀缺。</p>
+        <p>对普通人回报率最高的投资，是教育和培训。适用面广的"通用能力"选择多，专精的"专业能力"收入高，选哪个取决于你要广度还是深度。</p>
+        <p>职场上想被公平对待，最有效的路径同样是提升自己的生产力——能力强到不可替代时，偏见自然让位于利益。</p>
+      </div>
+      <div class="blk">
+        <h3>模块三 · 信息不对称：买东西的门道</h3>
+        <p><span class="k">结论先行：</span>买卖双方知道的不一样多时，买家只能往坏了猜，好东西反而卖不上价。</p>
+        <p>最典型的是二手车：卖家知道车况，买家不知道，于是所有人都把车当"烂车"压价。破局办法只有一个——主动亮出信息。保养记录、维修单据晒出来，价格立刻不一样。我的经验是：把完整保养记录交给懂行的买家，成交价能翻倍。</p>
+        <p>互联网最大的功劳之一，就是把价格变透明。货比三家的成本大幅下降，你只要肯花时间，就能拿到接近市场最低价。</p>
+        <p>同一航班不同票价也是这个逻辑的变体：航空公司把空座便宜卖给价格敏感的人，多赚的几乎全是利润，其他乘客也没多花一分钱。看见"不公平"的定价，先想想自己能不能当那个捡便宜的人。</p>
+      </div>
+      <div class="blk">
+        <h3>模块四 · 看懂政策：激励决定行为</h3>
+        <p><span class="k">结论先行：</span>看政策别看口号，看它让谁得到好处、谁为之买单、人的行为会怎么变。</p>
+        <p>好心常常办坏事。房租管制想帮穷房客，结果房东不维护房子、老租客死守不肯搬、新租客排不上队，最后受益的是有关系的有钱人。</p>
+        <p>补贴让某类行为变多，重税让某类行为变少。烟酒税最好玩：既想让人少消费，又想多收财政收入，两个目标天生打架。</p>
+        <p>救助濒临破产的公司也要多想一层：如果冒险总有人兜底，冒险的人只会更大胆，这就是"道德风险"。而无论救助还是补贴，最后买单的都是纳税人——包括你。</p>
+      </div>
+      <div class="blk">
+        <h3>模块五 · 钱与银行：做清醒的钱包主人</h3>
+        <p><span class="k">结论先行：</span>利率是钱的价格，由市场决定；CPI 是生活成本的风向标，你的工资调整、补贴发放都跟着它走。</p>
+        <p>对复杂投资，我只有一条硬建议：任何复杂程度超出你理解能力的方案，一律持怀疑态度。很多富人和专业机构都因为轻信"高回报、轻描风险"的说辞损失惨重，何况我们。</p>
+        <p>神秘的高门槛基金听起来诱人，实际上高费用、高风险、低透明，亏了照收管理费、赚了大头归经理——这种结构对普通人天然不利。</p>
+        <p>至于存款安全：正规体系里的银行有动机也有能力守护你的钱，把担心花在提升自己的赚钱能力上，比担心系统崩溃划算得多。</p>
+      </div>
+      <div class="blk">
+        <h3>模块六 · 把经济学用进每一天</h3>
+        <p><span class="k">结论先行：</span>做任何决定前先问两个问题：我要什么？我愿意放弃什么？</p>
+        <p>讨价还价的核心是信息：知道对方的成本线、知道市场上的成交价，你就有底气。谈判不是嗓门大，是数据硬。</p>
+        <p>别为小概率的坏消息瞎操心。经济有起有落，但把精力花在让自己变稀缺上，任何环境里你都更从容。</p>
+        <p>我的通用决策框架送给你：明确目标 → 盘点资源 → 列出替代方案 → 检查各方的激励。四步走完，大多数纠结自动解开。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 自测卷 ============ -->
+  <section>
+    <h2>自测卷 · 10 题当场出分</h2>
+    <div class="quiz" id="quiz">
+      <div class="q">
+        <div class="qt">1. 按这份资料的框架，一个"理性决定"必须满足哪两个要素？</div>
+        <label><input type="radio" name="q1">A. 目标远大 + 行动迅速</label>
+        <label><input type="radio" name="q1" data-correct="1">B. 目标明确不自相矛盾 + 用尽量少的资源实现</label>
+        <label><input type="radio" name="q1">C. 情绪稳定 + 听从专家</label>
+        <label><input type="radio" name="q1">D. 收益最大 + 风险为零</label>
+        <div class="ans">答案：B。理性 = 目标一致 + 资源效率。</div>
+      </div>
+      <div class="q">
+        <div class="qt">2. 明星收入远高于普通职业者，最本质的原因是？</div>
+        <label><input type="radio" name="q2">A. 他们更努力</label>
+        <label><input type="radio" name="q2">B. 他们的工作更有价值</label>
+        <label><input type="radio" name="q2" data-correct="1">C. 供小于求、难被替代，且能带来利润</label>
+        <label><input type="radio" name="q2">D. 分配机制不公平</label>
+        <div class="ans">答案：C。价格和收入由供需与稀缺决定。</div>
+      </div>
+      <div class="q">
+        <div class="qt">3. 二手车好车也卖不上好价，主要因为？</div>
+        <label><input type="radio" name="q3">A. 车况确实都不好</label>
+        <label><input type="radio" name="q3" data-correct="1">B. 买卖双方信息不对称，买家往坏处猜</label>
+        <label><input type="radio" name="q3">C. 市场被垄断</label>
+        <label><input type="radio" name="q3">D. 运输成本太高</label>
+        <div class="ans">答案：B。主动亮出保养记录等真实信息是破局关键。</div>
+      </div>
+      <div class="q">
+        <div class="qt">4. 判断：同一航班不同票价，是航空公司故意让普通乘客多掏钱的设计。</div>
+        <label><input type="radio" name="q4">A. 正确</label>
+        <label><input type="radio" name="q4" data-correct="1">B. 错误</label>
+        <div class="ans">答案：B。填满空座多赚的几乎全是利润，其他乘客并未多付钱，价格敏感的乘客反而得实惠。</div>
+      </div>
+      <div class="q">
+        <div class="qt">5. 评价一项政策好不好，最靠谱的角度是？</div>
+        <label><input type="radio" name="q5">A. 看出发点是否善良</label>
+        <label><input type="radio" name="q5">B. 看宣传口号是否动人</label>
+        <label><input type="radio" name="q5" data-correct="1">C. 看实际结果：谁受益、谁买单、行为如何改变</label>
+        <label><input type="radio" name="q5">D. 看支持的人多不多</label>
+        <div class="ans">答案：C。善意陷阱模型：看结果不看动机。</div>
+      </div>
+      <div class="q">
+        <div class="qt">6. 房租管制的实际结果往往是？</div>
+        <label><input type="radio" name="q6">A. 穷人都住上了便宜房</label>
+        <label><input type="radio" name="q6" data-correct="1">B. 房源维护变差、老租客不搬、关系户受益</label>
+        <label><input type="radio" name="q6">C. 房东维护更积极</label>
+        <label><input type="radio" name="q6">D. 租金更加透明</label>
+        <div class="ans">答案：B。价格压低于市场价，供给和质量都会萎缩。</div>
+      </div>
+      <div class="q">
+        <div class="qt">7. CPI 最直接影响到普通人的是什么？</div>
+        <label><input type="radio" name="q7">A. 股票涨跌</label>
+        <label><input type="radio" name="q7" data-correct="1">B. 生活成本变化，以及工资、补贴、纳税的调整依据</label>
+        <label><input type="radio" name="q7">C. 汇率波动</label>
+        <label><input type="radio" name="q7">D. 房贷利率</label>
+        <div class="ans">答案：B。CPI 是生活成本的风向标。</div>
+      </div>
+      <div class="q">
+        <div class="qt">8. 面对一款你完全看不懂的复杂投资产品，最理性的做法是？</div>
+        <label><input type="radio" name="q8">A. 相信专业推销员</label>
+        <label><input type="radio" name="q8">B. 先小额试水</label>
+        <label><input type="radio" name="q8" data-correct="1">C. 持怀疑态度，不投</label>
+        <label><input type="radio" name="q8">D. 看别人买就跟着买</label>
+        <div class="ans">答案：C。理解边界模型：讲不清的钱不赚。</div>
+      </div>
+      <div class="q">
+        <div class="qt">9. "人力资本投资"指的是？</div>
+        <label><input type="radio" name="q9">A. 购买理财产品</label>
+        <label><input type="radio" name="q9" data-correct="1">B. 在教育、培训和工作经验上的持续投入</label>
+        <label><input type="radio" name="q9">C. 尽早买房</label>
+        <label><input type="radio" name="q9">D. 多存钱少消费</label>
+        <div class="ans">答案：B。这是普通人回报率最高的投资。</div>
+      </div>
+      <div class="q">
+        <div class="qt">10. 判断：收入差距的本质，是稀缺程度的不同。</div>
+        <label><input type="radio" name="q10" data-correct="1">A. 正确</label>
+        <label><input type="radio" name="q10">B. 错误</label>
+        <div class="ans">答案：A。供需定价模型：让自己稀缺，收入自然抬升。</div>
+      </div>
+    </div>
+    <div class="quizbar">
+      <button onclick="grade()">交卷看分</button>
+      <span class="score" id="score"></span>
+    </div>
+  </section>
+
+  <!-- ============ 打卡 ============ -->
+  <section>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check">
+      <li><span class="day">第 1 天：</span>记录今天的每一笔消费，每笔后面写一句"我因此放弃了什么"。</li>
+      <li><span class="day">第 2 天：</span>列出自己三项"别人不容易替代"的能力；不足的，写下补课计划。</li>
+      <li><span class="day">第 3 天：</span>买一样东西前花 10 分钟比三家价，把差价记下来，感受信息透明的力量。</li>
+      <li><span class="day">第 4 天：</span>找一条你身边的新政策或公司新规，用两行字写出"谁受益、谁买单"。</li>
+      <li><span class="day">第 5 天：</span>列一份"理解边界"清单：写出所有你讲不清楚的钱，圈出该退出的部分。</li>
+      <li><span class="day">第 6 天：</span>用"目标 → 资源 → 替代方案 → 激励"四步，拆解一件本周要决定的事。</li>
+      <li><span class="day">第 7 天：</span>复盘一周：挑一个被情绪带偏的决定，重写一版理性决策，对照差距。</li>
+    </ul>
+  </section>
+
+  <!-- ============ 结语 ============ -->
+  <section>
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead">
+      <p><b>1.</b> 一切选择都有代价：买东西、换工作、花时间，先想清楚你放弃了什么。</p>
+      <p><b>2.</b> 你的身价由稀缺度决定：让自己变得少有人能替代，收入自然抬升。</p>
+      <p><b>3.</b> 看事看激励、看结果：出发点不重要，谁受益、谁买单、行为怎么变才重要。</p>
+    </div>
+    <p>我建议你从今天就开始打卡，每天只做一件小事，7 天走完再交卷自测。如果低于 7 分，重点重读"看懂政策"和"钱与银行"两个模块，把"理解边界"清单真正用起来——这份资料的价值不在读完，而在你下一次花钱、谈判、做决定时，能多问出那几个关键问题。</p>
+  </section>
+
+    <!-- ============ 复盘卡（补尾页） ============ -->
+  <section class="recap">
+    <h2>带走《一天一点经济学》· 一张复盘卡</h2>
+    <div class="lead">
+      <p><b>① 它归在「财富管理」这条线上</b>——把经济学还原成日常常识，花钱、挣钱、看懂政策都有依据</p>
+      <p><b>② 今天就能用的一步</b>：从自测卷里挑 1 题，把对应模型写进你明天要做的一件事里。</p>
+      <p><b>③ 卡住了别硬扛</b>：扫码加微信，领这套资料的 AI 陪练，对着练比自己悟快得多。</p>
+    </div>
+    <h3>这套资料怎么用（4 步闭环）</h3>
+    <ul class="check">
+      <li><span class="day">读</span> 通读「核心心智模型 + 精讲」，先建立骨架，不纠结细节。</li>
+      <li><span class="day">测</span> 做 10 题自测卷，当场出分；低于 7 分，回到薄弱模型再读一遍。</li>
+      <li><span class="day">练</span> 按「7 天打卡」每天一个微小动作，把知道变成做到。</li>
+      <li><span class="day">扩</span> 顺手领全套「33 本书带你开启新的人生」，沿主线一本本读完。</li>
+    </ul>
+    <h3>给忙碌者的 3 分钟速记</h3>
+    <ul class="check">
+      <li><span class="day">记</span> 这本书只解决一件事：把经济学还原成日常常识，花钱、挣钱、看懂政策都有依据</li>
+      <li><span class="day">用</span> 把书里最打动你的一个模型，立刻套进本周一个真实问题。</li>
+      <li><span class="day">传</span> 试着给一个人讲清楚这个模型——讲得清，才是真懂。</li>
+      <li><span class="day">续</span> 读不顺就换一本，主线是「认知→思维→行动→关系→财富」，不必死磕顺序。</li>
+    </ul>
+    <p>「33 本书带你开启新的人生」不是读得多，是把每一本的真东西用起来——这一本，先从一个模型开始，今天就用一次。</p>
+  </section>
+
+<footer>
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  </footer>
+
+</div>
+
+<script>
+function grade(){
+  var qs = document.querySelectorAll('#quiz .q');
+  var total = qs.length, right = 0;
+  qs.forEach(function(q){
+    var picked = q.querySelector('input:checked');
+    var correct = q.querySelector('input[data-correct="1"]');
+    var ans = q.querySelector('.ans');
+    if(ans) ans.style.display = 'block';
+    if(picked && picked === correct){ right++; }
+  });
+  var s = document.getElementById('score');
+  if(s) s.textContent = '得分 ' + right + ' / ' + total;
+}
+</script>
+</body>
+</html>
