@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一本书读懂金融常识 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>一本书读懂金融常识 · 书智能体</b><span>财富管理｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">财富管理</span>
+      <h1>《一本书读懂金融常识》</h1>
+      <p class="pos">看懂身边的金融，让钱更安全、更值钱</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">钱总在不经意间变少，理财又怕踩坑；新闻里的加息、汇率、通胀听得云里雾里。这份资料把金融常识翻译成大白话，帮你建立自己的判断框架，不再被市场情绪和推销话术牵着走。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">货币三兄弟</div><p class="md">M0 是手里现金，M1 加活期存款，M2 再加定期与储蓄。三者的增速差，是经济冷热的温度计。</p><p class="mu">看 M1 比 M2 跑得快还是慢，能大致判断钱是在流动还是在"睡觉"。</p></div><div class="mcard"><div class="mt">复利思维</div><p class="md">利滚利加上时间，是指数级增长。早开始一天，往往胜过后来多投一笔。</p><p class="mu">做任何长期储蓄或投资前，先算"按这个收益率，N 年后变成多少"。</p></div><div class="mcard"><div class="mt">信用即资产</div><p class="md">按时还钱、不逾期，积累的是一笔隐形财富：更低利率、更高额度、更多便利。</p><p class="mu">从今天起把"不逾期"当铁律，它比临时想办法借钱重要得多。</p></div><div class="mcard"><div class="mt">通胀隐形税</div><p class="md">物价上涨时，同样一笔现金能买的东西变少了，钱在"躺着"时也被征了税。</p><p class="mu">长期不用的钱别全放活期，用能跑赢通胀的工具承接。</p></div><div class="mcard"><div class="mt">配置优于押注</div><p class="md">不同人生阶段、不同风险承受力，该放不同的"篮子"；别把全部身家押一个方向。</p><p class="mu">先留足应急金，再谈投资；缺了底层安全垫，收益再高也脆弱。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">上篇　金融常识——轻轻走进身边的金融世界</div><ul><li>货币：钱的形态与 M0/M1/M2，货币需求与"货币幻觉"。</li><li>信用：个人、银行、国家、商业、消费信用的逻辑与边界。</li><li>利率与汇率：钱的内部价格、国与国货币的比价及其影响。</li></ul></div><div class="ochap"><div class="ot">中篇　多重分形的金融市场</div><ul><li>股票、外汇、保险、期货、期权、债券六大市场的角色与风险。</li><li>通胀与通缩：财富增长的一对冤家，以及它们对口袋的真实影响。</li><li>金融危机：风险、泡沫与经济周期，世上没有只赚不赔的市场。</li></ul></div><div class="ochap"><div class="ot">下篇　金融理财——唯有理财才能生财</div><ul><li>理财先理观念：脑袋决定钱袋，不跟风、要规划、按阶段配置。</li><li>金融资本投资：储蓄、保险、债券、外汇、基金、黄金、股票的取舍。</li><li>负债理财：房贷、车贷、教育金、卡片与典当，让负债也能"飞跃"。</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>一、货币的三兄弟：M0、M1、M2</h3><p>结论先行：别只盯"印了多少钱"，要看钱在哪个层次、流不流得动。</p><p><span class="k">M0</span> 是流通中的现金；<span class="k">M1</span> 在 M0 上加活期存款，反映即期购买力；<span class="k">M2</span> 再加定期与储蓄，代表更广义的"钱袋子"。</p><p>经验上，M1 增速长期快过 M2，说明钱从定期往外跑、大家想花想投，经济偏热；反过来则偏冷。它是判断冷暖的简便温度计。</p></div><div class="blk"><h3>二、复利：让时间替你赚钱</h3><p>结论先行：复利被说成"世界第八大奇迹"，核心不是收益率多高，而是"不中断 + 够长"。</p><p>本金产生的利息再投入，下一期连本带利一起生息，越往后滚得越快。同样一笔钱，早开始十年和晚开始十年，终点可能差出数倍。</p><p>所以别小看每月定投、别轻易中断——时间才是复利真正的朋友。</p></div><div class="blk"><h3>三、信用是你的隐形财富</h3><p>结论先行：信用不是虚名，它直接换算成利率、额度和机会，是每个人的"经济身份证"。</p><p>一次逾期可能让房贷利率上浮、额度缩水，甚至被拒。反过来，干净良好的记录能换来更便宜的资金和更顺的手续。</p><p>建立信用的笨办法最有效：和正规金融机构发生借贷、按时还、别逾期。不借钱不等于信用好，没记录银行反而难判断你。</p></div><div class="blk"><h3>四、通胀是一种隐形税</h3><p>结论先行：钱不流动、不增值，就会被物价悄悄"征税"，购买力逐年缩水。</p><p>当市面上商品对应的货币量不变、货币流速或投放过快，物价就会被推高。这时你账上的名义数字没变，能买的东西却少了。</p><p>抵御的思路很简单也很硬核：长期不用的钱，要放到收益率能覆盖通胀的工具里，而不是全躺在活期账户。</p></div><div class="blk"><h3>五、利率与汇率：钱的内外价格</h3><p>结论先行：利率是钱在国内的"租金价格"，汇率是一国货币对另一国的"比价"，二者牵动一切资产。</p><p>利率升高，持币的机会成本变大，人们更愿存钱、少借；利率降低则相反，刺激借与投。汇率波动则影响进出口、海外消费与留学成本。</p><p>看懂这两个价格，新闻里的"加息""贬值"就不再抽象，而能落到你的存款、房贷和购物上。</p></div><div class="blk"><h3>六、理财先理观念：别跟风，要配置</h3><p>结论先行：理财第一步不是选产品，而是理清观念——脑袋决定钱袋。</p><p>三个底层原则：一不跟风，理财是你自己的事；二要规划目标，追求起来才有劲；三无论有钱没钱都要配置资产，并随人生阶段调整。</p><p>顺序上先留应急金、还清高息负债，再用余钱做投资。底层安全垫没铺好，再高的收益也只是空中楼阁。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 金融不是高墙里的学问，它就在你的存款、刷卡、借贷和每一笔消费里，先建立常识才不会被带节奏。</p><p><b>2.</b> 钱有内外两个价格——利率与汇率，还有通胀这把隐形的刀，看懂它们你就看懂了大部分财经新闻。</p><p><b>3.</b> 理财先理观念：不跟风、留安全垫、按阶段配置，时间加复利会替认真的人把雪球滚大。</p></div>
+    <p>这份资料建议从今天开始连续 7 天打卡；自测低于 7 分，重读"货币三兄弟"与"配置优于押注"两节，再对照自家账本练一遍。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第 1 天</span> 查一下自己名下的征信/信用状况，确认没有莫名逾期。</li><li><span class="day">第 2 天</span> 算一笔账：按当前利率，每月定投 1000 元、20 年后大概是多少（体会复利）。</li><li><span class="day">第 3 天</span> 整理家庭资产，分成现金、储蓄、投资、负债四栏，看比例健不健康。</li><li><span class="day">第 4 天</span> 留足 3–6 个月应急金，算算还差多少、怎么补齐。</li><li><span class="day">第 5 天</span> 关注一次 M1/M2 与利率新闻，试着用今天的框架解释给你身边的人听。</li><li><span class="day">第 6 天</span> 检查手里的负债，把高息的消费贷/信用卡分期优先列个还款计划。</li><li><span class="day">第 7 天</span> 写一句自己的理财目标（如"三年攒够首付底仓"），并定下每月配置动作。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 我国的 M1 通常是指？", "o": ["A. 流通中的现金 M0", "B. M0 加上商业银行活期存款", "C. M0 加上定期与储蓄存款", "D. 全部外币存款"], "a": 1, "tip": "M1 = M0 + 活期存款，是狭义货币、即期购买力；M2 才再加上定期与储蓄。"}, {"q": "2. 复利能放大收益，最关键的两个条件是？", "o": ["A. 高收益、频繁交易", "B. 不中断、时间够长", "C. 只买股票、加杠杆", "D. 追涨杀跌"], "a": 1, "tip": "复利靠\"利滚利 + 时间\"，中途中断或时间太短都发挥不出指数威力。"}, {"q": "3. 把个人信用比作什么最贴切？", "o": ["A. 一张银行卡", "B. 经济身份证", "C. 一份保险合同", "D. 一笔存款"], "a": 1, "tip": "信用记录像\"经济身份证\"，直接影响贷款利率、额度与各类手续的便利。"}, {"q": "4. 通货膨胀对现金持有者的主要影响是？", "o": ["A. 现金购买力上升", "B. 现金购买力下降，钱被隐形征税", "C. 没有任何影响", "D. 银行存款自动变多"], "a": 1, "tip": "物价上涨使同额现金能买的东西变少，相当于持币被征了\"隐形税\"。"}, {"q": "5. 利率上升时，一般人持币的意愿通常如何变化？", "o": ["A. 下降，因为持币机会成本变高", "B. 上升，大家更爱存钱", "C. 完全不变", "D. 立刻去买股票"], "a": 0, "tip": "利率高则持币成本（放弃的利息）大，人们倾向减少持币、转投生息资产。"}, {"q": "6. 汇率本质上是？", "o": ["A. 一国的利率水平", "B. 两国货币之间的比价", "C. 物价指数", "D. 股票指数"], "a": 1, "tip": "汇率是一国货币兑换另一国货币的比价，牵动进出口、留学与海外消费成本。"}, {"q": "7. 当 M1 增速长期快于 M2，一般说明？", "o": ["A. 经济偏热，钱更愿意流动和投机", "B. 经济偏冷，钱都在睡觉", "C. 通胀已经消失", "D. 没有任何含义"], "a": 0, "tip": "M1 跑赢 M2，意味着定期转活、大家想花想投，经济趋于扩张偏热。"}, {"q": "8. 理财第一步应该先做什么？", "o": ["A. 马上买热门基金", "B. 理观念：明确目标、不跟风、先配安全垫", "C. 全仓押一个方向", "D. 听朋友推荐就行"], "a": 1, "tip": "理财先理观念，先留应急金、还清高息债，再按阶段做资产配置。"}, {"q": "9. \"货币幻觉\"指的是？", "o": ["A. 钱不够花的感觉", "B. 只盯名义金额、忽略实际购买力变化", "C. 喜欢收藏硬币", "D. 误以为钱会越来越多"], "a": 1, "tip": "货币幻觉是只关注票面数字、忽视通胀带来的购买力变化，容易误判真实财富。"}, {"q": "10. 资产配置的核心原则是？", "o": ["A. 全部买收益最高的", "B. 按人生阶段与风险承受力分篮子放", "C. 永远只存银行", "D. 借越多越好"], "a": 1, "tip": "配置优于押注，应随阶段与风险承受力调整不同\"篮子\"，先安全后收益。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《一本书读懂金融常识》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《一本书读懂金融常识》】", "维度：财富管理", "一句话定位：看懂身边的金融，让钱更安全、更值钱", "", "核心心智模型（5 个）：", "1. 货币三兄弟——M0 是手里现金，M1 加活期存款，M2 再加定期与储蓄。三者的增速差，是经济冷热的温度计。 看 M1 比 M2 跑得快还是慢，能大致判断钱是在流动还是在\"睡觉\"。", "2. 复利思维——利滚利加上时间，是指数级增长。早开始一天，往往胜过后来多投一笔。 做任何长期储蓄或投资前，先算\"按这个收益率，N 年后变成多少\"。", "3. 信用即资产——按时还钱、不逾期，积累的是一笔隐形财富：更低利率、更高额度、更多便利。 从今天起把\"不逾期\"当铁律，它比临时想办法借钱重要得多。", "4. 通胀隐形税——物价上涨时，同样一笔现金能买的东西变少了，钱在\"躺着\"时也被征了税。 长期不用的钱别全放活期，用能跑赢通胀的工具承接。", "5. 配置优于押注——不同人生阶段、不同风险承受力，该放不同的\"篮子\"；别把全部身家押一个方向。 先留足应急金，再谈投资；缺了底层安全垫，收益再高也脆弱。", "", "精讲要点：", "· 一、货币的三兄弟：M0、M1、M2：结论先行：别只盯\"印了多少钱\"，要看钱在哪个层次、流不流得动。", "· 二、复利：让时间替你赚钱：结论先行：复利被说成\"世界第八大奇迹\"，核心不是收益率多高，而是\"不中断 + 够长\"。", "· 三、信用是你的隐形财富：结论先行：信用不是虚名，它直接换算成利率、额度和机会，是每个人的\"经济身份证\"。", "· 四、通胀是一种隐形税：结论先行：钱不流动、不增值，就会被物价悄悄\"征税\"，购买力逐年缩水。", "· 五、利率与汇率：钱的内外价格：结论先行：利率是钱在国内的\"租金价格\"，汇率是一国货币对另一国的\"比价\"，二者牵动一切资产。", "· 六、理财先理观念：别跟风，要配置：结论先行：理财第一步不是选产品，而是理清观念——脑袋决定钱袋。", "", "带走三句话：", "1. 金融不是高墙里的学问，它就在你的存款、刷卡、借贷和每一笔消费里，先建立常识才不会被带节奏。", "2. 钱有内外两个价格——利率与汇率，还有通胀这把隐形的刀，看懂它们你就看懂了大部分财经新闻。", "3. 理财先理观念：不跟风、留安全垫、按阶段配置，时间加复利会替认真的人把雪球滚大。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：货币三兄弟、复利思维、信用即资产、通胀隐形税、配置优于押注），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b18_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b18_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b18_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b18_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
