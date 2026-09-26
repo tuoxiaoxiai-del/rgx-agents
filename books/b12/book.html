@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>《四步创业法》</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1c1c1c; font-size: 14px; line-height: 1.78;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .wrap { width: 100%; }
+  h1, h2, h3 { font-weight: 800; letter-spacing: .5px; }
+  h2 { font-size: 19px; color: #143a32; margin: 26px 0 12px;
+       padding-left: 11px; border-left: 5px solid #c08438; }
+  h3 { font-size: 15.5px; color: #143a32; margin: 16px 0 6px; }
+
+  /* 封面（顶部块，不强制分页） */
+  .cover { border: 1px solid #e3ddd0; border-radius: 14px; padding: 22px 24px;
+           background: linear-gradient(135deg,#143a32 0%,#1d5247 100%); color: #fff;
+           margin-bottom: 22px; }
+  .cover .dim { display: inline-block; font-size: 12px; background: #c08438; color: #1c1c1c;
+           padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 1px; }
+  .cover h1 { font-size: 25px; margin: 12px 0 8px; line-height: 1.35; }
+  .cover .pos { font-size: 14.5px; opacity: .95; margin: 0; }
+  .cover .sign { margin-top: 14px; font-size: 12.5px; opacity: .85; }
+
+  .lead { background: #f6f3ec; border-radius: 10px; padding: 14px 16px; margin: 4px 0 6px; }
+  .lead b { color: #143a32; }
+
+  /* 心智模型卡片 */
+  .models { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mcard { border: 1px solid #e3ddd0; border-radius: 10px; padding: 12px 14px;
+           background: #fcfbf7; break-inside: avoid; }
+  .mcard .mt { font-weight: 800; color: #143a32; font-size: 14.5px; margin-bottom: 4px; }
+  .mcard .md { font-size: 13px; color: #3a3a3a; margin: 0; }
+  .mcard .mu { font-size: 12.5px; color: #7a6a4a; margin: 6px 0 0; }
+
+  /* 提纲 */
+  .outline { padding-left: 0; }
+  .ochap { break-inside: avoid; margin: 10px 0; }
+  .ochap .ot { font-weight: 800; color: #143a32; font-size: 14.5px; }
+  .ochap ul { margin: 4px 0 0; padding-left: 20px; }
+  .ochap li { margin: 2px 0; }
+
+  /* 精讲 */
+  .lect .blk { break-inside: avoid; margin: 10px 0; }
+  .lect p { margin: 5px 0; }
+  .lect .k { color: #c08438; font-weight: 700; }
+
+  /* 自测卷 */
+  .quiz .q { break-inside: avoid; border: 1px solid #e3ddd0; border-radius: 10px;
+             padding: 12px 14px; margin: 10px 0; background: #fcfbf7; }
+  .quiz .qt { font-weight: 700; margin-bottom: 7px; }
+  .quiz label { display: block; padding: 4px 8px; border-radius: 6px; margin: 3px 0;
+                cursor: pointer; }
+  .quiz label:hover { background: #f0ece1; }
+  .quiz input { margin-right: 8px; }
+  .quiz .ans { font-size: 12.5px; color: #1d7a4d; margin-top: 6px; display: none; }
+  .quizbar { margin: 12px 0; }
+  .quizbar button { background: #143a32; color: #fff; border: 0; border-radius: 8px;
+                    padding: 9px 18px; font-size: 14px; cursor: pointer; font-weight: 700; }
+  .score { font-size: 16px; font-weight: 800; color: #143a32; margin-left: 12px; }
+
+  /* 打卡 */
+  .check li { margin: 6px 0; break-inside: avoid; }
+  .check .day { font-weight: 800; color: #c08438; }
+
+  footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #e3ddd0;
+           font-size: 12.5px; color: #6a6a6a; text-align: center; }
+  footer .cta { display: flex; align-items: center; justify-content: center; gap: 18px;
+                background: #f6f3ec; border: 1px solid #e3ddd0; border-radius: 12px;
+                padding: 14px 18px; margin-bottom: 14px; }
+  footer .ctaqr { width: 92px; height: 92px; border-radius: 8px; }
+  footer .ctatxt { text-align: left; }
+  footer .ctabig { font-size: 16px; font-weight: 800; color: #143a32; }
+  footer .ctasub { font-size: 12.5px; color: #6a6a6a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ COVER ============ -->
+  <section class="cover">
+    <span class="dim">商业赚钱</span>
+    <h1>《四步创业法》</h1>
+    <p class="pos">四步找到真客户，验证有人掏钱再扩张</p>
+    <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+  </section>
+
+  <!-- ============ 解决什么 ============ -->
+  <section>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead"><p>市面上九成的新产品卖不动，通病是同一句：团队以为「有产品就有顾客」，闭门造车做完才找买家，结果销售疲软、仓促扩张、现金烧穿。这份笔记给你一套补上这块短板的流程——先走出办公室确认需求，再验证有人肯掏钱，然后才谈获客和扩张，每一步都有明确的过关标准，让你把失败拦截在花大钱之前。</p></div>
+  </section>
+
+  <!-- ============ 心智模型 ============ -->
+  <section>
+    <h2>核心心智模型</h2>
+    <div class="models">
+      <div class="mcard">
+        <div class="mt">走出办公室</div>
+        <p class="md">产品想法对不对、定价合不合理、渠道通不通，答案都在客户那里，不在会议室的 PPT 里。</p>
+        <p class="mu">用法：定下硬规矩——每个关键决策出台前，必须先见过一定数量的真实潜在客户。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">天使客户</div>
+        <p class="md">先找那批「被问题折磨到已经自己动手找解法、甚至列好预算」的人，他们才是第一批真客户。</p>
+        <p class="mu">用法：聊天时听对方抱怨到哪一级——没意识到问题的人，暂时别浪费时间。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">四步过关制</div>
+        <p class="md">找客户分四步：探索需求→检验买单→激发更多客户→正式组队，每一步有明确过关标准，不达标不放行。</p>
+        <p class="mu">用法：把四步贴成看板，团队只回答一个问题——「现在卡在哪一步、证据是什么」。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">市场类型决定打法</div>
+        <p class="md">存量市场拼差异、细分市场拼切口、全新市场拼教育，同一产品进不同市场，打法完全不同。</p>
+        <p class="mu">用法：动手做营销前先回答「我进的是哪种市场」，答案直接决定预算和节奏。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">后退不丢人</div>
+        <p class="md">探索市场的本质是反复试错，回退重来不是失败信号，而是学习必经之路。</p>
+        <p class="mu">用法：把「本轮学到了什么」写进周报，让团队习惯为修正方向而非硬冲进度。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">先穷后富</div>
+        <p class="md">验证阶段钱多反而是毒药：让人被假象迷惑、跳过验证直接烧钱扩张。穷着验证，富着扩张。</p>
+        <p class="mu">用法：前两步用最小团队跑，确认有人持续掏钱后，再放量招人加预算。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 提纲 ============ -->
+  <section>
+    <h2>内容提纲</h2>
+    <div class="outline">
+      <div class="ochap">
+        <span class="ot">第一章 · 毁灭之路：传统产品开发思维的十宗罪</span>
+        <ul>
+          <li>「有产品就有顾客」是一厢情愿，不是策略</li>
+          <li>过分强调上市时间与执行，忽略探索和学习</li>
+          <li>没有暂停纠错机制，仓促扩张必然滑向恶性循环</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <span class="ot">第二章 · 顿悟之路：以客户为中心的四步流程</span>
+        <ul>
+          <li>与产品开发并行的另一条主线：找客户、验模式</li>
+          <li>每个阶段是可回退的循环，不是单向流水线</li>
+          <li>先穷后富：验证期小团队小预算，达标后再放量</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <span class="ot">第三章 · 客户探索与客户检验</span>
+        <ul>
+          <li>回答四个问题：痛点真不真、方案行不行、模式成不成立、能不能开卖</li>
+          <li>五级筛查找到天使客户，避免广种薄收</li>
+          <li>目标不是收集需求清单，而是找到可复用的销售路线图</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <span class="ot">第四章 · 客户培养、组建公司与市场类型</span>
+        <ul>
+          <li>借首批客户撬动更多潜在需求，导入销售渠道</li>
+          <li>验证完成才招兵买马，从探索型团队过渡为正规军</li>
+          <li>存量、细分、全新三类市场，各自对应完全不同的节奏与打法</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 精讲 ============ -->
+  <section>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="lect">
+      <div class="blk">
+        <h3>1. 先说结论：传统打法是一条毁灭之路</h3>
+        <p>标准剧本人人熟悉：立愿景→做商业计划→埋头开发→公关造势→正式发布→全面扩张。听起来严谨，其实暗藏一个致命假设——<span class="k">产品做出来自然有人买</span>。九成新产品卖不动，就是为这个假设买单。</p>
+        <p>反面案例教科书级的一家生鲜电商：拿了几亿美元，仓库修得又大又先进，唯独没人验证过顾客需求。计划每天八千单，实际每天两千单，仓库利用率不到三成——却仍在按计划狂建物流中心，两年就烧穿破产。它输的不是执行力，是方向。</p>
+      </div>
+      <div class="blk">
+        <h3>2. 十个坑里，先记住这四个</h3>
+        <p>① <span class="k">不清楚顾客在哪</span>：失败主因从来不是开发能力，是缺顾客和可行的商业模型；② <span class="k">拿开发进度代替客户认知</span>：发布日期到了不等于市场摸清了；③ <span class="k">只强调执行不做探索</span>：前进两步退一步才是探索市场的正常节奏，线性狂奔只会撞死胡同；④ <span class="k">没有停车检查机制</span>：数据已经很难看，却没有任何环节允许公司停下来纠错，只能一条路滑到黑。</p>
+        <p>销售主管平均在职不到九个月、换一任主管换一套打法、士气越拖越垮——这条恶性循环链，几乎每家失败公司都走过一遍。</p>
+      </div>
+      <div class="blk">
+        <h3>3. 第一步 · 客户探索：先答四个问题</h3>
+        <p>探索的目的不是开用户座谈会、写需求文档，而是回答：<span class="k">客户有没有一个亟待解决的问题？产品能不能解决它？商业模型是否可行？可以开卖了吗？</span></p>
+        <p>做法很简单：拿着你最初的产品构想（原型更好），去找真实的人聊。注意别犯两个极端——一头是不停加功能讨好所有人，另一头是在办公室里反复推演。创始人的创意可以保留，但必须由市场来裁决。还有一条反直觉的：<span class="k">第一批产品不要追求人人满意</span>，集中服务一小撮最痛的人，比广撒网有效得多。</p>
+      </div>
+      <div class="blk">
+        <h3>4. 天使客户：五级筛查法</h3>
+        <p>按「被问题折磨的迫切程度」，客户分五级：<span class="k">没意识到问题→意识到问题→主动找解法→自己动手做解法→已列预算要买</span>。前两级给不了你有效反馈，真正的机会在最后两级。</p>
+        <p>比如你去卖一套帮银行缩短排队的系统：经理说「什么问题？」——出局；说「有这问题，我们会递杯水」——还早；说「每年损失五十万，一直在找方案」——有戏；说「我们自己试做过，不理想」——就是天使客户；说「预算五十万已批，能解决就付款」——闭着眼成交。把探索时间全部押在后两级身上，反馈中肯、愿意买单、还会帮你转介绍。</p>
+      </div>
+      <div class="blk">
+        <h3>5. 第二步 · 客户检验：找到能反复用的销售路线图</h3>
+        <p>探索回答「谁会买」，检验回答「<span class="k">怎么持续地卖出去</span>」。目标很具体：找到稳定的回头客，跑通一条可重复的销售流程，定价、渠道、销售话术都经过真实订单检验。检验不通过，就退回第一步重新找客户——这条回路是整个方法的核心，不丢人。</p>
+        <p>一家被投资人逼着「转电商」的家具公司，创始人顶着压力继续用商品目录服务专业设计师，每期目录都根据上期反馈调整，六年做到年营收一亿八千万美元；同期重金砸广告的竞争对手，钱烧完就消失了。差别就在于：一个验证出了可复用的销售模型，一个只验证了「广告费花得很快」。</p>
+      </div>
+      <div class="blk">
+        <h3>6. 第三、四步 + 一条铁律：市场类型决定一切</h3>
+        <p><span class="k">客户培养</span>是借首批客户的势能撬动更多潜在需求，把人导入已验证的销售渠道——方法因市场类型而异，对没人了解的新产品砸品牌广告纯属打水漂。<span class="k">组建公司</span>是前两步达标后才做的事：招主管、建部门、放量扩张。顺序不能倒，仓促扩张等于饮鸩止渴。</p>
+        <p>铁律是：<span class="k">市场类型决定打法</span>。存量市场客户知道你卖什么，主打优势对比，见效快；细分市场从低成本或小众需求切入；全新市场要教育用户「这东西能帮你做什么」，周期可能长达数年，现金流规划完全不同。同一家公司做同类产品，隔三年打法就该彻底换——先判断市场，再定策略，别拿旧地图找新大陆。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 自测卷 ============ -->
+  <section>
+    <h2>自测卷 · 10 题当场出分</h2>
+    <div class="quiz" id="quiz">
+      <div class="q">
+        <div class="qt">1. 企业失败最主要的原因是什么？</div>
+        <label><input type="radio" name="q1" data-correct="1">缺少顾客和可行的商业模型</label>
+        <label><input type="radio" name="q1">产品开发流程有缺陷</label>
+        <label><input type="radio" name="q1">融资节奏没踩准</label>
+        <label><input type="radio" name="q1">团队执行力不够强</label>
+        <div class="ans">答案：A。方向性缺客户，比任何执行问题都致命。</div>
+      </div>
+      <div class="q">
+        <div class="qt">2. 「有产品就有顾客」这句话本质是什么？</div>
+        <label><input type="radio" name="q2">被验证过的商业常识</label>
+        <label><input type="radio" name="q2" data-correct="1">一厢情愿的祷告词，不是策略</label>
+        <label><input type="radio" name="q2">只适用于小生意</label>
+        <label><input type="radio" name="q2">投资人的通用评估标准</label>
+        <div class="ans">答案：B。它可以用来融资讲故事，但不能当经营策略。</div>
+      </div>
+      <div class="q">
+        <div class="qt">3. 客户发展四步的正确顺序是？</div>
+        <label><input type="radio" name="q3">客户培养→客户探索→组建公司→客户检验</label>
+        <label><input type="radio" name="q3" data-correct="1">客户探索→客户检验→客户培养→组建公司</label>
+        <label><input type="radio" name="q3">组建公司→客户探索→客户培养→客户检验</label>
+        <label><input type="radio" name="q3">客户检验→客户培养→客户探索→组建公司</label>
+        <div class="ans">答案：B。先探索、再检验、后培养、最后才正式组队扩张。</div>
+      </div>
+      <div class="q">
+        <div class="qt">4. 客户探索的首要任务是？</div>
+        <label><input type="radio" name="q4">收集尽可能多的功能需求</label>
+        <label><input type="radio" name="q4">撰写详细的市场需求文档</label>
+        <label><input type="radio" name="q4" data-correct="1">验证产品构想能否解决客户的真问题</label>
+        <label><input type="radio" name="q4">多开几场用户研讨会</label>
+        <div class="ans">答案：C。探索是检验假设，不是广撒网收集愿望清单。</div>
+      </div>
+      <div class="q">
+        <div class="qt">5. 哪一类人最可能成为你的第一批「天使客户」？</div>
+        <label><input type="radio" name="q5">还没意识到问题存在的人</label>
+        <label><input type="radio" name="q5">意识到问题但暂时不想解决的人</label>
+        <label><input type="radio" name="q5" data-correct="1">已经自己动手找方案、甚至列好预算的人</label>
+        <label><input type="radio" name="q5">喜欢尝鲜但购买力有限的技术爱好者</label>
+        <div class="ans">答案：C。被问题折磨到最深的最后两级，才是真客户。</div>
+      </div>
+      <div class="q">
+        <div class="qt">6. 「客户检验」阶段的目标是什么？</div>
+        <label><input type="radio" name="q6">把品牌广告铺满渠道</label>
+        <label><input type="radio" name="q6">尽快招满销售团队</label>
+        <label><input type="radio" name="q6" data-correct="1">找到可反复使用的销售模型和稳定回头客</label>
+        <label><input type="radio" name="q6">产品功能全部开发完毕</label>
+        <div class="ans">答案：C。检验过关的标准是：有人持续掏钱，且流程可复制。</div>
+      </div>
+      <div class="q">
+        <div class="qt">7. 客户检验失败后，正确的做法是？</div>
+        <label><input type="radio" name="q7">加大营销预算硬冲</label>
+        <label><input type="radio" name="q7" data-correct="1">退回客户探索阶段，重新找客户、修假设</label>
+        <label><input type="radio" name="q7">更换销售主管再试一次</label>
+        <label><input type="radio" name="q7">直接宣布项目失败解散团队</label>
+        <div class="ans">答案：B。回退是方法的内置回路，是学习不是失败。</div>
+      </div>
+      <div class="q">
+        <div class="qt">8. 为什么说验证阶段「钱多是坏事」？</div>
+        <label><input type="radio" name="q8">钱多会导致税务成本上升</label>
+        <label><input type="radio" name="q8" data-correct="1">钱多让人被假象迷惑，跳过验证直接烧钱扩张</label>
+        <label><input type="radio" name="q8">钱多会稀释创始团队股权</label>
+        <label><input type="radio" name="q8">钱多必然推高人力成本</label>
+        <div class="ans">答案：B。先穷后富：验证期小团队小预算，达标后再放量。</div>
+      </div>
+      <div class="q">
+        <div class="qt">9. 面对全新市场，营销的重心应该是什么？</div>
+        <label><input type="radio" name="q9">强调产品性能参数碾压对手</label>
+        <label><input type="radio" name="q9" data-correct="1">教育用户认识「这东西能解决你什么问题」</label>
+        <label><input type="radio" name="q9">靠低价快速抢占份额</label>
+        <label><input type="radio" name="q9">复制同行的宣传策略</label>
+        <div class="ans">答案：B。新市场没有现成认知，先让用户理解价值，性能对比是存量市场的打法。</div>
+      </div>
+      <div class="q">
+        <div class="qt">10. 什么时候才应该正式组建销售与营销部门、放量扩张？</div>
+        <label><input type="radio" name="q10">产品开发一完成就扩张</label>
+        <label><input type="radio" name="q10">拿到大额融资的当月</label>
+        <label><input type="radio" name="q10" data-correct="1">前两步验证完成、确认有可复用的销售模型之后</label>
+        <label><input type="radio" name="q10">竞争对手开始扩张的时候</label>
+        <div class="ans">答案：C。顺序不能倒——先验证有人买单，再招兵买马，否则扩张就是加速失血。</div>
+      </div>
+    </div>
+    <div class="quizbar">
+      <button onclick="grade()">交卷看分</button>
+      <span class="score" id="score"></span>
+    </div>
+  </section>
+
+  <!-- ============ 打卡 ============ -->
+  <section>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check">
+      <li><span class="day">第 1 天：</span>写下你的产品要解决的客户问题，用一句话说清「谁、在什么场景、痛到什么程度」。</li>
+      <li><span class="day">第 2 天：</span>列出 20 个潜在客户名单，按「五级筛查法」预判每个人处在哪一级。</li>
+      <li><span class="day">第 3 天：</span>约谈 3 位名单上最靠后的潜在客户，只问现状和困扰，全程不推销。</li>
+      <li><span class="day">第 4 天：</span>判断你的市场类型：存量、细分还是全新？写出这个判断如何改变你的打法。</li>
+      <li><span class="day">第 5 天：</span>把产品构想（或原型）拿给至少 2 位天使客户候选看，记录他们愿不愿意谈价格。</li>
+      <li><span class="day">第 6 天：</span>画一版「销售路线图」：第一批电话打给谁、话术说什么、什么信号代表成交可能。</li>
+      <li><span class="day">第 7 天：</span>复盘：四步流程里你目前卡在哪一步、证据是什么，下周只做推进这一步的 3 件事。</li>
+    </ul>
+  </section>
+
+  <!-- ============ 结语 ============ -->
+  <section>
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead">
+      <p><b>1.</b> 「有产品就有顾客」是祷告词不是策略——先确认有人肯掏钱，再谈把生意做大。</p>
+      <p><b>2.</b> 四步过关：探索需求、检验买单、培养客户、最后才组队扩张，每步不达标不放行。</p>
+      <p><b>3.</b> 先判断市场类型再定打法；后退重来是学习的常态，别把纠错当失败。</p>
+    </div>
+    <p>这份资料怎么用：从明天起走 7 天打卡，第 3 天的客户约谈是全场关键，别跳过。打卡结束后做自测卷，低于 7 分优先重读精讲第 3、4、6 节（四步流程与天使客户是全书骨架）；达标后，把「四步看板」搬进你的团队周会，每周只回答一个问题——卡在哪一步、证据是什么。</p>
+  </section>
+
+    <!-- ============ 复盘卡（补尾页） ============ -->
+  <section class="recap">
+    <h2>带走《四步创业法》· 一张复盘卡</h2>
+    <div class="lead">
+      <p><b>① 它归在「商业赚钱」这条线上</b>——四步找到真客户，验证有人掏钱再扩张</p>
+      <p><b>② 今天就能用的一步</b>：从自测卷里挑 1 题，把对应模型写进你明天要做的一件事里。</p>
+      <p><b>③ 卡住了别硬扛</b>：扫码加微信，领这套资料的 AI 陪练，对着练比自己悟快得多。</p>
+    </div>
+    <h3>这套资料怎么用（4 步闭环）</h3>
+    <ul class="check">
+      <li><span class="day">读</span> 通读「核心心智模型 + 精讲」，先建立骨架，不纠结细节。</li>
+      <li><span class="day">测</span> 做 10 题自测卷，当场出分；低于 7 分，回到薄弱模型再读一遍。</li>
+      <li><span class="day">练</span> 按「7 天打卡」每天一个微小动作，把知道变成做到。</li>
+      <li><span class="day">扩</span> 顺手领全套「33 本书带你开启新的人生」，沿主线一本本读完。</li>
+    </ul>
+    <h3>给忙碌者的 3 分钟速记</h3>
+    <ul class="check">
+      <li><span class="day">记</span> 这本书只解决一件事：四步找到真客户，验证有人掏钱再扩张</li>
+      <li><span class="day">用</span> 把书里最打动你的一个模型，立刻套进本周一个真实问题。</li>
+      <li><span class="day">传</span> 试着给一个人讲清楚这个模型——讲得清，才是真懂。</li>
+      <li><span class="day">续</span> 读不顺就换一本，主线是「认知→思维→行动→关系→财富」，不必死磕顺序。</li>
+    </ul>
+    <p>「33 本书带你开启新的人生」不是读得多，是把每一本的真东西用起来——这一本，先从一个模型开始，今天就用一次。</p>
+  </section>
+
+<footer>
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  </footer>
+
+</div>
+
+<script>
+function grade(){
+  var qs = document.querySelectorAll('#quiz .q');
+  var total = qs.length, right = 0;
+  qs.forEach(function(q){
+    var picked = q.querySelector('input:checked');
+    var correct = q.querySelector('input[data-correct="1"]');
+    var ans = q.querySelector('.ans');
+    if(ans) ans.style.display = 'block';
+    if(picked && picked === correct){ right++; }
+  });
+  var s = document.getElementById('score');
+  if(s) s.textContent = '得分 ' + right + ' / ' + total;
+}
+</script>
+</body>
+</html>
