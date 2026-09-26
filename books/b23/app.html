@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一分钟掌控人心 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>一分钟掌控人心 · 书智能体</b><span>人际影响｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">人际影响</span>
+      <h1>《一分钟掌控人心》</h1>
+      <p class="pos">看穿表象、读懂动机，让人心顺着你的节奏走</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">很多人不是看不透人，是不知道该看哪儿：被第一印象带偏、被客气话糊弄、被表面的热情误导。这份笔记给你一套"读人"的抓手——从最初的十秒、到脚尖的朝向、到对方没说出口的弦外之音，让你少踩坑、多拿主动权。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">首因效应</div><p class="md">最初的十秒就定下了整段关系的基调，且极难改写。</p><p class="mu">用法：初次见面把仪表、谈吐、姿态收拾到位，别赌以后慢慢改观。</p></div><div class="mcard"><div class="mt">利益支点</div><p class="md">别人凭什么按你的意愿动？先找到那个"为什么"。</p><p class="mu">用法：先摆出对方的好处，再亮自己的目的，像找支点撬地球。</p></div><div class="mcard"><div class="mt">卸下防御</div><p class="md">你先放下防备，对方才敢靠近——这是接近人的先动优势。</p><p class="mu">用法：主动示诚、先开口，别等对方先示好。</p></div><div class="mcard"><div class="mt">脚语读心</div><p class="md">离大脑越远越诚实，脚和细微动作藏不住真实想法。</p><p class="mu">用法：看对方脚尖朝向、小动作，比看表情更准。</p></div><div class="mcard"><div class="mt">刺猬距离</div><p class="md">再亲密也要留一寸私人空间，靠太近反而成敌人。</p><p class="mu">用法：关系再好也别越界，尊重边界才长久。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">模块一　攻心为上</div><ul><li>知人才能善任，识人比用人更难</li><li>最初瞬间定基调：首因效应</li><li>撬动别人先找他为什么（利益支点）</li><li>攻克心理防线、卸下自己的防御</li></ul></div><div class="ochap"><div class="ot">模块二　微表情与肢体</div><ul><li>辨别真伪：笑不一定真快乐</li><li>眼睛藏不住，脚更藏不住</li><li>重要的不是他是否撒谎，是为什么撒谎</li></ul></div><div class="ochap"><div class="ot">模块三　察言观色</div><ul><li>人爱讲大话，越轻易得到的信息越不可信</li><li>让对方生气，往往吐出真心话</li><li>听弦外之音才是关键</li></ul></div><div class="ochap"><div class="ot">模块四　永无敌人</div><ul><li>化解敌意，多让对方说"是"</li><li>坚守立场不轻易变，但给足私人空间</li><li>保持适当沉默，影响力胜过千军万马</li></ul></div><div class="ochap"><div class="ot">模块五　让人喜欢你</div><ul><li>迎合对方特别习惯，让他觉得自己独一无二</li><li>委婉赞颂、用钦佩语气赞同，别随便恭维</li><li>让对方先尝到胜利的滋味</li></ul></div><div class="ochap"><div class="ot">模块六　放下自己</div><ul><li>别把自己的想法强按到别人头上（投射效应）</li><li>用对方的语言，主动把"没关系"变"有关系"</li><li>共情但不丢了自己的判断</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>一、第一印象十秒定调</h3><p><span class="k">结论先行：</span>人和人之间，往往十秒钟就定了调，之后要用很久去改写。</p><p>把同一张照片，一组人被告知是"囚犯"、另一组被告知是"教授"，两组人给出的性格判断截然相反。可见第一印象的心理暗示有多强。</p><p>所以初次见面，从仪表到谈吐都收拾出最好的自己。在陌生人面前的一秒钟印象，可能用一年都难扳回来——这不是外貌歧视，是规则。</p></div><div class="blk"><h3>二、撬动别人，先找他为什么</h3><p><span class="k">结论先行：</span>没有无缘无故的配合，先找到对方的利益支点，他才愿意动。</p><p>那些能把别人说动的人，共性都是先摆出对方能得到什么，再讲自己的目的。就像谈条件，先把"这对你有什么用"说透，对方才听得进"那你该怎么做"。</p><p>多询问、多观察、多倾听，先想别人所想，别人才能做你想做之事。话不投机半句多，投机就得先懂对方想听什么。</p></div><div class="blk"><h3>三、卸下你的防御，对方才靠近</h3><p><span class="k">结论先行：</span>你浑身是刺，谁都退避三舍；自己先放下防备，是接近人的最快路径。</p><p>人都有戒备心，尤其面对陌生人。你若先心存防御，对方就拼尽全力防御你，结果两败俱伤。你若先示诚，对方才敢走近。</p><p>突破别人心理防线最有效的办法，是真诚以待。人内心深处都矛盾地渴望被一个人真正读懂——你敞开一点，他才卸下一点。</p></div><div class="blk"><h3>四、看脚不看脸：离大脑越远越诚实</h3><p><span class="k">结论先行：</span>脸可以演，脚很难演；离大脑越远的部位，越容易出卖真实想法。</p><p>研究指出，人体越远离大脑中枢的部位可信度越高。人在高度紧张、刻意隐瞒时，往往会忘了"从头到脚"武装自己，脚就诚实地泄露了秘密。</p><p>实用招数：对方脚尖朝向你，说明想靠近；脚尖朝外、频繁搓地，多是不想待、无聊或想逃。看脚，比看表情更稳。</p></div><div class="blk"><h3>五、再亲密也留一寸：刺猬距离</h3><p><span class="k">结论先行：</span>靠太近会扎人，靠太远会冷；再好的关系也要给彼此私人空间。</p><p>人与人之间像刺猬，离远了冷，离近了互相扎。保持适当距离，关系反而舒服、长久。</p><p>延伸到相处：别因为熟就随意越界、随便打探。尊重边界，是"永无敌人"的底色——很多敌意，恰恰是从没分寸的靠近里长出来的。</p></div><div class="blk"><h3>六、听出弦外之音，别被大话带跑</h3><p><span class="k">结论先行：</span>人爱讲大话，越轻易得到的信息越不可信；真正有用的，是他没说出口的那句。</p><p>有人满口答应、有人滔滔大话，但真到关键处往往走样。一个老板夸你"能力可担更重职责"，紧接着问"不景气会不会裁员"，其实是在探你口风——没听懂弦外之音，机会就溜了。</p><p>练法：把对方前后话连起来想，看表情声调是否和平时不一致，再结合环境。永远别试图去挖别人不想说的，那是红线。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 最初的十秒定基调，初次见面把最好的一面亮出来，别赌以后慢慢改观。</p><p><b>2.</b> 撬动别人先找他为什么，自己先卸下防御，人心才顺着你的节奏走。</p><p><b>3.</b> 看脚不看脸、听弦外之音、留一寸距离，这套抓手让你少踩坑、多拿主动权。</p></div>
+    <p>这份资料建议从今天起连做 7 天打卡；自测卷低于 7 分，回头重读"首因效应"和"利益支点"两张卡片，先把读人与找支点练熟。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第 1 天</span> 今天见一个陌生人/新同事，刻意把仪表和谈吐收拾到位，留意对方第一反应。</li><li><span class="day">第 2 天</span> 求人帮个小忙前，先在心里写清"这对他有什么好处"。</li><li><span class="day">第 3 天</span> 对一个戒备的人主动先开口、先示诚，看关系是否松动。</li><li><span class="day">第 4 天</span> 聊天时偷看对方脚尖朝向，验证他是否真的想继续聊。</li><li><span class="day">第 5 天</span> 对一个熟悉的人，忍住不打探私事，留一寸空间。</li><li><span class="day">第 6 天</span> 听人说话时，连前后语境猜一次弦外之音，事后验证。</li><li><span class="day">第 7 天</span> 复盘本周：哪次你"读"对了人，写一句给自己。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 关于\"第一印象\"，更成立的看法是？", "o": ["A. 第一印象无所谓，日久见人心", "B. 最初十秒就定基调，且极难改写", "C. 只看出身", "D. 看运气"], "a": 1, "tip": "首因效应下，最初的瞬间强烈影响后续交往态度。"}, {"q": "2. 想让别人按你的意愿配合，第一步该？", "o": ["A. 直接下命令", "B. 先找到对方为什么愿意配合的利益支点", "C. 比谁嗓门大", "D. 等对方主动"], "a": 1, "tip": "先摆对方好处、再讲自己目的，对方才肯动。"}, {"q": "3. 想快速拉近和一个戒备心重的人的距离，更有效的是？", "o": ["A. 逼问他的私事", "B. 自己先示诚、先开口，卸下防御", "C. 装作不认识", "D. 找人施压"], "a": 1, "tip": "你先放下防备，对方才敢靠近，这是先动优势。"}, {"q": "4. 关于\"脚语读心\"，核心观点是？", "o": ["A. 看脸最准", "B. 离大脑越远的部位越诚实，脚容易泄露真实想法", "C. 看手最准", "D. 都不准"], "a": 1, "tip": "脚远离大脑中枢，容易脱离意识控制，反而诚实。"}, {"q": "5. 对方脚尖朝外、频繁搓地，多半说明？", "o": ["A. 他很放松", "B. 他想逃离或不感兴趣", "C. 他喜欢你", "D. 他在撒谎"], "a": 1, "tip": "脚尖朝外、搓地常是\"想走\"或\"无聊\"的信号。"}, {"q": "6. \"刺猬距离\"提醒我们？", "o": ["A. 越近越好", "B. 再亲密也要留私人空间，靠太近反成敌", "C. 别和任何人来往", "D. 只和陌生人保持距离"], "a": 1, "tip": "适当距离让关系舒服长久，越界容易滋生敌意。"}, {"q": "7. 关于\"弦外之音\"，更贴切的做法是？", "o": ["A. 只听字面意思", "B. 联系前后语境、看表情声调，听出没说出口的真意", "C. 直接打断追问", "D. 当没听见"], "a": 1, "tip": "把前后话连起来想、比对平时状态，才能捕捉真意。"}, {"q": "8. \"越轻易得到的信息越不可信\"是因为？", "o": ["A. 人爱讲大话，且常带自我立场", "B. 同上，表面承诺常与实际不符", "C. 信息太少", "D. 记错了"], "a": 1, "tip": "答案：B（A/B同义）。人常从自身利益出发言行不一，漂亮话要打折听。"}, {"q": "9. 想让人喜欢你，更稳妥的做法是？", "o": ["A. 见谁都猛夸", "B. 迎合对方特别习惯，用钦佩语气委婉赞颂", "C. 贬低第三者", "D. 隐藏所有不同意见"], "a": 1, "tip": "让对方觉得自己独一无二、被真诚认同，比泛泛恭维管用。"}, {"q": "10. 与别人相处时，\"投射效应\"要警惕的是？", "o": ["A. 把自己的想法强按到别人头上", "B. 同上，误以为别人和你想的一样", "C. 不表达自己", "D. 太客气"], "a": 1, "tip": "答案：B（A/B同义）。别拿自己的标准揣度别人，共情但不丢自我判断。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《一分钟掌控人心》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《一分钟掌控人心》】", "维度：人际影响", "一句话定位：看穿表象、读懂动机，让人心顺着你的节奏走", "", "核心心智模型（5 个）：", "1. 首因效应——最初的十秒就定下了整段关系的基调，且极难改写。 用法：初次见面把仪表、谈吐、姿态收拾到位，别赌以后慢慢改观。", "2. 利益支点——别人凭什么按你的意愿动？先找到那个\"为什么\"。 用法：先摆出对方的好处，再亮自己的目的，像找支点撬地球。", "3. 卸下防御——你先放下防备，对方才敢靠近——这是接近人的先动优势。 用法：主动示诚、先开口，别等对方先示好。", "4. 脚语读心——离大脑越远越诚实，脚和细微动作藏不住真实想法。 用法：看对方脚尖朝向、小动作，比看表情更准。", "5. 刺猬距离——再亲密也要留一寸私人空间，靠太近反而成敌人。 用法：关系再好也别越界，尊重边界才长久。", "", "精讲要点：", "· 一、第一印象十秒定调：结论先行：人和人之间，往往十秒钟就定了调，之后要用很久去改写。", "· 二、撬动别人，先找他为什么：结论先行：没有无缘无故的配合，先找到对方的利益支点，他才愿意动。", "· 三、卸下你的防御，对方才靠近：结论先行：你浑身是刺，谁都退避三舍；自己先放下防备，是接近人的最快路径。", "· 四、看脚不看脸：离大脑越远越诚实：结论先行：脸可以演，脚很难演；离大脑越远的部位，越容易出卖真实想法。", "· 五、再亲密也留一寸：刺猬距离：结论先行：靠太近会扎人，靠太远会冷；再好的关系也要给彼此私人空间。", "· 六、听出弦外之音，别被大话带跑：结论先行：人爱讲大话，越轻易得到的信息越不可信；真正有用的，是他没说出口的那句。", "", "带走三句话：", "1. 最初的十秒定基调，初次见面把最好的一面亮出来，别赌以后慢慢改观。", "2. 撬动别人先找他为什么，自己先卸下防御，人心才顺着你的节奏走。", "3. 看脚不看脸、听弦外之音、留一寸距离，这套抓手让你少踩坑、多拿主动权。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：首因效应、利益支点、卸下防御、脚语读心、刺猬距离），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b23_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b23_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b23_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b23_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
