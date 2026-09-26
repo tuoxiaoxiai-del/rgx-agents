@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一个外企面试官的面经 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>一个外企面试官的面经 · 书智能体</b><span>成事执行｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">成事执行</span>
+      <h1>《一个外企面试官的面经》</h1>
+      <p class="pos">用面试官思维备战外企面试，谈出好 offer</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">投了上百份简历石沉大海，面试聊得开心却总没回音——问题往往不在能力，而在没摸透面试官怎么挑人。这本书把招聘的全流程拆开给你看，让你从"被筛选"变成"主动匹配"，把每次面试都变成可复制的胜算。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">简历极简主义</div><p class="md">简历是海选漏斗里的"入场券"，不是自传；1–2 页、突出硬指标，按岗位定制。</p><p class="mu">用法：把学校、专业、成绩、对口实习、领导力经历放最显眼处，无关内容果断砍。</p></div><div class="mcard"><div class="mt">第一印象秒定</div><p class="md">面试约 30 分钟，第一眼那 1 秒就定基调；形象要与岗位文化协调。</p><p class="mu">用法：传统行业穿稳妥职业装／商务休闲，第一天上班宁可保守，别用外表制造"要被扭转的印象"。</p></div><div class="mcard"><div class="mt">案例锚定法（STAR）</div><p class="md">回答经历类问题，用"情境—任务—行动—结果"讲真实故事，让能力可被验证。</p><p class="mu">用法：被问"有无困难／冲突"时，别答"没遇到过"，举一个你主动解决的具体例子。</p></div><div class="mcard"><div class="mt">双向匹配思维</div><p class="md">面试不是被审判，是看双方是否合拍；先搞清岗位职责、团队风格、企业文化。</p><p class="mu">用法：面试前读透职位描述，现场用对方关心的能力去回应，而不是炫耀你有的全部。</p></div><div class="mcard"><div class="mt">薪资底线谈判</div><p class="md">跳槽涨薪行规多在 30% 以内，外企薪酬架构偏刚性；谈薪前先设底线、摸市价。</p><p class="mu">用法：报期望时给"理想值＋最低可接受值"，宁可按底线谈崩，也别委屈就范埋下再跳的隐患。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">第一章　面试官的一天：招聘实录与真实案例</div><ul><li>从面试官视角看简历海选、笔试、HR 面、部门面、老板面的完整链路</li><li>A／B／C／D／E 等真实候选人案例：踩坑与亮点一目了然</li><li>面试官在 30 分钟内要考察近 10 项素质，时间比想象中紧</li></ul></div><div class="ochap"><div class="ot">第二章　简历的生死线</div><ul><li>海选平均 30 秒，简历要简洁、突出硬指标</li><li>1–2 页足够，按岗位定制，砍掉无关"美化"</li></ul></div><div class="ochap"><div class="ot">第三章　面试流程全景</div><ul><li>笔试（细心／逻辑／英语）→ HR 面 → 用人部门面 → 负责人／老板面</li><li>每一轮考察重点不同，提前准备对应材料</li></ul></div><div class="ochap"><div class="ot">第四章　行为面与案例面</div><ul><li>用 STAR 讲真实故事，展示主动解决问题</li><li>避开"没遇到过困难"等减分回答</li></ul></div><div class="ochap"><div class="ot">第五章　压力面与临场心态</div><ul><li>听到难题先停几秒、列要点再开口</li><li>紧张正常，重点是别被紧张拖垮表现</li></ul></div><div class="ochap"><div class="ot">第六章　第一印象与职业形象</div><ul><li>形象与企业文化协调，第一天保守总没错</li><li>从握手、坐姿到表达，细节都在打分</li></ul></div><div class="ochap"><div class="ot">第七章　薪资谈判与跳槽涨薪</div><ul><li>涨薪 30% 行规、外企架构刚性、底线思维</li><li>期望薪资报区间，谈不拢不强求</li></ul></div><div class="ochap"><div class="ot">第八章　职业规划与自我定位</div><ul><li>先想清"做什么行业、什么职务、做到哪"</li><li>迷茫时先稳住现有工作，边做边找方向</li></ul></div><div class="ochap"><div class="ot">第九章　高频疑问解答</div><ul><li>学历／三本／自考／乙肝等硬伤怎么看</li><li>应届生、跨专业、转行者的真实应对</li></ul></div><div class="ochap"><div class="ot">第十章　收尾：从拿 offer 到长期发展</div><ul><li>offer 后的取舍、试用期心态、长期成长</li><li>每份工作都把简历的"开头"写扎实</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>模块一　简历：让人 30 秒记住你</h3><p><span class="k">结论先行：</span>简历的唯一目的是让你进笔试／面试，不是展示才艺。</p><p>硬指标优先：学校、专业、成绩、对口实习、领导力经历，是海选时真正的筛选键。</p><p>长度克制：1–2 页中文加 1–2 页英文足够；十几页"精装自传"只会徒增阅读负担。</p><p>按岗定制：把和岗位最相关的经历放在最显眼处，无关内容果断删。</p></div><div class="blk"><h3>模块二　第一印象：1 秒定基调</h3><p><span class="k">结论先行：</span>面试 30 分钟，第一眼那 1 秒基本定调，后面是在"证实或推翻"它。</p><p>协调优先：形象要贴合企业文化，传统行业穿稳妥职业装，创意岗可商务休闲。</p><p>别制造障碍：一个突兀的发型、随意的衣着，会逼面试官花 29 分钟去扭转印象。</p><p>细节都在打分：握手、入座、眼神、语速，专业感从这些小处来。</p></div><div class="blk"><h3>模块三　案例面：用故事代替形容词</h3><p><span class="k">结论先行：</span>说"我沟通能力强"没人信，讲一个真实故事别人才信。</p><p>套用 STAR：情境—任务—行动—结果，让能力可被验证。</p><p>别答"没困难"：被问冲突／困难，举一个你主动协调解决的例子，比"一切都顺"加分。</p><p>展现主动：面试官要的是"会造也会组织造的人"，不是只埋头干活的人。</p></div><div class="blk"><h3>模块四　压力面：慢半拍反而赢</h3><p><span class="k">结论先行：</span>压力面考的不是你知不知道答案，而是你乱不乱。</p><p>先停后答：听到难题，给自己几秒，脑子里列 2–3 个要点再开口，条理立刻出来。</p><p>坦诚优于编造：不会就老实说"我没做过，但我的学习路径是…"，别编故事露馅。</p><p>紧张正常：适度紧张人人都有，关键是别让它拖垮你的表达和状态。</p></div><div class="blk"><h3>模块五　薪资谈判：守住底线</h3><p><span class="k">结论先行：</span>谈薪不是比谁胆大，是信息战＋底线战。</p><p>摸市价：先了解岗位职级与行业薪资区间，再开口。</p><p>报区间：给"理想值＋最低可接受值"，留谈判空间。</p><p>行规与刚性：跳槽涨薪多在 30% 内，外企架构偏刚性；谈不拢宁可不去，别委屈就范。</p></div><div class="blk"><h3>模块六　双向匹配：你也在面试公司</h3><p><span class="k">结论先行：</span>面试是双向选择，你也要判断这家公司值不值得去。</p><p>先读岗位：面试前吃透职位描述，现场用对方关心的能力回应。</p><p>看文化与团队：主管要的是 team player 还是有冲劲的销售，提前判断。</p><p>问对问题：收尾问培训、发展空间、工作内容都稳妥；直接问薪资是大忌。</p></div><div class="blk"><h3>模块七　长期主义：offer 之后才是开始</h3><p><span class="k">结论先行：</span>拿到 offer 只是入场，试用期和前两年决定你站不站得稳。</p><p>先融入再突围：新人先适应团队节奏，再谈脱颖而出。</p><p>别裸辞乱跳：短时间频繁跳槽在简历上很难解释，能稳则稳。</p><p>持续积累：职业是一场长跑，每份工作都把"开头"写扎实。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 面试不是考试而是匹配——你越清楚自己要什么、对方要什么，胜算越高。</p><p><b>2.</b> 简历极简、形象协调、故事真实，这三件事决定了 80% 的第一印象分。</p><p><b>3.</b> 谈薪守住底线、入职先融入再突围，把每一次面试都当作长期职业的扎实一笔。</p></div>
+    <p>这份资料建议从今天开始连续 7 天打卡，每天一个微小行动；自测卷低于 7 分（答对不足 7 题），重点重读"案例面"与"薪资谈判"两个模块，把 STAR 结构和底线思维练熟再投简历。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第 1 天</span> 下午花 20 分钟，按"硬指标优先"改写简历，砍到 2 页内。</li><li><span class="day">第 2 天</span> 选一个目标岗位，读透职位描述，列出它最看重的 3 项能力。</li><li><span class="day">第 3 天</span> 用 STAR 结构，写下 1 段你主动解决问题的真实经历并出声练讲。</li><li><span class="day">第 4 天</span> 对着镜子模拟 1 次自我介绍，计时 1 分钟，删掉无关流水账。</li><li><span class="day">第 5 天</span> 查一下目标行业／职级的薪资区间，写下你的理想值与底线值。</li><li><span class="day">第 6 天</span> 找朋友做 1 次模拟面试，专练"被问困难／冲突"时的回答。</li><li><span class="day">第 7 天</span> 复盘：列出自己最可能被问的 3 个弱点，各准备 1 句坦诚应对。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 面试官海选简历时，平均花在每份简历上的时间大约是？", "o": ["A. 5 分钟", "B. 30 秒左右", "C. 15 分钟", "D. 1 小时"], "a": 1, "tip": "海选阶段简历极多，每份平均只有几十秒，简历必须一眼抓重点。"}, {"q": "2. 关于面试第一印象，下列说法最恰当的是？", "o": ["A. 学历高就能赢", "B. 形象要与岗位文化协调", "C. 英文好最关键", "D. 薪资期望定印象"], "a": 1, "tip": "第一眼 1 秒定调，形象贴合企业文化比单点硬件更重要。"}, {"q": "3. 被问\"过去有没有遇到沟通困难\"，哪种回答最减分？", "o": ["A. 举一个你主动协调解决的具体例子", "B. 说\"一般没困难，对方都接受\"", "C. 假设场景讲解决方法", "D. 承认并说会学习改进"], "a": 1, "tip": "否认困难显得缺乏主动解决问题的意识，是典型减分项。"}, {"q": "4. 外企薪酬架构很灵活，跳槽涨薪可以随意开高价。", "o": ["A. 对", "B. 错"], "a": 1, "tip": "外企薪酬架构偏刚性，跳槽涨薪多在 30% 以内，超出需强依据和特批。"}, {"q": "5. 行为面／案例面回答经历问题，最佳方式是？", "o": ["A. 复述整份简历", "B. 用 STAR 讲真实故事", "C. 只报结果", "D. 回避细节"], "a": 1, "tip": "情境—任务—行动—结果，让能力可被验证，比形容词有说服力。"}, {"q": "6. 面试官问\"你还有什么问题要问我\"，较稳妥的是？", "o": ["A. 直接问工资多少", "B. 问\"几点下班\"", "C. 问培训／发展空间／工作内容", "D. 一言不发"], "a": 2, "tip": "收尾问稳妥的安全话题显重视，直接问薪资是大忌。"}, {"q": "7. 谈期望薪资时，最稳妥的做法是？", "o": ["A. 一开口报最高期望", "B. 完全回避不谈", "C. 先摸市价、设底线、报区间", "D. 报远低于市价显好说话"], "a": 2, "tip": "信息战＋底线战，报区间留谈判空间，宁可不达标也不委屈。"}, {"q": "8. 面试只是公司在挑人，求职者没必要提前了解岗位。", "o": ["A. 对", "B. 错"], "a": 1, "tip": "面试是双向匹配，提前读透职位描述才能精准回应。"}, {"q": "9. 听到面试难题应立即开口，显得反应快。", "o": ["A. 对", "B. 错"], "a": 1, "tip": "先停几秒、列要点再答，条理和稳重比抢答更加分。"}, {"q": "10. 简历越厚越能显示实力。", "o": ["A. 对", "B. 错"], "a": 1, "tip": "1–2 页足够，过厚只增加阅读负担，重点被淹没。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《一个外企面试官的面经》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《一个外企面试官的面经》】", "维度：成事执行", "一句话定位：用面试官思维备战外企面试，谈出好 offer", "", "核心心智模型（5 个）：", "1. 简历极简主义——简历是海选漏斗里的\"入场券\"，不是自传；1–2 页、突出硬指标，按岗位定制。 用法：把学校、专业、成绩、对口实习、领导力经历放最显眼处，无关内容果断砍。", "2. 第一印象秒定——面试约 30 分钟，第一眼那 1 秒就定基调；形象要与岗位文化协调。 用法：传统行业穿稳妥职业装／商务休闲，第一天上班宁可保守，别用外表制造\"要被扭转的印象\"。", "3. 案例锚定法（STAR）——回答经历类问题，用\"情境—任务—行动—结果\"讲真实故事，让能力可被验证。 用法：被问\"有无困难／冲突\"时，别答\"没遇到过\"，举一个你主动解决的具体例子。", "4. 双向匹配思维——面试不是被审判，是看双方是否合拍；先搞清岗位职责、团队风格、企业文化。 用法：面试前读透职位描述，现场用对方关心的能力去回应，而不是炫耀你有的全部。", "5. 薪资底线谈判——跳槽涨薪行规多在 30% 以内，外企薪酬架构偏刚性；谈薪前先设底线、摸市价。 用法：报期望时给\"理想值＋最低可接受值\"，宁可按底线谈崩，也别委屈就范埋下再跳的隐患。", "", "精讲要点：", "· 模块一　简历：让人 30 秒记住你：结论先行：简历的唯一目的是让你进笔试／面试，不是展示才艺。", "· 模块二　第一印象：1 秒定基调：结论先行：面试 30 分钟，第一眼那 1 秒基本定调，后面是在\"证实或推翻\"它。", "· 模块三　案例面：用故事代替形容词：结论先行：说\"我沟通能力强\"没人信，讲一个真实故事别人才信。", "· 模块四　压力面：慢半拍反而赢：结论先行：压力面考的不是你知不知道答案，而是你乱不乱。", "· 模块五　薪资谈判：守住底线：结论先行：谈薪不是比谁胆大，是信息战＋底线战。", "· 模块六　双向匹配：你也在面试公司：结论先行：面试是双向选择，你也要判断这家公司值不值得去。", "· 模块七　长期主义：offer 之后才是开始：结论先行：拿到 offer 只是入场，试用期和前两年决定你站不站得稳。", "", "带走三句话：", "1. 面试不是考试而是匹配——你越清楚自己要什么、对方要什么，胜算越高。", "2. 简历极简、形象协调、故事真实，这三件事决定了 80% 的第一印象分。", "3. 谈薪守住底线、入职先融入再突围，把每一次面试都当作长期职业的扎实一笔。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：简历极简主义、第一印象秒定、案例锚定法（STAR）、双向匹配思维、薪资底线谈判），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b27_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b27_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b27_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b27_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
