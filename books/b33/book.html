@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>《睡个好觉：如何科学改善你的睡眠》</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1c1c1c; font-size: 14px; line-height: 1.78;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .wrap { width: 100%; }
+  h1, h2, h3 { font-weight: 800; letter-spacing: .5px; }
+  h2 { font-size: 19px; color: #143a32; margin: 26px 0 12px;
+       padding-left: 11px; border-left: 5px solid #c08438; }
+  h3 { font-size: 15.5px; color: #143a32; margin: 16px 0 6px; }
+
+  /* 封面（顶部块，不强制分页） */
+  .cover { border: 1px solid #e3ddd0; border-radius: 14px; padding: 22px 24px;
+           background: linear-gradient(135deg,#143a32 0%,#1d5247 100%); color: #fff;
+           margin-bottom: 22px; }
+  .cover .dim { display: inline-block; font-size: 12px; background: #c08438; color: #1c1c1c;
+           padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 1px; }
+  .cover h1 { font-size: 25px; margin: 12px 0 8px; line-height: 1.35; }
+  .cover .pos { font-size: 14.5px; opacity: .95; margin: 0; }
+  .cover .sign { margin-top: 14px; font-size: 12.5px; opacity: .85; }
+
+  .lead { background: #f6f3ec; border-radius: 10px; padding: 14px 16px; margin: 4px 0 6px; }
+  .lead b { color: #143a32; }
+
+  /* 心智模型卡片 */
+  .models { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mcard { border: 1px solid #e3ddd0; border-radius: 10px; padding: 12px 14px;
+           background: #fcfbf7; break-inside: avoid; }
+  .mcard .mt { font-weight: 800; color: #143a32; font-size: 14.5px; margin-bottom: 4px; }
+  .mcard .md { font-size: 13px; color: #3a3a3a; margin: 0; }
+  .mcard .mu { font-size: 12.5px; color: #7a6a4a; margin: 6px 0 0; }
+
+  /* 提纲 */
+  .outline { padding-left: 0; }
+  .ochap { break-inside: avoid; margin: 10px 0; }
+  .ochap .ot { font-weight: 800; color: #143a32; font-size: 14.5px; }
+  .ochap ul { margin: 4px 0 0; padding-left: 20px; }
+  .ochap li { margin: 2px 0; }
+
+  /* 精讲 */
+  .lect .blk { break-inside: avoid; margin: 10px 0; }
+  .lect p { margin: 5px 0; }
+  .lect .k { color: #c08438; font-weight: 700; }
+
+  /* 自测卷 */
+  .quiz .q { break-inside: avoid; border: 1px solid #e3ddd0; border-radius: 10px;
+             padding: 12px 14px; margin: 10px 0; background: #fcfbf7; }
+  .quiz .qt { font-weight: 700; margin-bottom: 7px; }
+  .quiz label { display: block; padding: 4px 8px; border-radius: 6px; margin: 3px 0;
+                cursor: pointer; }
+  .quiz label:hover { background: #f0ece1; }
+  .quiz input { margin-right: 8px; }
+  .quiz .ans { font-size: 12.5px; color: #1d7a4d; margin-top: 6px; display: none; }
+  .quizbar { margin: 12px 0; }
+  .quizbar button { background: #143a32; color: #fff; border: 0; border-radius: 8px;
+                    padding: 9px 18px; font-size: 14px; cursor: pointer; font-weight: 700; }
+  .score { font-size: 16px; font-weight: 800; color: #143a32; margin-left: 12px; }
+
+  /* 打卡 */
+  .check li { margin: 6px 0; break-inside: avoid; }
+  .check .day { font-weight: 800; color: #c08438; }
+
+  footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #e3ddd0;
+           font-size: 12.5px; color: #6a6a6a; text-align: center; }
+  footer .cta { display: flex; align-items: center; justify-content: center; gap: 18px;
+                background: #f6f3ec; border: 1px solid #e3ddd0; border-radius: 12px;
+                padding: 14px 18px; margin-bottom: 14px; }
+  footer .ctaqr { width: 92px; height: 92px; border-radius: 8px; }
+  footer .ctatxt { text-align: left; }
+  footer .ctabig { font-size: 16px; font-weight: 800; color: #143a32; }
+  footer .ctasub { font-size: 12.5px; color: #6a6a6a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ COVER ============ -->
+  <section class="cover">
+    <span class="dim">未来与身心</span>
+    <h1>《睡个好觉：如何科学改善你的睡眠》</h1>
+    <p class="pos">用科学方法，把睡眠变成可改善的日常习惯</p>
+    <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+  </section>
+
+  <!-- ============ 解决什么 ============ -->
+  <section>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">很多人被"必须睡8小时""周末补觉就行""熬夜死不了"这些说法困住，越睡越糟。读懂睡眠怎么运作、你到底需要睡多久、哪些习惯在偷走睡眠，你就能把觉睡踏实，白天的精力和情绪都跟着回来。</div>
+  </section>
+
+  <!-- ============ 心智模型 ============ -->
+  <section>
+    <h2>核心心智模型</h2>
+    <div class="models">
+      <div class="mcard">
+        <div class="mt">双系统驱动睡眠</div>
+        <p class="md">睡眠由"睡眠债积累"和"生物钟节律"两个系统共同决定，困是自然结果而非意志问题。</p>
+        <p class="mu">用法：白天清醒越久债越多，晚上自然困；固定作息让生物钟稳下来。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">90分钟周期律</div>
+        <p class="md">睡眠是以约90分钟为单位的周期循环，深睡与做梦交替出现。</p>
+        <p class="mu">用法：把起床点放在REM或浅睡期，醒来更清醒，少头昏。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">核心温度开关</div>
+        <p class="md">入睡靠核心体温下降，散热（手脚暖、泡脚）能帮你更快睡着。</p>
+        <p class="mu">用法：睡前洗热水澡或泡脚，让身体把热量散出去。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">睡眠长度看感觉</div>
+        <p class="md">不迷信8小时，按白天的精力与状态判断自己睡够没。</p>
+        <p class="mu">用法：长假里不熬夜、自然醒，记下间隔时长就是你的个人基准。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">熬夜是慢性债</div>
+        <p class="md">补觉能补一部分，但长期欠睡的危害（肥胖、糖尿病、心血管、情绪）还不清。</p>
+        <p class="mu">用法：把睡眠当固定支出，别用"周末补"当长期借口。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 提纲 ============ -->
+  <section>
+    <h2>内容提纲</h2>
+    <div class="outline">
+      <div class="ochap">
+        <div class="ot">一、先破除对睡眠的误会</div>
+        <ul>
+          <li>8小时只是平均值，睡太久也有风险</li>
+          <li>老年人不是不需要睡，是身体限制了睡眠</li>
+          <li>周末补觉能补一部分，但长期欠睡补不回</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">二、睡眠到底有什么用</div>
+        <ul>
+          <li>恢复：睡眠时大脑像被"洗了个澡"，清走代谢垃圾</li>
+          <li>记忆巩固：睡一觉，白天的记忆更牢、灵感更多</li>
+          <li>情绪：睡眠帮我们消化负面情绪</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">三、你是怎么睡着的</div>
+        <ul>
+          <li>一个晚上是多个约90分钟的周期在循环</li>
+          <li>深睡修复身体，REM（做梦期）巩固记忆与情绪</li>
+          <li>最佳起床点在REM及之后的浅睡期</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">四、被睡眠困扰的你</div>
+        <ul>
+          <li>失眠：先清卧室干扰，严重时就医，行为疗法长期更稳</li>
+          <li>熬夜：长期睡眠不足的危害是累积且真实的</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">五、今晚就睡个好觉</div>
+        <ul>
+          <li>温度是隐形开关：太热最伤睡眠，入睡时开空调更合理</li>
+          <li>9条改善技巧：累了才上床、固定作息、不强迫睡</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 精讲 ============ -->
+  <section>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="lect">
+      <div class="blk">
+        <h3>1. 别被"8小时"绑住</h3>
+        <p>结论先行：每天必须睡够8小时是个误会，它只是人群平均值，不是你的硬指标。</p>
+        <p><span class="k">证据：</span>研究发现每天睡8小时以上的人，寿命反而短于睡6—8小时的人；睡眠与健康的关系像一条抛物线，过短或过长都有风险。</p>
+        <p><span class="k">老年人：</span>他们不是"需要得少"，而是深层睡眠变少、夜里易醒，需求仍有7—8小时，只是身体限制了睡眠时长。</p>
+      </div>
+      <div class="blk">
+        <h3>2. 睡眠由两套系统共同管</h3>
+        <p>结论先行：你什么时候困，不是靠意志力，而是两个系统合力的结果。</p>
+        <p><span class="k">睡眠债系统：</span>清醒越久，想睡的驱动力越高，到晚上达到顶峰。</p>
+        <p><span class="k">生物钟系统：</span>身体按当地昼夜规律调节体温、褪黑素、皮质醇，决定你"该不该这时候困"。两系统配合好，入睡才顺。</p>
+      </div>
+      <div class="blk">
+        <h3>3. 一个晚上是多个90分钟周期</h3>
+        <p>结论先行：睡眠不是"睡着—醒来"两段，而是由约90分钟的周期反复循环。</p>
+        <p><span class="k">结构：</span>浅睡→深睡（修复身体、降耗）→REM做梦期（巩固记忆、消化情绪）→回到浅睡，一晚约5个循环。</p>
+        <p><span class="k">怎么用：</span>深睡被叫醒会头昏脑涨；最佳起床点在REM或浅睡期，此时轻轻一扰就醒、神智清楚。</p>
+      </div>
+      <div class="blk">
+        <h3>4. 睡眠是大脑的"清洁时间"</h3>
+        <p>结论先行：睡眠时大脑在用脑脊液"洗澡"，把白天积下的代谢垃圾清走，其中就包括和认知退化相关的物质。</p>
+        <p><span class="k">记忆：</span>睡一觉后，白天学的东西记得更牢，甚至能"想通"白天卡住的问题——大脑在后台筛选和加工信息。</p>
+        <p><span class="k">情绪：</span>睡眠会保留事件记忆、淡化其中的强烈情绪，所以"睡一觉就好多了"是有科学依据的。</p>
+      </div>
+      <div class="blk">
+        <h3>5. 失眠与熬夜：两条不同的路</h3>
+        <p>结论先行：睡不好的人分两类——真睡不着（失眠）和不愿睡（熬夜），应对完全不同。</p>
+        <p><span class="k">失眠：</span>先清掉卧室里的手机、电视、惊悚内容等干扰源；药物只宜短期，长期更推荐行为疗法（刺激控制、睡眠限制），严重了就就医，别自己乱用药。</p>
+        <p><span class="k">熬夜：</span>长期睡眠不足会推高肥胖、糖尿病、心血管病风险，并拖累注意力与情绪；补觉能补一部分，但长期欠债还不清。没有任何人"仅仅因为缺觉"值得拿健康去赌。</p>
+      </div>
+      <div class="blk">
+        <h3>6. 今晚就睡好的实操</h3>
+        <p>结论先行：改善睡眠不靠意志力，靠环境和习惯的小调整。</p>
+        <p><span class="k">温度是开关：</span>环境过热最伤睡眠，湿热更糟；若必须限制开空调，入睡时开比后半夜开更合理。冬季别让卧室过冷，脸和吸入的冷空气会影响心脏自主神经。</p>
+        <p><span class="k">9条里最关键的：</span>累了才上床，不强迫自己睡；固定时间睡和起；睡前4小时避开咖啡因和烟酒；闭眼半小时没睡意就起床，看点容易犯困的东西；床只用来睡，不在床上玩手机、吃东西。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 自测卷 ============ -->
+  <section>
+    <h2>自测卷 · 10 题当场出分</h2>
+    <div class="quiz" id="quiz">
+      <div class="q">
+        <div class="qt">1. 关于"每天必须睡满8小时"，正确的是？</div>
+        <label><input type="radio" name="q1"> A. 必须正好8小时</label>
+        <label><input type="radio" name="q1" data-correct="1"> B. 只是平均值，因人而异</label>
+        <label><input type="radio" name="q1"> C. 越长越健康</label>
+        <label><input type="radio" name="q1"> D. 越短越健康</label>
+        <div class="ans">答案：B。8小时是平均值，过短或过长都有风险。</div>
+      </div>
+      <div class="q">
+        <div class="qt">2. 睡眠主要由哪两个系统共同调控？</div>
+        <label><input type="radio" name="q2"> A. 饥饿与口渴</label>
+        <label><input type="radio" name="q2" data-correct="1"> B. 睡眠债平衡系统 + 昼夜节律</label>
+        <label><input type="radio" name="q2"> C. 心跳与呼吸</label>
+        <label><input type="radio" name="q2"> D. 血压与血糖</label>
+        <div class="ans">答案：B。两套系统合力决定你何时困。</div>
+      </div>
+      <div class="q">
+        <div class="qt">3. 一个睡眠周期大约多长？</div>
+        <label><input type="radio" name="q3"> A. 30分钟</label>
+        <label><input type="radio" name="q3" data-correct="1"> B. 90分钟</label>
+        <label><input type="radio" name="q3"> C. 3小时</label>
+        <label><input type="radio" name="q3"> D. 15分钟</label>
+        <div class="ans">答案：B。约90分钟一个周期，一晚循环约5次。</div>
+      </div>
+      <div class="q">
+        <div class="qt">4. 最理想的起床时机是？</div>
+        <label><input type="radio" name="q4"> A. 深睡中被叫醒</label>
+        <label><input type="radio" name="q4" data-correct="1"> B. REM或浅睡期</label>
+        <label><input type="radio" name="q4"> C. 刚入睡时</label>
+        <label><input type="radio" name="q4"> D. 任意时间</label>
+        <div class="ans">答案：B。此时睡眠轻，醒来更清醒。</div>
+      </div>
+      <div class="q">
+        <div class="qt">5. 睡前泡脚或洗热水澡有助于入睡，原理是？</div>
+        <label><input type="radio" name="q5"> A. 升高核心体温</label>
+        <label><input type="radio" name="q5" data-correct="1"> B. 帮助核心体温下降、把热量散出去</label>
+        <label><input type="radio" name="q5"> C. 让人更精神</label>
+        <label><input type="radio" name="q5"> D. 杀菌</label>
+        <div class="ans">答案：B。散热让核心体温下降，触发睡意。</div>
+      </div>
+      <div class="q">
+        <div class="qt">6. 长期熬夜（睡眠长期不足）最不可能直接带来？</div>
+        <label><input type="radio" name="q6"> A. 肥胖风险上升</label>
+        <label><input type="radio" name="q6"> B. 糖尿病风险上升</label>
+        <label><input type="radio" name="q6"> C. 心血管风险上升</label>
+        <label><input type="radio" name="q6" data-correct="1"> D. 立刻致死</label>
+        <div class="ans">答案：D。危害是长期累积的，但绝不该拿健康去赌。</div>
+      </div>
+      <div class="q">
+        <div class="qt">7. 关于老年人睡眠，正确的是？</div>
+        <label><input type="radio" name="q7"> A. 年纪大就不需要睡了</label>
+        <label><input type="radio" name="q7" data-correct="1"> B. 需求并不少，是身体因素限制了入睡和维持</label>
+        <label><input type="radio" name="q7"> C. 应比年轻人少很多</label>
+        <label><input type="radio" name="q7"> D. 补觉完全没用</label>
+        <div class="ans">答案：B。需求仍有7—8小时，只是睡不稳。</div>
+      </div>
+      <div class="q">
+        <div class="qt">8. 对安眠药的正确态度是？</div>
+        <label><input type="radio" name="q8"> A. 长期随便吃</label>
+        <label><input type="radio" name="q8" data-correct="1"> B. 短期可用、不宜长期依赖，长期失眠应就医或行为疗法</label>
+        <label><input type="radio" name="q8"> C. 完全没有副作用</label>
+        <label><input type="radio" name="q8"> D. 越多越好</label>
+        <div class="ans">答案：B。长期更推荐行为疗法，必要时就医。</div>
+      </div>
+      <div class="q">
+        <div class="qt">9. 行为疗法（如刺激控制、睡眠限制）对失眠，相比药物？</div>
+        <label><input type="radio" name="q9"> A. 更差</label>
+        <label><input type="radio" name="q9" data-correct="1"> B. 长期更有效且更安全</label>
+        <label><input type="radio" name="q9"> C. 完全无效</label>
+        <label><input type="radio" name="q9"> D. 只适合儿童</label>
+        <div class="ans">答案：B。长期看行为疗法更稳更省钱。</div>
+      </div>
+      <div class="q">
+        <div class="qt">10. 判断自己睡够没，最可靠的办法是？</div>
+        <label><input type="radio" name="q10"> A. 看别人睡多久</label>
+        <label><input type="radio" name="q10"> B. 听闹钟</label>
+        <label><input type="radio" name="q10" data-correct="1"> C. 看白天的精力与状态</label>
+        <label><input type="radio" name="q10"> D. 数羊</label>
+        <div class="ans">答案：C。白天是否需要硬撑、情绪和面色如何，比数字更准。</div>
+      </div>
+    </div>
+    <div class="quizbar">
+      <button onclick="grade()">交卷看分</button>
+      <span class="score" id="score"></span>
+    </div>
+  </section>
+
+  <!-- ============ 打卡 ============ -->
+  <section>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check">
+      <li><span class="day">第 1 天</span> 固定起床时间，无论几点睡，早上同一时刻起。</li>
+      <li><span class="day">第 2 天</span> 睡前4小时不喝咖啡、茶、酒，手机不进卧室。</li>
+      <li><span class="day">第 3 天</span> 睡前洗热水澡或泡脚，帮身体散热、触发睡意。</li>
+      <li><span class="day">第 4 天</span> 困了才上床；躺下半小时没睡意就起来，看点易困的书。</li>
+      <li><span class="day">第 5 天</span> 把卧室温度调到舒适区间，太热就入睡时开空调。</li>
+      <li><span class="day">第 6 天</span> 午睡控制在30分钟内，不靠白天补觉抵消夜里的欠债。</li>
+      <li><span class="day">第 7 天</span> 记下自己自然醒的睡眠时长，作为个人睡眠基准。</li>
+    </ul>
+  </section>
+
+  <!-- ============ 结语 ============ -->
+  <section>
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead">
+      <p><b>1.</b> 睡眠由"睡眠债"和"生物钟"共同决定，困是自然信号，靠意志力硬扛不划算。</p>
+      <p><b>2.</b> 别迷信8小时，也别迷信熬夜——按白天精力判断睡够没，长期欠睡的危害还不清。</p>
+      <p><b>3.</b> 改善睡眠从环境和小习惯入手：固定作息、散热助眠、床只用来睡，今晚就能开始。</p>
+    </div>
+    <p>这份资料建议从今天起连续7天打卡；自测卷低于7分，重读"精讲"第1、3、6节，把作息与睡眠环境先调顺。</p>
+  </section>
+
+    <!-- ============ 复盘卡（补尾页） ============ -->
+  <section class="recap">
+    <h2>带走《睡个好觉：如何科学改善你的睡眠》· 一张复盘卡</h2>
+    <div class="lead">
+      <p><b>① 它归在「未来与身心」这条线上</b>——用科学方法，把睡眠变成可改善的日常习惯</p>
+      <p><b>② 今天就能用的一步</b>：从自测卷里挑 1 题，把对应模型写进你明天要做的一件事里。</p>
+      <p><b>③ 卡住了别硬扛</b>：扫码加微信，领这套资料的 AI 陪练，对着练比自己悟快得多。</p>
+    </div>
+    <h3>这套资料怎么用（4 步闭环）</h3>
+    <ul class="check">
+      <li><span class="day">读</span> 通读「核心心智模型 + 精讲」，先建立骨架，不纠结细节。</li>
+      <li><span class="day">测</span> 做 10 题自测卷，当场出分；低于 7 分，回到薄弱模型再读一遍。</li>
+      <li><span class="day">练</span> 按「7 天打卡」每天一个微小动作，把知道变成做到。</li>
+      <li><span class="day">扩</span> 顺手领全套「33 本书带你开启新的人生」，沿主线一本本读完。</li>
+    </ul>
+    <h3>给忙碌者的 3 分钟速记</h3>
+    <ul class="check">
+      <li><span class="day">记</span> 这本书只解决一件事：用科学方法，把睡眠变成可改善的日常习惯</li>
+      <li><span class="day">用</span> 把书里最打动你的一个模型，立刻套进本周一个真实问题。</li>
+      <li><span class="day">传</span> 试着给一个人讲清楚这个模型——讲得清，才是真懂。</li>
+      <li><span class="day">续</span> 读不顺就换一本，主线是「认知→思维→行动→关系→财富」，不必死磕顺序。</li>
+    </ul>
+    <p>「33 本书带你开启新的人生」不是读得多，是把每一本的真东西用起来——这一本，先从一个模型开始，今天就用一次。</p>
+  </section>
+
+<footer>
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  </footer>
+
+</div>
+
+<script>
+function grade(){
+  var qs = document.querySelectorAll('#quiz .q');
+  var total = qs.length, right = 0;
+  qs.forEach(function(q){
+    var picked = q.querySelector('input:checked');
+    var correct = q.querySelector('input[data-correct="1"]');
+    var ans = q.querySelector('.ans');
+    if(ans) ans.style.display = 'block';
+    if(picked && picked === correct){ right++; }
+  });
+  var s = document.getElementById('score');
+  if(s) s.textContent = '得分 ' + right + ' / ' + total;
+}
+</script>
+</body>
+</html>
