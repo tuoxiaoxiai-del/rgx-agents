@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>释放潜能：7个改变个人、团队和组织的教练技巧 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>释放潜能：7个改变个人、团队和组织的教练技巧 · 书智能体</b><span>成事执行｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">成事执行</span>
+      <h1>《释放潜能：7个改变个人、团队和组织的教练技巧》</h1>
+      <p class="pos">用教练式提问与陪伴，帮身边的人（和你自己）把藏起来的潜能变成行动</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">带团队、带孩子、带自己，最难的不是"给答案"，而是对方听归听、动归不动。这份笔记把一套成熟的指导方法拆成可上手的动作：先赢得信任，再帮人看清自己、做出由内而外的承诺，最后陪他执行到位。你会学到怎么问、怎么听、怎么让人真正"自己想改变"。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">由内而外的承诺</div><p class="md">短暂的激励会随压力消失。只有当事人自己认定的目标，才扛得长久。</p><p class="mu">用法：少给答案，多问有力的问题，让对方亲口说出目标和下一步。</p></div><div class="mcard"><div class="mt">教练式提问</div><p class="md">好的指导靠"问对问题"而非"给对答案"。问题分三类：结合目的、导向承诺、确认行动。</p><p class="mu">用法：把"你应该"换成"你觉得"，让对方自己找到路。</p></div><div class="mcard"><div class="mt">信任是地基</div><p class="md">可信赖 = 品格（正直、真心关心） + 能力（真能成事）。缺一不可，且保密是命脉。</p><p class="mu">用法：先经营信任与安全感，再谈改变，绝不泄露对方私下的话。</p></div><div class="mcard"><div class="mt">撬开思维定式</div><p class="md">很多"我不行"只是旧观念。从假设、原理、角度、后果、问题本身五个方向去撬。</p><p class="mu">用法：当对方自我否定时，用提问让他自己看见另一种可能。</p></div><div class="mcard"><div class="mt">心流执行</div><p class="md">把改变接到内在热爱上，进入专注沉浸的状态，重复练成习惯就不再费力。</p><p class="mu">用法：问"你做什么会忘我"，把日常动作连到他真正在乎的事。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">第一部分　四条指导原则</div><ul><li>信任：可信赖 = 品格 + 能力，保密是不可破的底线</li><li>潜能：每个人都比自己以为的更有料，关键是量身定制与倾听</li><li>承诺：持久承诺由内而生，靠有力问题激发</li><li>执行：让对方握住方向盘，进入专注心流</li></ul></div><div class="ochap"><div class="ot">第二部分　七项教练技巧</div><ul><li>建立信任、挑战思维定式、寻求战略清晰</li><li>完美执行、进行有效反馈、挖掘才能、提升"中层"</li><li>核心心法：少说多问，把方向盘交还给对方</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>一、信任：一切改变的起点</h3><p><span class="k">结论先行：</span>没有信任，你说的再对，对方也会防备、质疑、拖延。指导的第一课是"被信任"，而不是"显得专业"。</p><p>可信赖来自两样：品格——你是不是正直、是不是真心把对方的最大利益放第一；能力——你能不能真的帮他成事。只有能力没品格，是精致的投机；只有品格没能力，是好心办不成事。</p><p>守住秘密是信任的命脉。对方把脆弱的一面交给你，你替他保密，关系才立得住。失之易、得之难，一次冷漠或泄密，前面的功夫就白费。</p></div><div class="blk"><h3>二、潜能：每个人都被低估了</h3><p><span class="k">结论先行：</span>人的实际潜力，普遍比他愿意用出来的大得多。指导不是灌知识，而是把被自我防卫压住的潜能"放"出来。</p><p>好的指导像裁缝量体裁衣：先听对方的故事、目标、恐惧，再定制方法，绝不拿一套现成模板硬套。把耳朵打开，用共情去听——不是为评判、给建议而听，而是让对方感到"被懂"。</p><p>当一个人被认真关注，他就会敞开，潜能才流动得出来。所以，先搁置你自己的故事，全神贯注地在当下与他在一起。</p></div><div class="blk"><h3>三、承诺：由内而外才长久</h3><p><span class="k">结论先行：</span>外在的奖励和威胁只能燃一时，真正能坚持的承诺，是当事人自己生出来的。</p><p>指导者的任务不是下指令，而是创造条件，让人对"自己的目标"做出承诺。最有力的工具是提问：先结合目的（你最想实现什么），再导向承诺（挡路的障碍是什么、你有什么资源），最后确认行动（接下来24小时你做哪两三件）。</p><p>少说话、多听。你替他做主，承诺就变成你的；让他自己讲出目标与解法，他才真正"拥有"它。</p></div><div class="blk"><h3>四、挑战思维定式：撬开旧观念</h3><p><span class="k">结论先行：</span>挡住一个人的，往往不是能力，而是"我不行""我天生不擅长"这类旧观念。它们会变成自我实现的预言。</p><p>撬开定式有五个角度：探寻他背后的假设、探测支撑它的理由、换一个立场看、推演这么想的后果、质疑"问题本身"是否成立。你不必反驳他，只要让这些信念在光下现形。</p><p>当对方学会把旧观念与真实对照，阻碍他发挥的墙就塌了。改变——真正的改变——是由内而外的。</p></div><div class="blk"><h3>五、战略清晰：找到"燃烧的Yes"</h3><p><span class="k">结论先行：</span>没有明确方向的人，会忠于日常琐事直到被它奴役。先有"燃烧的Yes"，才有清晰的策略与行动。</p><p>帮对方找到他热烈追求的人生目标——写一份个人使命：最看重什么、想留下什么、每天为什么而起。它提供焦点与意义，也让人知道什么可做、什么不做。</p><p>再把使命落到可操作的策略：核心服务对象是谁、独特价值是什么、资源怎么配、未来几年重点投什么。不付诸行动的想象只是梦，没有想象的行动只是消磨时间。</p></div><div class="blk"><h3>六、执行与心流：把改变练成习惯</h3><p><span class="k">结论先行：</span>承诺之后不执行，再好的谈话都是空谈。指导者要让对方握住方向盘，而不是被你推着走。</p><p>帮人进入专注沉浸的"心流"状态：问"你做什么会忘记时间""你最擅长什么"，把行动接到他内在的热爱上。重复会成习惯，习惯又延长心流——改变就稳了。</p><p>七项技巧里，建立信任、挑战定式、战略清晰、完美执行、有效反馈、挖掘才能、提升"中层"环环相扣。其中回报最高的一招，是把表现中等、尚未出色的人托起来——组织的进步往往就藏在这里。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 信任是地基——可信赖来自品格与能力，守住秘密，对方才肯把真心交出来。</p><p><b>2.</b> 改变靠"问"不靠"给"——由内而外的承诺和撬开的旧观念，都要让对方自己说出来。</p><p><b>3.</b> 执行要交还方向盘，把行动接到内在热爱、练成习惯，改变才真正落地。</p></div>
+    <p>这份资料怎么用：从今天起用教练式提问带一次对话，7 天打卡连做一遍；自测卷低于 8 分，重读"精讲"第一、三、六节，把信任与承诺这两块补牢。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第1天</span> 和一位你想帮的人对话，全程只问不打断，结束后复述你听到的核心。</li><li><span class="day">第2天</span> 用"结合目的"的三问（你最想实现什么 / 怎么衡量成功 / 今天谈什么有用）开启一次交流。</li><li><span class="day">第3天</span> 当对方自我否定时，先不反驳，改用"为什么你觉得是这样"把假设撬开。</li><li><span class="day">第4天</span> 写下你自己的个人使命三句话：最看重什么、想留下什么、每天为何而起。</li><li><span class="day">第5天</span> 对一件拖延的事，用"导向承诺"的两问：障碍是什么、你有什么资源。</li><li><span class="day">第6天</span> 找出一件你擅长且会忘我的事，把它接回当天的一个行动里。</li><li><span class="day">第7天</span> 用"确认行动"收尾：请对方亲口说出接下来24小时要做的两三件事。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 关于\"可信赖\"，下列说法正确的是？", "o": ["<span>A. 只要有能力就够</span>", "<span>B. 只要品格好就够</span>", "<span>C. 品格与能力缺一不可</span>", "<span>D. 职位高自然被人信</span>"], "a": 2, "tip": "可信赖 = 品格 + 能力，权威地位本身换不来信任。"}, {"q": "2. 哪种激励最能带来持久的承诺？", "o": ["<span>A. 一次性的金钱奖励</span>", "<span>B. 当事人由内而生、自己认定的目标</span>", "<span>C. 即时的威胁与压力</span>", "<span>D. 别人替他定好的计划</span>"], "a": 1, "tip": "外在激励随紧迫感消失，内在承诺才长久。"}, {"q": "3. 教练式指导的核心动作是？", "o": ["<span>A. 直接告诉对方该怎么做</span>", "<span>B. 问对的问题，让对方自己找答案</span>", "<span>C. 替对方把方案写明白</span>", "<span>D. 用权威压他执行</span>"], "a": 1, "tip": "少说多问，把方向盘交还对方，承诺才真正属于他。"}, {"q": "4. 关于倾听，恰当的做法是？", "o": ["<span>A. 为给建议、做判断而听</span>", "<span>B. 用共情听，让对方感到被懂</span>", "<span>C. 边听边想怎么反驳</span>", "<span>D. 只听自己关心的部分</span>"], "a": 1, "tip": "共情式倾听营造安全感，潜能才释放得出来。"}, {"q": "5. 撬开\"我不行\"这类旧观念，可以？", "o": ["<span>A. 直接否定对方</span>", "<span>B. 从假设、理由、角度、后果等多方向提问</span>", "<span>C. 讲大道理说服</span>", "<span>D. 置之不理</span>"], "a": 1, "tip": "让旧信念在提问中现形，对方自己会松动。"}, {"q": "6. 没有清晰方向的人，容易？", "o": ["<span>A. 忠于日常琐事直到被它奴役</span>", "<span>B. 自然找到人生使命</span>", "<span>C. 比有目标的人更高效</span>", "<span>D. 不受影响</span>"], "a": 0, "tip": "先有\"燃烧的Yes\"，才有策略与行动可言。"}, {"q": "7. 关于保密，下列说法正确的是？", "o": ["<span>A. 它是信任的命脉，绝不能泄露对方私下所言</span>", "<span>B. 看情况可以转述给团队</span>", "<span>C. 不重要</span>", "<span>D. 只对上级保密</span>"], "a": 0, "tip": "泄密一次，信任就崩，前面功夫全白费。"}, {"q": "8. 帮助对方执行时，指导者应该？", "o": ["<span>B. 让对方握住方向盘，自己陪跑</span>", "<span>A. 推着对方走他不愿走的路</span>", "<span>C. 替他做所有决定</span>", "<span>D. 只提要求不陪伴</span>"], "a": 0, "tip": "对方参与开车、抵达目的地，改变才真正发生。"}, {"q": "9. 提升组织表现，性价比最高的一招是？", "o": ["<span>A. 只盯着最顶尖的明星</span>", "<span>B. 把表现中等、尚未出色的人托起来</span>", "<span>C. 替换掉所有人</span>", "<span>D. 不干预</span>"], "a": 1, "tip": "\"中层\"群体基数大，托起来回报最高。"}, {"q": "10. 把改变练成习惯，关键是？", "o": ["<span>A. 靠意志力硬扛</span>", "<span>B. 接上内在热爱，进入专注心流，重复成习惯</span>", "<span>C. 频繁换目标</span>", "<span>D. 等状态好再说</span>"], "a": 1, "tip": "心流让重复不再费力，习惯又延长心流，改变才稳。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《释放潜能：7个改变个人、团队和组织的教练技巧》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《释放潜能：7个改变个人、团队和组织的教练技巧》】", "维度：成事执行", "一句话定位：用教练式提问与陪伴，帮身边的人（和你自己）把藏起来的潜能变成行动", "", "核心心智模型（5 个）：", "1. 由内而外的承诺——短暂的激励会随压力消失。只有当事人自己认定的目标，才扛得长久。 用法：少给答案，多问有力的问题，让对方亲口说出目标和下一步。", "2. 教练式提问——好的指导靠\"问对问题\"而非\"给对答案\"。问题分三类：结合目的、导向承诺、确认行动。 用法：把\"你应该\"换成\"你觉得\"，让对方自己找到路。", "3. 信任是地基——可信赖 = 品格（正直、真心关心） + 能力（真能成事）。缺一不可，且保密是命脉。 用法：先经营信任与安全感，再谈改变，绝不泄露对方私下的话。", "4. 撬开思维定式——很多\"我不行\"只是旧观念。从假设、原理、角度、后果、问题本身五个方向去撬。 用法：当对方自我否定时，用提问让他自己看见另一种可能。", "5. 心流执行——把改变接到内在热爱上，进入专注沉浸的状态，重复练成习惯就不再费力。 用法：问\"你做什么会忘我\"，把日常动作连到他真正在乎的事。", "", "精讲要点：", "· 一、信任：一切改变的起点：结论先行：没有信任，你说的再对，对方也会防备、质疑、拖延。指导的第一课是\"被信任\"，而不是\"显得专业\"。", "· 二、潜能：每个人都被低估了：结论先行：人的实际潜力，普遍比他愿意用出来的大得多。指导不是灌知识，而是把被自我防卫压住的潜能\"放\"出来。", "· 三、承诺：由内而外才长久：结论先行：外在的奖励和威胁只能燃一时，真正能坚持的承诺，是当事人自己生出来的。", "· 四、挑战思维定式：撬开旧观念：结论先行：挡住一个人的，往往不是能力，而是\"我不行\"\"我天生不擅长\"这类旧观念。它们会变成自我实现的预言。", "· 五、战略清晰：找到\"燃烧的Yes\"：结论先行：没有明确方向的人，会忠于日常琐事直到被它奴役。先有\"燃烧的Yes\"，才有清晰的策略与行动。", "· 六、执行与心流：把改变练成习惯：结论先行：承诺之后不执行，再好的谈话都是空谈。指导者要让对方握住方向盘，而不是被你推着走。", "", "带走三句话：", "1. 信任是地基——可信赖来自品格与能力，守住秘密，对方才肯把真心交出来。", "2. 改变靠\"问\"不靠\"给\"——由内而外的承诺和撬开的旧观念，都要让对方自己说出来。", "3. 执行要交还方向盘，把行动接到内在热爱、练成习惯，改变才真正落地。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：由内而外的承诺、教练式提问、信任是地基、撬开思维定式、心流执行），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b30_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b30_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b30_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b30_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
