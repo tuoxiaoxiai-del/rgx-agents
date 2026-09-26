@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>《说服：像讲故事一样讲道理》</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1c1c1c; font-size: 14px; line-height: 1.78;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .wrap { width: 100%; }
+  h1, h2, h3 { font-weight: 800; letter-spacing: .5px; }
+  h2 { font-size: 19px; color: #143a32; margin: 26px 0 12px;
+       padding-left: 11px; border-left: 5px solid #c08438; }
+  h3 { font-size: 15.5px; color: #143a32; margin: 16px 0 6px; }
+
+  /* 封面（顶部块，不强制分页） */
+  .cover { border: 1px solid #e3ddd0; border-radius: 14px; padding: 22px 24px;
+           background: linear-gradient(135deg,#143a32 0%,#1d5247 100%); color: #fff;
+           margin-bottom: 22px; }
+  .cover .dim { display: inline-block; font-size: 12px; background: #c08438; color: #1c1c1c;
+           padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 1px; }
+  .cover h1 { font-size: 25px; margin: 12px 0 8px; line-height: 1.35; }
+  .cover .pos { font-size: 14.5px; opacity: .95; margin: 0; }
+  .cover .sign { margin-top: 14px; font-size: 12.5px; opacity: .85; }
+
+  .lead { background: #f6f3ec; border-radius: 10px; padding: 14px 16px; margin: 4px 0 6px; }
+  .lead b { color: #143a32; }
+
+  /* 心智模型卡片 */
+  .models { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mcard { border: 1px solid #e3ddd0; border-radius: 10px; padding: 12px 14px;
+           background: #fcfbf7; break-inside: avoid; }
+  .mcard .mt { font-weight: 800; color: #143a32; font-size: 14.5px; margin-bottom: 4px; }
+  .mcard .md { font-size: 13px; color: #3a3a3a; margin: 0; }
+  .mcard .mu { font-size: 12.5px; color: #7a6a4a; margin: 6px 0 0; }
+
+  /* 提纲 */
+  .outline { padding-left: 0; }
+  .ochap { break-inside: avoid; margin: 10px 0; }
+  .ochap .ot { font-weight: 800; color: #143a32; font-size: 14.5px; }
+  .ochap ul { margin: 4px 0 0; padding-left: 20px; }
+  .ochap li { margin: 2px 0; }
+
+  /* 精讲 */
+  .lect .blk { break-inside: avoid; margin: 10px 0; }
+  .lect p { margin: 5px 0; }
+  .lect .k { color: #c08438; font-weight: 700; }
+
+  /* 自测卷 */
+  .quiz .q { break-inside: avoid; border: 1px solid #e3ddd0; border-radius: 10px;
+             padding: 12px 14px; margin: 10px 0; background: #fcfbf7; }
+  .quiz .qt { font-weight: 700; margin-bottom: 7px; }
+  .quiz label { display: block; padding: 4px 8px; border-radius: 6px; margin: 3px 0;
+                cursor: pointer; }
+  .quiz label:hover { background: #f0ece1; }
+  .quiz input { margin-right: 8px; }
+  .quiz .ans { font-size: 12.5px; color: #1d7a4d; margin-top: 6px; display: none; }
+  .quizbar { margin: 12px 0; }
+  .quizbar button { background: #143a32; color: #fff; border: 0; border-radius: 8px;
+                    padding: 9px 18px; font-size: 14px; cursor: pointer; font-weight: 700; }
+  .score { font-size: 16px; font-weight: 800; color: #143a32; margin-left: 12px; }
+
+  /* 打卡 */
+  .check li { margin: 6px 0; break-inside: avoid; }
+  .check .day { font-weight: 800; color: #c08438; }
+
+  footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #e3ddd0;
+           font-size: 12.5px; color: #6a6a6a; text-align: center; }
+  footer .cta { display: flex; align-items: center; justify-content: center; gap: 18px;
+                background: #f6f3ec; border: 1px solid #e3ddd0; border-radius: 12px;
+                padding: 14px 18px; margin-bottom: 14px; }
+  footer .ctaqr { width: 92px; height: 92px; border-radius: 8px; }
+  footer .ctatxt { text-align: left; }
+  footer .ctabig { font-size: 16px; font-weight: 800; color: #143a32; }
+  footer .ctasub { font-size: 12.5px; color: #6a6a6a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ COVER ============ -->
+  <section class="cover">
+    <span class="dim">人际影响</span>
+    <h1>《说服：像讲故事一样讲道理》</h1>
+    <p class="pos">读完能用的说服力：先铺垫、抛锚点、给期望，让人自己点头。</p>
+    <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+  </section>
+
+  <!-- ============ 解决什么 ============ -->
+  <section>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">你明明有理，对方却不为所动；你越解释，他越抗拒。问题往往不在道理本身，而在你没先铺好他接收道理的那条"心理通道"。这份笔记把影响他人行为的底层机制，拆成几个可以照做的动作，让你把"他想不通"变成"他点个头"。</div>
+  </section>
+
+  <!-- ============ 心智模型 ============ -->
+  <section>
+    <h2>核心心智模型</h2>
+    <div class="models">
+      <div class="mcard">
+        <div class="mt">先戴眼镜法</div>
+        <div class="md">先抛一个相关概念，让对方用你设定的"滤镜"去理解后面的信息。</div>
+        <div class="mu">提要求前，先用一个相关的小故事或词，激活对方的"开放"或"顺从"状态。</div>
+      </div>
+      <div class="mcard">
+        <div class="mt">锚点落地法</div>
+        <div class="md">人会以最先出现的数字或标准为基准，上下调整自己的判断。</div>
+        <div class="mu">报价、提期望前，先扔一个略高（或略低）的锚，对方会围着它浮动。</div>
+      </div>
+      <div class="mcard">
+        <div class="mt">期望成真法</div>
+        <div class="md">你传达的高期望会塑造对方的感知和行为，最终变成现实。</div>
+        <div class="mu">布置任务时认真说"你能做好"，对方的真实表现往往真的更好。</div>
+      </div>
+      <div class="mcard">
+        <div class="mt">小步一致法</div>
+        <div class="md">人一旦做了小承诺或小动作，会为了"前后一致"而答应更大的事。</div>
+        <div class="mu">想让对方配合，先请他帮个小忙，或先让他点个头。</div>
+      </div>
+      <div class="mcard">
+        <div class="mt">对比显小法</div>
+        <div class="md">先亮一个更差或更大的对照，目标选项就显得更优、更小。</div>
+        <div class="mu">先提大要求再提小要求，或在选项旁加一个"诱饵"，让主选项胜出。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 提纲 ============ -->
+  <section>
+    <h2>内容提纲</h2>
+    <div class="outline">
+      <div class="ochap">
+        <div class="ot">第一章 引导思维：先给对方一副眼镜</div>
+        <ul>
+          <li>相关词语能激活脑中"图式"，让后续信息被带着滤镜理解</li>
+          <li>广告、谈判、日常对话都能用"铺垫"定向对方的感觉</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第二章 稳固感知：锚定与对比</div>
+        <ul>
+          <li>锚定效应：任何数字都会成为判断基准，进而被调整</li>
+          <li>对比效应：极端锚点会让目标显得更小或更值</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第三章 传达高期望：期望塑造感知</div>
+        <ul>
+          <li>期望会改变生理层面的愉悦反应与行为表现</li>
+          <li>首因效应：最先给的信息印象最深，用来传达高期待</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第四章 管理身体语言：身体反过来说服大脑</div>
+        <ul>
+          <li>面部反馈：微笑的动作本身就会让人心情变好</li>
+          <li>自我知觉：点头、敞开胸怀等姿态会触发相应态度</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第五章 创造行为一致性：让人先点头</div>
+        <ul>
+          <li>认知失调：行为与态度不符时，人会改态度去迎合行为</li>
+          <li>得寸进尺、虚报低价、先表态度三种落地法</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第六章 触发社会压力与适应信息</div>
+        <ul>
+          <li>社会规范、相似性会制造顺从压力</li>
+          <li>重复接触减少反感，减少负面信息让接受更顺</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第七章 驱使动力与保持依从</div>
+        <ul>
+          <li>适度激励：理由太足，反而不易改变态度</li>
+          <li>稀缺与有利关联，让答应过的事持续生效</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 精讲 ============ -->
+  <section>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="lect">
+      <div class="blk">
+        <h3>模块一 启动思维：给对方一副好眼镜</h3>
+        <p>结论先行：人不是直接看世界，而是透过脑中已有的"图式"看世界。你先塞进一个相关概念，他后面接收信息时就会戴着这副眼镜。</p>
+        <p><span class="k">怎么用：</span>想让对方开放，先讲一个"某人尝试新事物很享受"的小故事；想让人顺从，先用生日照片、图书馆图片等场景激活对应的"图式"。一个随意的铺垫，比正襟危坐讲道理管用得多。</p>
+      </div>
+      <div class="blk">
+        <h3>模块二 锚定：先抛一个数，判断围着它转</h3>
+        <p>结论先行：人做估算时，会不自觉地以最先出现的数字为起点上下调整，哪怕那个数字很离谱。</p>
+        <p><span class="k">两个招式：</span>一是"锚点落地"——报价先高后低，对方以高为基准觉得划算；二是"对比显小"——先提一个明显更大的要求被拒，再提真要求，对方会觉得小很多、更容易答应。加一个更差的"诱饵"选项，也能让主选项胜出。</p>
+      </div>
+      <div class="blk">
+        <h3>模块三 高期望：你说它好，它就真的好</h3>
+        <p>结论先行：你对一件事传达的期待，会改写对方的感知，甚至改变他的实际表现——这不是玄学，是生理层面的反应。</p>
+        <p><span class="k">要点：</span>先给的信息印象最深（首因效应），所以开口就传达高期望；把"你能做好"说出口，对方真可能做得更好。反过来，太离谱的期望会产生反效果，把握分寸。</p>
+      </div>
+      <div class="blk">
+        <h3>模块四 身体会反向说服大脑</h3>
+        <p>结论先行：不是只有想法影响身体，身体动作也会反过来影响想法和情绪。</p>
+        <p><span class="k">三个动作：</span>咬笔微笑让人更开心（面部反馈）；提要求前用停顿、扬眉引导对方点头，他会更开放；敞开胸怀、挺直姿态，比抱臂防御更易被说服。想让自己自信，先把背挺直。</p>
+      </div>
+      <div class="blk">
+        <h3>模块五 一致性：让人先点头，他就不忍心摇头</h3>
+        <p>结论先行：人一旦做了某个小动作或小承诺，会为了"前后一致"而答应更大的事——因为改口比顺从更不舒服。</p>
+        <p><span class="k">落地三法：</span>得寸进尺（先小求再大求）；虚报低价（先答应再扩大范围，惯性推着走）；先问"今天好吗"，对方说"挺好"后更易答应请求。让人先点头，他就不忍心拒绝你。</p>
+      </div>
+      <div class="blk">
+        <h3>模块六 把七步串成一条说服线</h3>
+        <p>结论先行：单用一招不够稳，把"铺垫→锚点→期望→一致→收尾"串成一条线，说服力才扎实。</p>
+        <p><span class="k">示例：</span>想说服伴侣支持一次家庭旅行——先用"孩子肯吃讨厌的菜"激活开放状态，再抛一个贵得离谱的对照行程做锚，顺势提出真方案；过程中多让他点头、多传达"这趟值"的期待，依从自然发生。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 自测卷 ============ -->
+  <section>
+    <h2>自测卷 · 10 题当场出分</h2>
+    <div class="quiz" id="quiz">
+      <div class="q">
+        <div class="qt">1. 你向客户推销前，先提一个明显更贵的高端款，客户反而更容易接受中间款。这主要利用了？</div>
+        <label><input type="radio" name="q1"> A. 启动效应</label>
+        <label><input type="radio" name="q1" data-correct="1"> B. 对比与诱饵效应</label>
+        <label><input type="radio" name="q1"> C. 自我实现预言</label>
+        <label><input type="radio" name="q1"> D. 首因效应</label>
+        <div class="ans">答案：B。先亮一个更差或更贵的对照，目标选项就显得更优、更划算。</div>
+      </div>
+      <div class="q">
+        <div class="qt">2. 让人联想到数字"7"，往往是因为相关概念被激活后产生扩散。这说明？</div>
+        <label><input type="radio" name="q2"> A. 7 本来就是幸运数字</label>
+        <label><input type="radio" name="q2" data-correct="1"> B. 相关概念被激活，在脑中扩散触发相连节点</label>
+        <label><input type="radio" name="q2"> C. 小矮人长得像 7</label>
+        <label><input type="radio" name="q2"> D. 完全是随机</label>
+        <div class="ans">答案：B。这是"图式—启动—激活扩散"的机制：先提相关概念，相连想法被一并唤醒。</div>
+      </div>
+      <div class="q">
+        <div class="qt">3. 介绍一份工作时先说"很有挑战"，再说"成长很快"，对方印象更好。这利用了？</div>
+        <label><input type="radio" name="q3" data-correct="1"> A. 首因效应（最先的信息印象最深）</label>
+        <label><input type="radio" name="q3"> B. 近因效应</label>
+        <label><input type="radio" name="q3"> C. 锚定效应</label>
+        <label><input type="radio" name="q3"> D. 对比效应</label>
+        <div class="ans">答案：A。先出现的正面词塑造了整体预期，后面信息很难撼动第一印象。</div>
+      </div>
+      <div class="q">
+        <div class="qt">4. 想让别人答应你一个较大的请求，最好先让他？</div>
+        <label><input type="radio" name="q4"> A. 看完整份报告</label>
+        <label><input type="radio" name="q4" data-correct="1"> B. 答应一个小小的请求（得寸进尺）</label>
+        <label><input type="radio" name="q4"> C. 先签合同</label>
+        <label><input type="radio" name="q4"> D. 独自思考</label>
+        <div class="ans">答案：B。小承诺制造"前后一致"的压力，后面的大请求更难拒绝。</div>
+      </div>
+      <div class="q">
+        <div class="qt">5. 关于锚定效应，正确的是？</div>
+        <label><input type="radio" name="q5"> A. 人做判断完全理性</label>
+        <label><input type="radio" name="q5" data-correct="1"> B. 人会以先出现的数字为基准上下调整</label>
+        <label><input type="radio" name="q5"> C. 数字对判断毫无影响</label>
+        <label><input type="radio" name="q5"> D. 只有专家才会被影响</label>
+        <div class="ans">答案：B。哪怕数字很离谱，也会成为判断的起点。</div>
+      </div>
+      <div class="q">
+        <div class="qt">6. 你传达对某人的高期望，对方表现真的变好。这叫？</div>
+        <label><input type="radio" name="q6"> A. 确认偏误</label>
+        <label><input type="radio" name="q6" data-correct="1"> B. 自我实现预言</label>
+        <label><input type="radio" name="q6"> C. 认知失调</label>
+        <label><input type="radio" name="q6"> D. 启动效应</label>
+        <div class="ans">答案：B。期望塑造感知与行为，最终应验成现实。</div>
+      </div>
+      <div class="q">
+        <div class="qt">7. 让人咬着笔（做出微笑表情）看笑话，会觉得更好笑，因为？</div>
+        <label><input type="radio" name="q7"> A. 笔很贵</label>
+        <label><input type="radio" name="q7" data-correct="1"> B. 面部反馈会反向影响情绪</label>
+        <label><input type="radio" name="q7"> C. 笑话本身变好笑</label>
+        <label><input type="radio" name="q7"> D. 首因效应</label>
+        <div class="ans">答案：B。身体动作会反向说服大脑，微笑的姿态让人更愉悦。</div>
+      </div>
+      <div class="q">
+        <div class="qt">8. 想说服同事支持方案，在他双臂交叉、浑身防御时提要求，效果通常？</div>
+        <label><input type="radio" name="q8"> A. 最好</label>
+        <label><input type="radio" name="q8" data-correct="1"> B. 较差，应等他敞开胸怀</label>
+        <label><input type="radio" name="q8"> C. 完全一样</label>
+        <label><input type="radio" name="q8"> D. 无法判断</label>
+        <div class="ans">答案：B。防御姿态触发固执态度，等对方敞开胸怀、手上空空时再提更易成。</div>
+      </div>
+      <div class="q">
+        <div class="qt">9. 先提一个非常大的要求被拒，再提一个小要求，遵从率更高。这是？</div>
+        <label><input type="radio" name="q9"> A. 得寸进尺</label>
+        <label><input type="radio" name="q9" data-correct="1"> B. 以退为进（对比显小）</label>
+        <label><input type="radio" name="q9"> C. 锚定效应</label>
+        <label><input type="radio" name="q9"> D. 启动效应</label>
+        <div class="ans">答案：B。大要求被拒成了对照锚点，小要求显得微不足道。</div>
+      </div>
+      <div class="q">
+        <div class="qt">10. 判断：说服就是操控，可以用说谎、欺骗来达成目的。</div>
+        <label><input type="radio" name="q10"> A. 对</label>
+        <label><input type="radio" name="q10" data-correct="1"> B. 错</label>
+        <div class="ans">答案：B。说服与操控是两回事；靠欺骗影响他人，既违背善意也站不住脚。</div>
+      </div>
+    </div>
+    <div class="quizbar">
+      <button onclick="grade()">交卷看分</button>
+      <span class="score" id="score"></span>
+    </div>
+  </section>
+
+  <!-- ============ 打卡 ============ -->
+  <section>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check">
+      <li><span class="day">第1天</span> 提一个请求前，先讲一个"开放/尝试新事物"的小故事，给对方大脑戴副好眼镜。</li>
+      <li><span class="day">第2天</span> 谈报价或薪资时，先抛一个略高的锚点，再观察对方的反应与还价。</li>
+      <li><span class="day">第3天</span> 给别人布置任务时，刻意传达"你能做好"的高期望，不说"试试看"。</li>
+      <li><span class="day">第4天</span> 请求前用停顿、扬眉等非语言线索引导对方点头，再开口说正事。</li>
+      <li><span class="day">第5天</span> 找一个想让对方配合的事，先用"小请求"开头（得寸进尺）。</li>
+      <li><span class="day">第6天</span> 连续一天留意自己的姿态——挺直、敞开胸怀，体会对自信的影响。</li>
+      <li><span class="day">第7天</span> 把七步在一段真实对话里走一遍：铺垫→锚点→期望→一致→收尾。</li>
+    </ul>
+  </section>
+
+  <!-- ============ 结语 ============ -->
+  <section>
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead">
+      <p><b>1.</b> 说服不是比谁嗓门大，而是先帮对方戴上你想要的那副"眼镜"，让他自己看出你要的结论。</p>
+      <p><b>2.</b> 人对数字和期望极其敏感——你先抛的锚、你传递的期待，会悄悄改写他的判断和表现。</p>
+      <p><b>3.</b> 真正管用的说服都很轻：一个微小承诺、一个点头、一个开放姿态，比长篇大论更能让人自己说服自己。</p>
+    </div>
+    <p>这份资料建议从今天起按顺序读；自测卷低于 7 分，重读"启动思维"与"一致性"两节；7 天打卡每天挑 1 条练手，坚持一周比一次读完更有用。把方法用在与人为善的地方，效果才持久。</p>
+  </section>
+
+  <footer>
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  </footer>
+
+</div>
+
+<script>
+function grade(){
+  var qs = document.querySelectorAll('#quiz .q');
+  var total = qs.length, right = 0;
+  qs.forEach(function(q){
+    var picked = q.querySelector('input:checked');
+    var correct = q.querySelector('input[data-correct="1"]');
+    var ans = q.querySelector('.ans');
+    if(ans) ans.style.display = 'block';
+    if(picked && picked === correct){ right++; }
+  });
+  var s = document.getElementById('score');
+  if(s) s.textContent = '得分 ' + right + ' / ' + total;
+}
+</script>
+</body>
+</html>
