@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一次搞懂精实创业 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>一次搞懂精实创业 · 书智能体</b><span>商业赚钱｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">商业赚钱</span>
+      <h1>《一次搞懂精实创业》</h1>
+      <p class="pos">把创业变成一门可学习的实验课，少烧钱、早验证</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">很多人创业失败，不是不够拼，而是闭门造车憋了半年产品，上市那天才发现没人掏钱。钱烧光了、方向错了，回头一看连一次像样的验证都没做过。这份笔记把「怎么科学地试错」拆成一套可上手的动作：先验假设、再做样品、看真数据、决定坚持还是转向——让你在资源烧完之前，尽快确认顾客到底愿意为什么买单。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">大胆假设清单</div><p class="md">创业起步时先写下最要命的两三个假设：「顾客有这个问题」「有人愿意付钱」「能持续增长」，一切都围绕验证它们展开。</p><p class="mu">用法：每周问自己一次——哪个假设至今还没被真实的顾客行为验证过？</p></div><div class="mcard"><div class="mt">眼见为凭</div><p class="md">坐在办公室里猜需求，不如跑到顾客现场看一遍、聊一遍。一手观察永远比二手想象可靠。</p><p class="mu">用法：任何一个需求判断，都必须有一场真实对话或行为数据背书，否则不算数。</p></div><div class="mcard"><div class="mt">最小样品</div><p class="md">拿功能最简、刚够检验假设的版本先见顾客，比憋一个完美成品省钱得多、也快得多。</p><p class="mu">用法：纠结该做到什么程度时，记住一条——有怀疑，就简化。</p></div><div class="mcard"><div class="mt">会撒谎的数字</div><p class="md">注册总数、下载量这类虚荣指标看着漂亮，却和「能不能活下来」没有必然关系，只会让你误判进展。</p><p class="mu">用法：只盯能指导下一步动作的数字，比如付费转化、回头客比例、单位获客成本。</p></div><div class="mcard"><div class="mt">跑道等于转折次数</div><p class="md">判断还能撑多久，别只看账上的时间，要看还剩几次「根本性调整方向」的机会。</p><p class="mu">用法：每花一笔大钱前先问——这次动作，值得用掉一次宝贵的转向机会吗？</p></div><div class="mcard"><div class="mt">连问五个为什么</div><p class="md">出问题时顺着追问五次「为什么」，挖到流程层面的病根，而不是停在表面修修补补。</p><p class="mu">用法：追人不如追流程，把矛头对准系统缺陷，别变成五次互相指责。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">第一章 · 愿景：创业是一门可以学习的经营管理&lt;/span&gt;
+        &lt;ul&gt;
+          &lt;li&gt;新事业最大的风险不是做不出产品，而是做出没人要的东西&lt;/li&gt;
+          &lt;li&gt;进展的真正度量是「验证过的认知」，不是写完多少功能&lt;/li&gt;
+          &lt;li&gt;把科学实验的方法搬进生意里：假设—实验—证据—决策&lt;/li&gt;
+        &lt;/ul&gt;</div><ul><li>新事业最大的风险不是做不出产品，而是做出没人要的东西</li><li>进展的真正度量是「验证过的认知」，不是写完多少功能</li><li>把科学实验的方法搬进生意里：假设—实验—证据—决策</li></ul></div><div class="ochap"><div class="ot">第二章 · 掌舵：验证假设，决定坚持还是转向&lt;/span&gt;
+        &lt;ul&gt;
+          &lt;li&gt;找出「大胆且自信」的假设，用最小样品去撞真实世界&lt;/li&gt;
+          &lt;li&gt;用有作用、可理解、可稽核的指标替代虚荣指标&lt;/li&gt;
+          &lt;li&gt;识别十种常见的方向调整形态，让决策有据可依&lt;/li&gt;
+        &lt;/ul&gt;</div><ul><li>找出「大胆且自信」的假设，用最小样品去撞真实世界</li><li>用有作用、可理解、可稽核的指标替代虚荣指标</li><li>识别十种常见的方向调整形态，让决策有据可依</li></ul></div><div class="ochap"><div class="ot">第三章 · 加速：小批量、成长引擎与节奏调节&lt;/span&gt;
+        &lt;ul&gt;
+          &lt;li&gt;批量越小，试错越快，学得越多，代价越低&lt;/li&gt;
+          &lt;li&gt;看清自己靠哪种引擎成长：留住老客、口碑裂变还是付费获客&lt;/li&gt;
+          &lt;li&gt;速度与质量兼顾，用系统追问替代救火式管理&lt;/li&gt;
+        &lt;/ul&gt;</div><ul><li>批量越小，试错越快，学得越多，代价越低</li><li>看清自己靠哪种引擎成长：留住老客、口碑裂变还是付费获客</li><li>速度与质量兼顾，用系统追问替代救火式管理</li></ul></div><div class="ochap"><div class="ot">第四章 · 复用：把这套打法带进团队和成熟公司&lt;/span&gt;
+        &lt;ul&gt;
+          &lt;li&gt;给创新团队独立的资金、自主权与长期激励&lt;/li&gt;
+          &lt;li&gt;划定边界清晰的试验沙盒，统一衡量口径&lt;/li&gt;
+          &lt;li&gt;让快速测试成为组织的日常习惯，而非一次性运动&lt;/li&gt;
+        &lt;/ul&gt;</div><ul><li>给创新团队独立的资金、自主权与长期激励</li><li>划定边界清晰的试验沙盒，统一衡量口径</li><li>让快速测试成为组织的日常习惯，而非一次性运动</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>1. 先说结论：最贵浪费不是做慢了，是做错方向</h3><p>传统剧本是「苦干几年做出完美产品，一炮而红」。现实是大多数团队烧光资源后消失，因为他们从头到尾没问过潜在顾客一句真实反馈。<span class="k">任何新事业的第一要务，是尽快弄清顾客想要什么、肯为什么掏钱</span>——其他都排在后面。</p><p>所以别把「做出产品」当成功标准，把「验证过的认知」当标准。每完成一轮测试，你至少应该比上一轮更确定一件事：哪个假设成立、哪个被推翻。</p></div><div class="blk"><h3>2. 两个最要命的假设：值不值、长不长</h3><p>所有创业计划都建立在大量假设之上，但真正决定生死的只有两个：<span class="k">价值假设</span>——顾客是否真觉得你解决的问题够痛、愿意付钱；<span class="k">成长假设</span>——新顾客会怎么源源不断地进来。</p><p>我的经验是：把这两个假设白纸黑字写下来，贴在墙上。后面每一轮实验、每一个功能，都要么在验证它们，要么就别做。</p></div><div class="blk"><h3>3. 最小样品：五种先求有的做法</h3><p>别等完美，用最便宜的方式先见顾客：</p><p>① <span class="k">一支讲解视频</span>：产品复杂难以想象，就先拍片描述成品能做什么；② <span class="k">人工幕后跑通</span>：表面像自动服务，背后人来操作，先验证需求再说；③ <span class="k">实物原型或仿真品</span>：够顾客理解并给反馈即可；④ <span class="k">贵宾式服务</span>：只服务少数早期顾客，创始人亲自上门听意见；⑤ <span class="k">预售或目录挑选</span>：预订量够了再投产。</p><p>有人担心丑样品砸牌子。记住：在知道顾客要什么之前，你根本不知道「品质」该长什么样。原型不是终稿，它是用来买答案的。</p></div><div class="blk"><h3>4. 会撒谎的数字与三个 A 指标</h3><p>用户注册总数稳步上涨，报表很好看，但和利润无关——这就是虚荣指标，让你误以为在前进，其实离生存门槛一步没挪。</p><p>值得盯的指标要做到三个 A：<span class="k">有作用</span>（能看出明确因果，指导下一步动作）、<span class="k">可理解</span>（简单到人人看得懂、能用于决策）、<span class="k">可稽核</span>（数据采集过程透明，谁都能复核）。达不到这三条的数字，一律不进决策会议。</p></div><div class="blk"><h3>5. 转向还是坚持：让数据替你按下决策键</h3><p>最难受的时刻是：账上还剩点钱，结果不温不火，继续熬还是掉头？判断依据不靠感觉，靠基准线——把第一版产品投进市场拿到真实数据，和预期一比就清楚了。接近预期，微调即可；远低于预期，就该认真考虑换个方向。</p><p>调整不只有「推倒重来」一种：<span class="k">放大型</span>（把某个功能独立成新产品）、<span class="k">缩小型</span>（把整个产品降级为大产品的一个功能）、<span class="k">换客群</span>（卖给另一类人）、<span class="k">换需求</span>（解决顾客更痛的那个问题）、<span class="k">换渠道</span>、<span class="k">换收费方式</span>……关键是：每次调整后都会出现一套可立刻检验的新假设，转错了也有警钟。</p></div><div class="blk"><h3>6. 小批量 + 成长引擎：让车越开越快还不散架</h3><p><span class="k">批量越小，试错越快</span>。一次只改一点、尽快见客，你走完一轮验证的速度比对手快，掌握的信息就比对手多，而且错误代价小。做实验不是做效率优化，别用大批量赌方向。</p><p>成长引擎只有三种：<span class="k">黏住式</span>（顾客留得久，盯流失率，把产品做得更有吸引力）、<span class="k">口碑式</span>（像邮箱签名那样让使用行为自带传播，盯反馈回路通不通）、<span class="k">付费式</span>（盯顾客终身价值和获客成本的比值）。多数时候一次只专注一种引擎。出问题就「连问五个为什么」，把钱花在系统性修复上；允许初犯，但绝不允许同样的错犯第二次。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 创业不是赌运气，而是一门可以学习、可以传授的经营管理——成败有方法，别只靠孤勇。</p><p><b>2.</b> 最大的浪费是做错方向：先用最小样品去买真顾客的答案，再决定往哪砸钱。</p><p><b>3.</b> 只信能指导动作的数字，只留能承受转向的跑道；该转就转，该守才守。</p></div>
+    <p>这份资料怎么用：建议从明天开始走完 7 天打卡，第 2 天的顾客对话不要省——它价值最高。第 6 天写完实验结论后做一次自测卷，低于 7 分说明「假设—实验—决策」这条主线还没吃透，重读精讲第 1、2、5 节再测一次；达标后，把这套循环变成每周固定动作。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第 1 天：</span> 把你生意里最要命的两个假设（值不值、长不长）白纸黑字写下来，各配一句「怎样才算被验证」。</li><li><span class="day">第 2 天：</span> 约一位目标顾客做 30 分钟真实对话，只问「你现在怎么解决这个问题、最烦哪一步」，不推销。</li><li><span class="day">第 3 天：</span> 列出你能想到的最简验证方式（视频、人工跑通、预售页、原型任选其一），写出 48 小时内能落地的版本。</li><li><span class="day">第 4 天：</span> 把这个最小样品推给至少 5 位潜在顾客，记录原话反馈，不打断、不解释、不辩解。</li><li><span class="day">第 5 天：</span> 把现有报表里的指标分成两栏：能指导动作的 / 只是好看的，删掉所有虚荣指标。</li><li><span class="day">第 6 天：</span> 对照假设写一页「实验结论」：哪个假设被验证、被推翻、还是证据不足，下一步动作是什么。</li><li><span class="day">第 7 天：</span> 盘点一次「跑道」：按当前烧钱速度，你还剩几次方向调整的机会？把下一个最大动作排在最值得的假设上。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 创业公司最大的风险通常是什么？", "o": ["产品开发进度太慢", "做出了一批没人愿意买单的东西", "竞争对手太多太强", "招聘不到优秀工程师"], "a": 1, "tip": "最贵浪费是方向性浪费——执行得再漂亮，方向错了全白干。"}, {"q": "2. 新事业「进展」的真正度量是什么？", "o": ["功能清单完成了多少项", "团队加班了多少小时", "获得了多少条验证过的认知", "办公室扩了多少工位"], "a": 2, "tip": "每轮实验都应换来「哪个假设成立、哪个被推翻」的确定感。"}, {"q": "3. 下面哪一项属于「会撒谎的数字」（虚荣指标）？", "o": ["付费转化率", "累计注册用户总数", "回头客比例", "单位获客成本"], "a": 1, "tip": "注册总数只涨不下，却和生存能力没有必然因果。"}, {"q": "4. 判断「跑道还有多长」，更靠谱的看法是什么？", "o": ["账上现金还够烧几个月", "还能承受几次根本性的方向调整", "投资人的耐心还剩几轮", "产品还剩几个功能没上线"], "a": 1, "tip": "跑道本质是转向次数，每次大动作都在消耗它。"}, {"q": "5. 决定「最小样品做到多复杂」的经验法则是什么？", "o": ["越接近成品越有说服力", "按竞品的功能清单对标", "拿不准时，简化就对", "按投资人预期的成熟度"], "a": 2, "tip": "样品是用来买答案的，多数人系统性高估了它该有的功能。"}, {"q": "6. 哪种做法属于「人工幕后跑通」式验证？", "o": ["先建大型仓储物流再开业", "表面是自动服务，背后由人来执行，先验证需求", "花大预算投放品牌广告", "闭门打磨三年再一次性发布"], "a": 1, "tip": "用人力假装自动化，是验证需求最便宜的方式之一。"}, {"q": "7. 三个 A 指标不包括以下哪一项？", "o": ["Ambitious（有野心）", "Actionable（有作用，能看出因果）", "Accessible（可理解，人人看得懂）", "Auditable（可稽核，过程透明）"], "a": 0, "tip": "是「有作用、可理解、可稽核」，跟「有野心」无关。"}, {"q": "8. 如果你的生意靠「顾客留得久、转换成本高」成长，该重点盯什么？", "o": ["新客获取成本", "顾客流失率", "媒体报道数量", "员工人数增长"], "a": 1, "tip": "黏住式成长的生命线是流失率，重点是把产品做得让老客离不开。"}, {"q": "9. 真实数据远低于预期时，更合理的动作是什么？", "o": ["加大广告投放继续冲", "按原计划快速扩张", "回到假设本身，认真考虑调整方向", "立即裁掉销售团队"], "a": 2, "tip": "数据持续偏离基准线，说明该检验假设而不是加倍下注。"}, {"q": "10. 团队出了问题，运用「连问五个为什么」的正确姿势是？", "o": ["把矛头对准流程和系统缺陷，按问题大小投入资源", "逐级追责，找出该背锅的人", "先开会统一思想再谈问题", "所有问题都加大预算解决"], "a": 0, "tip": "追流程不追人；允许初犯，但不容许同样的错再犯。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《一次搞懂精实创业》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《一次搞懂精实创业》】", "维度：商业赚钱", "一句话定位：把创业变成一门可学习的实验课，少烧钱、早验证", "", "核心心智模型（6 个）：", "1. 大胆假设清单——创业起步时先写下最要命的两三个假设：「顾客有这个问题」「有人愿意付钱」「能持续增长」，一切都围绕验证它们展开。 用法：每周问自己一次——哪个假设至今还没被真实的顾客行为验证过？", "2. 眼见为凭——坐在办公室里猜需求，不如跑到顾客现场看一遍、聊一遍。一手观察永远比二手想象可靠。 用法：任何一个需求判断，都必须有一场真实对话或行为数据背书，否则不算数。", "3. 最小样品——拿功能最简、刚够检验假设的版本先见顾客，比憋一个完美成品省钱得多、也快得多。 用法：纠结该做到什么程度时，记住一条——有怀疑，就简化。", "4. 会撒谎的数字——注册总数、下载量这类虚荣指标看着漂亮，却和「能不能活下来」没有必然关系，只会让你误判进展。 用法：只盯能指导下一步动作的数字，比如付费转化、回头客比例、单位获客成本。", "5. 跑道等于转折次数——判断还能撑多久，别只看账上的时间，要看还剩几次「根本性调整方向」的机会。 用法：每花一笔大钱前先问——这次动作，值得用掉一次宝贵的转向机会吗？", "6. 连问五个为什么——出问题时顺着追问五次「为什么」，挖到流程层面的病根，而不是停在表面修修补补。 用法：追人不如追流程，把矛头对准系统缺陷，别变成五次互相指责。", "", "精讲要点：", "· 1. 先说结论：最贵浪费不是做慢了，是做错方向：传统剧本是「苦干几年做出完美产品，一炮而红」。现实是大多数团队烧光资源后消失，因为他们从头到尾没问过潜在顾客一句真实反馈。任何新事业的第一要务，是尽快弄清顾客想要什么、肯为什么掏钱——其他都排在后面。", "· 2. 两个最要命的假设：值不值、长不长：所有创业计划都建立在大量假设之上，但真正决定生死的只有两个：价值假设——顾客是否真觉得你解决的问题够痛、愿意付钱；成长假设——新顾客会怎么源源不断地进来。", "· 3. 最小样品：五种先求有的做法：别等完美，用最便宜的方式先见顾客：", "· 4. 会撒谎的数字与三个 A 指标：用户注册总数稳步上涨，报表很好看，但和利润无关——这就是虚荣指标，让你误以为在前进，其实离生存门槛一步没挪。", "· 5. 转向还是坚持：让数据替你按下决策键：最难受的时刻是：账上还剩点钱，结果不温不火，继续熬还是掉头？判断依据不靠感觉，靠基准线——把第一版产品投进市场拿到真实数据，和预期一比就清楚了。接近预期，微调即可；远低于预期，就该认真考虑换个方向。", "· 6. 小批量 + 成长引擎：让车越开越快还不散架：批量越小，试错越快。一次只改一点、尽快见客，你走完一轮验证的速度比对手快，掌握的信息就比对手多，而且错误代价小。做实验不是做效率优化，别用大批量赌方向。", "", "带走三句话：", "1. 创业不是赌运气，而是一门可以学习、可以传授的经营管理——成败有方法，别只靠孤勇。", "2. 最大的浪费是做错方向：先用最小样品去买真顾客的答案，再决定往哪砸钱。", "3. 只信能指导动作的数字，只留能承受转向的跑道；该转就转，该守才守。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：大胆假设清单、眼见为凭、最小样品、会撒谎的数字、跑道等于转折次数、连问五个为什么），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b11_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b11_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b11_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b11_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
