@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>《思维简史：从丛林到宇宙》</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1c1c1c; font-size: 14px; line-height: 1.78;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .wrap { width: 100%; }
+  h1, h2, h3 { font-weight: 800; letter-spacing: .5px; }
+  h2 { font-size: 19px; color: #143a32; margin: 26px 0 12px;
+       padding-left: 11px; border-left: 5px solid #c08438; }
+  h3 { font-size: 15.5px; color: #143a32; margin: 16px 0 6px; }
+
+  .cover { border: 1px solid #e3ddd0; border-radius: 14px; padding: 22px 24px;
+           background: linear-gradient(135deg,#143a32 0%,#1d5247 100%); color: #fff;
+           margin-bottom: 22px; }
+  .cover .dim { display: inline-block; font-size: 12px; background: #c08438; color: #1c1c1c;
+           padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 1px; }
+  .cover h1 { font-size: 25px; margin: 12px 0 8px; line-height: 1.35; }
+  .cover .pos { font-size: 14.5px; opacity: .95; margin: 0; }
+  .cover .sign { margin-top: 14px; font-size: 12.5px; opacity: .85; }
+
+  .lead { background: #f6f3ec; border-radius: 10px; padding: 14px 16px; margin: 4px 0 6px; }
+  .lead b { color: #143a32; }
+
+  .models { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mcard { border: 1px solid #e3ddd0; border-radius: 10px; padding: 12px 14px;
+           background: #fcfbf7; break-inside: avoid; }
+  .mcard .mt { font-weight: 800; color: #143a32; font-size: 14.5px; margin-bottom: 4px; }
+  .mcard .md { font-size: 13px; color: #3a3a3a; margin: 0; }
+  .mcard .mu { font-size: 12.5px; color: #7a6a4a; margin: 6px 0 0; }
+
+  .outline { padding-left: 0; }
+  .ochap { break-inside: avoid; margin: 10px 0; }
+  .ochap .ot { font-weight: 800; color: #143a32; font-size: 14.5px; }
+  .ochap ul { margin: 4px 0 0; padding-left: 20px; }
+  .ochap li { margin: 2px 0; }
+
+  .lect .blk { break-inside: avoid; margin: 10px 0; }
+  .lect p { margin: 5px 0; }
+  .lect .k { color: #c08438; font-weight: 700; }
+
+  .quiz .q { break-inside: avoid; border: 1px solid #e3ddd0; border-radius: 10px;
+             padding: 12px 14px; margin: 10px 0; background: #fcfbf7; }
+  .quiz .qt { font-weight: 700; margin-bottom: 7px; }
+  .quiz label { display: block; padding: 4px 8px; border-radius: 6px; margin: 3px 0;
+                cursor: pointer; }
+  .quiz label:hover { background: #f0ece1; }
+  .quiz input { margin-right: 8px; }
+  .quiz .ans { font-size: 12.5px; color: #1d7a4d; margin-top: 6px; display: none; }
+  .quizbar { margin: 12px 0; }
+  .quizbar button { background: #143a32; color: #fff; border: 0; border-radius: 8px;
+                    padding: 9px 18px; font-size: 14px; cursor: pointer; font-weight: 700; }
+  .score { font-size: 16px; font-weight: 800; color: #143a32; margin-left: 12px; }
+
+  .check li { margin: 6px 0; break-inside: avoid; }
+  .check .day { font-weight: 800; color: #c08438; }
+
+  footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #e3ddd0;
+           font-size: 12.5px; color: #6a6a6a; text-align: center; }
+  footer .cta { display: flex; align-items: center; justify-content: center; gap: 18px;
+                background: #f6f3ec; border: 1px solid #e3ddd0; border-radius: 12px;
+                padding: 14px 18px; margin-bottom: 14px; }
+  footer .ctaqr { width: 92px; height: 92px; border-radius: 8px; }
+  footer .ctatxt { text-align: left; }
+  footer .ctabig { font-size: 16px; font-weight: 800; color: #143a32; }
+  footer .ctasub { font-size: 12.5px; color: #6a6a6a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="cover">
+    <span class="dim">认知底盘</span>
+    <h1>《思维简史：从丛林到宇宙》</h1>
+    <p class="pos">看清人类认知升级的引擎，升级你的脑子</p>
+    <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+  </section>
+
+  <section>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">总觉得"自己不够聪明"或"学不动"，其实人和人的差距往往不在智商，而在思维方式与做事方法。读完这本，你会看清人类认知一次次升级的真正引擎，把好奇心、系统方法、挑战极限变成自己的日常习惯。</div>
+  </section>
+
+  <section>
+    <h2>核心心智模型</h2>
+    <div class="models">
+      <div class="mcard">
+        <div class="mt">好奇心驱动</div>
+        <p class="md">求知欲是人与其他物种最大的不同，也是文明能走远的真正根基。</p>
+        <p class="mu">用法：每天刻意留一个"为什么"去琢磨，别让提问权退化。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">系统实验法</div>
+        <p class="md">把猜想变成可重复、可量化的实验，知识才能从碰运气走向积累。</p>
+        <p class="mu">用法：任何主张先问"怎么验证"，让结论经得起重复。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">挑战极限</div>
+        <p class="md">每突破一层认知边界，思维就进化一次；未知永远多于已知。</p>
+        <p class="mu">用法：不满足"大概懂了"，继续追问更底层的"为什么"。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">想法先行</div>
+        <p class="md">先有超越日常的想法，才有后来生活方式的改变；别只盯"有用"。</p>
+        <p class="mu">用法：允许一段"无用"的探索，它可能是下一个突破的种子。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">拥抱变革</div>
+        <p class="md">新观念常被抵制，因为它终结旧信仰；突破定式才能创新。</p>
+        <p class="mu">用法：听到反常识结论，先别急着否，先了解再判断。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>内容提纲</h2>
+    <div class="outline">
+      <div class="ochap"><div class="ot">第一章 求知欲：最硬的底层动力</div><ul>
+        <li>求知欲比环境更顽强，是物种胜出的关键</li>
+        <li>人靠脑不是靠四肢站上食物链顶端</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">第二章 好奇心如何孕育文明</div><ul>
+        <li>对未知的好奇催生了最早的学术共同体</li>
+        <li>未来机器能解题，但提不出新问题</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">第三章 系统方法：让发现可积累</div><ul>
+        <li>从炼金术到化学，量化实验是分水岭</li>
+        <li>一套思维方式让发明从偶然变必然</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">第四章 科学是反常识的、不以实用为目的</div><ul>
+        <li>抽象实验得出反直觉结论</li>
+        <li>想法先行：先有想法才有生活改变</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">第五章 挑战极限：推远认知边界</div><ul>
+        <li>从原子到暗物质，层层追问接力突破</li>
+        <li>每突破一层，思维进化一次</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">第六章 接受变革：突破思维定式</div><ul>
+        <li>传统定式是创新最大敌人</li>
+        <li>新概念常遭抵制，因为它终结旧体系</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">第七章 思维方式的传承与加速</div><ul>
+        <li>知识积累呈指数加速</li>
+        <li>更好思维方式仍是立足之本</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="lect">
+      <div class="blk">
+        <h3>一、求知欲是刻在底层的动力</h3>
+        <p>有人在最恶劣的环境里，仍愿拿仅有的食物去换一个问题的答案——求知欲比外在环境更顽强。</p>
+        <p>人类能站上食物链顶端，靠的是脑不是四肢；正是好奇心，让智人在竞争中胜出。</p>
+        <p>我的经验：保持"为什么"的惯性，是持续成长的关键，别让提问的本能退化。</p>
+      </div>
+      <div class="blk">
+        <h3>二、好奇心孕育文明</h3>
+        <p>当精神被看得比物质重，反而催生了最早的师生学术共同体——那正是大学的雏形。</p>
+        <p>对未知的好奇，让人在没有实用回报时也愿意钻研。这种"探求未知"的冲动，至今没变。</p>
+        <p>未来智能时代，机器能解题，却提不出新问题——<span class="k">提问权仍属于人类</span>。</p>
+      </div>
+      <div class="blk">
+        <h3>三、系统方法：把猜想变成可积累的知识</h3>
+        <p>古代的炼金术靠碰运气，后来的化学靠天平做量化实验，知识才真正积累起来。</p>
+        <p>自近代以来，一套行之有效的思维方式，让发明从偶然变成了必然。</p>
+        <p>用法：任何主张先问"怎么验证"，让结论能被重复、被检验，而不是靠灵感一闪。</p>
+      </div>
+      <div class="blk">
+        <h3>四、科学是反常识、不以实用为目的</h3>
+        <p>最早的落体实验用光滑斜面"抽象"出理想状态，得出反常识结论：下落速度与重量无关。</p>
+        <p>经典力学描述理想状态，对当时生产生活毫无直接指导——它只想搞清世界到底怎么回事。</p>
+        <p><span class="k">想法先行</span>：先有超越日常的想法，才有后来生活方式的改变，而不是反过来。</p>
+      </div>
+      <div class="blk">
+        <h3>五、挑战极限：认知边界一次次被推远</h3>
+        <p>知道万物由原子构成，又追问原子里是什么——几代学者接力，从原子一路追问到暗物质。</p>
+        <p>每突破一层极限，人类思维就进化一次。别被"技术太快会取代人"吓住，未知永远多于已知。</p>
+        <p>对今天和明天的人，应该对世界上那些"还需要突破的极限"感到兴奋，而不是焦虑。</p>
+      </div>
+      <div class="blk">
+        <h3>六、接受变革难，但必须突破定式</h3>
+        <p>人类创新最大的敌人，是深植于信仰的传统思维定式，让人不敢质疑。</p>
+        <p>新概念常被抵制、嘲讽，因为它会终结人们赖以为生的旧信仰体系。</p>
+        <p>听到反常识结论，先别急着否定——它很可能正是下一步突破的起点。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>自测卷 · 10 题当场出分</h2>
+    <div class="quiz" id="quiz">
+      <div class="q">
+        <div class="qt">1. 人类能在进化中胜出，主要靠的是？</div>
+        <label><input type="radio" name="q1">A. 四肢力量</label>
+        <label><input type="radio" name="q1" data-correct="1">B. 大脑与求知欲</label>
+        <label><input type="radio" name="q1">C. 奔跑速度</label>
+        <label><input type="radio" name="q1">D. 毛发保暖</label>
+        <div class="ans">答案：B。靠脑不靠四肢，好奇心是智人胜出的关键。</div>
+      </div>
+      <div class="q">
+        <div class="qt">2. 化学能成为科学，拉瓦锡引入的关键方法是？</div>
+        <label><input type="radio" name="q2">A. 炼金术</label>
+        <label><input type="radio" name="q2" data-correct="1">B. 量化实验（天平）</label>
+        <label><input type="radio" name="q2">C. 占卜</label>
+        <label><input type="radio" name="q2">D. 哲学辩论</label>
+        <div class="ans">答案：B。可重复的量化实验，让知识能积累。</div>
+      </div>
+      <div class="q">
+        <div class="qt">3. 伽利略得出"下落速度与重量无关"，靠的是？</div>
+        <label><input type="radio" name="q3">A. 日常观察</label>
+        <label><input type="radio" name="q3" data-correct="1">B. 抽象实验（光滑斜面）</label>
+        <label><input type="radio" name="q3">C. 拍脑袋</label>
+        <label><input type="radio" name="q3">D. 权威说法</label>
+        <div class="ans">答案：B。抽象掉摩擦，才看到理想状态下的规律。</div>
+      </div>
+      <div class="q">
+        <div class="qt">4. 科学最反直觉的一点是？</div>
+        <label><input type="radio" name="q4">A. 完全实用</label>
+        <label><input type="radio" name="q4" data-correct="1">B. 脱离日常、不以实用为目的</label>
+        <label><input type="radio" name="q4">C. 靠运气</label>
+        <label><input type="radio" name="q4">D. 简单易懂</label>
+        <div class="ans">答案：B。科学先想弄清世界，再谈应用。</div>
+      </div>
+      <div class="q">
+        <div class="qt">5. "想法先行"是指？</div>
+        <label><input type="radio" name="q5" data-correct="1">A. 先有超越日常的想法，才有生活改变</label>
+        <label><input type="radio" name="q5">B. 先赚钱再思考</label>
+        <label><input type="radio" name="q5">C. 照搬经验</label>
+        <label><input type="radio" name="q5">D. 随大流</label>
+        <div class="ans">答案：A。思维方式的改变，常先于生产生活的改变。</div>
+      </div>
+      <div class="q">
+        <div class="qt">6. 让发明从偶然变必然，靠的是？</div>
+        <label><input type="radio" name="q6">A. 运气</label>
+        <label><input type="radio" name="q6" data-correct="1">B. 一套系统思维方式</label>
+        <label><input type="radio" name="q6">C. 天赋</label>
+        <label><input type="radio" name="q6">D. 政策</label>
+        <div class="ans">答案：B。方法让进步可复制。</div>
+      </div>
+      <div class="q">
+        <div class="qt">7. 关于挑战认知极限，正确的是？</div>
+        <label><input type="radio" name="q7">A. 已知已足够</label>
+        <label><input type="radio" name="q7" data-correct="1">B. 每突破一层，思维就进化一次</label>
+        <label><input type="radio" name="q7">C. 不必追问</label>
+        <label><input type="radio" name="q7">D. 到此为止</label>
+        <div class="ans">答案：B。层层追问，认知边界被不断推远。</div>
+      </div>
+      <div class="q">
+        <div class="qt">8. 人类创新最大的敌人常是？</div>
+        <label><input type="radio" name="q8">A. 工具不足</label>
+        <label><input type="radio" name="q8" data-correct="1">B. 传统思维定式</label>
+        <label><input type="radio" name="q8">C. 体力差</label>
+        <label><input type="radio" name="q8">D. 资金少</label>
+        <div class="ans">答案：B。定式深植信仰，让人不敢质疑。</div>
+      </div>
+      <div class="q">
+        <div class="qt">9. 面对反常识的新结论，更可取的态度是？</div>
+        <label><input type="radio" name="q9">A. 立刻否定</label>
+        <label><input type="radio" name="q9" data-correct="1">B. 先了解再判断</label>
+        <label><input type="radio" name="q9">C. 当笑话</label>
+        <label><input type="radio" name="q9">D. 无视</label>
+        <div class="ans">答案：B。它可能是下一步突破的起点。</div>
+      </div>
+      <div class="q">
+        <div class="qt">10. 未来智能时代，人类相对机器最大的优势在于？</div>
+        <label><input type="radio" name="q10">A. 算得快</label>
+        <label><input type="radio" name="q10" data-correct="1">B. 提出新问题</label>
+        <label><input type="radio" name="q10">C. 记忆好</label>
+        <label><input type="radio" name="q10">D. 不犯错</label>
+        <div class="ans">答案：B。机器解题，人类提问。</div>
+      </div>
+    </div>
+    <div class="quizbar">
+      <button onclick="grade()">交卷看分</button>
+      <span class="score" id="score"></span>
+    </div>
+  </section>
+
+  <section>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check">
+      <li><span class="day">第1天</span> 今天遇到任何事，刻意多问一个"为什么"，记下来。</li>
+      <li><span class="day">第2天</span> 选一个你"深信"的结论，查查它最早是怎么被验证的。</li>
+      <li><span class="day">第3天</span> 做一个小实验验证一个生活假设（比如"多喝水是否真提神"）。</li>
+      <li><span class="day">第4天</span> 允许自己花半小时做一件"暂时没用"的探索。</li>
+      <li><span class="day">第5天</span> 对一个你不懂的说法，追问"更底层的原因是什么"。</li>
+      <li><span class="day">第6天</span> 听到一个反常识观点，先列"它可能哪里有道理"。</li>
+      <li><span class="day">第7天</span> 向别人讲清"好奇心为什么重要"，用今天的一个例子。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead">
+      <p><b>1.</b> 求知欲与好奇心是人类最硬的底层动力，也是文明能走远的真正根基。</p>
+      <p><b>2.</b> 把猜想变成可验证、可积累的方法，比单次灵感重要得多——系统思维让进步可复制。</p>
+      <p><b>3.</b> 反常识、想法先行、挑战极限、拥抱变革：这四件事，决定了你能走多高。</p>
+    </div>
+    <p>这份资料建议从今天起连续 7 天打卡，每天只做一个微小动作；自测卷低于 7 分，重点重读"系统方法"与"挑战极限"两节，把 10 道题对应的模型再练一遍。</p>
+  </section>
+
+  <footer>
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  </footer>
+
+</div>
+
+<script>
+function grade(){
+  var qs = document.querySelectorAll('#quiz .q');
+  var total = qs.length, right = 0;
+  qs.forEach(function(q){
+    var picked = q.querySelector('input:checked');
+    var correct = q.querySelector('input[data-correct="1"]');
+    var ans = q.querySelector('.ans');
+    if(ans) ans.style.display = 'block';
+    if(picked && picked === correct){ right++; }
+  });
+  var s = document.getElementById('score');
+  if(s) s.textContent = '得分 ' + right + ' / ' + total;
+}
+</script>
+</body>
+</html>
