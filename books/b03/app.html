@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>思维的法则：毛泽东〈矛盾论〉如是读 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>思维的法则：毛泽东〈矛盾论〉如是读 · 书智能体</b><span>认知底盘｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">认知底盘</span>
+      <h1>《思维的法则：毛泽东〈矛盾论〉如是读》</h1>
+      <p class="pos">学会辩证看问题，复杂局面不再乱</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">遇到矛盾和问题，要么下意识回避、捂着，要么一根筋钻牛角尖；看人看事非黑即白，忙起来又抓不住重点。读完这本，你会拿一套"辩证看问题"的框架，把乱成一团的局面拆开、看透、抓住要害。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">矛盾普遍</div><p class="md">问题无处不在、无时不在，躲不开也捂不掉。敢正视，才能掌握主动。</p><p class="mu">用法：遇到麻烦，先别问"怎么会这样"，先承认它确实存在。</p></div><div class="mcard"><div class="mt">一分为二</div><p class="md">任何事都有两面，好里有隐忧、坏里有可取。刻意保留"第二种声音"。</p><p class="mu">用法：做决定前，强迫自己先找出一条反对理由。</p></div><div class="mcard"><div class="mt">具体看事</div><p class="md">不照搬别人经验、不因循老办法。同一件事在不同人、不同时期都不一样。</p><p class="mu">用法：别人的解法先"照镜子"——我的情况真和他一样吗？</p></div><div class="mcard"><div class="mt">抓主要矛盾</div><p class="md">精力和资源有限，先解决那件"牵一发而动全身"的事，其余自然松动。</p><p class="mu">用法：列任务时只标一个"唯一重点"，其余排后面。</p></div><div class="mcard"><div class="mt">看主流内因</div><p class="md">看事看主导方面，评价人才公平；遇挫先从自己身上找能改的原因。</p><p class="mu">用法：评价人/事前先问"主要方面是什么"，再问"我能改变什么"。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">第一章 承认问题到处都在</div><ul><li>发展过程总伴随问题，回避只会养大麻烦</li><li>敢正视、去解决，才能从被动转向主动</li></ul></div><div class="ochap"><div class="ot">第二章 学会一分为二看事</div><ul><li>任何事都有另一面，不偏执于一方</li><li>重大决策尤其需要保留反对声音</li></ul></div><div class="ochap"><div class="ot">第三章 在对立中看见统一</div><ul><li>矛盾双方互相依存，没有苦就显不出甜</li><li>困境里藏着转机，顺境里也要防翻车</li></ul></div><div class="ochap"><div class="ot">第四章 具体问题要具体看</div><ul><li>适合别人的未必适合你，盲目跟风常弄巧成拙</li><li>时代变了，老办法未必解得了新问题</li></ul></div><div class="ochap"><div class="ot">第五章 从自己身上找原因</div><ul><li>改变的根本在内部，外因只是条件</li><li>遇挫先问"我能改什么"，别只怨环境</li></ul></div><div class="ochap"><div class="ot">第六章 抓重点、看主流</div><ul><li>资源有限，先攻那件决定性的事</li><li>看人看事看主导方面，不拿瑕疵否全貌</li></ul></div><div class="ochap"><div class="ot">第七章 别把事想绝对了</div><ul><li>孤立、静止、片面是思维陷阱</li><li>既有定力也肯换位，没有绝对的事</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>一、问题不会自己消失，先正视它</h3><p>任何事物的成长过程都伴随着问题，这不是谁运气差，而是规律。躲和捂，只会让小问题攒成大麻烦。</p><p>很多单位、很多人出问题，不是因为没矛盾，而是<span class="k">怕矛盾、粉饰太平</span>，结果纸包不住火。</p><p>我的建议：把"出问题"当成常态信号，敢承认、去解决，你就从被动转成了主动。</p></div><div class="blk"><h3>二、一分为二：任何事都有另一面</h3><p>看人看事别只盯一面。成绩背后往往有隐忧，缺陷里也总有可取之处。</p><p>越是信心满满，越要主动找"第二种声音"。重大决策里，一个反对意见常常比十个附和更能补漏。</p><p>防止"一言堂"的笨办法：专门安排人当"挑刺者"，不采纳也要让它存在。</p></div><div class="blk"><h3>三、对立统一：祸福相依、互相转化</h3><p>矛盾双方互为存在前提——没有苦就显不出甜，没有困难就显不出顺利。</p><p>这提醒我们：<span class="k">困境里往往藏着转机</span>，顺境里也要防着好事变坏事。</p><p>处理一段关系，既看彼此的一致，也看分歧；在分歧里找共同，比只盯对立走得更远。</p></div><div class="blk"><h3>四、具体问题具体看，不照搬不守旧</h3><p>适合别人的，不一定适合你。盲目学别人，常闹"东施效颦"的笑话。</p><p>时代在变，过去管用的老办法，未必解得了今天的新问题。明者因时而变，知者随事而制。</p><p>真本事是量体裁衣、因地制宜——先看清自己的特殊条件，再动手。</p></div><div class="blk"><h3>五、抓重点、看主流</h3><p>精力有限，想面面俱到往往面面都塌。先解决那件"牵一发而动全身"的事，其余会跟着松动。</p><p>看人看事看<b>主导方面</b>：主要面是好的，就是好的；别拿一点瑕疵否定全部，也别无视隐患变大。</p><p>评价人或单位，先问"主流是什么"，再决定态度，才公平也才清醒。</p></div><div class="blk"><h3>六、别把事想绝对了</h3><p>孤立地、静止地、片面地看问题，是最常见的思维陷阱——只盯自己利益就孤立，只看眼前就静止，只怪别人就片面。</p><p>真正的清醒是：在某一刻坚持自己的立场（这叫定力），也能换角度想到另一种结论（这叫换位）。</p><p>唯一能绝对确认的，就是<span class="k">没有绝对的事</span>。把这句话常挂心头，人就不容易钻牛角尖。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 问题是常态，敢正视、去解决，你就从被动变主动——躲和捂只会养大麻烦。</p><p><b>2.</b> 一分为二、抓重点、具体看，三招合起来，再乱的局面也有了清晰的抓手。</p><p><b>3.</b> 唯一能绝对确认的，是没有绝对的事：既有定力，也肯换位。</p></div>
+    <p>这份资料建议从今天起连续 7 天打卡，每天只做一个微小动作；自测卷低于 7 分，重点重读"一分为二"与"抓重点、看主流"两节，把 10 道题对应的模型再练一遍。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第1天</span> 今天遇到的一个麻烦，先写下来承认它，不再回避。</li><li><span class="day">第2天</span> 对一个你反感的观点，强迫自己写出一条它"有道理"的理由。</li><li><span class="day">第3天</span> 挑一件顺心事，问自己"这里藏着什么隐患"，练习防翻车。</li><li><span class="day">第4天</span> 想学别人的一个做法前，先列"我和他条件有何不同"。</li><li><span class="day">第5天</span> 遇到挫折，写三条"我能改变的事"，至少做其中一条。</li><li><span class="day">第6天</span> 把今天待办列出来，只圈一个"唯一重点"先完成它。</li><li><span class="day">第7天</span> 评价一个人或一件事，先说清"它的主流/主导方面是什么"。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 遇到麻烦，哪种态度更可取？", "o": ["A. 假装没发生", "B. 正视它并着手解决", "C. 等它自己好", "D. 全怪别人"], "a": 1, "tip": "问题是常态，正视才能从被动转主动。"}, {"q": "2. \"一分为二\"最核心的是？", "o": ["A. 只看好的一面", "B. 同时看到事物的两面", "C. 只盯问题", "D. 故意抬杠"], "a": 1, "tip": "不偏执于任一方，才看得全。"}, {"q": "3. 重大决策时，保留反对意见的主要作用是？", "o": ["A. 添乱", "B. 防止一边倒、补上漏洞", "C. 浪费时间", "D. 显得民主"], "a": 1, "tip": "第二种声音能拦住盲点。"}, {"q": "4. 关于困境与顺境，更符合的看法是？", "o": ["A. 完全无关", "B. 二者可互相转化", "C. 永远不变", "D. 顺境必翻车"], "a": 1, "tip": "祸福相依，困境藏转机，顺境防翻车。"}, {"q": "5. 别人用某方法成功了，你照搬最可能？", "o": ["A. 一定成功", "B. 未必适合你", "C. 超越对方", "D. 毫无差别"], "a": 1, "tip": "条件不同，照搬常弄巧成拙。"}, {"q": "6. \"具体问题具体分析\"反对的是？", "o": ["A. 因地制宜", "B. 照搬经验、因循守旧", "C. 调查研究", "D. 灵活处理"], "a": 1, "tip": "它反对不看条件地套用老办法。"}, {"q": "7. 资源有限时，更聪明的做法是？", "o": ["A. 事事平均用力", "B. 先抓主要矛盾/重点", "C. 全交给别人", "D. 只做简单的"], "a": 1, "tip": "先攻决定性的一件，其余会松动。"}, {"q": "8. 评价一个人\"总体不错但有小毛病\"，用的是？", "o": ["A. 只看毛病", "B. 看主流（主导方面）", "C. 全盘否定", "D. 不评价"], "a": 1, "tip": "看主导方面，才公平清醒。"}, {"q": "9. 关于内因与外因，更恰当的理解是？", "o": ["A. 外因决定一切", "B. 内因是根据，外因是条件", "C. 内因没用", "D. 都无关紧要"], "a": 1, "tip": "外因通过内因起作用，改变先从内部找。"}, {"q": "10. 避免\"把事想绝对\"，应该？", "o": ["A. 孤立看问题", "B. 静止看问题", "C. 兼顾定力与换位", "D. 一根筋到底"], "a": 2, "tip": "既坚持立场，也肯换角度，就没有绝对的事。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《思维的法则：毛泽东〈矛盾论〉如是读》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《思维的法则：毛泽东〈矛盾论〉如是读》】", "维度：认知底盘", "一句话定位：学会辩证看问题，复杂局面不再乱", "", "核心心智模型（5 个）：", "1. 矛盾普遍——问题无处不在、无时不在，躲不开也捂不掉。敢正视，才能掌握主动。 用法：遇到麻烦，先别问\"怎么会这样\"，先承认它确实存在。", "2. 一分为二——任何事都有两面，好里有隐忧、坏里有可取。刻意保留\"第二种声音\"。 用法：做决定前，强迫自己先找出一条反对理由。", "3. 具体看事——不照搬别人经验、不因循老办法。同一件事在不同人、不同时期都不一样。 用法：别人的解法先\"照镜子\"——我的情况真和他一样吗？", "4. 抓主要矛盾——精力和资源有限，先解决那件\"牵一发而动全身\"的事，其余自然松动。 用法：列任务时只标一个\"唯一重点\"，其余排后面。", "5. 看主流内因——看事看主导方面，评价人才公平；遇挫先从自己身上找能改的原因。 用法：评价人/事前先问\"主要方面是什么\"，再问\"我能改变什么\"。", "", "精讲要点：", "· 一、问题不会自己消失，先正视它：任何事物的成长过程都伴随着问题，这不是谁运气差，而是规律。躲和捂，只会让小问题攒成大麻烦。", "· 二、一分为二：任何事都有另一面：看人看事别只盯一面。成绩背后往往有隐忧，缺陷里也总有可取之处。", "· 三、对立统一：祸福相依、互相转化：矛盾双方互为存在前提——没有苦就显不出甜，没有困难就显不出顺利。", "· 四、具体问题具体看，不照搬不守旧：适合别人的，不一定适合你。盲目学别人，常闹\"东施效颦\"的笑话。", "· 五、抓重点、看主流：精力有限，想面面俱到往往面面都塌。先解决那件\"牵一发而动全身\"的事，其余会跟着松动。", "· 六、别把事想绝对了：孤立地、静止地、片面地看问题，是最常见的思维陷阱——只盯自己利益就孤立，只看眼前就静止，只怪别人就片面。", "", "带走三句话：", "1. 问题是常态，敢正视、去解决，你就从被动变主动——躲和捂只会养大麻烦。", "2. 一分为二、抓重点、具体看，三招合起来，再乱的局面也有了清晰的抓手。", "3. 唯一能绝对确认的，是没有绝对的事：既有定力，也肯换位。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：矛盾普遍、一分为二、具体看事、抓主要矛盾、看主流内因），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b03_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b03_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b03_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b03_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
