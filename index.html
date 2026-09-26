@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RGX智能体 - Think. Ground. Act.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #c9a227;
+      --bg: #fafafa;
+      --card-bg: #ffffff;
+      --text: #1a1a2e;
+      --text-muted: #64748b;
+    }
+    body {
+      font-family: 'Inter', 'Noto Serif SC', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .serif { font-family: 'Noto Serif SC', serif; }
+    
+    /* Book card hover */
+    .book-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .book-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    .book-card:hover .book-cover {
+      transform: scale(1.02);
+    }
+    .book-cover {
+      transition: transform 0.3s ease;
+    }
+    
+    /* Category filter active state */
+    .filter-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+    
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; }
+    ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
+    
+    /* Loading skeleton */
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1a1a2e',
+            accent: '#c9a227',
+            muted: '#64748b',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+            <span class="text-accent font-bold text-lg">R</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-bold text-primary text-base leading-tight">RGX智能体</span>
+            <span class="text-xs text-accent tracking-wider">Think. Ground. Act.</span>
+          </div>
+        </div>
+        <nav class="hidden md:flex space-x-8">
+          <a href="#books" class="text-muted hover:text-primary transition">全部课程</a>
+          <a href="#about" class="text-muted hover:text-primary transition">关于</a>
+        </nav>
+        <div class="text-sm text-muted">
+          张文昊 · 25年广告营销策划与商业项目实战经验
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-primary to-primary/95 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="serif text-4xl md:text-5xl font-bold mb-6 leading-tight">
+        我喜欢读书<br>
+        <span class="text-accent">但我的时间有限</span>
+      </h1>
+      <div class="text-accent text-sm tracking-widest mb-4">RGX · Think. Ground. Act. · 谋于思 · 立于知 · 成于行</div>
+      <p class="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
+        智能体给了人们一个可能——
+      </p>
+      <p class="text-lg text-gray-400 mb-2 max-w-xl mx-auto">
+        用最短的时间，把喜欢的书的精髓读完，
+      </p>
+      <p class="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
+        并进行训练，直到掌握这本书的精髓。
+      </p>
+      <div class="flex justify-center gap-4 flex-wrap">
+        <a href="#books" class="bg-accent text-primary px-8 py-3 rounded-lg font-semibold hover:bg-accent/90 transition">
+          开始学习
+        </a>
+        <a href="#contact" class="border border-white/30 text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition">
+          扫码咨询
+        </a>
+      </div>
+      <div class="mt-12 grid grid-cols-3 gap-8 max-w-lg mx-auto text-center">
+        <div>
+          <div class="text-3xl font-bold text-accent">33</div>
+          <div class="text-sm text-gray-400">门智能体课</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-accent">7</div>
+          <div class="text-sm text-gray-400">大知识板块</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-accent">5</div>
+          <div class="text-sm text-gray-400">层交互功能</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter -->
+  <section id="books" class="py-8 bg-white border-b border-gray-100 sticky top-16 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap gap-2" id="filter-container">
+        <!-- Filter buttons will be injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Books Grid -->
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="books-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Book cards will be injected by JS -->
+      </div>
+      <div id="empty-state" class="hidden text-center py-20">
+        <p class="text-muted text-lg">暂无课程</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="serif text-3xl font-bold text-center mb-4">从读完，到会用</h2>
+      <p class="text-center text-muted mb-12">不是让你多读一本书——是让你真正掌握一本书</p>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          </div>
+          <h3 class="font-semibold text-sm">精读</h3>
+          <p class="text-xs text-muted mt-1">核心方法提炼</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+          </div>
+          <h3 class="font-semibold text-sm">闯关自测</h3>
+          <p class="text-xs text-muted mt-1">10题 interactive</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          </div>
+          <h3 class="font-semibold text-sm">AI 陪练</h3>
+          <p class="text-xs text-muted mt-1">grounded 提示词</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          </div>
+          <h3 class="font-semibold text-sm">数据复盘</h3>
+          <p class="text-xs text-muted mt-1">学习进度追踪</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          </div>
+          <h3 class="font-semibold text-sm">离线可用</h3>
+          <p class="text-xs text-muted mt-1">零 API Key</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="serif text-3xl font-bold mb-6">为什么做这件事</h2>
+      <p class="text-muted text-lg mb-8 leading-relaxed">
+        我喜欢读书，但我的时间有限。
+        我想把喜欢的书的精髓读完，并进行训练直到掌握，
+        却发现传统阅读方式无法满足这个需求。
+      </p>
+      <p class="text-muted text-lg mb-8 leading-relaxed">
+        于是我把 33 本公版书蒸馏成 33 个 AI 智能体。
+        每本书的核心方法被提炼出来，配上闯关自测和 AI 陪练，
+        让你用最短的时间掌握精髓，并通过训练真正会用。
+      </p>
+      <p class="text-muted text-lg mb-8 leading-relaxed">
+        这是张文昊基于 25 年广告营销策划与商业项目实战经验，
+        把时间还给读者，把精髓留给大脑。
+      </p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div>
+          <div class="text-2xl font-bold text-primary">9.9元</div>
+          <div class="text-sm text-muted">单本起</div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-primary">¥99</div>
+          <div class="text-sm text-muted">完整包</div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-primary">¥399</div>
+          <div class="text-sm text-muted">全季通票</div>
+        </div>
+        <div>
+          <div class="text-2xl font-bold text-primary">¥999</div>
+          <div class="text-sm text-muted">年度会员</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="font-bold text-lg mb-4">RGX智能体</h3>
+          <div class="mb-3">
+            <span class="text-accent font-bold text-2xl">RGX</span>
+            <span class="text-gray-400 text-sm ml-2">®</span>
+          </div>
+          <p class="text-gray-400 text-sm mb-1">
+            Think. Ground. Act.
+          </p>
+          <p class="text-gray-400 text-sm mb-3">
+            谋于思 · 立于知 · 成于行
+          </p>
+          <p class="text-gray-500 text-xs">
+            RGX人工智能研究院 · 张文昊<br>
+            25年广告营销策划与商业项目实战经验
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-4">联系我们</h3>
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-2 text-sm text-gray-400">
+              <span>📱</span>
+              <span>13128941999</span>
+            </div>
+            <div class="flex items-center gap-2 text-sm text-gray-400">
+              <span>✉️</span>
+              <span>tuoxiaoxiai@gmail.com</span>
+            </div>
+            <div class="mt-2">
+              <img src="assets/wechat_qr.jpg" alt="微信二维码" class="w-32 h-32 rounded-lg">
+              <p class="text-xs text-gray-500 mt-1 text-center">扫码加微信</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-4">法律信息</h3>
+          <p class="text-gray-400 text-sm">
+            课程内容版权归作者所有<br>
+            未经授权请勿传播
+          </p>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500">
+        © 2026 RGX人工智能研究院 · 张文昊 | Think. Ground. Act.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Book data - loaded from books.json
+    const books = [
+      {id:"b01",dim:"认知底盘",title:"一看就懂逻辑思维"},
+      {id:"b02",dim:"认知底盘",title:"思维不设限：看透思考本质，在变化中持续获益"},
+      {id:"b03",dim:"认知底盘",title:"思维的法则：毛泽东《矛盾论》如是读"},
+      {id:"b04",dim:"认知底盘",title:"思维简史：从丛林到宇宙"},
+      {id:"b05",dim:"认知底盘",title:"一本书读懂大数据：每个人都看得懂的大数据入门书"},
+      {id:"b06",dim:"心理内驱",title:"心流的艺术"},
+      {id:"b07",dim:"心理内驱",title:"一个悲观主义者的积极思考"},
+      {id:"b08",dim:"心理内驱",title:"世界重启：有趣的末日实验总结人类文明精华"},
+      {id:"b09",dim:"心理内驱",title:"世界如此险恶，你要内心强大2"},
+      {id:"b10",dim:"心理内驱",title:"世界尽头的咖啡馆"},
+      {id:"b11",dim:"商业赚钱",title:"一次搞懂精实创业"},
+      {id:"b12",dim:"商业赚钱",title:"四步创业法"},
+      {id:"b13",dim:"商业赚钱",title:"一本书读懂互联网思维：每个人都看得懂的互联网思维入门书"},
+      {id:"b14",dim:"商业赚钱",title:"一本书读懂互联网营销推广"},
+      {id:"b15",dim:"商业赚钱",title:"世界上最伟大的女销售员"},
+      {id:"b16",dim:"商业赚钱",title:"谁偷走了我的客户"},
+      {id:"b17",dim:"财富管理",title:"一本书读懂财报：秒通财报，从本书开始"},
+      {id:"b18",dim:"财富管理",title:"一本书读懂金融常识"},
+      {id:"b19",dim:"财富管理",title:"一本书读懂中国税系列"},
+      {id:"b20",dim:"财富管理",title:"一天一点经济学"},
+      {id:"b21",dim:"人际影响",title:"谁说你懂做人做事"},
+      {id:"b22",dim:"人际影响",title:"一分钟打动人心：人际关系中的心理策略"},
+      {id:"b23",dim:"人际影响",title:"一分钟掌控人心：从零开始学攻心术"},
+      {id:"b24",dim:"人际影响",title:"一分钟看透职场人"},
+      {id:"b25",dim:"人际影响",title:"说服：像讲故事一样讲道理"},
+      {id:"b26",dim:"成事执行",title:"谁能成为领导羊"},
+      {id:"b27",dim:"成事执行",title:"一个外企面试官的面经"},
+      {id:"b28",dim:"成事执行",title:"谁是谷歌想要的人才？破解世界最顶尖公司的面试密码"},
+      {id:"b29",dim:"成事执行",title:"一看就懂的生产管理法：PDCA在工厂中的应用"},
+      {id:"b30",dim:"成事执行",title:"释放潜能：7个改变个人、团队和组织的教练技巧"},
+      {id:"b31",dim:"未来与身心",title:"一定要教给孩子的60个安全自救细节"},
+      {id:"b32",dim:"未来与身心",title:"五种时间"},
+      {id:"b33",dim:"未来与身心",title:"睡个好觉：如何科学改善你的睡眠"}
+    ];
+
+    // Category metadata
+    const categories = {
+      "认知底盘": {icon: "🧠", desc: "思维模型与认知升级"},
+      "心理内驱": {icon: "💪", desc: "心理韧性与内驱力"},
+      "商业赚钱": {icon: "💰", desc: "商业模式与营销实战"},
+      "财富管理": {icon: "📊", desc: "财务知识与管理"},
+      "人际影响": {icon: "🤝", desc: "沟通与影响力"},
+      "成事执行": {icon: "⚡", desc: "执行力与领导力"},
+      "未来与身心": {icon: "🌱", desc: "身心健康与未来趋势"}
+    };
+
+    let currentFilter = 'all';
+
+    // Render filter buttons
+    function renderFilters() {
+      const container = document.getElementById('filter-container');
+      const btns = ['all', ...Object.keys(categories)];
+      
+      btns.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = `filter-btn px-4 py-2 rounded-full text-sm font-medium border border-gray-200 transition ${currentFilter === cat ? 'active' : ''}`;
+        btn.dataset.filter = cat;
+        btn.textContent = cat === 'all' ? '全部课程' : `${categories[cat].icon} ${cat}`;
+        btn.addEventListener('click', () => setFilter(cat));
+        container.appendChild(btn);
+      });
+    }
+
+    // Set filter
+    function setFilter(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === filter);
+      });
+      renderBooks();
+    }
+
+    // Render book cards
+    function renderBooks() {
+      const grid = document.getElementById('books-grid');
+      const empty = document.getElementById('empty-state');
+      grid.innerHTML = '';
+      
+      const filtered = currentFilter === 'all' 
+        ? books 
+        : books.filter(b => b.dim === currentFilter);
+      
+      if (filtered.length === 0) {
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      
+      filtered.forEach(book => {
+        const cat = categories[book.dim];
+        const card = document.createElement('div');
+        card.className = 'book-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100';
+        card.innerHTML = `
+          <div class="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+            <div class="text-center p-4">
+              <div class="text-4xl mb-2">${cat.icon}</div>
+              <div class="text-xs font-medium text-muted uppercase tracking-wider">${book.dim}</div>
+            </div>
+            <div class="absolute top-3 right-3">
+              <span class="bg-accent/90 text-primary text-xs font-bold px-2 py-1 rounded">
+                ¥${getPrice(book.id)}
+              </span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold text-primary line-clamp-2 mb-2">${book.title}</h3>
+            <p class="text-xs text-muted mb-3">${cat.desc}</p>
+            <div class="flex gap-2">
+              <a href="books/${book.id}/app.html" target="_blank" 
+                 class="flex-1 bg-primary text-white text-sm font-medium py-2 rounded-lg text-center hover:bg-primary/90 transition">
+                立即学习
+              </a>
+              <button onclick="showPreview('books/${book.id}/app.html')"
+                 class="px-3 border border-gray-200 text-muted hover:border-primary hover:text-primary transition rounded-lg">
+                预览
+              </button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Get price based on book ID
+    function getPrice(id) {
+      const num = parseInt(id.replace('b', ''));
+      if (num <= 5) return '9.9';
+      if (num <= 15) return '99';
+      if (num <= 25) return '399';
+      return '999';
+    }
+
+    // Show preview (opens app.html)
+    function showPreview(bookId) {
+      window.open(`/books/${bookId}/app.html`, '_blank');
+    }
+
+    // Initialize
+    renderFilters();
+    renderBooks();
+  </script>
+</body>
+</html>
