@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>世界上最伟大的女销售员 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>世界上最伟大的女销售员 · 书智能体</b><span>商业赚钱｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">商业赚钱</span>
+      <h1>《世界上最伟大的女销售员》</h1>
+      <p class="pos">从柜台后看清销售，把陌生人变成回头客</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">卖货、谈单、做服务，最难的是"人"。你道理都懂，面对挑剔的顾客却容易慌、容易硬推、容易留不住人。这份笔记从一线售货员的真实经历里，提炼出待人接物、读懂人心、扛住拒绝的底层能力，让你把"成交"变成一件自然的事。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">柜台视角</div><p class="md">站到服务者这边看生意，才知道体验卡在哪。</p><p class="mu">用法：每周去一线待半天，看真实卡点。</p></div><div class="mcard"><div class="mt">读懂人</div><p class="md">先观察需求和情绪，再开口。</p><p class="mu">用法：顾客进门先不推销，看他在看什么。</p></div><div class="mcard"><div class="mt">细节即信任</div><p class="md">小动作（记住名字、偏好）比大承诺更攒信任。</p><p class="mu">用法：建一个客户偏好小本子。</p></div><div class="mcard"><div class="mt">韧性留人</div><p class="md">这行淘汰快，能留下靠的是扛得住。</p><p class="mu">用法：把每次被拒当数据，不当打击。</p></div><div class="mcard"><div class="mt">把自己当产品</div><p class="md">你也在被"购买"，专业和真诚是你的卖点。</p><p class="mu">用法：每次接触都经营你的口碑。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">引言 一个售货员的自白</div><ul><li>从购物者到柜台后的视角转换</li><li>被忽视的行业真相与一线价值</li></ul></div><div class="ochap"><div class="ot">第 1-3 章 入行与适应</div><ul><li>从零开始，学习产品与节奏</li><li>在犯错与观察中成长</li></ul></div><div class="ochap"><div class="ot">第 4-5 章 积累小成功</div><ul><li>第一单成交带来的正向循环</li><li>面对有趣的挑战与难缠顾客</li></ul></div><div class="ochap"><div class="ot">第 6-8 章 熬过低谷</div><ul><li>衰退期与行业波动中的坚持</li><li>一线价值被低估，仍要保住尊严</li></ul></div><div class="ochap"><div class="ot">第 9-11 章 系统与个人</div><ul><li>别活成机器上的齿轮，保持自我</li><li>高流动率里靠韧性胜出</li><li>面对极端顾客，守住专业边界</li></ul></div><div class="ochap"><div class="ot">第 12 章与结语 寻求新生活</div><ul><li>离开时带走可迁移的能力</li><li>人人都在营销自己</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>1. 先换到柜台后面看世界</h3><p><span class="k">结论：</span>真正的用户体验，只有站到服务者位置才看得懂。</p><p>平时你是买东西的人，永远在要服务；站到柜台后，才知亮堂卖场和杂乱后台的落差。</p><p>这行年流动率极高，能留下来的，靠的不是天赋，是韧性。</p><p>把这种视角带进你的生意：你给客户的体验，瓶颈往往在一线细节。</p></div><div class="blk"><h3>2. 读懂人，比背话术重要一百倍</h3><p><span class="k">结论：</span>先观察情绪和需求，再决定说什么，成交更自然。</p><p>挑剔的有钱顾客也有软肋：服务水准不达标就翻脸，但被认真对待就忠诚。</p><p>别一上来就推销，先看他在看什么、犹豫什么、为谁买。</p><p>一句"您是想送人还是自己用"，比背十句产品参数更管用。</p></div><div class="blk"><h3>3. 信任藏在细节里</h3><p><span class="k">结论：</span>记住名字、偏好、上次聊过什么，比降价更留人。</p><p>包装、称呼、回头还能叫出你，这些"小动作"堆出被重视的感觉。</p><p>一线员工是消费体验的最后一米，笑着多走一步，口碑就留住了。</p><p>做法：给重要客户建一个极简偏好本，下次直接叫得出需求。</p></div><div class="blk"><h3>4. 把"被拒绝"当成数据，不是打击</h3><p><span class="k">结论：</span>销售的本质是被拒多、成交少，能扛才赢。</p><p>这行没人指望你留下，高流动率反而给了留下的人空间。</p><p>每次碰壁记一笔：为什么没成？是需求不对还是时机不对？</p><p>当成训练数据迭代自己，拒绝就从"伤口"变成"样本"。</p></div><div class="blk"><h3>5. 你也在被"购买"：经营自己的口碑</h3><p><span class="k">结论：</span>不管卖什么，你本人就是别人要不要回头的原因。</p><p>第一次约会、一次汇报，本质都是营销自己，专业和真诚是卖点。</p><p>一线岗位最被忽视，却最影响顾客对品牌的评价。</p><p>把每次接触当作品牌广告：你专业，品牌就专业。</p></div><div class="blk"><h3>6. 熬过低谷，能力才真正长出来</h3><p><span class="k">结论：</span>衰退期和难缠顾客，是逼你升级的教练。</p><p>行业有周期，个人有低谷，能熬过"想放弃"那几天的人留下。</p><p>别把自己活成机器上的齿轮：保持自我，服务才有人味。</p><p>离开时带走的不是工牌，而是一套可迁移的待人接物能力。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 站到柜台后看生意，才知道体验的瓶颈卡在一线细节。</p><p><b>2.</b> 读懂人、记细节、扛拒绝，是把陌生人变回头客的三件套。</p><p><b>3.</b> 你本人就是被购买的品牌，专业和真诚是你最好的卖点。</p></div>
+    <p>这份资料建议从今天起连续 7 天打卡，每天只做一个微小动作；读完自测卷若低于 7 分，重读"核心心智模型"与"精讲"第 2、3 模块，把方法用在你的下一次服务里。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第 1 天</span> 去你自己的业务一线待半天，记三个体验卡点。</li><li><span class="day">第 2 天</span> 观察一个顾客，先不推销，写下他的真实需求。</li><li><span class="day">第 3 天</span> 记住一位老客户的一个偏好，下次直接用上。</li><li><span class="day">第 4 天</span> 把今天被拒的一次，写成"为什么没成"的笔记。</li><li><span class="day">第 5 天</span> 给一位顾客多走一步（一句关心/一个细节），看反馈。</li><li><span class="day">第 6 天</span> 整理你的"服务话术"里最管用的三句。</li><li><span class="day">第 7 天</span> 复盘本周：哪天最像"齿轮"，怎么找回自己。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 真正的用户体验要从哪里看？", "o": ["A. 老板办公室", "B. 服务者一线视角", "C. 广告文案", "D. 财务报表"], "a": 1, "tip": "站到服务者位置，才知体验卡在一线细节。"}, {"q": "2. 面对挑剔顾客，首先应该？", "o": ["A. 直接降价", "B. 先观察需求与情绪", "C. 不理他", "D. 叫保安"], "a": 1, "tip": "先读懂人，再决定怎么沟通。"}, {"q": "3. 建立信任最靠？", "o": ["A. 大承诺", "B. 细节与记住偏好", "C. 威胁", "D. 沉默"], "a": 1, "tip": "记住名字与偏好，比降价更留人。"}, {"q": "4. 被拒绝时应看作？", "o": ["A. 打击", "B. 训练数据", "C. 放弃理由", "D. 运气差"], "a": 1, "tip": "把拒绝当样本迭代自己，而非伤口。"}, {"q": "5. 你本人在销售中扮演？", "o": ["A. 无关角色", "B. 被购买的品牌", "C. 背景板", "D. 障碍"], "a": 1, "tip": "你本人就是别人要不要回头的原因。"}, {"q": "6. 高流动率行业靠什么胜出？", "o": ["A. 天赋", "B. 韧性", "C. 关系", "D. 运气"], "a": 1, "tip": "能扛过想放弃的人，才留得下来。"}, {"q": "7. 一线员工影响？", "o": ["A. 无影响", "B. 顾客对品牌的评价", "C. 股价", "D. 物流"], "a": 1, "tip": "一线是体验最后一米，决定品牌印象。"}, {"q": "8. 服务中最该避免？", "o": ["A. 多走一步", "B. 活成齿轮失去自我", "C. 微笑", "D. 记住偏好"], "a": 1, "tip": "保持自我，服务才有人味。"}, {"q": "9. 判断：一上来就猛推销最能成交。", "o": ["A. 对", "B. 错"], "a": 1, "tip": "答案：错。先观察再开口，比硬推更自然。"}, {"q": "10. 判断：销售能力只在卖货时有用。", "o": ["A. 对", "B. 错"], "a": 1, "tip": "答案：错。人人都在营销自己，能力可迁移。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《世界上最伟大的女销售员》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《世界上最伟大的女销售员》】", "维度：商业赚钱", "一句话定位：从柜台后看清销售，把陌生人变成回头客", "", "核心心智模型（5 个）：", "1. 柜台视角——站到服务者这边看生意，才知道体验卡在哪。 用法：每周去一线待半天，看真实卡点。", "2. 读懂人——先观察需求和情绪，再开口。 用法：顾客进门先不推销，看他在看什么。", "3. 细节即信任——小动作（记住名字、偏好）比大承诺更攒信任。 用法：建一个客户偏好小本子。", "4. 韧性留人——这行淘汰快，能留下靠的是扛得住。 用法：把每次被拒当数据，不当打击。", "5. 把自己当产品——你也在被\"购买\"，专业和真诚是你的卖点。 用法：每次接触都经营你的口碑。", "", "精讲要点：", "· 1. 先换到柜台后面看世界：结论：真正的用户体验，只有站到服务者位置才看得懂。", "· 2. 读懂人，比背话术重要一百倍：结论：先观察情绪和需求，再决定说什么，成交更自然。", "· 3. 信任藏在细节里：结论：记住名字、偏好、上次聊过什么，比降价更留人。", "· 4. 把\"被拒绝\"当成数据，不是打击：结论：销售的本质是被拒多、成交少，能扛才赢。", "· 5. 你也在被\"购买\"：经营自己的口碑：结论：不管卖什么，你本人就是别人要不要回头的原因。", "· 6. 熬过低谷，能力才真正长出来：结论：衰退期和难缠顾客，是逼你升级的教练。", "", "带走三句话：", "1. 站到柜台后看生意，才知道体验的瓶颈卡在一线细节。", "2. 读懂人、记细节、扛拒绝，是把陌生人变回头客的三件套。", "3. 你本人就是被购买的品牌，专业和真诚是你最好的卖点。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：柜台视角、读懂人、细节即信任、韧性留人、把自己当产品），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b15_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b15_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b15_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b15_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
