@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一本书读懂大数据：每个人都看得懂的大数据入门书 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>一本书读懂大数据：每个人都看得懂的大数据入门书 · 书智能体</b><span>认知底盘｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">认知底盘</span>
+      <h1>《一本书读懂大数据：每个人都看得懂的大数据入门书》</h1>
+      <p class="pos">看懂大数据，把它变成做决策的底气</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">总听说大数据重要，却觉得它离自己很远、看不懂也用不上。读完这本你会明白，大数据不是技术黑话，而是一种"用数据看世界"的思维方式，工作、生意、生活里都能直接用。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">4V 认知</div><p class="md">大数据=大量、多样、快速，再加最关键的"价值"。价值不藏在容量里，藏在分析里。</p><p class="mu">用法：别被"大"吓到，先看它能不能回答一个具体问题。</p></div><div class="mcard"><div class="mt">用比大重要</div><p class="md">数据本身毫无价值，搁着不用的数据和地下室垃圾没区别；驾驭方式才决定价值。</p><p class="mu">用法：每收集数据前，先写清"要用它做什么决策"。</p></div><div class="mcard"><div class="mt">关联生价值</div><p class="md">关联起来的数据远大于孤岛；把分散行为串成画像，价值才浮现。</p><p class="mu">用法：打通部门壁垒，把碎片拼成完整的用户图景。</p></div><div class="mcard"><div class="mt">活性即价值</div><p class="md">更新越频繁的数据活性越高、信息越丰富；实时数据比沉睡档案值钱。</p><p class="mu">用法：优先建设和依赖高频、实时的数据源。</p></div><div class="mcard"><div class="mt">思维致胜</div><p class="md">价值链上握数据的、有技能的、有思维的，三者中思维最难被替代也最持久。</p><p class="mu">用法：训练"从数据看问题"的脑子，而不是只攒工具。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">第一章 身处数据时代，揭开大数据的面纱</div><ul><li>大数据是什么：大量、多样、快速，价值是第四维</li><li>"大"和"数据"都不重要，重要的是怎么驾驭</li></ul></div><div class="ochap"><div class="ot">第二章 大数据为何如此重要</div><ul><li>非结构化数据占八成以上，价值待挖掘</li><li>活性、结构化/非结构化、价值链三类玩家</li></ul></div><div class="ochap"><div class="ot">第三章 需求挖掘与电商实践</div><ul><li>从浏览行为识别需求，做精准触达</li><li>把用户碎片行为关联成真实偏好</li></ul></div><div class="ochap"><div class="ot">第四章 数据进入企业管理</div><ul><li>用数据构建管理模式，不介入就被淘汰</li><li>客观数据最具发言权</li></ul></div><div class="ochap"><div class="ot">第五章 生活无处不数据</div><ul><li>数据可预测先兆、舆情与下一步行动</li><li>数据也会骗人，要从动作推导真伪</li></ul></div><div class="ochap"><div class="ot">第六章 颠覆与重塑思维</div><ul><li>综合人才、智能化与柔性化</li><li>生活、工作、思维被重构</li></ul></div><div class="ochap"><div class="ot">第七章 得数据者得天下：机遇与挑战</div><ul><li>人机结合是趋势</li><li>数据化带来前所未有且的机遇与挑战</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>一、大数据的 4V，但价值在"第四 V"</h3><p>常说的大数据有四个特征：大量化、多样化、快速化，三者之外还有最关键的<span class="k">价值（Value）</span>。</p><p>容量大、速度快、类型多，都不代表价值高——价值藏在怎么用里面。</p><p>我的经验：判断一项大数据，先问它能不能回答一个具体问题，而不是先看它有多大。</p></div><div class="blk"><h3>二、用比"大"重要</h3><p>数据本身没有任何价值，搁着不用的数据，和地下室里的垃圾没区别。</p><p>"大"和"数据"都不关键，关键是企业、个人怎么驾驭它、怎么用它改进决策。</p><p>用法：每收集一批数据，先写清楚"我要用它做什么决定"，再动手。</p></div><div class="blk"><h3>三、关联起来的数据才值钱</h3><p>孤立的数据价值有限；把分散的行为关联成整体，才画出真实的用户画像。</p><p>现实里"数据孤岛""数据割据"很常见——各部门壁垒让本可挖掘的价值一直沉睡。</p><p>打通孤岛，是大数据发挥威力的前提。碎片一旦连起来，商机就出来了。</p></div><div class="blk"><h3>四、活性即价值：越新越值钱</h3><p>数据的<span class="k">活性</span>就是更新频率，更新越频繁，包含的信息越丰富。</p><p>传统报表以天计，大数据应用要求在 1 秒以内响应，差几秒体验就天差地别。</p><p>用法：优先建设和依赖高频、实时的数据源，沉睡的档案该清就清。</p></div><div class="blk"><h3>五、结构化与非结构化</h3><p>结构化数据像工资表，规整好处理；非结构化像文本、图片、视频，占了总量八成以上。</p><p>半结构化、多结构化最常见，要先用一套规则把它整理清楚，再拿去分析。</p><p>大数据处理的难点，大半在"把乱的数据理清楚"，而不是算力本身。</p></div><div class="blk"><h3>六、思维比数据和技能更持久</h3><p>价值链上有三类玩家：握数据的、有技能的、有思维的。前两类都能被替代。</p><p>只有"用数据看世界"的思维最难学，也最持久——理论不会因大数据而消亡，反而更被需要。</p><p>所以与其囤数据、追工具，不如先把脑子训练成"数据化思考"的脑子。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 大数据不是"大"和"数据"，而是"怎么用"——价值藏在分析与业务改进里。</p><p><b>2.</b> 关联起来的数据才值钱，活性越高的数据越新越有用；打通孤岛是第一步。</p><p><b>3.</b> 数据和技能都会被替代，只有"用数据看世界"的思维，才最持久。</p></div>
+    <p>这份资料建议从今天起连续 7 天打卡，每天只做一个微小动作；自测卷低于 7 分，重点重读"用比大重要"与"关联生价值"两节，把 10 道题对应的模型再练一遍。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第1天</span> 选一个你常做却没想过的决定，写下"如果有权威数据，我会看哪几个指标"。</li><li><span class="day">第2天</span> 把今天产生的个人数据（步数、消费、浏览）关联起来，看能得出什么结论。</li><li><span class="day">第3天</span> 工作中找一个"数据孤岛"，写清打通它能多看到什么。</li><li><span class="day">第4天</span> 找一个你依赖的"旧报表"，问自己"换成实时数据会怎样"。</li><li><span class="day">第5天</span> 读一篇新闻，圈出其中"拿数据说话"和"拿情绪说话"的区别。</li><li><span class="day">第6天</span> 用一个生活决策（买什么、去哪玩）先列数据再决定。</li><li><span class="day">第7天</span> 向同事/朋友讲清"为什么关联起来的数据更值钱"，用今天的例子。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 大数据的 4V 中，最关键的\"第四 V\"是？", "o": ["A. 体积（Volume）", "B. 价值（Value）", "C. 速度（Velocity）", "D. 多样（Variety）"], "a": 1, "tip": "价值藏在分析和使用方式里。"}, {"q": "2. 关于\"大数据本身的价值\"，正确的是？", "o": ["A. 越大越值钱", "B. 本身无价值，看怎么用", "C. 存着就值钱", "D. 完全无意义"], "a": 1, "tip": "搁置不用的数据和垃圾没区别。"}, {"q": "3. 关联数据与孤立数据相比？", "o": ["A. 价值一样", "B. 关联价值远大于孤立", "C. 孤立更值钱", "D. 无法比较"], "a": 1, "tip": "打通孤岛才能挖出金。"}, {"q": "4. \"数据孤岛\"指的是？", "o": ["A. 一座岛屿", "B. 部门间数据壁垒、互不联通", "C. 某种数据库", "D. 硬件设备"], "a": 1, "tip": "壁垒让数据价值沉睡。"}, {"q": "5. 数据的\"活性\"主要指？", "o": ["A. 颜色", "B. 更新频率", "C. 体积大小", "D. 数据来源"], "a": 1, "tip": "更新越频繁，活性越高。"}, {"q": "6. 大数据应用对响应速度通常的要求是？", "o": ["A. 几天", "B. 1 秒以内", "C. 一个月", "D. 没有要求"], "a": 1, "tip": "慢了体验就垮。"}, {"q": "7. 非结构化数据（文本、视频等）在总量中占比大约？", "o": ["A. 极少", "B. 八成以上", "C. 为零", "D. 正好一半"], "a": 1, "tip": "它才是大数据处理的主战场。"}, {"q": "8. 价值链三类公司中，最持久的是？", "o": ["A. 数据型", "B. 技能型", "C. 思维型", "D. 三者都一样"], "a": 2, "tip": "数据技能皆可替，思维最难学。"}, {"q": "9. 关于\"理论终结\"的说法，本书的态度是？", "o": ["A. 完全同意", "B. 大数据仍需要理论和方法论", "C. 理论完全没用", "D. 不用分析"], "a": 1, "tip": "大数据恰恰更依赖方法论。"}, {"q": "10. 企业用大数据，首要该想的是？", "o": ["A. 买最多服务器", "B. 数据用来做什么决策", "C. 越大越好", "D. 雇人就行"], "a": 1, "tip": "先想用途，再谈规模。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《一本书读懂大数据：每个人都看得懂的大数据入门书》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《一本书读懂大数据：每个人都看得懂的大数据入门书》】", "维度：认知底盘", "一句话定位：看懂大数据，把它变成做决策的底气", "", "核心心智模型（5 个）：", "1. 4V 认知——大数据=大量、多样、快速，再加最关键的\"价值\"。价值不藏在容量里，藏在分析里。 用法：别被\"大\"吓到，先看它能不能回答一个具体问题。", "2. 用比大重要——数据本身毫无价值，搁着不用的数据和地下室垃圾没区别；驾驭方式才决定价值。 用法：每收集数据前，先写清\"要用它做什么决策\"。", "3. 关联生价值——关联起来的数据远大于孤岛；把分散行为串成画像，价值才浮现。 用法：打通部门壁垒，把碎片拼成完整的用户图景。", "4. 活性即价值——更新越频繁的数据活性越高、信息越丰富；实时数据比沉睡档案值钱。 用法：优先建设和依赖高频、实时的数据源。", "5. 思维致胜——价值链上握数据的、有技能的、有思维的，三者中思维最难被替代也最持久。 用法：训练\"从数据看问题\"的脑子，而不是只攒工具。", "", "精讲要点：", "· 一、大数据的 4V，但价值在\"第四 V\"：常说的大数据有四个特征：大量化、多样化、快速化，三者之外还有最关键的价值（Value）。", "· 二、用比\"大\"重要：数据本身没有任何价值，搁着不用的数据，和地下室里的垃圾没区别。", "· 三、关联起来的数据才值钱：孤立的数据价值有限；把分散的行为关联成整体，才画出真实的用户画像。", "· 四、活性即价值：越新越值钱：数据的活性就是更新频率，更新越频繁，包含的信息越丰富。", "· 五、结构化与非结构化：结构化数据像工资表，规整好处理；非结构化像文本、图片、视频，占了总量八成以上。", "· 六、思维比数据和技能更持久：价值链上有三类玩家：握数据的、有技能的、有思维的。前两类都能被替代。", "", "带走三句话：", "1. 大数据不是\"大\"和\"数据\"，而是\"怎么用\"——价值藏在分析与业务改进里。", "2. 关联起来的数据才值钱，活性越高的数据越新越有用；打通孤岛是第一步。", "3. 数据和技能都会被替代，只有\"用数据看世界\"的思维，才最持久。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：4V 认知、用比大重要、关联生价值、活性即价值、思维致胜），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b05_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b05_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b05_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b05_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
