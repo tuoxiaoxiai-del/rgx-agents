@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>《谁能成为领导羊》</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1c1c1c; font-size: 14px; line-height: 1.78;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .wrap { width: 100%; }
+  h1, h2, h3 { font-weight: 800; letter-spacing: .5px; }
+  h2 { font-size: 19px; color: #143a32; margin: 26px 0 12px;
+       padding-left: 11px; border-left: 5px solid #c08438; }
+  h3 { font-size: 15.5px; color: #143a32; margin: 16px 0 6px; }
+
+  /* 封面（顶部块，不强制分页） */
+  .cover { border: 1px solid #e3ddd0; border-radius: 14px; padding: 22px 24px;
+           background: linear-gradient(135deg,#143a32 0%,#1d5247 100%); color: #fff;
+           margin-bottom: 22px; }
+  .cover .dim { display: inline-block; font-size: 12px; background: #c08438; color: #1c1c1c;
+           padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 1px; }
+  .cover h1 { font-size: 25px; margin: 12px 0 8px; line-height: 1.35; }
+  .cover .pos { font-size: 14.5px; opacity: .95; margin: 0; }
+  .cover .sign { margin-top: 14px; font-size: 12.5px; opacity: .85; }
+
+  .lead { background: #f6f3ec; border-radius: 10px; padding: 14px 16px; margin: 4px 0 6px; }
+  .lead b { color: #143a32; }
+
+  /* 心智模型卡片 */
+  .models { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mcard { border: 1px solid #e3ddd0; border-radius: 10px; padding: 12px 14px;
+           background: #fcfbf7; break-inside: avoid; }
+  .mcard .mt { font-weight: 800; color: #143a32; font-size: 14.5px; margin-bottom: 4px; }
+  .mcard .md { font-size: 13px; color: #3a3a3a; margin: 0; }
+  .mcard .mu { font-size: 12.5px; color: #7a6a4a; margin: 6px 0 0; }
+
+  /* 提纲 */
+  .outline { padding-left: 0; }
+  .ochap { break-inside: avoid; margin: 10px 0; }
+  .ochap .ot { font-weight: 800; color: #143a32; font-size: 14.5px; }
+  .ochap ul { margin: 4px 0 0; padding-left: 20px; }
+  .ochap li { margin: 2px 0; }
+
+  /* 精讲 */
+  .lect .blk { break-inside: avoid; margin: 10px 0; }
+  .lect p { margin: 5px 0; }
+  .lect .k { color: #c08438; font-weight: 700; }
+
+  /* 自测卷 */
+  .quiz .q { break-inside: avoid; border: 1px solid #e3ddd0; border-radius: 10px;
+             padding: 12px 14px; margin: 10px 0; background: #fcfbf7; }
+  .quiz .qt { font-weight: 700; margin-bottom: 7px; }
+  .quiz label { display: block; padding: 4px 8px; border-radius: 6px; margin: 3px 0;
+                cursor: pointer; }
+  .quiz label:hover { background: #f0ece1; }
+  .quiz input { margin-right: 8px; }
+  .quiz .ans { font-size: 12.5px; color: #1d7a4d; margin-top: 6px; display: none; }
+  .quizbar { margin: 12px 0; }
+  .quizbar button { background: #143a32; color: #fff; border: 0; border-radius: 8px;
+                    padding: 9px 18px; font-size: 14px; cursor: pointer; font-weight: 700; }
+  .score { font-size: 16px; font-weight: 800; color: #143a32; margin-left: 12px; }
+
+  /* 打卡 */
+  .check li { margin: 6px 0; break-inside: avoid; }
+  .check .day { font-weight: 800; color: #c08438; }
+
+  footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #e3ddd0;
+           font-size: 12.5px; color: #6a6a6a; text-align: center; }
+  footer .cta { display: flex; align-items: center; justify-content: center; gap: 18px;
+                background: #f6f3ec; border: 1px solid #e3ddd0; border-radius: 12px;
+                padding: 14px 18px; margin-bottom: 14px; }
+  footer .ctaqr { width: 92px; height: 92px; border-radius: 8px; }
+  footer .ctatxt { text-align: left; }
+  footer .ctabig { font-size: 16px; font-weight: 800; color: #143a32; }
+  footer .ctasub { font-size: 12.5px; color: #6a6a6a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ COVER ============ -->
+  <section class="cover">
+    <span class="dim">成事执行</span>
+    <h1>《谁能成为领导羊》</h1>
+    <p class="pos">从两只羊到百亿企业，读懂"谁在成事、事怎么成"。</p>
+    <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+  </section>
+
+  <!-- ============ 解决什么 ============ -->
+  <section>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">你带团队却带不动，做业务却做不长，看别人当领导轻松、自己一上场就乱。问题往往不是能力不够，而是没看清"领导怎么产生、权力怎么生效、企业怎么长短命"。这份笔记用真实的生意故事，把成事的逻辑讲透，让你少走十年弯路。</div>
+  </section>
+
+  <!-- ============ 心智模型 ============ -->
+  <section>
+    <h2>核心心智模型</h2>
+    <div class="models">
+      <div class="mcard">
+        <div class="mt">先动者成头羊</div>
+        <div class="md">在不确定环境里先迈出一步、敢尝试、会妥协的人，自然成为被跟随的领导。</div>
+        <div class="mu">别等头衔，先在新情况里给出动作和方案，别人会跟上来。</div>
+      </div>
+      <div class="mcard">
+        <div class="mt">把决定权交出去</div>
+        <div class="md">权力满足的是下属"我很行"的感觉，充分授权比监控更能激发主动。</div>
+        <div class="mu">想让人扛事，就让他自己拍板，并说"你来判断"。</div>
+      </div>
+      <div class="mcard">
+        <div class="mt">换将先给试车期</div>
+        <div class="md">新领导上任需要时间和信任，急功近利是换帅失败的主因。</div>
+        <div class="mu">接手新角色时，主动要一段试车期和阶段性目标。</div>
+      </div>
+      <div class="mcard">
+        <div class="mt">价值在交易里才算数</div>
+        <div class="md">企业值多少只有卖的时候才知道，未来赚钱能力才是真价值，账面数字会骗人。</div>
+        <div class="mu">别被市值、估值吓住，盯"它明天还能不能赚钱"。</div>
+      </div>
+      <div class="mcard">
+        <div class="mt">做事先于赚钱</div>
+        <div class="md">把事情做好放在赚钱之前的人，反而收获最长久的回报。</div>
+        <div class="mu">关键抉择时先问"这事怎么做对"，再看"能赚多少"。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 提纲 ============ -->
+  <section>
+    <h2>内容提纲</h2>
+    <div class="outline">
+      <div class="ochap">
+        <div class="ot">第一章 领导羊：领导是怎么产生的</div>
+        <ul>
+          <li>先行动、敢探索、能妥协适应的人，被本能跟随</li>
+          <li>领导者的自信，来自被跟随者的互动与回馈</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第二章 什么样的人能当 CEO</div>
+        <ul>
+          <li>沟通靠行动不靠嘴、诚信敢认错、持续自省学习</li>
+          <li>做"选择题"的高手、有操作力的快刀手、领导超人</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第三章 管理者的自恋</div>
+        <ul>
+          <li>自恋过强会抢下属风头、授权不足</li>
+          <li>把风头让给下属，他才主动把事扛起来</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第四章 给新 CEO 多一点时间</div>
+        <ul>
+          <li>换帅如换心，需要信任与"试车"过程</li>
+          <li>董事会顶住短期压力，是成败关键</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第五章 市值与价值</div>
+        <ul>
+          <li>市值随竞争、资金、交易量波动，不等于现金</li>
+          <li>企业价值=未来赚钱能力，只有交易时才知道</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第六章 企业为什么短命</div>
+        <ul>
+          <li>参与者的人性贪婪，共同"杀死"了企业</li>
+          <li>少数"忘我"、把事做好的企业成了百年老店</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第七章 成事的底层</div>
+        <ul>
+          <li>从领导到执行，把"人"放在制度前面</li>
+          <li>做事先于赚钱，长久回报反会自己来</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 精讲 ============ -->
+  <section>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="lect">
+      <div class="blk">
+        <h3>模块一 领导是被"做"出来的，不是被"封"出来的</h3>
+        <p>结论先行：两只羊关在一起，先行动、敢探索、会妥协适应的那只，自然成了被跟随的"头羊"；位置是做出来的，不是天生的。</p>
+        <p><span class="k">要点：</span>领导者的自信（书里用"血清素"比喻）来自被跟随者的顺从与互动——你被人捧着，才越来越从容。所以领导的底气，是团队给的，不是自己撑的。</p>
+      </div>
+      <div class="blk">
+        <h3>模块二 好 CEO 的六块底子</h3>
+        <p>结论先行：CEO 不是学校能批量培养的标准件，但成事的人都有几块共同的底子。</p>
+        <p><span class="k">六块底子：</span>沟通靠行动和倾听，不靠嘴皮；诚信，敢说"我不懂、我错了"；持续自省与学习；是做"选择题"的高手（在不确定里取舍）；是有操作力的快刀手（果断执行）；同时是定方向、带团队的"领导超人"。</p>
+      </div>
+      <div class="blk">
+        <h3>模块三 自恋管理：授权是给下属"我很行"的奖章</h3>
+        <p>结论先行：管理者不能单兵作战，任务靠下属的脑和手完成；而人心里都需要"我很强"的感觉。</p>
+        <p><span class="k">怎么做：</span>自恋过强会抢下属风头、不愿授权；反过来，把决定权交出去，下属觉得"我很行"，就会主动赴汤蹈火。权力一面刻着责任，另一面写着信任——给谁，谁就被激活。</p>
+      </div>
+      <div class="blk">
+        <h3>模块四 换帅如换心：给新领导试车的时间和信任</h3>
+        <p>结论先行：换 CEO 像换心脏，没有标准件，不试永远不知道合不合适；急功近利是失败主因。</p>
+        <p><span class="k">四体会：</span>先弄清哪些问题换人解决不了；给能力和诚信双信任；与新人一起学、共定战略；顶住投资者压力，多给时间。多数跳槽的明星经理人晚节不保，是因为公司病太重、时间太少。</p>
+      </div>
+      <div class="blk">
+        <h3>模块五 别被数字骗：市值不等于价值</h3>
+        <p>结论先行：公司值多少钱，只有卖的时候才知道；纸面上的市值会随竞争、资金、交易量剧烈波动，不能当现金用。</p>
+        <p><span class="k">真正价值：</span>企业的价值是它的"未来赚钱能力"。今天肯出价，是因为相信它明天赚得更多。所以看一家企业，盯"它明天还能不能赚钱"，而不是盯着股价或排行榜。</p>
+      </div>
+      <div class="blk">
+        <h3>模块六 把事做好，钱会自己来</h3>
+        <p>结论先行：大多数企业短命，根子在参与者的人性贪婪；少数长寿企业，共性是把"做好事情"放在"赚钱"前面。</p>
+        <p><span class="k">忘我者长寿：</span>在关键时刻舍得牺牲短期利益、善待员工、以诚待客、耐住长远——这些每一条都是钱。可一旦选了"钱"，企业就短命；选了"把事做好"，大把回报反会不期而遇。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 自测卷 ============ -->
+  <section>
+    <h2>自测卷 · 10 题当场出分</h2>
+    <div class="quiz" id="quiz">
+      <div class="q">
+        <div class="qt">1. 两只羊里，先成为"领导羊"的那只，主要因为？</div>
+        <label><input type="radio" name="q1"> A. 体型更大</label>
+        <label><input type="radio" name="q1" data-correct="1"> B. 先行动、敢探索、能适应</label>
+        <label><input type="radio" name="q1"> C. 年龄更大</label>
+        <label><input type="radio" name="q1"> D. 被喂得更多</label>
+        <div class="ans">答案：B。领导是在不确定里先迈出那一步、敢承担风险的人，别人自然跟随。</div>
+      </div>
+      <div class="q">
+        <div class="qt">2. 文中认为 CEO 最重要的沟通能力，关键是？</div>
+        <label><input type="radio" name="q2"> A. 口才好、会演讲</label>
+        <label><input type="radio" name="q2" data-correct="1"> B. 靠行动与倾听，而非长篇大论</label>
+        <label><input type="radio" name="q2"> C. 写漂亮报告</label>
+        <label><input type="radio" name="q2"> D. 提拔自己人</label>
+        <div class="ans">答案：B。有效沟通靠行动和先听懂对方，而不是表现欲强的独白。</div>
+      </div>
+      <div class="q">
+        <div class="qt">3. 管理者"自恋"过强，最容易导致？</div>
+        <label><input type="radio" name="q3"> A. 下属更努力</label>
+        <label><input type="radio" name="q3" data-correct="1"> B. 授权不足、下属不幸福</label>
+        <label><input type="radio" name="q3"> C. 更诚信</label>
+        <label><input type="radio" name="q3"> D. 利润更高</label>
+        <div class="ans">答案：B。自恋会抢下属风头、不愿放权，下属失去"我很行"的感觉就不主动。</div>
+      </div>
+      <div class="q">
+        <div class="qt">4. 充分授权能激发员工主动工作，核心原因是？</div>
+        <label><input type="radio" name="q4"> A. 给的钱更多</label>
+        <label><input type="radio" name="q4" data-correct="1"> B. 满足了其"我很行"的自恋感</label>
+        <label><input type="radio" name="q4"> C. 监管更松</label>
+        <label><input type="radio" name="q4"> D. 任务更简单</label>
+        <div class="ans">答案：B。把决定权交出去，等于给他"我很强"的奖章，他才愿意赴汤蹈火。</div>
+      </div>
+      <div class="q">
+        <div class="qt">5. 换 CEO 失败最常见的原因是？</div>
+        <label><input type="radio" name="q5"> A. 新 CEO 太笨</label>
+        <label><input type="radio" name="q5" data-correct="1"> B. 董事会顶不住压力、不给时间</label>
+        <label><input type="radio" name="q5"> C. 薪资太低</label>
+        <label><input type="radio" name="q5"> D. 办公室太小</label>
+        <div class="ans">答案：B。急功近利、不给试车期，是大多数换帅失败的根源。</div>
+      </div>
+      <div class="q">
+        <div class="qt">6. 公司的"市值"相当于？</div>
+        <label><input type="radio" name="q6"> A. 银行里的现金</label>
+        <label><input type="radio" name="q6" data-correct="1"> B. 理论上的市场价，会随交易波动</label>
+        <label><input type="radio" name="q6"> C. 企业的净资产</label>
+        <label><input type="radio" name="q6"> D. 当年的利润</label>
+        <div class="ans">答案：B。市值说有就有、说无就无，不能当现金用。</div>
+      </div>
+      <div class="q">
+        <div class="qt">7. 企业的真正价值由什么决定？</div>
+        <label><input type="radio" name="q7"> A. 当前利润</label>
+        <label><input type="radio" name="q7" data-correct="1"> B. 未来的赚钱能力</label>
+        <label><input type="radio" name="q7"> C. 员工人数</label>
+        <label><input type="radio" name="q7"> D. 厂房大小</label>
+        <div class="ans">答案：B。值多少钱，只看它明天还能不能赚、能赚多少。</div>
+      </div>
+      <div class="q">
+        <div class="qt">8. 文中认为大多数企业短命的根源是？</div>
+        <label><input type="radio" name="q8"> A. 技术落后</label>
+        <label><input type="radio" name="q8" data-correct="1"> B. 参与者的人性贪婪</label>
+        <label><input type="radio" name="q8"> C. 法律不严</label>
+        <label><input type="radio" name="q8"> D. 税收太高</label>
+        <div class="ans">答案：B。股东、管理层、员工、消费者……每个人把个人利益放企业之前，企业就失血而亡。</div>
+      </div>
+      <div class="q">
+        <div class="qt">9. 百年老店的共同点是？</div>
+        <label><input type="radio" name="q9"> A. 永远只想赚钱</label>
+        <label><input type="radio" name="q9" data-correct="1"> B. 把做好事情放第一、相对忘我</label>
+        <label><input type="radio" name="q9"> C. 形成垄断</label>
+        <label><input type="radio" name="q9"> D. 从不创新</label>
+        <div class="ans">答案：B。忘我、把事做好的人，反而收获最长久的回报。</div>
+      </div>
+      <div class="q">
+        <div class="qt">10. 判断：CEO 是商学院能批量培养出来的标准专业人才。</div>
+        <label><input type="radio" name="q10"> A. 对</label>
+        <label><input type="radio" name="q10" data-correct="1"> B. 错</label>
+        <div class="ans">答案：B。CEO 的素质由先天基因与后天实践相互作用形成，商学院教不出"标准件"。</div>
+      </div>
+    </div>
+    <div class="quizbar">
+      <button onclick="grade()">交卷看分</button>
+      <span class="score" id="score"></span>
+    </div>
+  </section>
+
+  <!-- ============ 打卡 ============ -->
+  <section>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check">
+      <li><span class="day">第1天</span> 团队遇新情况，刻意先迈一步、先给方案，练习"先动者"姿态。</li>
+      <li><span class="day">第2天</span> 把一件你本能想亲自抓的事交出去，让下属定，并说"你来判断"。</li>
+      <li><span class="day">第3天</span> 开会时少讲多听，用一个决定或一次表扬代替长篇说服。</li>
+      <li><span class="day">第4天</span> 给一位伙伴一句具体的高期望——"这件事交给你我放心"。</li>
+      <li><span class="day">第5天</span> 若你刚接手新角色，主动向对方要一段"试车期"，并列出阶段性目标。</li>
+      <li><span class="day">第6天</span> 做一次"选择题"练习：面对不确定，写下两个方案和各自代价，逼自己决策。</li>
+      <li><span class="day">第7天</span> 把"做事先于赚钱"写进待办顶部，先问"这事怎么做对"，再看"能赚多少"。</li>
+    </ul>
+  </section>
+
+  <!-- ============ 结语 ============ -->
+  <section>
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead">
+      <p><b>1.</b> 领导不是头衔，是你在不确定里先迈出的那一步和敢承担的那个风险——别人自然跟上来。</p>
+      <p><b>2.</b> 管人最核心是"给自恋"：把决定权交出去，让下属觉得"我很行"，他才会主动把事扛起来。</p>
+      <p><b>3.</b> 成事要把"把事做好"放在"把钱赚到"前面，忘我的人反而走得最远。</p>
+    </div>
+    <p>建议按"领导→CEO→授权→换帅→价值→长寿"顺序读；自测低于 7 分，重读"自恋管理"与"换帅如换心"；7 天打卡每天挑 1 条落地，尤其第 2 条（授权）和第 7 条（做事先于赚钱）。</p>
+  </section>
+
+  <footer>
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  </footer>
+
+</div>
+
+<script>
+function grade(){
+  var qs = document.querySelectorAll('#quiz .q');
+  var total = qs.length, right = 0;
+  qs.forEach(function(q){
+    var picked = q.querySelector('input:checked');
+    var correct = q.querySelector('input[data-correct="1"]');
+    var ans = q.querySelector('.ans');
+    if(ans) ans.style.display = 'block';
+    if(picked && picked === correct){ right++; }
+  });
+  var s = document.getElementById('score');
+  if(s) s.textContent = '得分 ' + right + ' / ' + total;
+}
+</script>
+</body>
+</html>
