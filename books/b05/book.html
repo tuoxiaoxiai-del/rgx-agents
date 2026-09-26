@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>《一本书读懂大数据：每个人都看得懂的大数据入门书》</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1c1c1c; font-size: 14px; line-height: 1.78;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .wrap { width: 100%; }
+  h1, h2, h3 { font-weight: 800; letter-spacing: .5px; }
+  h2 { font-size: 19px; color: #143a32; margin: 26px 0 12px;
+       padding-left: 11px; border-left: 5px solid #c08438; }
+  h3 { font-size: 15.5px; color: #143a32; margin: 16px 0 6px; }
+
+  .cover { border: 1px solid #e3ddd0; border-radius: 14px; padding: 22px 24px;
+           background: linear-gradient(135deg,#143a32 0%,#1d5247 100%); color: #fff;
+           margin-bottom: 22px; }
+  .cover .dim { display: inline-block; font-size: 12px; background: #c08438; color: #1c1c1c;
+           padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 1px; }
+  .cover h1 { font-size: 25px; margin: 12px 0 8px; line-height: 1.35; }
+  .cover .pos { font-size: 14.5px; opacity: .95; margin: 0; }
+  .cover .sign { margin-top: 14px; font-size: 12.5px; opacity: .85; }
+
+  .lead { background: #f6f3ec; border-radius: 10px; padding: 14px 16px; margin: 4px 0 6px; }
+  .lead b { color: #143a32; }
+
+  .models { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mcard { border: 1px solid #e3ddd0; border-radius: 10px; padding: 12px 14px;
+           background: #fcfbf7; break-inside: avoid; }
+  .mcard .mt { font-weight: 800; color: #143a32; font-size: 14.5px; margin-bottom: 4px; }
+  .mcard .md { font-size: 13px; color: #3a3a3a; margin: 0; }
+  .mcard .mu { font-size: 12.5px; color: #7a6a4a; margin: 6px 0 0; }
+
+  .outline { padding-left: 0; }
+  .ochap { break-inside: avoid; margin: 10px 0; }
+  .ochap .ot { font-weight: 800; color: #143a32; font-size: 14.5px; }
+  .ochap ul { margin: 4px 0 0; padding-left: 20px; }
+  .ochap li { margin: 2px 0; }
+
+  .lect .blk { break-inside: avoid; margin: 10px 0; }
+  .lect p { margin: 5px 0; }
+  .lect .k { color: #c08438; font-weight: 700; }
+
+  .quiz .q { break-inside: avoid; border: 1px solid #e3ddd0; border-radius: 10px;
+             padding: 12px 14px; margin: 10px 0; background: #fcfbf7; }
+  .quiz .qt { font-weight: 700; margin-bottom: 7px; }
+  .quiz label { display: block; padding: 4px 8px; border-radius: 6px; margin: 3px 0;
+                cursor: pointer; }
+  .quiz label:hover { background: #f0ece1; }
+  .quiz input { margin-right: 8px; }
+  .quiz .ans { font-size: 12.5px; color: #1d7a4d; margin-top: 6px; display: none; }
+  .quizbar { margin: 12px 0; }
+  .quizbar button { background: #143a32; color: #fff; border: 0; border-radius: 8px;
+                    padding: 9px 18px; font-size: 14px; cursor: pointer; font-weight: 700; }
+  .score { font-size: 16px; font-weight: 800; color: #143a32; margin-left: 12px; }
+
+  .check li { margin: 6px 0; break-inside: avoid; }
+  .check .day { font-weight: 800; color: #c08438; }
+
+  footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #e3ddd0;
+           font-size: 12.5px; color: #6a6a6a; text-align: center; }
+  footer .cta { display: flex; align-items: center; justify-content: center; gap: 18px;
+                background: #f6f3ec; border: 1px solid #e3ddd0; border-radius: 12px;
+                padding: 14px 18px; margin-bottom: 14px; }
+  footer .ctaqr { width: 92px; height: 92px; border-radius: 8px; }
+  footer .ctatxt { text-align: left; }
+  footer .ctabig { font-size: 16px; font-weight: 800; color: #143a32; }
+  footer .ctasub { font-size: 12.5px; color: #6a6a6a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="cover">
+    <span class="dim">认知底盘</span>
+    <h1>《一本书读懂大数据：每个人都看得懂的大数据入门书》</h1>
+    <p class="pos">看懂大数据，把它变成做决策的底气</p>
+    <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+  </section>
+
+  <section>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">总听说大数据重要，却觉得它离自己很远、看不懂也用不上。读完这本你会明白，大数据不是技术黑话，而是一种"用数据看世界"的思维方式，工作、生意、生活里都能直接用。</div>
+  </section>
+
+  <section>
+    <h2>核心心智模型</h2>
+    <div class="models">
+      <div class="mcard">
+        <div class="mt">4V 认知</div>
+        <p class="md">大数据=大量、多样、快速，再加最关键的"价值"。价值不藏在容量里，藏在分析里。</p>
+        <p class="mu">用法：别被"大"吓到，先看它能不能回答一个具体问题。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">用比大重要</div>
+        <p class="md">数据本身毫无价值，搁着不用的数据和地下室垃圾没区别；驾驭方式才决定价值。</p>
+        <p class="mu">用法：每收集数据前，先写清"要用它做什么决策"。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">关联生价值</div>
+        <p class="md">关联起来的数据远大于孤岛；把分散行为串成画像，价值才浮现。</p>
+        <p class="mu">用法：打通部门壁垒，把碎片拼成完整的用户图景。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">活性即价值</div>
+        <p class="md">更新越频繁的数据活性越高、信息越丰富；实时数据比沉睡档案值钱。</p>
+        <p class="mu">用法：优先建设和依赖高频、实时的数据源。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">思维致胜</div>
+        <p class="md">价值链上握数据的、有技能的、有思维的，三者中思维最难被替代也最持久。</p>
+        <p class="mu">用法：训练"从数据看问题"的脑子，而不是只攒工具。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>内容提纲</h2>
+    <div class="outline">
+      <div class="ochap"><div class="ot">第一章 身处数据时代，揭开大数据的面纱</div><ul>
+        <li>大数据是什么：大量、多样、快速，价值是第四维</li>
+        <li>"大"和"数据"都不重要，重要的是怎么驾驭</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">第二章 大数据为何如此重要</div><ul>
+        <li>非结构化数据占八成以上，价值待挖掘</li>
+        <li>活性、结构化/非结构化、价值链三类玩家</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">第三章 需求挖掘与电商实践</div><ul>
+        <li>从浏览行为识别需求，做精准触达</li>
+        <li>把用户碎片行为关联成真实偏好</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">第四章 数据进入企业管理</div><ul>
+        <li>用数据构建管理模式，不介入就被淘汰</li>
+        <li>客观数据最具发言权</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">第五章 生活无处不数据</div><ul>
+        <li>数据可预测先兆、舆情与下一步行动</li>
+        <li>数据也会骗人，要从动作推导真伪</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">第六章 颠覆与重塑思维</div><ul>
+        <li>综合人才、智能化与柔性化</li>
+        <li>生活、工作、思维被重构</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">第七章 得数据者得天下：机遇与挑战</div><ul>
+        <li>人机结合是趋势</li>
+        <li>数据化带来前所未有且的机遇与挑战</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="lect">
+      <div class="blk">
+        <h3>一、大数据的 4V，但价值在"第四 V"</h3>
+        <p>常说的大数据有四个特征：大量化、多样化、快速化，三者之外还有最关键的<span class="k">价值（Value）</span>。</p>
+        <p>容量大、速度快、类型多，都不代表价值高——价值藏在怎么用里面。</p>
+        <p>我的经验：判断一项大数据，先问它能不能回答一个具体问题，而不是先看它有多大。</p>
+      </div>
+      <div class="blk">
+        <h3>二、用比"大"重要</h3>
+        <p>数据本身没有任何价值，搁着不用的数据，和地下室里的垃圾没区别。</p>
+        <p>"大"和"数据"都不关键，关键是企业、个人怎么驾驭它、怎么用它改进决策。</p>
+        <p>用法：每收集一批数据，先写清楚"我要用它做什么决定"，再动手。</p>
+      </div>
+      <div class="blk">
+        <h3>三、关联起来的数据才值钱</h3>
+        <p>孤立的数据价值有限；把分散的行为关联成整体，才画出真实的用户画像。</p>
+        <p>现实里"数据孤岛""数据割据"很常见——各部门壁垒让本可挖掘的价值一直沉睡。</p>
+        <p>打通孤岛，是大数据发挥威力的前提。碎片一旦连起来，商机就出来了。</p>
+      </div>
+      <div class="blk">
+        <h3>四、活性即价值：越新越值钱</h3>
+        <p>数据的<span class="k">活性</span>就是更新频率，更新越频繁，包含的信息越丰富。</p>
+        <p>传统报表以天计，大数据应用要求在 1 秒以内响应，差几秒体验就天差地别。</p>
+        <p>用法：优先建设和依赖高频、实时的数据源，沉睡的档案该清就清。</p>
+      </div>
+      <div class="blk">
+        <h3>五、结构化与非结构化</h3>
+        <p>结构化数据像工资表，规整好处理；非结构化像文本、图片、视频，占了总量八成以上。</p>
+        <p>半结构化、多结构化最常见，要先用一套规则把它整理清楚，再拿去分析。</p>
+        <p>大数据处理的难点，大半在"把乱的数据理清楚"，而不是算力本身。</p>
+      </div>
+      <div class="blk">
+        <h3>六、思维比数据和技能更持久</h3>
+        <p>价值链上有三类玩家：握数据的、有技能的、有思维的。前两类都能被替代。</p>
+        <p>只有"用数据看世界"的思维最难学，也最持久——理论不会因大数据而消亡，反而更被需要。</p>
+        <p>所以与其囤数据、追工具，不如先把脑子训练成"数据化思考"的脑子。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>自测卷 · 10 题当场出分</h2>
+    <div class="quiz" id="quiz">
+      <div class="q">
+        <div class="qt">1. 大数据的 4V 中，最关键的"第四 V"是？</div>
+        <label><input type="radio" name="q1">A. 体积（Volume）</label>
+        <label><input type="radio" name="q1" data-correct="1">B. 价值（Value）</label>
+        <label><input type="radio" name="q1">C. 速度（Velocity）</label>
+        <label><input type="radio" name="q1">D. 多样（Variety）</label>
+        <div class="ans">答案：B。价值藏在分析和使用方式里。</div>
+      </div>
+      <div class="q">
+        <div class="qt">2. 关于"大数据本身的价值"，正确的是？</div>
+        <label><input type="radio" name="q2">A. 越大越值钱</label>
+        <label><input type="radio" name="q2" data-correct="1">B. 本身无价值，看怎么用</label>
+        <label><input type="radio" name="q2">C. 存着就值钱</label>
+        <label><input type="radio" name="q2">D. 完全无意义</label>
+        <div class="ans">答案：B。搁置不用的数据和垃圾没区别。</div>
+      </div>
+      <div class="q">
+        <div class="qt">3. 关联数据与孤立数据相比？</div>
+        <label><input type="radio" name="q3">A. 价值一样</label>
+        <label><input type="radio" name="q3" data-correct="1">B. 关联价值远大于孤立</label>
+        <label><input type="radio" name="q3">C. 孤立更值钱</label>
+        <label><input type="radio" name="q3">D. 无法比较</label>
+        <div class="ans">答案：B。打通孤岛才能挖出金。</div>
+      </div>
+      <div class="q">
+        <div class="qt">4. "数据孤岛"指的是？</div>
+        <label><input type="radio" name="q4">A. 一座岛屿</label>
+        <label><input type="radio" name="q4" data-correct="1">B. 部门间数据壁垒、互不联通</label>
+        <label><input type="radio" name="q4">C. 某种数据库</label>
+        <label><input type="radio" name="q4">D. 硬件设备</label>
+        <div class="ans">答案：B。壁垒让数据价值沉睡。</div>
+      </div>
+      <div class="q">
+        <div class="qt">5. 数据的"活性"主要指？</div>
+        <label><input type="radio" name="q5">A. 颜色</label>
+        <label><input type="radio" name="q5" data-correct="1">B. 更新频率</label>
+        <label><input type="radio" name="q5">C. 体积大小</label>
+        <label><input type="radio" name="q5">D. 数据来源</label>
+        <div class="ans">答案：B。更新越频繁，活性越高。</div>
+      </div>
+      <div class="q">
+        <div class="qt">6. 大数据应用对响应速度通常的要求是？</div>
+        <label><input type="radio" name="q6">A. 几天</label>
+        <label><input type="radio" name="q6" data-correct="1">B. 1 秒以内</label>
+        <label><input type="radio" name="q6">C. 一个月</label>
+        <label><input type="radio" name="q6">D. 没有要求</label>
+        <div class="ans">答案：B。慢了体验就垮。</div>
+      </div>
+      <div class="q">
+        <div class="qt">7. 非结构化数据（文本、视频等）在总量中占比大约？</div>
+        <label><input type="radio" name="q7">A. 极少</label>
+        <label><input type="radio" name="q7" data-correct="1">B. 八成以上</label>
+        <label><input type="radio" name="q7">C. 为零</label>
+        <label><input type="radio" name="q7">D. 正好一半</label>
+        <div class="ans">答案：B。它才是大数据处理的主战场。</div>
+      </div>
+      <div class="q">
+        <div class="qt">8. 价值链三类公司中，最持久的是？</div>
+        <label><input type="radio" name="q8">A. 数据型</label>
+        <label><input type="radio" name="q8">B. 技能型</label>
+        <label><input type="radio" name="q8" data-correct="1">C. 思维型</label>
+        <label><input type="radio" name="q8">D. 三者都一样</label>
+        <div class="ans">答案：C。数据技能皆可替，思维最难学。</div>
+      </div>
+      <div class="q">
+        <div class="qt">9. 关于"理论终结"的说法，本书的态度是？</div>
+        <label><input type="radio" name="q9">A. 完全同意</label>
+        <label><input type="radio" name="q9" data-correct="1">B. 大数据仍需要理论和方法论</label>
+        <label><input type="radio" name="q9">C. 理论完全没用</label>
+        <label><input type="radio" name="q9">D. 不用分析</label>
+        <div class="ans">答案：B。大数据恰恰更依赖方法论。</div>
+      </div>
+      <div class="q">
+        <div class="qt">10. 企业用大数据，首要该想的是？</div>
+        <label><input type="radio" name="q10">A. 买最多服务器</label>
+        <label><input type="radio" name="q10" data-correct="1">B. 数据用来做什么决策</label>
+        <label><input type="radio" name="q10">C. 越大越好</label>
+        <label><input type="radio" name="q10">D. 雇人就行</label>
+        <div class="ans">答案：B。先想用途，再谈规模。</div>
+      </div>
+    </div>
+    <div class="quizbar">
+      <button onclick="grade()">交卷看分</button>
+      <span class="score" id="score"></span>
+    </div>
+  </section>
+
+  <section>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check">
+      <li><span class="day">第1天</span> 选一个你常做却没想过的决定，写下"如果有权威数据，我会看哪几个指标"。</li>
+      <li><span class="day">第2天</span> 把今天产生的个人数据（步数、消费、浏览）关联起来，看能得出什么结论。</li>
+      <li><span class="day">第3天</span> 工作中找一个"数据孤岛"，写清打通它能多看到什么。</li>
+      <li><span class="day">第4天</span> 找一个你依赖的"旧报表"，问自己"换成实时数据会怎样"。</li>
+      <li><span class="day">第5天</span> 读一篇新闻，圈出其中"拿数据说话"和"拿情绪说话"的区别。</li>
+      <li><span class="day">第6天</span> 用一个生活决策（买什么、去哪玩）先列数据再决定。</li>
+      <li><span class="day">第7天</span> 向同事/朋友讲清"为什么关联起来的数据更值钱"，用今天的例子。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead">
+      <p><b>1.</b> 大数据不是"大"和"数据"，而是"怎么用"——价值藏在分析与业务改进里。</p>
+      <p><b>2.</b> 关联起来的数据才值钱，活性越高的数据越新越有用；打通孤岛是第一步。</p>
+      <p><b>3.</b> 数据和技能都会被替代，只有"用数据看世界"的思维，才最持久。</p>
+    </div>
+    <p>这份资料建议从今天起连续 7 天打卡，每天只做一个微小动作；自测卷低于 7 分，重点重读"用比大重要"与"关联生价值"两节，把 10 道题对应的模型再练一遍。</p>
+  </section>
+
+  <footer>
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  </footer>
+
+</div>
+
+<script>
+function grade(){
+  var qs = document.querySelectorAll('#quiz .q');
+  var total = qs.length, right = 0;
+  qs.forEach(function(q){
+    var picked = q.querySelector('input:checked');
+    var correct = q.querySelector('input[data-correct="1"]');
+    var ans = q.querySelector('.ans');
+    if(ans) ans.style.display = 'block';
+    if(picked && picked === correct){ right++; }
+  });
+  var s = document.getElementById('score');
+  if(s) s.textContent = '得分 ' + right + ' / ' + total;
+}
+</script>
+</body>
+</html>
