@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RGX智能体 - Think. Ground. Act.</title>
+  <title>RGX智能体 - Reasoning · Grounding · eXecution</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -63,7 +63,41 @@
       background-size: 200% 100%;
       animation: shimmer 1.5s infinite;
     }
-  </style>
+  
+.stars, .stars2, .stars3 {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
+  display: block;
+  background: transparent;
+}
+.stars {
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: twinkle 4s ease-in-out infinite;
+}
+.stars2 {
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 40px 70px, #eee, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 50px 160px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 90px 40px, #eee, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  animation: twinkle 6s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+</style>
   <script>
     tailwind.config = {
       theme: {
@@ -88,7 +122,7 @@
           <img src="assets/rgx-logo.png" alt="RGX" class="h-10 w-auto">
           <div class="flex flex-col">
             <span class="font-bold text-primary text-base leading-tight">RGX智能体</span>
-            <span class="text-xs text-accent tracking-wider">Think. Ground. Act.</span>
+            <span class="text-xs text-accent tracking-wider">Reasoning · Grounding · eXecution</span>
           </div>
         </div>
         <nav class="hidden md:flex space-x-8">
@@ -103,13 +137,16 @@
   </header>
 
   <!-- Hero -->
-  <section class="bg-gradient-to-b from-[#0a0e27] via-[#1a1f3a] to-[#0d1225] text-white py-20">
+  <section class="relative bg-[#0a0e1a] text-white py-20 overflow-hidden">
+      <div class="stars"></div>
+      <div class="stars2"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(10,14,26,0.5)] to-[#0a0e1a]"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h1 class="serif text-4xl md:text-5xl font-bold mb-6 leading-tight">
         我喜欢读书<br>
         <span class="text-accent">但我的时间有限</span>
       </h1>
-      <div class="text-accent text-sm tracking-widest mb-4">RGX · Think. Ground. Act. · 谋于思 · 立于知 · 成于行</div>
+      <div class="text-accent text-sm tracking-widest mb-4">RGX · Reasoning · Grounding · eXecution · Reasoning · Grounding · eXecution</div>
       <p class="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
         智能体给了人们一个可能——
       </p>
@@ -260,10 +297,10 @@
             <span class="text-gray-400 text-sm ml-2">®</span>
           </div>
           <p class="text-gray-400 text-sm mb-1">
-            Think. Ground. Act.
+            Reasoning · Grounding · eXecution
           </p>
           <p class="text-gray-400 text-sm mb-3">
-            谋于思 · 立于知 · 成于行
+            Reasoning · Grounding · eXecution
           </p>
           <p class="text-gray-500 text-xs">
             RGX人工智能研究院 · 张文昊<br>
@@ -296,7 +333,7 @@
         </div>
       </div>
       <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500">
-        © 2026 RGX人工智能研究院 · 张文昊 | Think. Ground. Act.
+        © 2026 RGX人工智能研究院 · 张文昊 | Reasoning · Grounding · eXecution
       </div>
     </div>
   </footer>
@@ -397,7 +434,7 @@
         const card = document.createElement('div');
         card.className = 'book-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100';
         card.innerHTML = `
-          <div class="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+          <div class="relative h-56 bg-gradient-to-br from-[#1a1f3a] to-[#0a0e1a] flex items-center justify-center overflow-hidden"><div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 20px 20px;"></div><div class="relative text-center p-4"><div class="text-5xl mb-3 filter drop-shadow-lg">${cat.icon}</div><div class="text-xs font-medium text-accent/80 uppercase tracking-widest">${book.dim}</div></div><div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-accent to-transparent opacity-50"></div>
             <div class="text-center p-4">
               <div class="text-4xl mb-2">${cat.icon}</div>
               <div class="text-xs font-medium text-muted uppercase tracking-wider">${book.dim}</div>
@@ -409,7 +446,7 @@
             </div>
           </div>
           <div class="p-4">
-            <h3 class="font-semibold text-primary line-clamp-2 mb-2">${book.title}</h3>
+            <div class="h-12 overflow-hidden"><h3 class="font-semibold text-primary line-clamp-2 mb-2 text-sm leading-tight">${book.title}</h3></div>
             <p class="text-xs text-muted mb-3">${cat.desc}</p>
             <div class="flex gap-2">
               <a href="books/${book.id}/app.html" target="_blank" 
