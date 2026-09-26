@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>《世界尽头的咖啡馆》</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1c1c1c; font-size: 14px; line-height: 1.78;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .wrap { width: 100%; }
+  h1, h2, h3 { font-weight: 800; letter-spacing: .5px; }
+  h2 { font-size: 19px; color: #143a32; margin: 26px 0 12px;
+       padding-left: 11px; border-left: 5px solid #c08438; }
+  h3 { font-size: 15.5px; color: #143a32; margin: 16px 0 6px; }
+
+  .cover { border: 1px solid #e3ddd0; border-radius: 14px; padding: 22px 24px;
+           background: linear-gradient(135deg,#143a32 0%,#1d5247 100%); color: #fff;
+           margin-bottom: 22px; }
+  .cover .dim { display: inline-block; font-size: 12px; background: #c08438; color: #1c1c1c;
+           padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 1px; }
+  .cover h1 { font-size: 25px; margin: 12px 0 8px; line-height: 1.35; }
+  .cover .pos { font-size: 14.5px; opacity: .95; margin: 0; }
+  .cover .sign { margin-top: 14px; font-size: 12.5px; opacity: .85; }
+
+  .lead { background: #f6f3ec; border-radius: 10px; padding: 14px 16px; margin: 4px 0 6px; }
+  .lead b { color: #143a32; }
+
+  .models { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mcard { border: 1px solid #e3ddd0; border-radius: 10px; padding: 12px 14px;
+           background: #fcfbf7; break-inside: avoid; }
+  .mcard .mt { font-weight: 800; color: #143a32; font-size: 14.5px; margin-bottom: 4px; }
+  .mcard .md { font-size: 13px; color: #3a3a3a; margin: 0; }
+  .mcard .mu { font-size: 12.5px; color: #7a6a4a; margin: 6px 0 0; }
+
+  .outline { padding-left: 0; }
+  .ochap { break-inside: avoid; margin: 10px 0; }
+  .ochap .ot { font-weight: 800; color: #143a32; font-size: 14.5px; }
+  .ochap ul { margin: 4px 0 0; padding-left: 20px; }
+  .ochap li { margin: 2px 0; }
+
+  .lect .blk { break-inside: avoid; margin: 10px 0; }
+  .lect p { margin: 5px 0; }
+  .lect .k { color: #c08438; font-weight: 700; }
+
+  .quiz .q { break-inside: avoid; border: 1px solid #e3ddd0; border-radius: 10px;
+             padding: 12px 14px; margin: 10px 0; background: #fcfbf7; }
+  .quiz .qt { font-weight: 700; margin-bottom: 7px; }
+  .quiz label { display: block; padding: 4px 8px; border-radius: 6px; margin: 3px 0;
+                cursor: pointer; }
+  .quiz label:hover { background: #f0ece1; }
+  .quiz input { margin-right: 8px; }
+  .quiz .ans { font-size: 12.5px; color: #1d7a4d; margin-top: 6px; display: none; }
+  .quizbar { margin: 12px 0; }
+  .quizbar button { background: #143a32; color: #fff; border: 0; border-radius: 8px;
+                    padding: 9px 18px; font-size: 14px; cursor: pointer; font-weight: 700; }
+  .score { font-size: 16px; font-weight: 800; color: #143a32; margin-left: 12px; }
+
+  .check li { margin: 6px 0; break-inside: avoid; }
+  .check .day { font-weight: 800; color: #c08438; }
+
+  footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #e3ddd0;
+           font-size: 12.5px; color: #6a6a6a; text-align: center; }
+  footer .cta { display: flex; align-items: center; justify-content: center; gap: 18px;
+                background: #f6f3ec; border: 1px solid #e3ddd0; border-radius: 12px;
+                padding: 14px 18px; margin-bottom: 14px; }
+  footer .ctaqr { width: 92px; height: 92px; border-radius: 8px; }
+  footer .ctatxt { text-align: left; }
+  footer .ctabig { font-size: 16px; font-weight: 800; color: #143a32; }
+  footer .ctasub { font-size: 12.5px; color: #6a6a6a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="cover">
+    <span class="dim">心理内驱</span>
+    <h1>《世界尽头的咖啡馆》</h1>
+    <p class="pos">想清自己为何存在，把时间花在真正想做的事</p>
+    <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+  </section>
+
+  <section>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">很多人每天忙忙碌碌，却说不清自己到底为什么而活，只能把满足寄托在物质和消费，或"等退休再做"的幻想上。读完这份笔记，你会用一个简单的问题重新校准人生方向，把有限精力从消耗你的事上收回来，活得更像自己。</div>
+  </section>
+
+  <section>
+    <h2>核心心智模型</h2>
+    <div class="models">
+      <div class="mcard">
+        <div class="mt">存在意义（PFE）</div>
+        <p class="md">一个人弄清"我为什么存在"后，就有了指引所有选择的指南针，有权决定做任何与之相关的事。</p>
+        <p class="mu">用法：先认真回答"我为什么来这里"，再让每天的事都围绕它展开。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">正向浪与反向浪</div>
+        <p class="md">帮你实现存在意义的人、事、活动是正向浪；想消耗你时间与精力的，是反向浪。</p>
+        <p class="mu">用法：像绿海龟一样，不在反向浪上白白划水，把精力留给正向浪。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">渔夫悖论</div>
+        <p class="md">你不必等"退休"才过想活的日子——今天就可以做想做的事，每一天才不是准备期。</p>
+        <p class="mu">用法：把"将来再做"的借口拆掉，从每天留一小时开始。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">消费主义陷阱</div>
+        <p class="md">广告让人误以为拥有某物人生才圆满，于是陷入赚钱—消费—更不满足的循环。</p>
+        <p class="mu">用法：清醒区分"我真正想要的"和"别人塞给我的"，自己定义圆满。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">高尔夫球法则</div>
+        <p class="md">除了你自己，没人规定你必须在哪个位置击球；卡死的事，球可以捡起来换个地方打。</p>
+        <p class="mu">用法：遇到困住你的事，主动"把球移走"，别被外界力量牵着走。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>内容提纲</h2>
+    <div class="outline">
+      <div class="ochap"><div class="ot">一、三个问题：你为什么来这里 / 你害怕死亡吗 / 你满足吗</div><ul>
+        <li>菜单背面的三个问题，其实是在问一个人为什么存在</li>
+        <li>把"你"换成"我"，问题就从一个路牌变成了改变人生的门</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">二、存在意义（PFE）：找到它，世界就变了</div><ul>
+        <li>弄清 PFE 后，你对自己的人生有了完整的、决定性的话语权</li>
+        <li>清楚 PFE 并全力以赴的人，运气仿佛格外好</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">三、绿海龟的课：别在反向浪上耗尽体力</div><ul>
+        <li>不与海浪相争，只在顺势时加速，反向浪上只求浮在原地</li>
+        <li>你花在反向浪上的精力越多，留给正向浪的就越少</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">四、渔夫与商人：不必等退休</div><ul>
+        <li>商人规划"先赚钱再退休享福"，渔夫当下就过着满足的生活</li>
+        <li>每一天都是做想做的事的机会，无需等到将来</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">五、广告与满足感：别把人生寄托在物质上</div><ul>
+        <li>营销不断暗示"拥有某物才圆满"，把人锁进赚钱买东西的循环</li>
+        <li>某样东西是否让生活圆满，由你自己说了算</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">六、死亡与高尔夫球：掌握自己的命运</div><ul>
+        <li>清楚 PFE 并每天践行的人，不害怕失去做想做事的机会</li>
+        <li>主动把人生中的"高尔夫球"移走，积极选择自己的路</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="lect">
+      <div class="blk">
+        <h3>1. 一个咖啡馆菜单上的三个问题，问的是"你为何存在"</h3>
+        <p><span class="k">结论：</span>"你为什么来这里""你害怕死亡吗""你满足吗"——这三个看似随意的问题，真正在问的是一个人为什么存在。把"你"换成"我"去认真回答，你的世界就开始改变，因为这扇门一旦打开就很难关上。</p>
+        <p>多数人活了一辈子都没认真问过自己。你不必等某个深夜迷路误入咖啡馆才去想，今天就可以在纸上写下第一个问题的答案。</p>
+      </div>
+      <div class="blk">
+        <h3>2. 弄清存在意义后，你才真正有了选择权</h3>
+        <p><span class="k">结论：</span>一个人弄清自己为什么存在，就等于定义了自己的"存在意义"。此后他可以做十件、百件与之相关的事，选择权和话语权完全在自己手里。</p>
+        <p>反过来，那些对生活满意度低的人，做的很多事和自己的存在意义无关。所以别急着问"怎么做"，先问"为什么"——方向定了，路径自然浮现。</p>
+      </div>
+      <div class="blk">
+        <h3>3. 绿海龟教会的事：别在反向浪上白费力气</h3>
+        <p><span class="k">结论：</span>海龟从不与海浪相争：逆浪时只求浮在原地，顺浪时才加速。人也是一样——想消耗你时间精力的人、活动、信息，是涌向岸边的反向浪；成就你的，是正向浪。</p>
+        <p>你在反向浪上浪费得越多，留给正向浪的就越少。作者算过一笔账：光是每天看二十分钟并不感兴趣的邮件，从大学毕业算起就能耗掉人生整整一年。把注意力收回来，是性价比最高的事。</p>
+      </div>
+      <div class="blk">
+        <h3>4. 渔夫的启示：你不必等到退休</h3>
+        <p><span class="k">结论：</span>商人劝渔夫"先拼命赚钱，退休再享福"，渔夫反问"我退休不就是想过现在这样的日子吗"。很多人把人生切成"准备期"和"享受期"，却忘了每一天都该是做想做的事的机会。</p>
+        <p>我建议你别把满足推迟到某个虚构的终点。从今天起，每天先留一小时给真正想做的事，比等退休实在得多。</p>
+      </div>
+      <div class="blk">
+        <h3>5. 广告不会让你满足，只会让你更忙</h3>
+        <p><span class="k">结论：</span>营销最隐晦的信息是："没有某样东西，你的人生就是不圆满的。"于是人为了买更多东西去赚更多钱，做着没满足感的工作，再用购物补偿空虚——一个停不下来的循环。</p>
+        <p>破局点是：某样东西是否让生活更圆满，由你自己说了算，和别人告诉你圆不圆满无关。看穿了，你就从循环里跳了出来。</p>
+      </div>
+      <div class="blk">
+        <h3>6. 把人生的高尔夫球捡起来，换个位置打</h3>
+        <p><span class="k">结论：</span>有人总梦见难打的球位，越练习越焦虑，直到某天发现——除了自己，没人在意他在哪击球，球完全可以捡起来放到别处。这说的就是：别让外界力量替你决定人生。</p>
+        <p>清楚自己存在意义的人不害怕死亡，因为他们每一天都在做想做的事，没什么可遗憾的。积极选择自己的路，不然就只能被动接受安排。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>自测卷 · 10 题当场出分</h2>
+    <div class="quiz" id="quiz">
+      <div class="q">
+        <div class="qt">1. 书中菜单背面的三个问题，真正的意图是？</div>
+        <label><input type="radio" name="q1"> A. 帮咖啡馆做市场调研</label>
+        <label><input type="radio" name="q1" data-correct="1"> B. 引导人思考"自己为什么存在"</label>
+        <label><input type="radio" name="q1"> C. 测试顾客的逻辑能力</label>
+        <label><input type="radio" name="q1"> D. 随便写写增加趣味</label>
+        <div class="ans">答案：B。三个问题（你为什么来这里 / 害怕死亡吗 / 满足吗）真正在问一个人为什么存在，把"你"换成"我"去回答，人生方向就此改变。</div>
+      </div>
+      <div class="q">
+        <div class="qt">2. 关于"存在意义（PFE）"，正确的是？</div>
+        <label><input type="radio" name="q2"> A. 只有少数天才才配有存在意义</label>
+        <label><input type="radio" name="q2" data-correct="1"> B. 弄清 PFE 后，人有权决定做任何与之相关的事</label>
+        <label><input type="radio" name="q2"> C. 存在意义由社会标准决定</label>
+        <label><input type="radio" name="q2"> D. 存在意义必须和赚钱挂钩</label>
+        <div class="ans">答案：B。弄清自己为什么存在后，选择权和话语权完全在自己手里，可以做任何与之相关的事。</div>
+      </div>
+      <div class="q">
+        <div class="qt">3. "绿海龟"这个故事想说明什么？</div>
+        <label><input type="radio" name="q3"> A. 海龟游泳比人快是天生的</label>
+        <label><input type="radio" name="q3" data-correct="1"> B. 别在反向浪（消耗你的事）上空耗精力，把力气留给正向浪</label>
+        <label><input type="radio" name="q3"> C. 人应该少运动多休息</label>
+        <label><input type="radio" name="q3"> D. 海洋生物很神秘</label>
+        <div class="ans">答案：B。海龟顺浪加速、逆浪只求浮住，人也应把时间精力留给成就自己的"正向浪"，而非被反向浪消耗。</div>
+      </div>
+      <div class="q">
+        <div class="qt">4. 书中"渔夫与商人"的对比，核心启示是？</div>
+        <label><input type="radio" name="q4"> A. 做生意比打鱼赚钱</label>
+        <label><input type="radio" name="q4" data-correct="1"> B. 不必等退休，今天就可以过想活的日子</label>
+        <label><input type="radio" name="q4"> C. 渔夫比商人聪明</label>
+        <label><input type="radio" name="q4"> D. 退休是必须的</label>
+        <div class="ans">答案：B。把人生切成"先赚钱后享福"是误区，每一天都是做想做的事的机会，无需等到将来。</div>
+      </div>
+      <div class="q">
+        <div class="qt">5. 消费主义循环的本质是？</div>
+        <label><input type="radio" name="q5"> A. 东西越买越便宜</label>
+        <label><input type="radio" name="q5" data-correct="1"> B. 用"拥有某物才圆满"的暗示，把人锁进赚钱—消费—更不满足的循环</label>
+        <label><input type="radio" name="q5"> C. 广告都是骗人的</label>
+        <label><input type="radio" name="q5"> D. 人天生爱购物</label>
+        <div class="ans">答案：B。营销暗示"没有某物人生就不圆满"，人为了买更多去赚更多，做无满足感的工作再用购物补偿，循环不止。</div>
+      </div>
+      <div class="q">
+        <div class="qt">6. 怎样才算真正跳出消费主义循环？</div>
+        <label><input type="radio" name="q6"> A. 戒掉所有购物</label>
+        <label><input type="radio" name="q6" data-correct="1"> B. 认清"某物是否让生活圆满，由自己说了算"</label>
+        <label><input type="radio" name="q6"> C. 赚到足够多的钱</label>
+        <label><input type="radio" name="q6"> D. 搬到没商场的地方</label>
+        <div class="ans">答案：B。圆满与否由你自己定义，而非别人告知，看穿这点就能从循环里跳出来。</div>
+      </div>
+      <div class="q">
+        <div class="qt">7. 关于死亡，书中给出的关键看法是？</div>
+        <label><input type="radio" name="q7"> A. 人人都该整天怕死</label>
+        <label><input type="radio" name="q7" data-correct="1"> B. 弄清 PFE 并每天践行的人，不害怕失去做想做事的机会</label>
+        <label><input type="radio" name="q7"> C. 死亡和存在意义无关</label>
+        <label><input type="radio" name="q7"> D. 只有长寿才有意义</label>
+        <div class="ans">答案：B。当一个人已做成或每天都在做想做的事，就没有理由害怕失去做这些事的机会。</div>
+      </div>
+      <div class="q">
+        <div class="qt">8. "高尔夫球法则"说的是？</div>
+        <label><input type="radio" name="q8"> A. 打高尔夫能解压</label>
+        <label><input type="radio" name="q8" data-correct="1"> B. 除了自己，没人规定你必须在哪击球，卡死的事可以主动"移走"</label>
+        <label><input type="radio" name="q8"> C. 运动有益健康</label>
+        <label><input type="radio" name="q8"> D. 人生要按规则来</label>
+        <div class="ans">答案：B。没人真正在意你在哪击球，困住你的"球"可以捡起来换个位置，主动选择自己的路。</div>
+      </div>
+      <div class="q">
+        <div class="qt">9. 清楚自己存在意义并全力以赴的人，往往给人什么印象？</div>
+        <label><input type="radio" name="q9"> A. 冷漠孤僻</label>
+        <label><input type="radio" name="q9" data-correct="1"> B. 自信、快乐，且"运气"似乎格外好</label>
+        <label><input type="radio" name="q9"> C. 比别人更焦虑</label>
+        <label><input type="radio" name="q9"> D. 没什么区别</label>
+        <div class="ans">答案：B。他们充满热情、胸有成竹，且因走在正确道路上，意外助力常自然出现，显得"运气好"。</div>
+      </div>
+      <div class="q">
+        <div class="qt">10. 这本书最实用的第一步行动建议是？</div>
+        <label><input type="radio" name="q10"> A. 立刻辞职去旅行</label>
+        <label><input type="radio" name="q10" data-correct="1"> B. 认真回答"我为什么来这里"，并每天留时间做想做的事</label>
+        <label><input type="radio" name="q10"> C. 先赚够一百万</label>
+        <label><input type="radio" name="q10"> D. 等退休再想</label>
+        <div class="ans">答案：B。从回答第一个问题开始，并把想做的事排进日常，而非推到虚构的将来。</div>
+      </div>
+    </div>
+    <div class="quizbar">
+      <button onclick="grade()">交卷看分</button>
+      <span class="score" id="score"></span>
+    </div>
+  </section>
+
+  <section>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check">
+      <li><span class="day">第 1 天</span> 在纸上认真写一遍"我为什么来这里"，不写给别人，写给自己。</li>
+      <li><span class="day">第 2 天</span> 列出今天消耗你最多时间的三件事，标出哪件是"反向浪"。</li>
+      <li><span class="day">第 3 天</span> 像绿海龟一样，在至少一件反向浪上"只浮住不划水"，省下精力。</li>
+      <li><span class="day">第 4 天</span> 每天留一小时做真正喜欢的事，不为任何功利目的。</li>
+      <li><span class="day">第 5 天</span> 看到一条广告，停下来问："这是我的需要，还是它塞给我的？"</li>
+      <li><span class="day">第 6 天</span> 找一件卡住你的事，想象"把球捡起来换个位置打"可以怎么做。</li>
+      <li><span class="day">第 7 天</span> 重读第一天的答案，写下这一周有没有更接近它一点点。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead">
+      <p><b>1.</b> 弄清"我为什么存在"，你就有了指引所有选择的指南针，不必再随波逐流。</p>
+      <p><b>2.</b> 把时间精力从消耗你的"反向浪"收回，留给真正成就你的"正向浪"，每一天都算数。</p>
+      <p><b>3.</b> 你不必等退休，也不必被外界安排——主动把人生的高尔夫球移走，活成自己。</p>
+    </div>
+    <p>这份资料建议从今天就开始用：先翻到自测卷自测，低于 7 分就重读"精讲"第 1、2、3 节；7 天打卡从你读到这一页的第二天起连续做。把"我为什么来这里"贴在常看的地方，让它真正成为你做选择的尺子。</p>
+  </section>
+
+    <!-- ============ 复盘卡（补尾页） ============ -->
+  <section class="recap">
+    <h2>带走《世界尽头的咖啡馆》· 一张复盘卡</h2>
+    <div class="lead">
+      <p><b>① 它归在「心理内驱」这条线上</b>——想清自己为何存在，把时间花在真正想做的事</p>
+      <p><b>② 今天就能用的一步</b>：从自测卷里挑 1 题，把对应模型写进你明天要做的一件事里。</p>
+      <p><b>③ 卡住了别硬扛</b>：扫码加微信，领这套资料的 AI 陪练，对着练比自己悟快得多。</p>
+    </div>
+    <h3>这套资料怎么用（4 步闭环）</h3>
+    <ul class="check">
+      <li><span class="day">读</span> 通读「核心心智模型 + 精讲」，先建立骨架，不纠结细节。</li>
+      <li><span class="day">测</span> 做 10 题自测卷，当场出分；低于 7 分，回到薄弱模型再读一遍。</li>
+      <li><span class="day">练</span> 按「7 天打卡」每天一个微小动作，把知道变成做到。</li>
+      <li><span class="day">扩</span> 顺手领全套「33 本书带你开启新的人生」，沿主线一本本读完。</li>
+    </ul>
+    <h3>给忙碌者的 3 分钟速记</h3>
+    <ul class="check">
+      <li><span class="day">记</span> 这本书只解决一件事：想清自己为何存在，把时间花在真正想做的事</li>
+      <li><span class="day">用</span> 把书里最打动你的一个模型，立刻套进本周一个真实问题。</li>
+      <li><span class="day">传</span> 试着给一个人讲清楚这个模型——讲得清，才是真懂。</li>
+      <li><span class="day">续</span> 读不顺就换一本，主线是「认知→思维→行动→关系→财富」，不必死磕顺序。</li>
+    </ul>
+    <p>「33 本书带你开启新的人生」不是读得多，是把每一本的真东西用起来——这一本，先从一个模型开始，今天就用一次。</p>
+  </section>
+
+<footer>
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  </footer>
+
+</div>
+
+<script>
+function grade(){
+  var qs = document.querySelectorAll('#quiz .q');
+  var total = qs.length, right = 0;
+  qs.forEach(function(q){
+    var picked = q.querySelector('input:checked');
+    var correct = q.querySelector('input[data-correct="1"]');
+    var ans = q.querySelector('.ans');
+    if(ans) ans.style.display = 'block';
+    if(picked && picked === correct){ right++; }
+  });
+  var s = document.getElementById('score');
+  if(s) s.textContent = '得分 ' + right + ' / ' + total;
+}
+</script>
+</body>
+</html>
