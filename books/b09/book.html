@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>《世界如此险恶，你要内心强大2》</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1c1c1c; font-size: 14px; line-height: 1.78;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .wrap { width: 100%; }
+  h1, h2, h3 { font-weight: 800; letter-spacing: .5px; }
+  h2 { font-size: 19px; color: #143a32; margin: 26px 0 12px;
+       padding-left: 11px; border-left: 5px solid #c08438; }
+  h3 { font-size: 15.5px; color: #143a32; margin: 16px 0 6px; }
+
+  /* 封面（顶部块，不强制分页） */
+  .cover { border: 1px solid #e3ddd0; border-radius: 14px; padding: 22px 24px;
+           background: linear-gradient(135deg,#143a32 0%,#1d5247 100%); color: #fff;
+           margin-bottom: 22px; }
+  .cover .dim { display: inline-block; font-size: 12px; background: #c08438; color: #1c1c1c;
+           padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 1px; }
+  .cover h1 { font-size: 25px; margin: 12px 0 8px; line-height: 1.35; }
+  .cover .pos { font-size: 14.5px; opacity: .95; margin: 0; }
+  .cover .sign { margin-top: 14px; font-size: 12.5px; opacity: .85; }
+
+  .lead { background: #f6f3ec; border-radius: 10px; padding: 14px 16px; margin: 4px 0 6px; }
+  .lead b { color: #143a32; }
+
+  /* 心智模型卡片 */
+  .models { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mcard { border: 1px solid #e3ddd0; border-radius: 10px; padding: 12px 14px;
+           background: #fcfbf7; break-inside: avoid; }
+  .mcard .mt { font-weight: 800; color: #143a32; font-size: 14.5px; margin-bottom: 4px; }
+  .mcard .md { font-size: 13px; color: #3a3a3a; margin: 0; }
+  .mcard .mu { font-size: 12.5px; color: #7a6a4a; margin: 6px 0 0; }
+
+  /* 提纲 */
+  .outline { padding-left: 0; }
+  .ochap { break-inside: avoid; margin: 10px 0; }
+  .ochap .ot { font-weight: 800; color: #143a32; font-size: 14.5px; }
+  .ochap ul { margin: 4px 0 0; padding-left: 20px; }
+  .ochap li { margin: 2px 0; }
+
+  /* 精讲 */
+  .lect .blk { break-inside: avoid; margin: 10px 0; }
+  .lect p { margin: 5px 0; }
+  .lect .k { color: #c08438; font-weight: 700; }
+
+  /* 自测卷 */
+  .quiz .q { break-inside: avoid; border: 1px solid #e3ddd0; border-radius: 10px;
+             padding: 12px 14px; margin: 10px 0; background: #fcfbf7; }
+  .quiz .qt { font-weight: 700; margin-bottom: 7px; }
+  .quiz label { display: block; padding: 4px 8px; border-radius: 6px; margin: 3px 0;
+                cursor: pointer; }
+  .quiz label:hover { background: #f0ece1; }
+  .quiz input { margin-right: 8px; }
+  .quiz .ans { font-size: 12.5px; color: #1d7a4d; margin-top: 6px; display: none; }
+  .quizbar { margin: 12px 0; }
+  .quizbar button { background: #143a32; color: #fff; border: 0; border-radius: 8px;
+                    padding: 9px 18px; font-size: 14px; cursor: pointer; font-weight: 700; }
+  .score { font-size: 16px; font-weight: 800; color: #143a32; margin-left: 12px; }
+
+  /* 打卡 */
+  .check li { margin: 6px 0; break-inside: avoid; }
+  .check .day { font-weight: 800; color: #c08438; }
+
+  footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #e3ddd0;
+           font-size: 12.5px; color: #6a6a6a; text-align: center; }
+  footer .cta { display: flex; align-items: center; justify-content: center; gap: 18px;
+                background: #f6f3ec; border: 1px solid #e3ddd0; border-radius: 12px;
+                padding: 14px 18px; margin-bottom: 14px; }
+  footer .ctaqr { width: 92px; height: 92px; border-radius: 8px; }
+  footer .ctatxt { text-align: left; }
+  footer .ctabig { font-size: 16px; font-weight: 800; color: #143a32; }
+  footer .ctasub { font-size: 12.5px; color: #6a6a6a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ COVER ============ -->
+  <section class="cover">
+    <span class="dim">心理内驱</span>
+    <h1>《世界如此险恶，你要内心强大2》</h1>
+    <p class="pos">看清心理运作的暗逻辑，把情绪的主控权拿回来</p>
+    <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+  </section>
+
+  <!-- ============ 解决什么 ============ -->
+  <section>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">我们常以为自己是被外界伤害，其实多半是被自己的心理反应困住——一受刺激就情绪上头、事后又后悔。读完这份笔记，你会学会在关键时刻用理性稳住自己，不再被莫名的恐惧、愤怒和自卑牵着走，把人生的控制权重新握回手里。</div>
+  </section>
+
+  <!-- ============ 心智模型 ============ -->
+  <section>
+    <h2>核心心智模型</h2>
+    <div class="models">
+      <div class="mcard">
+        <div class="mt">心理保护</div>
+        <p class="md">人在感到心理受威胁时自动启动的防御机制，本意是保护你，却常常反向伤人。</p>
+        <p class="mu">用法：察觉自己突然愤怒、逃避、辩解时，先问"我在保护什么"，而不是顺着它行动。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">心理动物</div>
+        <p class="md">当保护机制接管了你、理性退场，你就退化成只凭情绪反应的"动物"状态。</p>
+        <p class="mu">用法：在冲突现场提醒自己"别沦为心理动物"，把话在脑子里过一遍再出口。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">双结构视角</div>
+        <p class="md">人同时有智力结构（理性）和心理结构（情绪），前者负责看清，后者负责反应。</p>
+        <p class="mu">用法：遇到刺激，先让智力结构出场，用事实描述发生了什么，而非用"我觉得"下结论。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">心理三层论</div>
+        <p class="md">深层是性格（最难改），中层是心理倾向（固执、自恋等），表层是情绪，越深层越决定你是谁。</p>
+        <p class="mu">用法：想改变自己，从可调整的中层倾向入手，发展另一种性格来弱化原有短板。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">三指数自检</div>
+        <p class="md">内心强大指数高、心理保护指数低、心理动物指数低，三者综合决定一个人的精神档次。</p>
+        <p class="mu">用法：定期给自己的"三指数"打分，哪条偏高就去修哪条。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 提纲 ============ -->
+  <section>
+    <h2>内容提纲</h2>
+    <div class="outline">
+      <div class="ochap"><div class="ot">一、理性起步：用理性武装自己</div><ul>
+        <li>心理分析是头脑与心理的防身利器，能保护自己也能改变自己</li>
+        <li>一切都有方法可循，从理性中得到的改变才扎实，不靠鸡汤</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">二、沦为心理动物：看清被操控的状态</div><ul>
+        <li>人最大的悲剧不是没认识自己，而是害怕认识自己</li>
+        <li>忽悠者的最高境界是让你自我说服，而非说服你</li>
+        <li>"我觉得"句式会让很多机会从身边溜走</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">三、在心理上求生：破解保护机制</div><ul>
+        <li>心理保护是打开心理秘密的钥匙，但盲目运作会反伤自己</li>
+        <li>用智力结构去应对，才是真正保护自己的方式</li>
+        <li>恶性循环：用心理保护来疗伤，反而越缠越紧</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">四、内心深处：三层心理结构</div><ul>
+        <li>性格在深层、心理倾向在中层、情绪在表层，各司其职</li>
+        <li>把持住性格，把它转化为改变自己和世界的驱动力</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">五、心理指数：给自己打分</div><ul>
+        <li>内心强大 / 心理保护 / 心理动物三指数，综合看清层次</li>
+        <li>真正强大的人是拿理性武装存在、不轻易被激怒的人</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- ============ 精讲 ============ -->
+  <section>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="lect">
+      <div class="blk">
+        <h3>1. 你以为的"性格不好"，其实是保护机制在干活</h3>
+        <p><span class="k">结论：</span>人遇到刺激时，几乎都会自动启动心理保护，这是写在心理结构里的本能，目的是在心理上"求生"。问题在于，它常常用错误的方式保护你——比如愤怒、逃避、自我辩解，表面上让你占了上风，实际上是在杀伤自己。</p>
+        <p>所以先别急着骂自己"没出息"或骂别人"有病"。当你或别人做出莫名其妙的反应时，先问一句：这是在保护什么？看穿了这层，你就从被操控的状态里醒了一半。</p>
+      </div>
+      <div class="blk">
+        <h3>2. 冲突现场，最忌讳变成"心理动物"</h3>
+        <p><span class="k">结论：</span>在商场吵架、夫妻争执、职场对峙里，很多小事搞到不可收拾，是因为双方都变成了心理动物——情绪刺激情绪，越吵越凶。</p>
+        <p>破解办法只有一个：用你的智力结构（理性）去应对，不刺激对方的心理结构。对方发火时你淡定，他的心理防御弦就松了，蓄积的能量转不成攻击，问题自然降温。真正的淡定，就是让理性先出场。</p>
+      </div>
+      <div class="blk">
+        <h3>3. "我觉得"是一个会漏财漏机会的句式</h3>
+        <p><span class="k">结论：</span>总把"我觉得"挂在嘴边，本质是一种自我保护——害怕说错、不敢下判断。但别人期待的是你准确描述事实并做判断，你却只给了一个模糊的感觉。</p>
+        <p>长期玩这个句式，你的洞察力和分析力会越来越迟钝，别人也会默认你"心里没底、控制不了局面"。除非在敷衍或博弈，否则干脆一点、直接一点，别把机会拱手让人。</p>
+      </div>
+      <div class="blk">
+        <h3>4. 别人攻击你，往往是因为你的存在威胁到了他</h3>
+        <p><span class="k">结论：</span>一个人莫名其妙地疏远你、攻击你，常常不是因为你做错了什么，而是你的存在在对比中贬低了他存在的价值，让他不安。他的攻击、冷漠，都是他自己的心理保护。</p>
+        <p>明白了这一点，你就不用内耗去自证清白。面对亲近人的"莫名其妙"，最正确的反应是放下道德评判，去破译他行为背后的心理动机——那才是真正的理解与爱的能力。</p>
+      </div>
+      <div class="blk">
+        <h3>5. 嫉妒、自恋、固执，背后是同一套剧本</h3>
+        <p><span class="k">结论：</span>嫉妒，往往是看不起自己却绝不允许自己意识到，于是把心理能量投射到刺激你的人身上；自恋，是没法靠别人肯定自己，转而自己肯定自己；固执，是怕被说服就意味着"自我"被交出去。</p>
+        <p>它们都是心理保护的不同剧目。看穿之后你会发现：把本该用来改变自己、提高自己的能量，浪费在攻击和防御上，才是最大的亏。</p>
+      </div>
+      <div class="blk">
+        <h3>6. 把性格从牢笼变成引擎</h3>
+        <p><span class="k">结论：</span>性格藏在心理结构最深处，几乎改不了，但你可以"发展另一种性格来弱化它"，或者把它把持住、转化为改变世界的驱动力。一个自卑的人若把那份动力升华成做事的引擎，反而能做出大出息。</p>
+        <p>最可惜的人，是让心理保护一直替自己活着——用疗伤的方式反复杀伤自己。最牛的人，是拿理性武装存在，刺激来了也激不出他的保护机制。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 自测卷 ============ -->
+  <section>
+    <h2>自测卷 · 10 题当场出分</h2>
+    <div class="quiz" id="quiz">
+      <div class="q">
+        <div class="qt">1. 一个人在冲突中"愤怒反击"，从心理角度看，主要起什么作用？</div>
+        <label><input type="radio" name="q1"> A. 说明他性格刚强、有原则</label>
+        <label><input type="radio" name="q1"> B. 是一种心理保护，用力量感覆盖被侮辱的虚弱</label>
+        <label><input type="radio" name="q1" data-correct="1"> C. 以上都对，愤怒的本质是心理能量的转换</label>
+        <label><input type="radio" name="q1"> D. 愤怒和恐惧无关，是天生的脾气</label>
+        <div class="ans">答案：C。愤怒把被侮辱、恐惧的心理能量夺过来，让人感到有力量、处于进攻态势，本质是一次心理能量的转换与保护。</div>
+      </div>
+      <div class="q">
+        <div class="qt">2. 所谓"心理动物"，指的是哪种状态？</div>
+        <label><input type="radio" name="q2"> A. 喜欢养宠物的人</label>
+        <label><input type="radio" name="q2" data-correct="1"> B. 心理保护被启动时失去理性、被情绪和本能驱动的状态</label>
+        <label><input type="radio" name="q2"> C. 智商偏低的人</label>
+        <label><input type="radio" name="q2"> D. 从事动物相关工作的人</label>
+        <div class="ans">答案：B。心理动物是被心理保护接管、理性退场、只凭情绪反应的人，与智力高低无关。</div>
+      </div>
+      <div class="q">
+        <div class="qt">3. 为什么总说"我觉得"会让你吃亏？</div>
+        <label><input type="radio" name="q3"> A. 因为"我觉得"显得不礼貌</label>
+        <label><input type="radio" name="q3"> B. 因为它太口语化，不适合正式场合</label>
+        <label><input type="radio" name="q3" data-correct="1"> C. 它本质是自我保护，阻止自己把问题搞清楚，长期削弱洞察力</label>
+        <label><input type="radio" name="q3"> D. 因为它会让别人讨厌你</label>
+        <div class="ans">答案：C。"我觉得"是一种自我保护式表达，阻止自己厘清事实，长期会钝化分析能力，也让人觉得你心里没底。</div>
+      </div>
+      <div class="q">
+        <div class="qt">4. 面对一个愤怒攻击你的人，最稳妥的应对是？</div>
+        <label><input type="radio" name="q4"> A. 立刻回骂，压住对方气势</label>
+        <label><input type="radio" name="q4" data-correct="1"> B. 用理性（智力结构）应对，不刺激对方，让他的防御松下来</label>
+        <label><input type="radio" name="q4"> C. 默默忍受，事后报复</label>
+        <label><input type="radio" name="q4"> D. 当众揭穿他的逻辑漏洞</label>
+        <div class="ans">答案：B。用智力结构淡定应对、不刺激对方心理结构，蓄积的攻击能量失去出口，情绪自然冷却，问题和平解决。</div>
+      </div>
+      <div class="q">
+        <div class="qt">5. 心理结构的三层，从深到浅依次是？</div>
+        <label><input type="radio" name="q5"> A. 情绪、心理倾向、性格</label>
+        <label><input type="radio" name="q5" data-correct="1"> B. 性格、心理倾向、情绪</label>
+        <label><input type="radio" name="q5"> C. 心理倾向、性格、情绪</label>
+        <label><input type="radio" name="q5"> D. 情绪、性格、心理倾向</label>
+        <div class="ans">答案：B。深层是性格（最难改、力量最大），中层是心理倾向（固执、自恋等），表层是情绪，越深层越决定你是谁。</div>
+      </div>
+      <div class="q">
+        <div class="qt">6. 关于"心理保护"，下列哪句话是对的？</div>
+        <label><input type="radio" name="q6"> A. 心理保护全是坏事，应该彻底消除</label>
+        <label><input type="radio" name="q6"> B. 心理保护只在受威胁时启动，盲目且强大，需要被看清和把持</label>
+        <label><input type="radio" name="q6" data-correct="1"> C. B 正确，且爱一个人不属于心理保护</label>
+        <label><input type="radio" name="q6"> D. 心理保护越频繁说明人越强大</label>
+        <div class="ans">答案：C。心理保护在心理生存受威胁时才启动，盲目而强大；而爱一个人时心理生存未受威胁，不属于保护机制。</div>
+      </div>
+      <div class="q">
+        <div class="qt">7. 一个人嫉妒别人，深层心理往往是？</div>
+        <label><input type="radio" name="q7"> A. 单纯看对方不顺眼</label>
+        <label><input type="radio" name="q7" data-correct="1"> B. 看不起自己却不允许自己意识到，把能量投射到刺激自己的人身上</label>
+        <label><input type="radio" name="q7"> C. 想成为对方那样的人</label>
+        <label><input type="radio" name="q7"> D. 和对方有私人恩怨</label>
+        <div class="ans">答案：B。嫉妒是一种隐秘的心理保护：把本该用于改变自己的心理能量，投射到刺激自己的人身上，以获得平衡。</div>
+      </div>
+      <div class="q">
+        <div class="qt">8. 想改变自己，最现实的做法是？</div>
+        <label><input type="radio" name="q8"> A. 彻底推翻自己的性格</label>
+        <label><input type="radio" name="q8" data-correct="1"> B. 从可调整的中层心理倾向入手，发展另一种性格来弱化短板</label>
+        <label><input type="radio" name="q8"> C. 只靠意志力压制情绪</label>
+        <label><input type="radio" name="q8"> D. 等环境变好自然就好</label>
+        <div class="ans">答案：B。性格极难改变，更可行的路是发展另一种性格来弱化它，或把性格的心理动力转化为做事的引擎。</div>
+      </div>
+      <div class="q">
+        <div class="qt">9. 别人突然疏远或攻击你，更可能的原因是？</div>
+        <label><input type="radio" name="q9"> A. 你真的做错了什么</label>
+        <label><input type="radio" name="q9" data-correct="1"> B. 你的存在在对比中贬低了他存在的价值，触发了他的心理保护</label>
+        <label><input type="radio" name="q9"> C. 他性格天生恶劣</label>
+        <label><input type="radio" name="q9"> D. 纯粹是巧合</label>
+        <div class="ans">答案：B。很多疏远和攻击并非因为你做错，而是你的存在让他不安，他需要靠攻击或回避来保护自己。</div>
+      </div>
+      <div class="q">
+        <div class="qt">10. 真正内心强大的人，最核心的特征是？</div>
+        <label><input type="radio" name="q10"> A. 永远不生气</label>
+        <label><input type="radio" name="q10" data-correct="1"> B. 拿理性武装存在，刺激来了也激不出他的保护机制</label>
+        <label><input type="radio" name="q10"> C. 什么都无所谓</label>
+        <label><input type="radio" name="q10"> D. 从不与人发生冲突</label>
+        <div class="ans">答案：B。内心强大的人心理保护指数低，能用理性把信息拦截在智力结构里解读，很难沦为被情绪劫持的心理动物。</div>
+      </div>
+    </div>
+    <div class="quizbar">
+      <button onclick="grade()">交卷看分</button>
+      <span class="score" id="score"></span>
+    </div>
+  </section>
+
+  <!-- ============ 打卡 ============ -->
+  <section>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check">
+      <li><span class="day">第 1 天</span> 今天起，每当自己突然愤怒或想辩解，先默念一句"我在保护什么"，记录一次。</li>
+      <li><span class="day">第 2 天</span> 把一句"我觉得"换成对事实的直接描述，试试看对方反应有什么不同。</li>
+      <li><span class="day">第 3 天</span> 遇到冲突，刻意淡定三秒再回应，体会对方防御松下来的感觉。</li>
+      <li><span class="day">第 4 天</span> 列出一个你嫉妒或反感的人，写下"他触发了我哪部分对自己的不满"。</li>
+      <li><span class="day">第 5 天</span> 给自己的"三指数"打分：内心强大、心理保护、心理动物，各 1–5 分。</li>
+      <li><span class="day">第 6 天</span> 选一个想改的中层倾向（如固执），今天刻意用一次相反的回应。</li>
+      <li><span class="day">第 7 天</span> 把一件一直用情绪应对的事，用"事实+判断"写下来，交给智力结构处理。</li>
+    </ul>
+  </section>
+
+  <!-- ============ 结语 ============ -->
+  <section>
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead">
+      <p><b>1.</b> 你最大的敌人往往不是外界，而是被刺激就自动启动、却反向伤你的心理保护机制。</p>
+      <p><b>2.</b> 真正的强大，是让理性先出场、把情绪主控权拿回来，不轻易沦为被本能劫持的"心理动物"。</p>
+      <p><b>3.</b> 看清自己和他人的心理剧本，不是用来评判，而是用来把性格变成改变生活的引擎。</p>
+    </div>
+    <p>这份资料建议从今天就开始用：先翻到自测卷自测，低于 7 分就重读"精讲"第 1、2、6 节；7 天打卡从你读到这一页的第二天起连续做，别断。把它当成随身的心理防身手册，遇到情绪波动就翻一翻。</p>
+  </section>
+
+    <!-- ============ 复盘卡（补尾页） ============ -->
+  <section class="recap">
+    <h2>带走《世界如此险恶，你要内心强大2》· 一张复盘卡</h2>
+    <div class="lead">
+      <p><b>① 它归在「心理内驱」这条线上</b>——看清心理运作的暗逻辑，把情绪的主控权拿回来</p>
+      <p><b>② 今天就能用的一步</b>：从自测卷里挑 1 题，把对应模型写进你明天要做的一件事里。</p>
+      <p><b>③ 卡住了别硬扛</b>：扫码加微信，领这套资料的 AI 陪练，对着练比自己悟快得多。</p>
+    </div>
+    <h3>这套资料怎么用（4 步闭环）</h3>
+    <ul class="check">
+      <li><span class="day">读</span> 通读「核心心智模型 + 精讲」，先建立骨架，不纠结细节。</li>
+      <li><span class="day">测</span> 做 10 题自测卷，当场出分；低于 7 分，回到薄弱模型再读一遍。</li>
+      <li><span class="day">练</span> 按「7 天打卡」每天一个微小动作，把知道变成做到。</li>
+      <li><span class="day">扩</span> 顺手领全套「33 本书带你开启新的人生」，沿主线一本本读完。</li>
+    </ul>
+    <h3>给忙碌者的 3 分钟速记</h3>
+    <ul class="check">
+      <li><span class="day">记</span> 这本书只解决一件事：看清心理运作的暗逻辑，把情绪的主控权拿回来</li>
+      <li><span class="day">用</span> 把书里最打动你的一个模型，立刻套进本周一个真实问题。</li>
+      <li><span class="day">传</span> 试着给一个人讲清楚这个模型——讲得清，才是真懂。</li>
+      <li><span class="day">续</span> 读不顺就换一本，主线是「认知→思维→行动→关系→财富」，不必死磕顺序。</li>
+    </ul>
+    <p>「33 本书带你开启新的人生」不是读得多，是把每一本的真东西用起来——这一本，先从一个模型开始，今天就用一次。</p>
+  </section>
+
+<footer>
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  </footer>
+
+</div>
+
+<script>
+function grade(){
+  var qs = document.querySelectorAll('#quiz .q');
+  var total = qs.length, right = 0;
+  qs.forEach(function(q){
+    var picked = q.querySelector('input:checked');
+    var correct = q.querySelector('input[data-correct="1"]');
+    var ans = q.querySelector('.ans');
+    if(ans) ans.style.display = 'block';
+    if(picked && picked === correct){ right++; }
+  });
+  var s = document.getElementById('score');
+  if(s) s.textContent = '得分 ' + right + ' / ' + total;
+}
+</script>
+</body>
+</html>
