@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>谁说你懂做人做事 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>谁说你懂做人做事 · 书智能体</b><span>人际影响｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">人际影响</span>
+      <h1>《谁说你懂做人做事》</h1>
+      <p class="pos">把"做人"和"做事"拧成一股绳，让关系成为你事业的底座</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">很多人不是能力不行，而是卡在"做人"和"做事"两张皮：要么一味讨好把事办砸，要么只顾硬干把人得罪光。这份笔记把你从"凭感觉"拉到"有分寸"——先想清楚要成为什么样的人、做成什么样的事，再用低调蓄力、宽严相济的方式把事落地，让人际关系从负担变成助力。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">高标定位·低点起步</div><p class="md">目标定得高，起步走得低：方向要够远，第一步要够小。</p><p class="mu">用法：先给自己一个够得着的"高远目标"，再从手边最小的事做起，别一上来就摆谱。</p></div><div class="mcard"><div class="mt">低调蓄力</div><p class="md">不显不露，在被人忽视的角落把本事攒足，再一鸣惊人。</p><p class="mu">用法：没人看好你时别急着证明，先把基本功练到别人挑不出毛病。</p></div><div class="mcard"><div class="mt">自信定高</div><p class="md">你相信自己能到多高，人生的天花板就有多高。</p><p class="mu">用法：每天用一句"我可以"给心里充电，先信自己，再谈成功。</p></div><div class="mcard"><div class="mt">宽严相济</div><p class="md">做人留余地，做事讲规矩：对人多包容，对手头的事一丝不苟。</p><p class="mu">用法：批评人之前先给台阶，交代自己的任务时把标准钉死。</p></div><div class="mcard"><div class="mt">独合有度</div><p class="md">独立立身，协作成事：先把自己活明白，再借团队把成果放大。</p><p class="mu">用法：遇事先想"我能独立扛多少"，剩下靠找对人、组对局来补。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">第一章　目标与方式</div><ul><li>高标定位：先敢给自己一个够高的目标</li><li>低点起步：从最不起眼的小事踏实干起</li><li>锁定目标不游移：选准了就全力以赴</li></ul></div><div class="ochap"><div class="ot">第二章　实与虚的辩证法</div><ul><li>表面功夫与真实意图要分得清</li><li>虚事实做：把"虚"的口碑用"实"的行动撑住</li></ul></div><div class="ochap"><div class="ot">第三章　守与变的取舍</div><ul><li>原则要守：底线和本分不妥协</li><li>方法要变：路走不通就换打法</li></ul></div><div class="ochap"><div class="ot">第四章　独与合的尺度</div><ul><li>独立做人：先立得住自己</li><li>协作做事：靠对人把成果做大</li></ul></div><div class="ochap"><div class="ot">第五章　胆大与心细</div><ul><li>敢想敢干才有机遇</li><li>留意细节才不出岔子</li></ul></div><div class="ochap"><div class="ot">第六章　展示与强加</div><ul><li>适度亮出自己的价值</li><li>别把想法硬塞给别人</li></ul></div><div class="ochap"><div class="ot">第七章　看透表象</div><ul><li>认清身边人面具后的真面目</li><li>看人别看他说了什么，看他用了谁、护着谁</li></ul></div><div class="ochap"><div class="ot">第八章　宽严之间</div><ul><li>宽容待人，聚拢人心</li><li>严谨对事，守住质量</li></ul></div><div class="ochap"><div class="ot">第九章　职场生存</div><ul><li>掌握进退的分寸</li><li>在规则里把事做成</li></ul></div><div class="ochap"><div class="ot">第十章　好人缘的后盾</div><ul><li>信任换信任，靠谱换靠谱</li><li>好人缘是做事的坚实底座</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>一、把目标立高，把起点放低</h3><p><span class="k">结论先行：</span>决定你走多远的，不是你起点多高，而是你目标定得多准、起步多稳。</p><p>很多人一辈子庸庸碌碌，根子上是没想清楚自己到底要什么。目标不是欲望，它更具体、有时限，而且得是你自己真心选的。</p><p>选目标有个铁律：别选错了方向。一只狗再怎么练也飞不起来，硬要它学飞只会摔断腿——目标要是违背自身条件，再宏大也是空转。</p><p>正确的做法是用好手里的牌：认准真实目标，别被小事缠住，大问题冷静搁置，最不重要的那个果断划掉。目标一旦定下，就别今天想当营销高手、明天想当设计师，好猎手的眼里只有猎物。</p></div><div class="blk"><h3>二、低调不是怂，是蓄力</h3><p><span class="k">结论先行：</span>在实力没攒够之前，藏起"高"、退一步，是为了重新找到一条能走通的路。</p><p>木秀于林风必摧之，嫉妒是人性自带的弱点。你能力再强，如果没人愿意做你的梯子，你也爬不上去。</p><p>真正的高手都懂得"以退为进"。有个博士求职被多家公司拒，他收起所有证书，以最低身份去应聘录入员，干得一丝不苟；老板发现他能挑出程序bug，他亮出学士证；又发现他建议独到，亮出硕士证；最后老板全面认可，他才拿出博士证被重用。</p><p>低调是高标的起点：把自己姿态摆得比别人低，心志站得比别人高，根系才能从低处吸足养料，树冠才伸得更高。</p></div><div class="blk"><h3>三、自信是能练出来的肌肉</h3><p><span class="k">结论先行：</span>自卑不是命，它靠自己就能治；你觉得自己有用，你就真的有用。</p><p>喷泉的高度超不过源头，人生的高度也超不过自信能到的地方。多数失败不是钱的问题，是缺了那口气。</p><p>一个极简的练法：每天对着镜子重复"我是可用之人、我有极高的才能"，洗漱时来三遍，进办公室再有力地来三遍。你越重复，心里的劲就越被唤醒。</p><p>真有短板也别怕，用"代偿"把自卑转成动力——把精力投到擅长和最能体现价值的事上，用一处突出去补另一处的弱。天下无人不自卑，关键是你别被它按在原地。</p></div><div class="blk"><h3>四、做人宽容，做事严谨</h3><p><span class="k">结论先行：</span>"做人要宽容，做事要严谨"不是口号，是对生存智慧最准的概括。</p><p>对别人多留余地，你才聚得拢人；对自己手头的事一丝不苟，你才立得住事。这一宽一严之间，显的是胸怀，要的是态度。</p><p>批评人之前先递台阶，交代任务时把标准钉死。把这两件事分开，你既不得罪人，也不放过质量。</p></div><div class="blk"><h3>五、看人别只看脸，看他用的人</h3><p><span class="k">结论先行：</span>要看清一个人，别光听他怎么说，要看他身边围着谁、护着谁、用着谁。</p><p>人人都戴面具，表面工程做得好是为了掩饰真实意图。但面具再厚，也藏不住他待人接物的底色。</p><p>一个实用抓手：看他的圈子。你身边是什么样的人，很大程度上决定你是什么样的人；反过来，想知道一个人底细，先看他跟谁走得近。</p><p>再提醒一句：突然对你大献殷勤的人，先别急着受用，看清动机再接招——天上不会掉免费的午餐，免费的往往最贵。</p></div><div class="blk"><h3>六、职场里进退的分寸</h3><p><span class="k">结论先行：</span>职场不是比谁更猛，是比谁更懂"什么时候进、什么时候退"。</p><p>进，是机会来了敢接、敢扛；退，是势头不对能收、能等。该你出头时缩着，是埋没自己；不该你抢功时往前挤，是惹火烧身。</p><p>把"好人缘"当底座经营：靠谱一次比漂亮话十句都管用。信任是攒出来的，今天答应的事明天兑现，慢慢你就有了别人愿意托付的底气。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 目标立高、起点放低，是把事做成最稳的起手式，别让"想太多"耽误"做太少"。</p><p><b>2.</b> 低调不是弱，是蓄力；自信不是天赋，是每天给心里充的那口气。</p><p><b>3.</b> 做人宽容、做事严谨，让人际关系从你的负担变成你事业的底座。</p></div>
+    <p>这份资料建议从今天开始连做 7 天打卡；自测卷低于 7 分，回头重读"高标定位·低点起步"和"低调蓄力"两张卡片，把模型先练熟再用。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第 1 天</span> 拿出一张纸，写下你未来半年最想成为的样子，只写一条够高的目标。</li><li><span class="day">第 2 天</span> 选一件一直拖延的小事，今天就开始做，不喊目标先动手。</li><li><span class="day">第 3 天</span> 对着镜子说三遍"我是可用之人"，观察一天状态有何不同。</li><li><span class="day">第 4 天</span> 今天夸一个同事的具体优点，对人宽容、对人真诚各做一次。</li><li><span class="day">第 5 天</span> 观察你最信任的一个人，记下来他身边围着谁、护着谁。</li><li><span class="day">第 6 天</span> 遇到一个想证明自己的场合，先忍住，把本事做出来再说。</li><li><span class="day">第 7 天</span> 复盘本周：哪次你"宽"对了、哪次"严"住了，写一句给自己。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 关于\"目标与起点\"，最稳妥的做法是？", "o": ["A. 目标定低一点，起点也低一点", "B. 目标定高，起步从最小的事做起", "C. 目标随便定，先忙起来再说", "D. 目标越高越好，不用管能不能实现"], "a": 1, "tip": "高标定位、低点起步，方向要远、第一步要小，才不空转。"}, {"q": "2. 一个人总在频繁更换目标，今天想当这、明天想当那，最可能导致？", "o": ["A. 人脉更广", "B. 处处打井处处空，准备前功尽弃", "C. 同上，精力分散难有成", "D. 更容易被贵人发现"], "a": 2, "tip": "答案：C（B/C同义，均指精力分散、难有结果）。目标太多容易精力分散，最终处处打井处处空。"}, {"q": "3. \"低调蓄力\"的核心目的是？", "o": ["A. 永远不让人知道自己的能力", "B. 在实力不足时藏起锋芒，攒足本事再一鸣惊人", "C. 避免任何竞争", "D. 让领导觉得你好管"], "a": 1, "tip": "低调是规避失败的韬晦手段，也是高标生存的起点。"}, {"q": "4. 关于自信，下列说法更成立的是？", "o": ["A. 等成功了自然就有自信", "B. 自信的高度决定人生能到的高度，可主动练出来", "C. 自信主要靠别人夸出来", "D. 自卑的人改不了"], "a": 1, "tip": "自信决定人生高度，且可以通过自我暗示和行动积累主动建立。"}, {"q": "5. \"做人宽容，做事严谨\"意味着？", "o": ["A. 对事对人都一样松", "B. 对人严、对事宽", "C. 对人多留余地，对手头事一丝不苟", "D. 两者都严到底"], "a": 2, "tip": "一宽一严之间，既聚拢人又立住事。"}, {"q": "6. 想看清一个人真实的一面，最该看的是？", "o": ["A. 他自我标榜的人设", "B. 他身边围着谁、护着谁、用着谁", "C. 他发朋友圈的频率", "D. 他的学历高低"], "a": 1, "tip": "圈子与用人最能暴露底色，面具藏不住长期的取舍。"}, {"q": "7. 面对突然对你大献殷勤的人，第一步应该？", "o": ["A. 立刻投桃报李", "B. 先看清对方动机再接招", "C. 装作没看见", "D. 马上答应他的请求"], "a": 1, "tip": "免费的午餐往往最贵，先看动机不吃亏。"}, {"q": "8. 用\"代偿\"克服自卑，指的是？", "o": ["A. 躲开所有短板", "B. 用一处突出成就去补另一处的弱，把自卑变动力", "C. 花钱请人帮忙", "D. 假装自己没有短板"], "a": 1, "tip": "通过补偿的方式扬长避短，把自卑转化为自强不息的推动力量。"}, {"q": "9. 在实力不足、竞争激烈的阶段，最合适的策略是？", "o": ["A. 硬碰硬证明自己", "B. 保持低调，在别人不注意的角落暗自积蓄力量", "C. 到处宣扬自己的计划", "D. 直接退出竞争"], "a": 1, "tip": "羽翼未丰时过早出头必遭淘汰，低调蓄力更稳妥。"}, {"q": "10. 关于\"好人缘\"，更准确的理解是？", "o": ["A. 对所有人都一味讨好", "B. 用一次次靠谱兑现攒出别人愿意托付的底气", "C. 少做事少犯错就行", "D. 靠请客吃饭维系"], "a": 1, "tip": "好人缘是做事的坚实后盾，靠长期靠谱积累，而非讨好。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《谁说你懂做人做事》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《谁说你懂做人做事》】", "维度：人际影响", "一句话定位：把\"做人\"和\"做事\"拧成一股绳，让关系成为你事业的底座", "", "核心心智模型（5 个）：", "1. 高标定位·低点起步——目标定得高，起步走得低：方向要够远，第一步要够小。 用法：先给自己一个够得着的\"高远目标\"，再从手边最小的事做起，别一上来就摆谱。", "2. 低调蓄力——不显不露，在被人忽视的角落把本事攒足，再一鸣惊人。 用法：没人看好你时别急着证明，先把基本功练到别人挑不出毛病。", "3. 自信定高——你相信自己能到多高，人生的天花板就有多高。 用法：每天用一句\"我可以\"给心里充电，先信自己，再谈成功。", "4. 宽严相济——做人留余地，做事讲规矩：对人多包容，对手头的事一丝不苟。 用法：批评人之前先给台阶，交代自己的任务时把标准钉死。", "5. 独合有度——独立立身，协作成事：先把自己活明白，再借团队把成果放大。 用法：遇事先想\"我能独立扛多少\"，剩下靠找对人、组对局来补。", "", "精讲要点：", "· 一、把目标立高，把起点放低：结论先行：决定你走多远的，不是你起点多高，而是你目标定得多准、起步多稳。", "· 二、低调不是怂，是蓄力：结论先行：在实力没攒够之前，藏起\"高\"、退一步，是为了重新找到一条能走通的路。", "· 三、自信是能练出来的肌肉：结论先行：自卑不是命，它靠自己就能治；你觉得自己有用，你就真的有用。", "· 四、做人宽容，做事严谨：结论先行：\"做人要宽容，做事要严谨\"不是口号，是对生存智慧最准的概括。", "· 五、看人别只看脸，看他用的人：结论先行：要看清一个人，别光听他怎么说，要看他身边围着谁、护着谁、用着谁。", "· 六、职场里进退的分寸：结论先行：职场不是比谁更猛，是比谁更懂\"什么时候进、什么时候退\"。", "", "带走三句话：", "1. 目标立高、起点放低，是把事做成最稳的起手式，别让\"想太多\"耽误\"做太少\"。", "2. 低调不是弱，是蓄力；自信不是天赋，是每天给心里充的那口气。", "3. 做人宽容、做事严谨，让人际关系从你的负担变成你事业的底座。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：高标定位·低点起步、低调蓄力、自信定高、宽严相济、独合有度），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b21_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b21_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b21_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b21_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
