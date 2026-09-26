@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一本书读懂中国税系列 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>一本书读懂中国税系列 · 书智能体</b><span>财富管理｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">财富管理</span>
+      <h1>《一本书读懂中国税系列》</h1>
+      <p class="pos">看清朝夕相处的税，做个明白的纳税人</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">工资之外总觉得税离自己很远，可物价一涨、买房买车一算账，才发现税早已埋在每一笔消费里。这份资料帮你把"看不见的税"看清楚，知道自己到底缴了什么、又能向公共财政主张什么。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">消费即纳税</div><p class="md">只要发生消费，就承担了一层隐性税费；无论收入高低，每个人都是纳税人。</p><p class="mu">下次买单时提醒自己：价格和税常常是一张连体账单。</p></div><div class="mcard"><div class="mt">流转税是大头</div><p class="md">附着在商品流通环节的税，比工资里的个税更难察觉，却往往是最重的一块负担。</p><p class="mu">看税负别只盯个税，先看清日常消费里叠了哪几层税。</p></div><div class="mcard"><div class="mt">税收三支柱</div><p class="md">现代税收有强制性、无偿性、固定性；法无明文规定不可税，征与缴都要有依据。</p><p class="mu">遇到"额外收费"先问一句：有法律依据吗？这是分辨税与费的关键。</p></div><div class="mcard"><div class="mt">税负看"钱去哪"</div><p class="md">税负高低不决定生活质量，关键看收上去的税有没有以公共服务和福利的形式返还。</p><p class="mu">比较税负时，把教育、医疗、养老等保障一起算进去才公平。</p></div><div class="mcard"><div class="mt">纳税人有权利</div><p class="md">纳税是义务，也是权利：你有权知道税花在哪、要求专款专用、参与规则讨论。</p><p class="mu">从"被动缴款"转向"主动关心去向"，才是成熟的纳税人。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">第一章　你应该懂得的税收常识</div><ul><li>税从哪来、为什么存在；"消费即纳税"与每个人都是纳税人的真相。</li><li>我国税种大致分五类，直接税与间接税各管一摊。</li></ul></div><div class="ochap"><div class="ot">第二章　看得见的所得税</div><ul><li>个人所得税：费用扣除、收入类型与"免费午餐"的边界。</li><li>企业所得税：企业这笔账该怎么算、为何总被讨论。</li></ul></div><div class="ochap"><div class="ot">第三章　藏在价里的流转税</div><ul><li>增值税、营业税、消费税、关税，各自贴在商品的哪一环。</li><li>价内税与价外税的区别，以及为什么改革总围绕它转。</li></ul></div><div class="ochap"><div class="ot">第四章　绕不开的财产行为税</div><ul><li>房产、车船、遗产、印花税，买房买车都与之相遇。</li><li>小税种也有大影响，别因"数额小"而忽略。</li></ul></div><div class="ochap"><div class="ot">第五章至第七章　资源税、通胀税与纳税人权利</div><ul><li>资源与环境税：为发展转型付出的代价与红利。</li><li>通胀税：钱变薄的隐形之手。</li><li>明明白白做纳税人：税花在哪、怎样合理表达与监督。</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>一、你正在缴税：消费即纳税的隐形税网</h3><p>结论先行：哪怕工资不到个税起征点，只要买东西，你就已经在缴税。</p><p>一件普通商品里通常叠着增值税，以及附加的城建税、教育费附加等；买烟酒化妆品等，还要多一层消费税。这些税最终都由消费者买单。</p><p>所以"我没缴税"是错觉。真正该关心的，不只是工资本身，而是每一笔消费背后那张看不见的税单。</p></div><div class="blk"><h3>二、所得税：最"切肤"的那部分</h3><p>结论先行：工资里的个税之所以让人印象深刻，是因为它直接从薪水上扣，看得见的才觉得疼。</p><p>个税按不同收入类型适用不同规则，也有费用扣除和若干免税边界；企业所得税则关系企业的经营成果如何被分配。</p><p>但换个角度：个税在整个税收盘子里的占比其实不大，真正压在普通人身上的，更多是下一节要说的流转税。</p></div><div class="blk"><h3>三、流转税：藏在价格里的最大头</h3><p>结论先行：附着在商品流通过程的税，才是大多数人默默承担的最重税负。</p><p>增值税按增值环节层层征收，消费税针对特定商品，关税发生在进出口。它们大多"藏"在标价里，不像个税那样单独列示。</p><p>理解价内税与价外税的区别也很实用：一个把税含在标价内、一个在价外单列，直接影响你对"到底花了多少税"的判断。</p></div><div class="blk"><h3>四、财产行为税：买房买车都绕不开</h3><p>结论先行：当钱流向房子、车子和大额交易，税就从"隐形"变成"实打实"的一笔支出。</p><p>房产相关的契税、印花税，车辆相关的购置税、车船税，以及备受讨论的遗产税，都属于这一类。额度虽常被忽视，累计起来并不小。</p><p>做大额资产决策前，把相关税费算进总成本，才不会在签完字后才发现"买得起养不起、缴不起"。</p></div><div class="blk"><h3>五、通胀税：让钱变薄的那只手</h3><p>结论先行：物价普遍上涨时，你手中货币的购买力在下降，这部分"流失的财富"相当于被征了一种隐形税。</p><p>它不体现在任何一张税单上，却真实发生在每个人的钱袋里。越是长期持币不动，被"征"得越多。</p><p>应对思路和金融常识相通：让长期不用的钱以能跑赢通胀的方式持有，而不是全躺成活期。</p></div><div class="blk"><h3>六、纳税人权利：税花在哪、我能说什么</h3><p>结论先行：纳税是义务，但纳税人同样有权关心税收的去向，并要求它"用之于民"。</p><p>税收支撑起国防、教育、医疗、交通等公共服务，理论上会以另一种形式返还。成熟的纳税人不会只问"我缴多少"，更会问"我的钱去了哪、办了哪些事"。</p><p>在规则制定环节，公众的理性表达也会推动税制更合理。关心去向，本身就是纳税人权利的一部分。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 税不只在工资条上，更藏在每一次消费里——看清隐形税网，才谈得上"明白花钱"。</p><p><b>2.</b> 直接税看得见、间接税藏价中，两类账都要会看，别被"我没缴税"的错觉骗了。</p><p><b>3.</b> 纳税是义务也是权利：比起税高税低，更该关心它是否以服务和福利真正回到了你身上。</p></div>
+    <p>这份资料建议从今天开始连续 7 天打卡；自测低于 7 分，重读"消费即纳税"与"纳税人有权利"两节，再拿自家账本对照一遍。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第 1 天</span> 拿一张超市小票，圈出商品价款之外可能被叠加的税费逻辑（增值税及附加）。</li><li><span class="day">第 2 天</span> 整理自己一年的"显性税"（个税、社保代扣）和"隐性税"（消费中的税）。</li><li><span class="day">第 3 天</span> 如果你有房/车计划，把契税、购置税等相关税费算进总预算。</li><li><span class="day">第 4 天</span> 查一下你所在城市的教育、医疗、养老等公共服务，理解"税的去向"。</li><li><span class="day">第 5 天</span> 用"通胀税"视角检查：长期不用的钱是否还在活期里睡大觉。</li><li><span class="day">第 6 天</span> 弄懂价内税与价外税的区别，下次看价签能多想一层。</li><li><span class="day">第 7 天</span> 写一句话：作为纳税人，你最希望税收优先花在哪件公共事上？</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. \"消费即纳税\"主要指向哪一类税？", "o": ["A. 个人所得税", "B. 附着在商品流通中的流转税", "C. 房产税", "D. 遗产税"], "a": 1, "tip": "消费税、增值税等流转税隐藏在商品价格里，消费者每次买单都在承担。"}, {"q": "2. 下列哪一项通常被视为\"间接税\"、最终由消费者承担？", "o": ["A. 个人所得税", "B. 增值税", "C. 企业所得税", "D. 以上都不是"], "a": 1, "tip": "增值税是典型的间接税，税负层层转嫁，最终落在消费者头上。"}, {"q": "3. 现代税收的三个基本特征通常指？", "o": ["A. 自愿、有偿、灵活", "B. 强制性、无偿性、固定性", "C. 随机、免费、可变", "D. 协商、返还、浮动"], "a": 1, "tip": "现代税收具有强制性、无偿性、固定性；法无明文规定不可税。"}, {"q": "4. 工资里的个人所得税属于哪类税？", "o": ["A. 直接税", "B. 间接税", "C. 资源税", "D. 行为税"], "a": 0, "tip": "个税由纳税人直接承担、无法转嫁，属于直接税，也是\"看得见的税\"。"}, {"q": "5. 买房时通常不会涉及以下哪一项？", "o": ["A. 契税", "B. 印花税", "C. 车辆购置税", "D. 个人所得税（卖房方）"], "a": 2, "tip": "车辆购置税是买车时才涉及的，与买房无关；买房常涉契税、印花税等。"}, {"q": "6. 所谓\"通胀税\"的本质是？", "o": ["A. 政府额外开征的税种", "B. 货币购买力下降带来的隐形损失", "C. 个人所得税的上调", "D. 一种关税"], "a": 1, "tip": "通胀税不是明文税种，而是物价上涨使货币购买力下降的隐形代价。"}, {"q": "7. \"宏观税负\"一般是指？", "o": ["A. 个人年缴税额", "B. 税收收入占 GDP 的比重", "C. 个税占工资比重", "D. 房价中的税费"], "a": 1, "tip": "宏观税负常用税收总额占国内生产总值的比重来衡量，反映整体税负水平。"}, {"q": "8. 关于税负高低与生活幸福，更符合逻辑的看法是？", "o": ["A. 税越低生活一定越幸福", "B. 关键看税是否以公共服务和福利返还", "C. 税负与幸福完全无关", "D. 税越高越幸福"], "a": 1, "tip": "同样的税负，若换来更好的教育、医疗、养老等保障，实际生活压力可能更小。"}, {"q": "9. 作为纳税人，下列哪项是正当权利？", "o": ["A. 拒绝依法纳税", "B. 关心税收去向、要求专款专用并参与讨论", "C. 自行决定缴多少", "D. 以上都不是"], "a": 1, "tip": "纳税人有权了解税收用途、要求合理使用，并在规则制定中理性表达。"}, {"q": "10. 区分\"税\"与\"费\"的一个重要标准是？", "o": ["A. 谁收的", "B. 是否有法律明文依据、是否强制无偿", "C. 数额大小", "D. 是否用现金缴"], "a": 1, "tip": "税收有法定依据、强制无偿、固定；无明文依据的摊派不属于规范意义上的税。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《一本书读懂中国税系列》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《一本书读懂中国税系列》】", "维度：财富管理", "一句话定位：看清朝夕相处的税，做个明白的纳税人", "", "核心心智模型（5 个）：", "1. 消费即纳税——只要发生消费，就承担了一层隐性税费；无论收入高低，每个人都是纳税人。 下次买单时提醒自己：价格和税常常是一张连体账单。", "2. 流转税是大头——附着在商品流通环节的税，比工资里的个税更难察觉，却往往是最重的一块负担。 看税负别只盯个税，先看清日常消费里叠了哪几层税。", "3. 税收三支柱——现代税收有强制性、无偿性、固定性；法无明文规定不可税，征与缴都要有依据。 遇到\"额外收费\"先问一句：有法律依据吗？这是分辨税与费的关键。", "4. 税负看\"钱去哪\"——税负高低不决定生活质量，关键看收上去的税有没有以公共服务和福利的形式返还。 比较税负时，把教育、医疗、养老等保障一起算进去才公平。", "5. 纳税人有权利——纳税是义务，也是权利：你有权知道税花在哪、要求专款专用、参与规则讨论。 从\"被动缴款\"转向\"主动关心去向\"，才是成熟的纳税人。", "", "精讲要点：", "· 一、你正在缴税：消费即纳税的隐形税网：结论先行：哪怕工资不到个税起征点，只要买东西，你就已经在缴税。", "· 二、所得税：最\"切肤\"的那部分：结论先行：工资里的个税之所以让人印象深刻，是因为它直接从薪水上扣，看得见的才觉得疼。", "· 三、流转税：藏在价格里的最大头：结论先行：附着在商品流通过程的税，才是大多数人默默承担的最重税负。", "· 四、财产行为税：买房买车都绕不开：结论先行：当钱流向房子、车子和大额交易，税就从\"隐形\"变成\"实打实\"的一笔支出。", "· 五、通胀税：让钱变薄的那只手：结论先行：物价普遍上涨时，你手中货币的购买力在下降，这部分\"流失的财富\"相当于被征了一种隐形税。", "· 六、纳税人权利：税花在哪、我能说什么：结论先行：纳税是义务，但纳税人同样有权关心税收的去向，并要求它\"用之于民\"。", "", "带走三句话：", "1. 税不只在工资条上，更藏在每一次消费里——看清隐形税网，才谈得上\"明白花钱\"。", "2. 直接税看得见、间接税藏价中，两类账都要会看，别被\"我没缴税\"的错觉骗了。", "3. 纳税是义务也是权利：比起税高税低，更该关心它是否以服务和福利真正回到了你身上。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：消费即纳税、流转税是大头、税收三支柱、税负看\"钱去哪\"、纳税人有权利），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b19_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b19_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b19_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b19_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
