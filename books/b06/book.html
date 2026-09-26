@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>《心流的艺术》</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1c1c1c; font-size: 14px; line-height: 1.78;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .wrap { width: 100%; }
+  h1, h2, h3 { font-weight: 800; letter-spacing: .5px; }
+  h2 { font-size: 19px; color: #143a32; margin: 26px 0 12px;
+       padding-left: 11px; border-left: 5px solid #c08438; }
+  h3 { font-size: 15.5px; color: #143a32; margin: 16px 0 6px; }
+
+  /* 封面（顶部块，不强制分页） */
+  .cover { border: 1px solid #e3ddd0; border-radius: 14px; padding: 22px 24px;
+           background: linear-gradient(135deg,#143a32 0%,#1d5247 100%); color: #fff;
+           margin-bottom: 22px; }
+  .cover .dim { display: inline-block; font-size: 12px; background: #c08438; color: #1c1c1c;
+           padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 1px; }
+  .cover h1 { font-size: 25px; margin: 12px 0 8px; line-height: 1.35; }
+  .cover .pos { font-size: 14.5px; opacity: .95; margin: 0; }
+  .cover .sign { margin-top: 14px; font-size: 12.5px; opacity: .85; }
+
+  .lead { background: #f6f3ec; border-radius: 10px; padding: 14px 16px; margin: 4px 0 6px; }
+  .lead b { color: #143a32; }
+
+  /* 心智模型卡片 */
+  .models { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mcard { border: 1px solid #e3ddd0; border-radius: 10px; padding: 12px 14px;
+           background: #fcfbf7; break-inside: avoid; }
+  .mcard .mt { font-weight: 800; color: #143a32; font-size: 14.5px; margin-bottom: 4px; }
+  .mcard .md { font-size: 13px; color: #3a3a3a; margin: 0; }
+  .mcard .mu { font-size: 12.5px; color: #7a6a4a; margin: 6px 0 0; }
+
+  /* 提纲 */
+  .outline { padding-left: 0; }
+  .ochap { break-inside: avoid; margin: 10px 0; }
+  .ochap .ot { font-weight: 800; color: #143a32; font-size: 14.5px; }
+  .ochap ul { margin: 4px 0 0; padding-left: 20px; }
+  .ochap li { margin: 2px 0; }
+
+  /* 精讲 */
+  .lect .blk { break-inside: avoid; margin: 10px 0; }
+  .lect p { margin: 5px 0; }
+  .lect .k { color: #c08438; font-weight: 700; }
+
+  /* 自测卷 */
+  .quiz .q { break-inside: avoid; border: 1px solid #e3ddd0; border-radius: 10px;
+             padding: 12px 14px; margin: 10px 0; background: #fcfbf7; }
+  .quiz .qt { font-weight: 700; margin-bottom: 7px; }
+  .quiz label { display: block; padding: 4px 8px; border-radius: 6px; margin: 3px 0;
+                cursor: pointer; }
+  .quiz label:hover { background: #f0ece1; }
+  .quiz input { margin-right: 8px; }
+  .quiz .ans { font-size: 12.5px; color: #1d7a4d; margin-top: 6px; display: none; }
+  .quizbar { margin: 12px 0; }
+  .quizbar button { background: #143a32; color: #fff; border: 0; border-radius: 8px;
+                    padding: 9px 18px; font-size: 14px; cursor: pointer; font-weight: 700; }
+  .score { font-size: 16px; font-weight: 800; color: #143a32; margin-left: 12px; }
+
+  /* 打卡 */
+  .check li { margin: 6px 0; break-inside: avoid; }
+  .check .day { font-weight: 800; color: #c08438; }
+
+  footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #e3ddd0;
+           font-size: 12.5px; color: #6a6a6a; text-align: center; }
+  footer .cta { display: flex; align-items: center; justify-content: center; gap: 18px;
+                background: #f6f3ec; border: 1px solid #e3ddd0; border-radius: 12px;
+                padding: 14px 18px; margin-bottom: 14px; }
+  footer .ctaqr { width: 92px; height: 92px; border-radius: 8px; }
+  footer .ctatxt { text-align: left; }
+  footer .ctabig { font-size: 16px; font-weight: 800; color: #143a32; }
+  footer .ctasub { font-size: 12.5px; color: #6a6a6a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ COVER ============ -->
+  <section class="cover">
+    <span class="dim">心理内驱</span>
+    <h1>《心流的艺术》</h1>
+    <p class="pos">把专注变成可设计的状态，让做事本身成为奖励</p>
+    <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+  </section>
+
+  <!-- ============ 解决什么 ============ -->
+  <section>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">刷完手机反而更累、忙了一整天却说不清做了什么——问题往往不在意志力，而在你很少进入那种全神贯注、忘了时间的状态。读完这份笔记，你会知道怎么主动把这种状态设计出来，让工作、学习和爱好都变成自带奖励的事。</div>
+  </section>
+
+  <!-- ============ 心智模型 ============ -->
+  <section>
+    <h2>核心心智模型</h2>
+    <div class="models">
+      <div class="mcard">
+        <div class="mt">心流通道</div>
+        <p class="md">挑战略高于技能的那条窄缝，是专注自动发生的地方。</p>
+        <p class="mu">用法：每次开工前把任务调到"努一把够得着"，别太松也别太难。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">即时反馈环</div>
+        <p class="md">做一步就知道对不对，大脑才舍不得走神。</p>
+        <p class="mu">用法：给任务装一个看得见的进度条、计数或检查点。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">自成目标</div>
+        <p class="md">把"为了结果"换成"过程本身就爽"，动力就从外挂变内置。</p>
+        <p class="mu">用法：挑一件你本就喜欢打磨的事，先不计较产出。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">注意力护城河</div>
+        <p class="md">专注是被打断杀死的，不是被偷走的。</p>
+        <p class="mu">用法：开工前一次性清场——手机、通知、杂事全处理掉。</p>
+      </div>
+      <div class="mcard">
+        <div class="mt">微心流单元</div>
+        <p class="md">把大目标拆成能一口气做完的小单元，心流更容易触发。</p>
+        <p class="mu">用法：用 25 分钟左右一个的"心流单元"推进任何事。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 提纲 ============ -->
+  <section>
+    <h2>内容提纲</h2>
+    <div class="outline">
+      <div class="ochap">
+        <div class="ot">第一章　什么是心流</div>
+        <ul>
+          <li>定义：一种全神贯注、忘掉时间、行动与意识合一的状态</li>
+          <li>六个特征：清晰目标、即时反馈、专注、掌控感、忘我、时间感变化</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第二章　心流怎么发生</div>
+        <ul>
+          <li>挑战与技能的平衡：太低则无聊，太高则焦虑，中间才是通道</li>
+          <li>为什么"刚好够不着"比"轻松搞定"更让人上头</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第三章　设计你的心流</div>
+        <ul>
+          <li>环境：减少中断，给专注留一块不被打扰的地盘</li>
+          <li>目标、反馈、技能匹配三件套怎么落地</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第四章　把日常变成练习</div>
+        <ul>
+          <li>工作里造心流：把 KPI 翻译成一个个小关卡</li>
+          <li>学习、运动、爱好里怎么用微心流单元</li>
+        </ul>
+      </div>
+      <div class="ochap">
+        <div class="ot">第五章　长期收益</div>
+        <ul>
+          <li>自成目标的人更耐挫、更不容易空虚</li>
+          <li>把"找乐子"升级成"造乐子"</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 精讲 ============ -->
+  <section>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="lect">
+      <div class="blk">
+        <h3>1. 心流不是玄学，是一种可复用的状态</h3>
+        <p>结论先说：你以为专注靠"状态好"，其实它靠的是条件到位。当你清楚下一步要干嘛、能马上知道做得对不对、难度又刚好压在能力上限，大脑就会自动进入那种忘了时间流逝的投入感。</p>
+        <p>所以别等"灵感来了"再做事。先把条件备齐：目标写一句话、反馈看得见、难度调到位，状态自然就跟来。</p>
+      </div>
+      <div class="blk">
+        <h3>2. 通道模型：无聊和焦虑是心流的两扇门</h3>
+        <p>把"挑战"放横轴、"技能"放纵轴，两者相等且都偏高时，你就站在心流通道里。任务太简单，你会烦；太难，你会慌。</p>
+        <p class="k">做法：觉得烦，就加一点难度或换个玩法；觉得慌，就拆细一点、补点技能。关键是让两者始终贴着走。</p>
+      </div>
+      <div class="blk">
+        <h3>3. 即时反馈是防走神的护栏</h3>
+        <p>人脑讨厌"不知道自己干得咋样"。一旦反馈滞后，注意力就会溜去刷手机。游戏让人上瘾，核心就是每一步都有得分、升级、音效。</p>
+        <p>把这套搬进现实：写代码就开实时预览，背单词就用错题统计，做家务就计时打卡。看得见进展，就不用靠自律硬撑。</p>
+      </div>
+      <div class="blk">
+        <h3>4. 自成目标：把"为了……"换成"因为喜欢做"</h3>
+        <p>靠外部奖励驱动的人，奖励一停动力就断。靠过程本身满足的人，做着做着就有劲。前者叫"他律"，后者叫"自成目标"。</p>
+        <p>训练方法很简单：找一件你愿意反复打磨的小事（做饭、练字、跑步都行），先不管结果，只享受把事情做漂亮的瞬间。慢慢你会把这种口味带进别的事。</p>
+      </div>
+      <div class="blk">
+        <h3>5. 注意力护城河：先清场，再开工</h3>
+        <p>一次打断之后，人平均要十几分钟才能回到深度状态。你不是不够专注，是被打断得太频繁。</p>
+        <p class="k">开工前三件事：手机静音倒扣、关掉所有无关网页、把待回的消息一次性清完。给专注留一块"无人区"，心流才进得来。</p>
+      </div>
+      <div class="blk">
+        <h3>6. 微心流：用时间盒把大事切成小关</h3>
+        <p>大目标让人拖延，是因为它模糊又遥远。切成 25 分钟一个、目标明确、做完即停的"心流单元"，门槛立刻变低。</p>
+        <p>我建议你从今天起，任何不想做的事都先只承诺"做一个单元"。往往一动起来，你就舍不得停了——这就是心流自己推着自己走。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 自测卷 ============ -->
+  <section>
+    <h2>自测卷 · 10 题当场出分</h2>
+    <div class="quiz" id="quiz">
+      <div class="q">
+        <div class="qt">1. 心流最容易出现在哪种情境下？</div>
+        <label><input type="radio" name="q1"> 任务非常简单、闭着眼都能做</label>
+        <label><input type="radio" name="q1" data-correct="1"> 挑战略高于当前技能，努一把够得着</label>
+        <label><input type="radio" name="q1"> 任务极难、完全不知道从哪下手</label>
+        <label><input type="radio" name="q1"> 边刷手机边做事</label>
+        <div class="ans">答案：挑战略高于技能时进入心流通道；太松无聊，太难焦虑。</div>
+      </div>
+      <div class="q">
+        <div class="qt">2. 为什么游戏容易让人"上头"？</div>
+        <label><input type="radio" name="q2"> 因为画面好看</label>
+        <label><input type="radio" name="q2" data-correct="1"> 因为每一步都有即时反馈（得分、升级）</label>
+        <label><input type="radio" name="q2"> 因为不用动脑</label>
+        <label><input type="radio" name="q2"> 因为免费</label>
+        <div class="ans">答案：即时反馈让大脑舍不得走神，这是防走神的关键护栏。</div>
+      </div>
+      <div class="q">
+        <div class="qt">3. "自成目标"指的是？</div>
+        <label><input type="radio" name="q3"> 为了奖金才努力</label>
+        <label><input type="radio" name="q3"> 给自己定很多目标</label>
+        <label><input type="radio" name="q3" data-correct="1"> 活动过程本身就带来满足，不靠外部奖励</label>
+        <label><input type="radio" name="q3"> 没有目标随便做</label>
+        <div class="ans">答案：过程即奖励，动力从外挂变内置，更耐挫。</div>
+      </div>
+      <div class="q">
+        <div class="qt">4. 一次被打断后，回到深度专注平均要多久？</div>
+        <label><input type="radio" name="q4"> 几秒钟</label>
+        <label><input type="radio" name="q4"> 一两分钟</label>
+        <label><input type="radio" name="q4" data-correct="1"> 约十几分钟</label>
+        <label><input type="radio" name="q4"> 不会受影响</label>
+        <div class="ans">答案：中断的代价很高，所以开工前要先清场。</div>
+      </div>
+      <div class="q">
+        <div class="qt">5. 觉得手头任务"太无聊"时，最好怎么办？</div>
+        <label><input type="radio" name="q5"> 硬撑着做完</label>
+        <label><input type="radio" name="q5" data-correct="1"> 加一点难度或换种玩法，把挑战提上来</label>
+        <label><input type="radio" name="q5"> 立刻放弃</label>
+        <label><input type="radio" name="q5"> 多刷会手机</label>
+        <div class="ans">答案：无聊说明挑战低于技能，提难度回到通道。</div>
+      </div>
+      <div class="q">
+        <div class="qt">6. 心流的六个特征不包括下面哪一项？</div>
+        <label><input type="radio" name="q6"> 清晰目标</label>
+        <label><input type="radio" name="q6"> 即时反馈</label>
+        <label><input type="radio" name="q6"> 忘我</label>
+        <label><input type="radio" name="q6" data-correct="1"> 一直很轻松、毫无压力</label>
+        <div class="ans">答案：心流有适度挑战带来的紧张感，并非毫无压力。</div>
+      </div>
+      <div class="q">
+        <div class="qt">7. "微心流单元"的核心作用是？</div>
+        <label><input type="radio" name="q7"> 让任务更神秘</label>
+        <label><input type="radio" name="q7" data-correct="1"> 把大目标切成能一口气做完的小关，降低启动门槛</label>
+        <label><input type="radio" name="q7"> 延长工作时间</label>
+        <label><input type="radio" name="q7"> 替代休息</label>
+        <div class="ans">答案：小单元目标明确、做完即停，心流更容易触发。</div>
+      </div>
+      <div class="q">
+        <div class="qt">8. 想在工作里造心流，第一步应该是？</div>
+        <label><input type="radio" name="q8" data-correct="1"> 把大目标写成一个个清晰的小关卡</label>
+        <label><input type="radio" name="q8"> 等老板给灵感</label>
+        <label><input type="radio" name="q8"> 先换份工作</label>
+        <label><input type="radio" name="q8"> 多开会</label>
+        <div class="ans">答案：清晰目标是心流的前提，先把"下一步"写明白。</div>
+      </div>
+      <div class="q">
+        <div class="qt">9. 关于"注意力护城河"，正确的是？</div>
+        <label><input type="radio" name="q9"> 专注是被偷走的</label>
+        <label><input type="radio" name="q9" data-correct="1"> 专注是被打断杀死的，要先清场再开工</label>
+        <label><input type="radio" name="q9"> 多任务能提高效率</label>
+        <label><input type="radio" name="q9"> 不用管手机</label>
+        <div class="ans">答案：减少中断比靠意志力硬撑更有效。</div>
+      </div>
+      <div class="q">
+        <div class="qt">10. 长期练习心流，最大的收获是？</div>
+        <label><input type="radio" name="q10"> 变得不爱社交</label>
+        <label><input type="radio" name="q10" data-correct="1"> 更耐挫、更不容易空虚，能把"找乐子"升级成"造乐子"</label>
+        <label><input type="radio" name="q10"> 永远不累</label>
+        <label><input type="radio" name="q10"> 不用睡觉</label>
+        <div class="ans">答案：自成目标带来内在满足，抗挫与幸福感提升。</div>
+      </div>
+    </div>
+    <div class="quizbar">
+      <button onclick="grade()">交卷看分</button>
+      <span class="score" id="score"></span>
+    </div>
+  </section>
+
+  <!-- ============ 打卡 ============ -->
+  <section>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check">
+      <li><span class="day">第 1 天</span>　挑一件今天必做的事，开工前把它写成"一个清晰的小目标"。</li>
+      <li><span class="day">第 2 天</span>　给这件事装个可见进度（勾选表/计时器/计数），做完看一眼。</li>
+      <li><span class="day">第 3 天</span>　开工前手机静音倒扣、关无关网页，体验一次"清场后"的专注。</li>
+      <li><span class="day">第 4 天</span>　遇到"太简单"的任务，主动加一点难度或换个玩法。</li>
+      <li><span class="day">第 5 天</span>　遇到"太难"的任务，拆成两步，先把第一步做成。</li>
+      <li><span class="day">第 6 天</span>　用 25 分钟一个的"微心流单元"推进一件一直拖着的事。</li>
+      <li><span class="day">第 7 天</span>　找一件你愿意反复打磨的小事，只为享受做漂亮的过程，不计数不出分。</li>
+    </ul>
+  </section>
+
+  <!-- ============ 结语 ============ -->
+  <section>
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead">
+      <p><b>1.</b> 专注不是靠"等状态"，而是靠把目标、反馈、难度三件套备齐后自动发生的状态。</p>
+      <p><b>2.</b> 挑战略高于技能的那条窄缝里，做事本身就会变成奖励，你不再需要靠自律硬撑。</p>
+      <p><b>3.</b> 先把场子清干净、把大事切成小关，你就能在任何日常里一次又一次地，"造"出心流。</p>
+    </div>
+    <p>这份资料从今天就能用：打卡从第 1 天开始，不用等周一。自测卷低于 7 分，回到"核心心智模型"和"精讲第 2、3 节"重读一遍，重点练"通道模型"和"即时反馈环"。</p>
+  </section>
+
+  <footer>
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  </footer>
+
+</div>
+
+<script>
+function grade(){
+  var qs = document.querySelectorAll('#quiz .q');
+  var total = qs.length, right = 0;
+  qs.forEach(function(q){
+    var picked = q.querySelector('input:checked');
+    var correct = q.querySelector('input[data-correct="1"]');
+    var ans = q.querySelector('.ans');
+    if(ans) ans.style.display = 'block';
+    if(picked && picked === correct){ right++; }
+  });
+  var s = document.getElementById('score');
+  if(s) s.textContent = '得分 ' + right + ' / ' + total;
+}
+</script>
+</body>
+</html>
