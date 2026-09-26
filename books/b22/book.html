@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>《一分钟打动人心》</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1c1c1c; font-size: 14px; line-height: 1.78;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .wrap { width: 100%; }
+  h1, h2, h3 { font-weight: 800; letter-spacing: .5px; }
+  h2 { font-size: 19px; color: #143a32; margin: 26px 0 12px;
+       padding-left: 11px; border-left: 5px solid #c08438; }
+  h3 { font-size: 15.5px; color: #143a32; margin: 16px 0 6px; }
+
+  .cover { border: 1px solid #e3ddd0; border-radius: 14px; padding: 22px 24px;
+           background: linear-gradient(135deg,#143a32 0%,#1d5247 100%); color: #fff;
+           margin-bottom: 22px; }
+  .cover .dim { display: inline-block; font-size: 12px; background: #c08438; color: #1c1c1c;
+           padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 1px; }
+  .cover h1 { font-size: 25px; margin: 12px 0 8px; line-height: 1.35; }
+  .cover .pos { font-size: 14.5px; opacity: .95; margin: 0; }
+  .cover .sign { margin-top: 14px; font-size: 12.5px; opacity: .85; }
+
+  .lead { background: #f6f3ec; border-radius: 10px; padding: 14px 16px; margin: 4px 0 6px; }
+  .lead b { color: #143a32; }
+
+  .models { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mcard { border: 1px solid #e3ddd0; border-radius: 10px; padding: 12px 14px;
+           background: #fcfbf7; break-inside: avoid; }
+  .mcard .mt { font-weight: 800; color: #143a32; font-size: 14.5px; margin-bottom: 4px; }
+  .mcard .md { font-size: 13px; color: #3a3a3a; margin: 0; }
+  .mcard .mu { font-size: 12.5px; color: #7a6a4a; margin: 6px 0 0; }
+
+  .outline { padding-left: 0; }
+  .ochap { break-inside: avoid; margin: 10px 0; }
+  .ochap .ot { font-weight: 800; color: #143a32; font-size: 14.5px; }
+  .ochap ul { margin: 4px 0 0; padding-left: 20px; }
+  .ochap li { margin: 2px 0; }
+
+  .lect .blk { break-inside: avoid; margin: 10px 0; }
+  .lect p { margin: 5px 0; }
+  .lect .k { color: #c08438; font-weight: 700; }
+
+  .quiz .q { break-inside: avoid; border: 1px solid #e3ddd0; border-radius: 10px;
+             padding: 12px 14px; margin: 10px 0; background: #fcfbf7; }
+  .quiz .qt { font-weight: 700; margin-bottom: 7px; }
+  .quiz label { display: block; padding: 4px 8px; border-radius: 6px; margin: 3px 0;
+                cursor: pointer; }
+  .quiz label:hover { background: #f0ece1; }
+  .quiz input { margin-right: 8px; }
+  .quiz .ans { font-size: 12.5px; color: #1d7a4d; margin-top: 6px; display: none; }
+  .quizbar { margin: 12px 0; }
+  .quizbar button { background: #143a32; color: #fff; border: 0; border-radius: 8px;
+                    padding: 9px 18px; font-size: 14px; cursor: pointer; font-weight: 700; }
+  .score { font-size: 16px; font-weight: 800; color: #143a32; margin-left: 12px; }
+
+  .check li { margin: 6px 0; break-inside: avoid; }
+  .check .day { font-weight: 800; color: #c08438; }
+
+  footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #e3ddd0;
+           font-size: 12.5px; color: #6a6a6a; text-align: center; }
+  footer .cta { display: flex; align-items: center; justify-content: center; gap: 18px;
+                background: #f6f3ec; border: 1px solid #e3ddd0; border-radius: 12px;
+                padding: 14px 18px; margin-bottom: 14px; }
+  footer .ctaqr { width: 92px; height: 92px; border-radius: 8px; }
+  footer .ctatxt { text-align: left; }
+  footer .ctabig { font-size: 16px; font-weight: 800; color: #143a32; }
+  footer .ctasub { font-size: 12.5px; color: #6a6a6a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="cover">
+    <span class="dim">人际影响</span>
+    <h1>《一分钟打动人心》</h1>
+    <p class="pos">看清人性底色，用对的方法让人愿意靠近你、帮到你</p>
+    <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+  </section>
+
+  <section>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">很多人苦恼"为什么我对人好却没好报、想求人帮忙却开不了口"。这份笔记把人际互动拆成可操作的动作：先学会看穿面具与真实动机，再用倾听、换位思考、雪中送炭这些"软办法"把人稳住、把事办成，让你从"用力讨好"升级为"四两拨千斤"。</div>
+  </section>
+
+  <section>
+    <h2>核心心智模型</h2>
+    <div class="models">
+      <div class="mcard"><div class="mt">面具识别</div><p class="md">人人都有表面工程，看人得穿过那张笑脸看底色。</p><p class="mu">用法：别被态度骗了，去观察他下意识的小动作和身边围着谁。</p></div>
+      <div class="mcard"><div class="mt">倾听即最高恭维</div><p class="md">给足别人"被看见"的感觉，比会说更拉好感。</p><p class="mu">用法：少说多问，让对方把话说完，偶尔给一句"你说得对"。</p></div>
+      <div class="mcard"><div class="mt">立场先行</div><p class="md">想让别人帮你，先找到他为什么愿意帮。</p><p class="mu">用法：先把对方的利益摆上台面，再讲你自己的目的。</p></div>
+      <div class="mcard"><div class="mt">雪中送炭</div><p class="md">十次锦上添花，不如一次在他最难时伸手。</p><p class="mu">用法：挑对方低谷、急处出手，这一回顶十回客套。</p></div>
+      <div class="mcard"><div class="mt">登门槛</div><p class="md">先让对方答应点小事，再图你真正的大请求。</p><p class="mu">用法：从小请求切入，一步步引导到目标，别一开口就要大的。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>内容提纲</h2>
+    <div class="outline">
+      <div class="ochap"><div class="ot">模块一　洞悉人性的底色</div><ul>
+        <li>人人都戴面具，笑脸后可能藏着别的心思</li>
+        <li>无意识的小动作最诚实，比台词更可信</li>
+        <li>看他身边围着谁，就大概知道他是谁</li>
+        <li>突然献殷勤，先看清动机再接招</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">模块二　瞬间赢得好感</div><ul>
+        <li>懂得倾听，是成本最低的好感来源</li>
+        <li>用对方熟悉的语言和话题，心就靠拢了</li>
+        <li>恰如其分的赞美，比泛泛夸更管用</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">模块三　获取他人支持的七种武器</div><ul>
+        <li>换位思考、区别对待不同性格的人</li>
+        <li>适当示弱、自嘲、分享一点秘密拉近距离</li>
+        <li>让对方先提问，十次锦上添花不如一次雪中送炭</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">模块四　巧妙化解敌意</div><ul>
+        <li>抬高对方，让他觉得敌视你没必要</li>
+        <li>避重就轻转移情绪焦点，有话好好说</li>
+      </ul></div>
+      <div class="ochap"><div class="ot">模块五　把说服变成一门艺术</div><ul>
+        <li>登门槛：先让对方答应小事</li>
+        <li>像对方一样思考，引导他走进你的思路</li>
+        <li>让对方觉得"这主意是他自己想的"，再适度刺激挑战欲</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="lect">
+      <div class="blk"><h3>一、人人都戴面具，别只看脸</h3>
+        <p><span class="k">结论先行：</span>你看到的"态度"多半是包装，真正可信的是他藏不住的下意识。</p>
+        <p>人都有自我保护本能，习惯用表情和姿态掩住真实想法。一个富翁戴面具去舞会撒泼，众人前倨后恭；面具一摘，所有人立刻换上谄媚脸——这才露出他们自己的面具。</p>
+        <p>所以看人别只听他说了什么。留意他无意识的小动作：护东西时下意识捂住最在意的部位，拍打后脑勺多半对人苛刻，手势大开的人通常自信外向。再结合他身边围着谁，底细就清楚了。</p>
+      </div>
+      <div class="blk"><h3>二、倾听比表达更打动人</h3>
+        <p><span class="k">结论先行：</span>多数人有倾诉欲、缺倾听欲，你肯听，对方就把你当知己。</p>
+        <p>一个大使初见别国总统，不谈正事，只夸厨师、多吃甜饼、悠闲抽雪茄，然后请对方谈国家的期望与规划，自己专注听、偶尔回应。结果总统觉得倍受尊重，对大使赞不绝口。</p>
+        <p>倾听是你能给人最有效的恭维，也是赢得好感最省的力。做法很简单：少说话、多提问、让对方把话讲完，把那份被重视的感觉还给他。</p>
+      </div>
+      <div class="blk"><h3>三、先找对方为什么，再讲你要什么</h3>
+        <p><span class="k">结论先行：</span>想撬动别人，先找到他的利益支点，否则对方凭什么动。</p>
+        <p>那些能把别人说动的人，共性都是先摆出对方的好处，再亮自己的目的。就像谈合作，先说"这对你有什么用"，对方才愿意听"那你该怎么做"。</p>
+        <p>反过来，面对突然献殷勤的人要警醒：无事献殷勤，背后大多有诉求。接受好处前先看动机，别等吃了"免费午餐"才发现代价更高。</p>
+      </div>
+      <div class="blk"><h3>四、锦上添花不如雪中送炭</h3>
+        <p><span class="k">结论先行：</span>在他最需要时伸手一次，顶得过平时客套十回。</p>
+        <p>人都下意识护着自己利益，你对他好他记一阵，但他在难处被你托住，那是一辈子的情分。关系里最值钱的不是热闹时的捧场，是低谷时的那只手。</p>
+        <p>操作上：平时别只会凑热闹捧场，留意谁正处低谷、急处，挑那个点出手，分量最重。</p>
+      </div>
+      <div class="blk"><h3>五、用小请求撬动大同意</h3>
+        <p><span class="k">结论先行：</span>别一开口就要大的，先让对方答应一件小事，再往你的目标引。</p>
+        <p>这就是"登门槛"：人一旦在小事上点了头，后续更大的请求阻力会小很多，因为人倾向于保持前后一致。</p>
+        <p>同时要学会"像对方一样思考"——站在他的立场表述，他才听得进去。再让结论像是他自己想出来的，他会更卖力去执行。</p>
+      </div>
+      <div class="blk"><h3>六、化解敌意：抬高对方、有话好好说</h3>
+        <p><span class="k">结论先行：</span>对方带着刺来的时候，硬碰硬只会更僵，抬着他、顺着说反而能化开。</p>
+        <p>面对敌意，先抬高对方的价值，让他觉得"敌视你没必要"；情绪上头时避重就轻，把焦点从冲突点挪开。真有分歧，回到"有话好好说"，把姿态放平。</p>
+        <p>以德报怨、适度赞美你的对手，往往比针锋相对更快收场。关系不是赢出来的，是谈出来的。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>自测卷 · 10 题当场出分</h2>
+    <div class="quiz" id="quiz">
+      <div class="q"><div class="qt">1. 想看穿一个人的真实想法，最该留意的是？</div>
+        <label><input type="radio" name="q1"> A. 他嘴上怎么说</label>
+        <label><input type="radio" name="q1" data-correct="1"> B. 他下意识的小动作和身边围着谁</label>
+        <label><input type="radio" name="q1"> C. 他的朋友圈封面</label>
+        <label><input type="radio" name="q1"> D. 他的着装品牌</label>
+        <div class="ans">答案：B。面具之下的下意识动作与圈子，才是最诚实的信号。</div></div>
+      <div class="q"><div class="qt">2. 关于"倾听"，下列说法更成立的是？</div>
+        <label><input type="radio" name="q2"> A. 多说自己更能赢得好感</label>
+        <label><input type="radio" name="q2" data-correct="1"> B. 少说多听、让对方讲完，是最省力的好感来源</label>
+        <label><input type="radio" name="q2"> C. 倾听没什么用</label>
+        <label><input type="radio" name="q2"> D. 只在领导面前才需要听</label>
+        <div class="ans">答案：B。倾听是成本最低、最有效的恭维，给人被重视的感觉。</div></div>
+      <div class="q"><div class="qt">3. 想请人帮忙却开不了口，更好的切入方式是？</div>
+        <label><input type="radio" name="q3"> A. 直接说"你得帮我"</label>
+        <label><input type="radio" name="q3" data-correct="1"> B. 先讲清楚这件事对他有什么好处</label>
+        <label><input type="radio" name="q3"> C. 先抱怨一通</label>
+        <label><input type="radio" name="q3"> D. 找别人替你说</label>
+        <div class="ans">答案：B。先找对方的利益支点，他才愿意动。</div></div>
+      <div class="q"><div class="qt">4. "十次锦上添花，不如一次雪中送炭"强调？</div>
+        <label><input type="radio" name="q4"> A. 平时少来往就行</label>
+        <label><input type="radio" name="q4" data-correct="1"> B. 在对方最需要时出手，分量最重</label>
+        <label><input type="radio" name="q4"> C. 送贵礼最重要</label>
+        <label><input type="radio" name="q4"> D. 越多客套越好</label>
+        <div class="ans">答案：B。低谷时的托举，抵得过十回热闹捧场。</div></div>
+      <div class="q"><div class="qt">5. "登门槛"策略指的是？</div>
+        <label><input type="radio" name="q5"> A. 一开口就提最大要求</label>
+        <label><input type="radio" name="q5" data-correct="1"> B. 先让对方答应小事，再引导到真实目标</label>
+        <label><input type="radio" name="q5"> C. 翻墙进别人家</label>
+        <label><input type="radio" name="q5"> D. 故意为难对方</label>
+        <div class="ans">答案：B。从小请求切入，利用人保持一致的倾向降低后续阻力。</div></div>
+      <div class="q"><div class="qt">6. 面对突然对你大献殷勤的人，第一步该？</div>
+        <label><input type="radio" name="q6"> A. 立刻回请</label>
+        <label><input type="radio" name="q6" data-correct="1"> B. 先看清对方真实动机</label>
+        <label><input type="radio" name="q6"> C. 当场答应对方所有请求</label>
+        <label><input type="radio" name="q6"> D. 假装没看见</label>
+        <div class="ans">答案：B。免费午餐往往最贵，先看动机不吃亏。</div></div>
+      <div class="q"><div class="qt">7. 化解他人敌意时，更有效的做法是？</div>
+        <label><input type="radio" name="q7"> A. 比对方更凶</label>
+        <label><input type="radio" name="q7" data-correct="1"> B. 抬高对方价值，让他觉得敌视你没必要</label>
+        <label><input type="radio" name="q7"> C. 不理他</label>
+        <label><input type="radio" name="q7"> D. 当众拆穿他</label>
+        <div class="ans">答案：B。抬着说、顺着引，比硬碰硬更容易化开。</div></div>
+      <div class="q"><div class="qt">8. 想让对方更卖力执行一个决定，最好让他感觉？</div>
+        <label><input type="radio" name="q8"> A. 这是你逼他的</label>
+        <label><input type="radio" name="q8" data-correct="1"> B. 这主意是他自己想出来的</label>
+        <label><input type="radio" name="q8"> C. 不做就惩罚</label>
+        <label><input type="radio" name="q8"> D. 别人都做了</label>
+        <div class="ans">答案：B。让人觉得是自己的主意，执行动力最强。</div></div>
+      <div class="q"><div class="qt">9. 用对方熟悉的语言和话题聊天，主要是为了？</div>
+        <label><input type="radio" name="q9"> A. 显得自己博学</label>
+        <label><input type="radio" name="q9" data-correct="1"> B. 快速拉近距离，让两颗心靠拢</label>
+        <label><input type="radio" name="q9"> C. 拖延时间</label>
+        <label><input type="radio" name="q9"> D. 套取秘密</label>
+        <div class="ans">答案：B。熟悉感能降低防备，让关系迅速升温。</div></div>
+      <div class="q"><div class="qt">10. 关于"自嘲"在人际中的作用，更贴切的是？</div>
+        <label><input type="radio" name="q10"> A. 贬低自己没好处</label>
+        <label><input type="radio" name="q10" data-correct="1"> B. 适度自嘲能让人觉得可爱、拉近距离</label>
+        <label><input type="radio" name="q10"> C. 越自嘲越没人理</label>
+        <label><input type="radio" name="q10"> D. 只能对领导用</label>
+        <div class="ans">答案：B。适度自嘲是获取支持的一种柔软武器，讨喜又不伤人。</div></div>
+    </div>
+    <div class="quizbar">
+      <button onclick="grade()">交卷看分</button>
+      <span class="score" id="score"></span>
+    </div>
+  </section>
+
+  <section>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check">
+      <li><span class="day">第 1 天</span> 今天和一个人聊天，全程只问不听的比例控制在一半以内，让对方多说。</li>
+      <li><span class="day">第 2 天</span> 观察一个你熟悉的人，记下他一个下意识的小动作，猜背后是什么性格。</li>
+      <li><span class="day">第 3 天</span> 面对一个请求，先讲"这对你有什么好处"再讲你的目的。</li>
+      <li><span class="day">第 4 天</span> 给一个平时被忽略的人一句具体、真诚的赞美。</li>
+      <li><span class="day">第 5 天</span> 有人对你有情绪，先抬高对方一句，再看气氛是否松动。</li>
+      <li><span class="day">第 6 天</span> 求人帮个小忙（登门槛），体验从小请求切入的感觉。</li>
+      <li><span class="day">第 7 天</span> 复盘本周：哪次你"听"对了、哪次"送"到了，写一句给自己。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead">
+      <p><b>1.</b> 人人都戴面具，别被态度骗了，看他下意识的小动作和身边围着谁。</p>
+      <p><b>2.</b> 倾听比会说更打动人，先找对方为什么、再讲你要什么，关系就顺了。</p>
+      <p><b>3.</b> 锦上添花不如雪中送炭，用小请求撬动大同意，柔软的办法最有力。</p>
+    </div>
+    <p>这份资料建议从今天起连做 7 天打卡；自测卷低于 7 分，回头重读"面具识别"和"立场先行"两张卡片，先把看人与找支点练熟。</p>
+  </section>
+
+    <!-- ============ 复盘卡（补尾页） ============ -->
+  <section class="recap">
+    <h2>带走《一分钟打动人心》· 一张复盘卡</h2>
+    <div class="lead">
+      <p><b>① 它归在「人际影响」这条线上</b>——看清人性底色，用对的方法让人愿意靠近你、帮到你</p>
+      <p><b>② 今天就能用的一步</b>：从自测卷里挑 1 题，把对应模型写进你明天要做的一件事里。</p>
+      <p><b>③ 卡住了别硬扛</b>：扫码加微信，领这套资料的 AI 陪练，对着练比自己悟快得多。</p>
+    </div>
+    <h3>这套资料怎么用（4 步闭环）</h3>
+    <ul class="check">
+      <li><span class="day">读</span> 通读「核心心智模型 + 精讲」，先建立骨架，不纠结细节。</li>
+      <li><span class="day">测</span> 做 10 题自测卷，当场出分；低于 7 分，回到薄弱模型再读一遍。</li>
+      <li><span class="day">练</span> 按「7 天打卡」每天一个微小动作，把知道变成做到。</li>
+      <li><span class="day">扩</span> 顺手领全套「33 本书带你开启新的人生」，沿主线一本本读完。</li>
+    </ul>
+    <h3>给忙碌者的 3 分钟速记</h3>
+    <ul class="check">
+      <li><span class="day">记</span> 这本书只解决一件事：看清人性底色，用对的方法让人愿意靠近你、帮到你</li>
+      <li><span class="day">用</span> 把书里最打动你的一个模型，立刻套进本周一个真实问题。</li>
+      <li><span class="day">传</span> 试着给一个人讲清楚这个模型——讲得清，才是真懂。</li>
+      <li><span class="day">续</span> 读不顺就换一本，主线是「认知→思维→行动→关系→财富」，不必死磕顺序。</li>
+    </ul>
+    <p>「33 本书带你开启新的人生」不是读得多，是把每一本的真东西用起来——这一本，先从一个模型开始，今天就用一次。</p>
+  </section>
+
+<footer>
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  </footer>
+
+</div>
+
+<script>
+function grade(){
+  var qs = document.querySelectorAll('#quiz .q');
+  var total = qs.length, right = 0;
+  qs.forEach(function(q){
+    var picked = q.querySelector('input:checked');
+    var correct = q.querySelector('input[data-correct="1"]');
+    var ans = q.querySelector('.ans');
+    if(ans) ans.style.display = 'block';
+    if(picked && picked === correct){ right++; }
+  });
+  var s = document.getElementById('score');
+  if(s) s.textContent = '得分 ' + right + ' / ' + total;
+}
+</script>
+</body>
+</html>
