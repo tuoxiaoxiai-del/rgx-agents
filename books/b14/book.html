@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>《一本书读懂互联网营销推广》</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1c1c1c; font-size: 14px; line-height: 1.78;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .wrap { width: 100%; }
+  h1, h2, h3 { font-weight: 800; letter-spacing: .5px; }
+  h2 { font-size: 19px; color: #143a32; margin: 26px 0 12px;
+       padding-left: 11px; border-left: 5px solid #c08438; }
+  h3 { font-size: 15.5px; color: #143a32; margin: 16px 0 6px; }
+
+  .cover { border: 1px solid #e3ddd0; border-radius: 14px; padding: 22px 24px;
+           background: linear-gradient(135deg,#143a32 0%,#1d5247 100%); color: #fff;
+           margin-bottom: 22px; }
+  .cover .dim { display: inline-block; font-size: 12px; background: #c08438; color: #1c1c1c;
+           padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 1px; }
+  .cover h1 { font-size: 25px; margin: 12px 0 8px; line-height: 1.35; }
+  .cover .pos { font-size: 14.5px; opacity: .95; margin: 0; }
+  .cover .sign { margin-top: 14px; font-size: 12.5px; opacity: .85; }
+
+  .lead { background: #f6f3ec; border-radius: 10px; padding: 14px 16px; margin: 4px 0 6px; }
+  .lead b { color: #143a32; }
+
+  .models { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mcard { border: 1px solid #e3ddd0; border-radius: 10px; padding: 12px 14px;
+           background: #fcfbf7; break-inside: avoid; }
+  .mcard .mt { font-weight: 800; color: #143a32; font-size: 14.5px; margin-bottom: 4px; }
+  .mcard .md { font-size: 13px; color: #3a3a3a; margin: 0; }
+  .mcard .mu { font-size: 12.5px; color: #7a6a4a; margin: 6px 0 0; }
+
+  .outline { padding-left: 0; }
+  .ochap { break-inside: avoid; margin: 10px 0; }
+  .ochap .ot { font-weight: 800; color: #143a32; font-size: 14.5px; }
+  .ochap ul { margin: 4px 0 0; padding-left: 20px; }
+  .ochap li { margin: 2px 0; }
+
+  .lect .blk { break-inside: avoid; margin: 10px 0; }
+  .lect p { margin: 5px 0; }
+  .lect .k { color: #c08438; font-weight: 700; }
+
+  .quiz .q { break-inside: avoid; border: 1px solid #e3ddd0; border-radius: 10px;
+             padding: 12px 14px; margin: 10px 0; background: #fcfbf7; }
+  .quiz .qt { font-weight: 700; margin-bottom: 7px; }
+  .quiz label { display: block; padding: 4px 8px; border-radius: 6px; margin: 3px 0;
+                cursor: pointer; }
+  .quiz label:hover { background: #f0ece1; }
+  .quiz input { margin-right: 8px; }
+  .quiz .ans { font-size: 12.5px; color: #1d7a4d; margin-top: 6px; display: none; }
+  .quizbar { margin: 12px 0; }
+  .quizbar button { background: #143a32; color: #fff; border: 0; border-radius: 8px;
+                    padding: 9px 18px; font-size: 14px; cursor: pointer; font-weight: 700; }
+  .score { font-size: 16px; font-weight: 800; color: #143a32; margin-left: 12px; }
+
+  .check li { margin: 6px 0; break-inside: avoid; }
+  .check .day { font-weight: 800; color: #c08438; }
+
+  footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #e3ddd0;
+           font-size: 12.5px; color: #6a6a6a; text-align: center; }
+  footer .cta { display: flex; align-items: center; justify-content: center; gap: 18px;
+                background: #f6f3ec; border: 1px solid #e3ddd0; border-radius: 12px;
+                padding: 14px 18px; margin-bottom: 14px; }
+  footer .ctaqr { width: 92px; height: 92px; border-radius: 8px; }
+  footer .ctatxt { text-align: left; }
+  footer .ctabig { font-size: 16px; font-weight: 800; color: #143a32; }
+  footer .ctasub { font-size: 12.5px; color: #6a6a6a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="cover">
+    <span class="dim">商业赚钱</span>
+    <h1>《一本书读懂互联网营销推广》</h1>
+    <p class="pos">掌握七大互联网营销打法，低成本把货卖出去</p>
+    <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+  </section>
+
+  <section>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">传统广告越来越贵、越来越没用，用户却泡在网上刷个不停。不是没钱投，是不会用对的方法在用户出现的地方说话。把营销搬到线上、用对策略和渠道，小预算也能撬动大流量。</div>
+  </section>
+
+  <section>
+    <h2>核心心智模型</h2>
+    <div class="models">
+      <div class="mcard"><div class="mt">精准触达</div><p class="md">在用户正好需要的地方出现，而不是广撒网。</p><p class="mu">用法：先画出用户活跃的平台和时间。</p></div>
+      <div class="mcard"><div class="mt">内容引流</div><p class="md">用有价值的内容换用户的关注和信任。</p><p class="mu">用法：每条内容先想"对用户有什么用"。</p></div>
+      <div class="mcard"><div class="mt">社交互动</div><p class="md">在评论、转发、私信里把陌生人变熟客。</p><p class="mu">用法：固定时间回复、主动发起话题。</p></div>
+      <div class="mcard"><div class="mt">粉丝运营</div><p class="md">把买过一次的人养成反复买的"自己人"。</p><p class="mu">用法：建社群、做专属福利。</p></div>
+      <div class="mcard"><div class="mt">闭环转化</div><p class="md">让线上看到的人顺畅走到线下去成交。</p><p class="mu">用法：每个触点都给清晰的下一步。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>内容提纲</h2>
+    <div class="outline">
+      <div class="ochap"><div class="ot">第 1 章 互联网营销：让全球互通</div><ul><li>什么是互联网营销，与传统营销的区别</li><li>常用策略：搜索、邮件、病毒式、社区</li></ul></div>
+      <div class="ochap"><div class="ot">第 2 章 移动终端：改写规则</div><ul><li>智能手机成主入口，时间碎片化</li><li>口碑与体验至上，大数据助力精准</li></ul></div>
+      <div class="ochap"><div class="ot">第 3 章 微博营销：公域大本营</div><ul><li>四大优势与适宜的企业类型</li><li>营造信服力、协作力、创造力，找真爱粉</li></ul></div>
+      <div class="ochap"><div class="ot">第 4-5 章 App 与微信：关进私域池</div><ul><li>App 用户最关心"对我有什么用"</li><li>微信公众账号定位、服务号与订阅号选择</li></ul></div>
+      <div class="ochap"><div class="ot">第 6 章 O2O 营销：线上线下融合</div><ul><li>线上引流到店、线下导流回网</li><li>场景打通，双向都赚钱</li></ul></div>
+      <div class="ochap"><div class="ot">第 7-9 章 内容、粉丝、互动策略</div><ul><li>好内容三标准：有用有趣有料</li><li>粉丝要认同与归属，互动要双向有分寸</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="lect">
+      <div class="blk"><h3>1. 先搞清：互联网营销到底是什么</h3>
+        <p><span class="k">结论：</span>它用更低成本、更高效率，把"你想卖"变成"用户想买"。</p>
+        <p>和传统营销最大区别：从单向广播变成双向互动，用户能参与、能回嘴。</p>
+        <p>地基要懂：网站、搜索、链接、电商、移动电商，它们是开展一切的前提。</p>
+        <p>别把"网络推广"等同于"营销"——推广是动作，营销是体系。</p>
+      </div>
+      <div class="blk"><h3>2. 移动互联网改写了规则</h3>
+        <p><span class="k">结论：</span>用户的时间碎了，你的打法也得碎成触点。</p>
+        <p>智能手机是主入口，阅读和娱乐都发生在碎片里，营销要"见缝插针"。</p>
+        <p>口碑牌照样要打：碎片化不意味着将就，反而更靠真实好评。</p>
+        <p>大数据让"精准"成为可能：知道谁、在哪、要什么，再出手。</p>
+      </div>
+      <div class="blk"><h3>3. 微博：把公域流量变成信服力</h3>
+        <p><span class="k">结论：</span>在开放的广场上，靠专业 + 亲民赢得陌生人信任。</p>
+        <p>四大优势：传播快、成本低、互动强、能沉淀品牌。</p>
+        <p>三步营造信服力：专业立人设、协作扩声量、创造促参与。</p>
+        <p>找"真爱粉"：精准定位目标用户，用内容让他们主动关注你。</p>
+      </div>
+      <div class="blk"><h3>4. 微信与 App：把流量关进自己的池子</h3>
+        <p><span class="k">结论：</span>公域抢来的人，要沉淀到私域才值钱。</p>
+        <p>微信阵地：先定公众账号定位，服务号做交易、订阅号做内容，可双号矩阵。</p>
+        <p>取名有技巧：好记、好搜、带品类词，让人一眼懂你是干嘛的。</p>
+        <p>App 是重入口：体验式服务比硬推有效，先体验后产生动机。</p>
+      </div>
+      <div class="blk"><h3>5. 内容与粉丝：让陌生人变成自己人</h3>
+        <p><span class="k">结论：</span>内容负责吸引，粉丝负责留存和复购。</p>
+        <p>好内容三标准：有用、有趣、有料，先利他再利己。</p>
+        <p>粉丝要的是认同与归属，不是你的广告；先给价值再要忠诚。</p>
+        <p>用社群把一次性买家养成长期资产，专属感是黏合剂。</p>
+      </div>
+      <div class="blk"><h3>6. O2O 与互动：把看见变成成交</h3>
+        <p><span class="k">结论：</span>线上种草、线下拔草，闭环才是营销的终点。</p>
+        <p>O2O 打通场景：线上引流到店、线下导流回网，双向都赚钱。</p>
+        <p>互动要双向：评论、转发、活动，把围观者变成参与者。</p>
+        <p>互动禁忌：直白又频繁的硬广最招人烦，节奏和分寸决定成败。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>自测卷 · 10 题当场出分</h2>
+    <div class="quiz" id="quiz">
+      <div class="q"><div class="qt">1. 互联网营销与传统营销最大区别是？</div>
+        <label><input type="radio" name="q1"> A. 更贵</label>
+        <label><input type="radio" name="q1" data-correct="1"> B. 双向互动</label>
+        <label><input type="radio" name="q1"> C. 只能文字</label>
+        <label><input type="radio" name="q1"> D. 无区别</label>
+        <div class="ans">答案：B。互联网营销从单向广播变为双向互动，用户能参与。</div></div>
+      <div class="q"><div class="qt">2. 移动互联网时代用户时间特征是？</div>
+        <label><input type="radio" name="q2"> A. 集中</label>
+        <label><input type="radio" name="q2" data-correct="1"> B. 碎片化</label>
+        <label><input type="radio" name="q2"> C. 变长</label>
+        <label><input type="radio" name="q2"> D. 消失</label>
+        <div class="ans">答案：B。用户时间被切碎，营销要嵌入碎片触点。</div></div>
+      <div class="q"><div class="qt">3. 微博营销重在营造？</div>
+        <label><input type="radio" name="q3"> A. 价格战</label>
+        <label><input type="radio" name="q3" data-correct="1"> B. 信服力</label>
+        <label><input type="radio" name="q3"> C. 库存</label>
+        <label><input type="radio" name="q3"> D. 垄断</label>
+        <div class="ans">答案：B。微博靠专业 + 亲民建立陌生人的信任。</div></div>
+      <div class="q"><div class="qt">4. 微信服务号更适合？</div>
+        <label><input type="radio" name="q4" data-correct="1"> A. 做交易服务</label>
+        <label><input type="radio" name="q4"> B. 发长文</label>
+        <label><input type="radio" name="q4"> C. 都没用</label>
+        <label><input type="radio" name="q4"> D. 只做展示</label>
+        <div class="ans">答案：A。服务号偏交易与服务，订阅号偏内容。</div></div>
+      <div class="q"><div class="qt">5. 好内容的三标准是？</div>
+        <label><input type="radio" name="q5"> A. 便宜</label>
+        <label><input type="radio" name="q5" data-correct="1"> B. 有用有趣有料</label>
+        <label><input type="radio" name="q5"> C. 越长越好</label>
+        <label><input type="radio" name="q5"> D. 越多越好</label>
+        <div class="ans">答案：B。内容先利他，有用有趣有料才留人。</div></div>
+      <div class="q"><div class="qt">6. 粉丝运营的核心是？</div>
+        <label><input type="radio" name="q6"> A. 硬广</label>
+        <label><input type="radio" name="q6" data-correct="1"> B. 认同与归属</label>
+        <label><input type="radio" name="q6"> C. 降价</label>
+        <label><input type="radio" name="q6"> D. 垄断</label>
+        <div class="ans">答案：B。粉丝要的是认同感，先给价值再要忠诚。</div></div>
+      <div class="q"><div class="qt">7. O2O 指的是？</div>
+        <label><input type="radio" name="q7" data-correct="1"> A. 线上线下融合</label>
+        <label><input type="radio" name="q7"> B. 只做线上</label>
+        <label><input type="radio" name="q7"> C. 只做线下</label>
+        <label><input type="radio" name="q7"> D. 物流配送</label>
+        <div class="ans">答案：A。O2O 打通线上线下场景，形成闭环。</div></div>
+      <div class="q"><div class="qt">8. 大数据让什么成为可能？</div>
+        <label><input type="radio" name="q8" data-correct="1"> A. 精准营销</label>
+        <label><input type="radio" name="q8"> B. 涨价</label>
+        <label><input type="radio" name="q8"> C. 减员</label>
+        <label><input type="radio" name="q8"> D. 闭店</label>
+        <div class="ans">答案：A。大数据帮助识别谁、在哪、要什么，实现精准。</div></div>
+      <div class="q"><div class="qt">9. 判断：网络推广就是互联网营销的全部。</div>
+        <label><input type="radio" name="q9"> A. 对</label>
+        <label><input type="radio" name="q9" data-correct="1"> B. 错</label>
+        <div class="ans">答案：错。推广是动作，营销是包含策略、渠道、转化的体系。</div></div>
+      <div class="q"><div class="qt">10. 判断：互动中直白又频繁的硬广效果最好。</div>
+        <label><input type="radio" name="q10"> A. 对</label>
+        <label><input type="radio" name="q10" data-correct="1"> B. 错</label>
+        <div class="ans">答案：错。硬广招人烦，互动讲究节奏和分寸。</div></div>
+    </div>
+    <div class="quizbar">
+      <button onclick="grade()">交卷看分</button>
+      <span class="score" id="score"></span>
+    </div>
+  </section>
+
+  <section>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check">
+      <li><span class="day">第 1 天</span> 画出你的用户活跃平台和时间段清单。</li>
+      <li><span class="day">第 2 天</span> 写一条"对用户有用"的内容，先利他。</li>
+      <li><span class="day">第 3 天</span> 在公开平台发起一个互动话题。</li>
+      <li><span class="day">第 4 天</span> 申请或优化你的微信阵地定位与名字。</li>
+      <li><span class="day">第 5 天</span> 建一个用户社群，先发福利不加广告。</li>
+      <li><span class="day">第 6 天</span> 设计一个 O2O 闭环：线上看到→线下成交的下一步。</li>
+      <li><span class="day">第 7 天</span> 看本周数据，留下一个最有效渠道继续加码。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead">
+      <p><b>1.</b> 互联网营销不是投广告，是用对的方法在用户出现的地方说话。</p>
+      <p><b>2.</b> 公域抢流量、私域养粉丝，内容与互动是两根支柱。</p>
+      <p><b>3.</b> 闭环成交才是终点：让每一次曝光都通向一个清晰的下一步。</p>
+    </div>
+    <p>这份资料建议从今天起连续 7 天打卡，每天只做一个微小动作；读完自测卷若低于 7 分，重读"核心心智模型"与"精讲"第 1、5 模块，把七大打法挑最贴合你的一两个先跑通。</p>
+  </section>
+
+    <!-- ============ 复盘卡（补尾页） ============ -->
+  <section class="recap">
+    <h2>带走《一本书读懂互联网营销推广》· 一张复盘卡</h2>
+    <div class="lead">
+      <p><b>① 它归在「商业赚钱」这条线上</b>——掌握七大互联网营销打法，低成本把货卖出去</p>
+      <p><b>② 今天就能用的一步</b>：从自测卷里挑 1 题，把对应模型写进你明天要做的一件事里。</p>
+      <p><b>③ 卡住了别硬扛</b>：扫码加微信，领这套资料的 AI 陪练，对着练比自己悟快得多。</p>
+    </div>
+    <h3>这套资料怎么用（4 步闭环）</h3>
+    <ul class="check">
+      <li><span class="day">读</span> 通读「核心心智模型 + 精讲」，先建立骨架，不纠结细节。</li>
+      <li><span class="day">测</span> 做 10 题自测卷，当场出分；低于 7 分，回到薄弱模型再读一遍。</li>
+      <li><span class="day">练</span> 按「7 天打卡」每天一个微小动作，把知道变成做到。</li>
+      <li><span class="day">扩</span> 顺手领全套「33 本书带你开启新的人生」，沿主线一本本读完。</li>
+    </ul>
+    <h3>给忙碌者的 3 分钟速记</h3>
+    <ul class="check">
+      <li><span class="day">记</span> 这本书只解决一件事：掌握七大互联网营销打法，低成本把货卖出去</li>
+      <li><span class="day">用</span> 把书里最打动你的一个模型，立刻套进本周一个真实问题。</li>
+      <li><span class="day">传</span> 试着给一个人讲清楚这个模型——讲得清，才是真懂。</li>
+      <li><span class="day">续</span> 读不顺就换一本，主线是「认知→思维→行动→关系→财富」，不必死磕顺序。</li>
+    </ul>
+    <p>「33 本书带你开启新的人生」不是读得多，是把每一本的真东西用起来——这一本，先从一个模型开始，今天就用一次。</p>
+    <h3>这本书能改写你的三句话</h3>
+    <ul class="check">
+      <li><span class="day">句1</span> 互联不是多开账号，而是把一次触达变成可被反复回看的资产。</li>
+      <li><span class="day">句2</span> 推广不是砸钱买曝光，而是用对的内容，在对的场景，找到对的人。</li>
+      <li><span class="day">句3</span> 增长不是一条爆款，而是一套能复制、能复盘、能放大的方法。</li>
+    </ul>
+    <h3>下周一就能做的一件小事</h3>
+    <p>挑你手头一个正在推的产品或内容，用本书的「钩子—证据—行动」三步，重写它的第一句话；发之前读三遍，删掉所有空话，只留一个让人想点开的理由。</p>
+    <h3>读完这本，先记住这三条</h3>
+    <ul class="check">
+      <li><span class="day">一</span> 先想清楚「给谁、解决什么、凭什么信你」，再动笔做内容。</li>
+      <li><span class="day">二</span> 把一次发布当成可复用资产，标题、钩子、证据都留档，下次直接改。</li>
+      <li><span class="day">三</span> 用数据回看，而不是用感觉判断——哪句被人读完、哪句被划走，比点赞数更真。</li>
+      <li><span class="day">四</span> 别追热点追到丢了自己——主线稳，偶尔借势，才走得远。</li>
+    </ul>
+    <p>把这本书当成你内容工作的「检查清单」：每次发之前对照三条过一遍，三个月后回头看，你会明显感觉到表达更准、转化更稳。</p>
+    <p>这一本就到这里——把它放进你下周的工作里，比再收藏十篇干货都管用。</p>
+  </section>
+
+<footer>
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  </footer>
+
+</div>
+
+<script>
+function grade(){
+  var qs = document.querySelectorAll('#quiz .q');
+  var total = qs.length, right = 0;
+  qs.forEach(function(q){
+    var picked = q.querySelector('input:checked');
+    var correct = q.querySelector('input[data-correct="1"]');
+    var ans = q.querySelector('.ans');
+    if(ans) ans.style.display = 'block';
+    if(picked && picked === correct){ right++; }
+  });
+  var s = document.getElementById('score');
+  if(s) s.textContent = '得分 ' + right + ' / ' + total;
+}
+</script>
+</body>
+</html>
