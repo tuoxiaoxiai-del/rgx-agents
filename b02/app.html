@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>思维不设限 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>思维不设限 · 书智能体</b><span>认知底盘｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">认知底盘</span>
+      <h1>《思维不设限》</h1>
+      <p class="pos">学会在跨界交叉点持续产出新颖可行的好点子</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">很多人被训练成只在自己的专业里越钻越深，遇到新问题脑子里只有老办法，越努力越被困在原地。这本书帮你把不同领域、不同文化、不同经验连成一张网，让"风马牛不相及"的东西碰撞出新颖又可行的点子。转变发生后，你不再被动等灵感，而是握有一套可以反复使用的跨界思考方法。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">交叉点模型</div><p class="md">把不同领域、文化、经验里的概念连接起来，新的组合就是新的创意。</p><p class="mu">卡住时，从另一个毫不相关的领域借一个概念来碰撞。</p></div><div class="mcard"><div class="mt">联想壁垒降级</div><p class="md">大脑习惯沿最熟的路径联想，主动降低这层壁垒，远距离的概念才连得上。</p><p class="mu">给一个词强行找 3 个跨领域关联，练就"乱点鸳鸯谱"的本领。</p></div><div class="mcard"><div class="mt">数量孵化质量</div><p class="md">想法越多，撞出好想法的几率越高；交叉点让组合呈指数级增长。</p><p class="mu">头脑风暴先凑数量、禁评判，好点子是从海量里筛出来的。</p></div><div class="mcard"><div class="mt">逆转假设</div><p class="md">主动推翻"理所当然"的前提，用大胆假设、小心求证找新路。</p><p class="mu">列出你正依赖的 3 个默认前提，逐个问"反过来会怎样"。</p></div><div class="mcard"><div class="mt">最小可执行步</div><p class="md">把创新拆成小而快的步子持续推进，比一次性完美计划更易落地。</p><p class="mu">把一个大想法拆成"今天就能做"的最小一步，先动起来。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">第一部分　深度洞察力：看见事物背后的联系</div><ul><li>交叉点的本质：不同领域、文化、学科的交汇处，藏着最多的新组合</li><li>创意的诞生：新颖、有价值、可落地，三者缺一不可</li></ul></div><div class="ochap"><div class="ot">第二部分　多元思考力：实现认知升维</div><ul><li>单向思维 vs 交叉思维：前者沿老路精进，后者开拓全新领域</li><li>三大力量：人口流动、科学融合、计算机技术，让交叉点空前密集</li></ul></div><div class="ochap"><div class="ot">第三部分　能力升级：成为思维高手</div><ul><li>联想壁垒：大脑爱走熟路，降级壁垒才能跨界连接</li><li>逆转假设与终身学习：推翻理所当然，主动扩充知识库存</li><li>想法数量孵化质量：海量想法形成"越多越好"的良性循环</li></ul></div><div class="ochap"><div class="ot">第四部分　人生破局点：把思考变成命运</div><ul><li>快速解决与长效积累：复盘经验、建立激励机制</li><li>价值观与风险：走出固化价值观陷阱，敢于期待不一样的人生</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>一、交叉点才是创意的富矿</h3><p><span class="k">结论先行：</span>绝大多数突破性创意，不是在一个领域里憋出来的，而是把两个本不相干的领域连在一起时蹦出来的。</p><p>每个领域都是一座概念仓库。你只在一个仓库里逛，能组合的路数有限；一旦走进两个仓库的交叉口，可组合的数量会指数级暴涨。</p><p>卡住时，先别急着在老本行里找答案，刻意去一个八竿子打不着的领域"借"一个概念来撞一下。交叉点不是天才的专利，普通人也进得去。</p></div><div class="blk"><h3>二、单向思维保底，交叉思维破局</h3><p><span class="k">结论先行：</span>两种思维都要，但角色不同，别用一把尺子量。</p><p>单向思维沿既定方向把现有想法打磨得更精，可控、见效快，是日常保底手段。</p><p>交叉思维把不同领域的概念往新方向甩，常常开出一个全新领域，率先进去的人有机会成为领跑者。</p><p>别用单向思维的标准去毙掉交叉思维——前者求稳，后者求新；也别因为"别人早想到了"就把自己掐灭，真正的交叉往往没人看见过。</p></div><div class="blk"><h3>三、你的联想壁垒正在拖后腿</h3><p><span class="k">结论先行：</span>大脑天生爱走熟路，这叫"联想壁垒"，它会悄悄掐掉你的跨界连接。</p><p>表现很直观：看到"脚"想到"鞋"，看到"土豆"想到"土豆丝"——反应越快越普通，越难出新。</p><p>解法很简单：主动降级壁垒。做联想练习时，逼自己给一个词找 3 个跨领域的关联，比如"脚 → 帽子 / 雪 / 物理学"。</p><p>联想壁垒低的人不是更聪明，只是更敢把远处的东西连起来。这东西能练。</p></div><div class="blk"><h3>四、海量想法比完美想法更有用</h3><p><span class="k">结论先行：</span>先有数量，才有质量。更多想法会自然带来更好的想法。</p><p>交叉点让想法组合呈指数增长，你抛出的点子越多，撞出金子的概率越高。</p><p>做法：头脑风暴阶段严禁评判，先凑够量。成功者的共性不是"一击即中"，而是进入了"越多越好 → 越好越多"的良性循环。</p><p>别在第一个想法上恋战，也别等"完美方案"——它往往根本不存在。</p></div><div class="blk"><h3>五、把想法变小、落地、穿越阻力</h3><p><span class="k">结论先行：</span>再好的点子，落不了地就是零。</p><p>最小可执行步：把大想法拆成今天就能做的最小一步，用小而快的节奏往前拱，比一次性完美计划更能扛住组织里的摩擦。</p><p>激情是燃料：遇到阻碍时，理性计算会劝你放弃，只有对想法的"非理性热爱"能让你跨过一道道坎。</p><p>我建议你选目标时先问自己：我是不是真的在意它、愿意为它吃亏？答案含糊，就先放一放。</p></div><div class="blk"><h3>六、走出去，和不一样的人碰撞</h3><p><span class="k">结论先行：</span>多元化的人，才能撞出多元化的想法。</p><p>人性陷阱：人天生倾向和像自己的人抱团，这会悄悄把团队变成复读机，创新就此熄火。</p><p>做法：主动找背景、专业、文化跟你不同的人合作；招募时甚至可以有意识地纳入"让你不舒服"的视角。</p><p>保持好奇，把时间"浪费"在和工作无关的领域上——未来某个时刻，它会自己连回你的主业。这是最划算的长期投资。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 创意不靠死磕单点，靠跨界交叉——去不相干的领域借一个概念来碰撞。</p><p><b>2.</b> 数量孵化质量——先凑够想法量再筛选，别恋战第一个点子，也别等完美方案。</p><p><b>3.</b> 最小可执行步——把大想法拆成今天就能做的最小一步，先动起来再优化。</p></div>
+    <p>这份资料怎么用：读完当天就做「7 天打卡」第 1 天的动作；自测卷得分低于 8 分，第二天重读精讲模块一和模块三；第 7 天打卡时，把找到的交叉点写成一句话贴在工位上。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第1天</span> 挑一个你正头疼的问题，列出 3 个完全无关的领域，各写一个可借鉴的概念。</li><li><span class="day">第2天</span> 做"联想降级"练习：给"杯子"强行找 5 个跨领域关联。</li><li><span class="day">第3天</span> 就一个小目标，先想出 10 个点子再评判，只求数量不求完美。</li><li><span class="day">第4天</span> 挑一个你默认的"理所当然"，写下"如果反过来"会怎样。</li><li><span class="day">第5天</span> 把一个大想法拆成"今天就能做"的最小一步，并真的做掉。</li><li><span class="day">第6天</span> 主动约一位背景和你很不同的人聊半小时，记下 3 个新视角。</li><li><span class="day">第7天</span> 把这一周的发现连成一张图，挑一个最想推进的交叉点。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1.（单选）交叉点的核心机制是什么？", "o": ["A. 把不同领域的现有概念重新连接、组合", "B. 在单一领域里越钻越深", "C. 等待灵感突然降临", "D. 照搬别人的成功模式"], "a": 0, "tip": "交叉点的本质是让不同领域的概念相遇重组，从而批量催生新颖且有价值的创意。"}, {"q": "2.（单选）关于\"单向思维\"与\"交叉思维\"，正确的是？", "o": ["A. 单向沿老路精进，交叉开拓全新领域", "B. 交叉思维不可靠，应尽量避免", "C. 只有专家才能做交叉思维", "D. 所有创新都来自单向思维"], "a": 0, "tip": "两者互补：单向思维保底求稳，交叉思维破局求新。"}, {"q": "3.（判断）一个想法只要足够新颖，哪怕没有价值，也算创新。", "o": ["A. 正确", "B. 错误"], "a": 1, "tip": "创新须同时满足新颖、有价值、可落地，缺一不可。"}, {"q": "4.（单选）\"联想壁垒\"指的是什么？", "o": ["A. 大脑习惯沿最熟悉的路径联想，阻碍远距离连接", "B. 一种生理上的记忆障碍", "C. 团队沟通的技术故障", "D. 知识储备不足"], "a": 0, "tip": "联想壁垒是思维定式，降级它才能把远处的概念连起来。"}, {"q": "5.（单选）想提高创意产出，最有效的基础做法是？", "o": ["A. 先追求想法的数量，再从中筛选", "B. 一上来就追求每个想法都完美", "C. 只靠个人闭门苦想", "D. 等待别人给方向"], "a": 0, "tip": "数量孵化质量，交叉点让组合指数增长。"}, {"q": "6.（判断）逆转假设（溯因推理）要求我们推翻\"理所当然\"的前提，大胆假设、小心求证。", "o": ["A. 正确", "B. 错误"], "a": 0, "tip": "主动逆转默认前提，是找到新路径的关键动作。"}, {"q": "7.（单选）把创新想法落地的好方法是？", "o": ["A. 拆成小而快的\"最小可执行步\"持续推进", "B. 等万事俱备再一次性放大", "C. 只做计划不行动", "D. 全部外包给别人"], "a": 0, "tip": "小步快跑比一次性完美计划更能穿越阻力。"}, {"q": "8.（单选）三大力量让今天的交叉点空前密集，不包括以下哪一项？", "o": ["A. 人口流动", "B. 科学融合", "C. 计算机技术飞跃", "D. 严格的专业隔离"], "a": 3, "tip": "专业隔离恰恰阻碍交叉，而非促成它。"}, {"q": "9.（判断）同质化团队因为想法一致，比多元化团队更容易推进创新。", "o": ["A. 正确", "B. 错误"], "a": 1, "tip": "多元化团队更容易借到各方资源、采取灵活打法，穿越复杂阻力。"}, {"q": "10.（单选）面对不确定和风险，本书建议的态度是？", "o": ["A. 具备风险意识，同时敢于期待不一样的人生", "B. 完全回避风险", "C. 把一切交给运气", "D. 只做有百分百把握的事"], "a": 0, "tip": "风险与机遇并存，清醒地冒险才能打开新局。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《思维不设限》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《思维不设限》】", "维度：认知底盘", "一句话定位：学会在跨界交叉点持续产出新颖可行的好点子", "", "核心心智模型（5 个）：", "1. 交叉点模型——把不同领域、文化、经验里的概念连接起来，新的组合就是新的创意。 卡住时，从另一个毫不相关的领域借一个概念来碰撞。", "2. 联想壁垒降级——大脑习惯沿最熟的路径联想，主动降低这层壁垒，远距离的概念才连得上。 给一个词强行找 3 个跨领域关联，练就\"乱点鸳鸯谱\"的本领。", "3. 数量孵化质量——想法越多，撞出好想法的几率越高；交叉点让组合呈指数级增长。 头脑风暴先凑数量、禁评判，好点子是从海量里筛出来的。", "4. 逆转假设——主动推翻\"理所当然\"的前提，用大胆假设、小心求证找新路。 列出你正依赖的 3 个默认前提，逐个问\"反过来会怎样\"。", "5. 最小可执行步——把创新拆成小而快的步子持续推进，比一次性完美计划更易落地。 把一个大想法拆成\"今天就能做\"的最小一步，先动起来。", "", "精讲要点：", "· 一、交叉点才是创意的富矿：结论先行：绝大多数突破性创意，不是在一个领域里憋出来的，而是把两个本不相干的领域连在一起时蹦出来的。", "· 二、单向思维保底，交叉思维破局：结论先行：两种思维都要，但角色不同，别用一把尺子量。", "· 三、你的联想壁垒正在拖后腿：结论先行：大脑天生爱走熟路，这叫\"联想壁垒\"，它会悄悄掐掉你的跨界连接。", "· 四、海量想法比完美想法更有用：结论先行：先有数量，才有质量。更多想法会自然带来更好的想法。", "· 五、把想法变小、落地、穿越阻力：结论先行：再好的点子，落不了地就是零。", "· 六、走出去，和不一样的人碰撞：结论先行：多元化的人，才能撞出多元化的想法。", "", "带走三句话：", "1. 创意不靠死磕单点，靠跨界交叉——去不相干的领域借一个概念来碰撞。", "2. 数量孵化质量——先凑够想法量再筛选，别恋战第一个点子，也别等完美方案。", "3. 最小可执行步——把大想法拆成今天就能做的最小一步，先动起来再优化。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：交叉点模型、联想壁垒降级、数量孵化质量、逆转假设、最小可执行步），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b02_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b02_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b02_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b02_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
