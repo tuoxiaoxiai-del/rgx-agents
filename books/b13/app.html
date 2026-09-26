@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一本书读懂互联网思维：每个人都看得懂的互联网思维入门书 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>一本书读懂互联网思维：每个人都看得懂的互联网思维入门书 · 书智能体</b><span>商业赚钱｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">商业赚钱</span>
+      <h1>《一本书读懂互联网思维：每个人都看得懂的互联网思维入门书》</h1>
+      <p class="pos">用互联网思维重做一遍生意，看清趋势与方法</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">传统生意越来越难做，流量贵、客户留不住，往往不是努力不够，而是思考问题的方式还停在旧时代。换上互联网思维，把用户放在中心，用新打法重新组织产品、渠道和增长，生意就能换个写法。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">用户至上</div><p class="md">一切决策从"用户要什么"出发，而不是"我想卖什么"。</p><p class="mu">用法：每次定方案前先写下用户的真实痛点。</p></div><div class="mcard"><div class="mt">单品极致</div><p class="md">在一个点上做到最好，比面面俱到更能赢。</p><p class="mu">用法：砍掉边缘功能，把 80% 资源压到核心体验。</p></div><div class="mcard"><div class="mt">免费引流</div><p class="md">用免费环节换用户的注意力和信任，再在别处变现。</p><p class="mu">用法：设计一个零门槛进来、又愿付费升级的钩子。</p></div><div class="mcard"><div class="mt">跨界打劫</div><p class="md">别只守本行，用新连接去抢别人的盘子。</p><p class="mu">用法：列出和用户重叠、但你没做的相邻场景。</p></div><div class="mcard"><div class="mt">数据驱动</div><p class="md">让真实行为数据替你做决定，而不是拍脑袋。</p><p class="mu">用法：每周看一次核心转化数据，据此迭代。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">第一章 趋势与挑战：移动互联已成底色</div><ul><li>未来是万物互联，旧经营模式不再保险</li><li>传统行业也要向互联网转型</li></ul></div><div class="ochap"><div class="ot">第二章 颠覆与重构：回到用户需求</div><ul><li>以人为本，用户价值至上</li><li>感性思维同样重要，懂用户更要懂自己</li></ul></div><div class="ochap"><div class="ot">第三章 体验与服务：让用户"有感觉"</div><ul><li>用户体验就是产品本身</li><li>体验至上要贯穿品牌沟通全链条</li></ul></div><div class="ochap"><div class="ot">第四章 简约并极致：专注出力量</div><ul><li>产品做减法，追求完美与极致</li><li>互联网里"第二"往往很难活</li></ul></div><div class="ochap"><div class="ot">第五章 跨界与打劫：不跨界就被跨界</div><ul><li>跨界是未来常态，垂直整合与水平扩张</li><li>用户数据是你跨界的撒手锏</li></ul></div><div class="ochap"><div class="ot">第六章 免费与收费：免费是为了收费</div><ul><li>免费的逻辑：成本与注意力经济</li><li>四种变现路径与免费的游戏规则</li></ul></div><div class="ochap"><div class="ot">第七章 数据与云端：把生活放云端</div><ul><li>企业重建场景，关注数据细节</li><li>数据背后的人才是最重要的洞察</li></ul></div><div class="ochap"><div class="ot">第八章至十一章 营销、分享、粉丝与平台</div><ul><li>新媒体新营销，好产品可自传播</li><li>社交圈即信任，粉丝社群造品牌</li><li>平台思维：搭共赢生态，开放平等</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>1. 用户不是数据点，是活生生的人</h3><p><span class="k">结论：</span>把"用户至上"从口号变成每次决策的起点。</p><p>过去企业习惯从"自己能生产什么"出发，互联网逼着你反过来：用户要什么，你才做什么。</p><p>感性需求常被忽略——用户买的常是"感觉"和"身份认同"，不只是功能参数。</p><p>做法：定期走到一线听真实反馈，把"我觉得好"换成"用户用脚投票"。</p></div><div class="blk"><h3>2. 极简与极致，是同一枚硬币的两面</h3><p><span class="k">结论：</span>少即是多，把一件事做到极致比做十件平庸的事更值钱。</p><p>产品做减法：每增加一个功能，先问它是否服务核心体验。</p><p>互联网里头部效应极强，"第二"很难活，所以必须冲到品类最前。</p><p>极致不是堆参数，而是让用户用的一瞬间就感到"对，就是它"。</p></div><div class="blk"><h3>3. 免费不是慈善，是最贵的引流</h3><p><span class="k">结论：</span>免费是手段，最终要在别处把钱赚回来。</p><p>常见路径：基础免费增值收费、A 产品免费 B 产品收费、个人免费第三方收费、个人免费企业收费。</p><p>"羊毛出在狗身上"：让愿意付钱的人补贴免费的人。</p><p>规则：免费的东西本身必须过关，否则免费只会加速口碑崩塌。</p></div><div class="blk"><h3>4. 跨界：守着一亩三分地最危险</h3><p><span class="k">结论：</span>边界正在消失，你不跨界，别人就来跨界打劫你。</p><p>三种方式：垂直整合（打通上下游）、水平扩张（相邻场景）、无预警颠覆（用新模式掀桌）。</p><p>用户数据是你的撒手锏：谁掌握用户画像，谁就更容易跨到别人地盘。</p><p>提醒：跨界不是乱扩，要围绕同一批用户的需求延伸。</p></div><div class="blk"><h3>5. 粉丝与社群：让用户替你说话</h3><p><span class="k">结论：</span>一个真心粉丝，抵得过一百个一次性顾客。</p><p>粉丝直接产生价值：复购、口碑、共创内容。</p><p>社群把陌生人变成"自己人"，身份认同是最强的黏合剂。</p><p>运营要点：从关注到社群，先给价值再要忠诚，别一上来就硬广。</p></div><div class="blk"><h3>6. 平台思维：你不是在单打独斗</h3><p><span class="k">结论：</span>搭一个让各方共赢的平台，比自己通吃走得更远。</p><p>平台五原则：一起建、资源共享、互利互惠、开放、平等。</p><p>数据放云端，企业的决策从经验型转向实时型。</p><p>落到个人：你也可以是平台——连接供需、整合资源，就是你的护城河。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 用户至上不是口号，是每次决策都先问"用户要什么"。</p><p><b>2.</b> 极简极致 + 免费引流 + 跨界打劫，是互联网时代的三把增长钥匙。</p><p><b>3.</b> 粉丝和平台思维告诉你：让他人替你赚钱、替你传播，才是长久生意。</p></div>
+    <p>这份资料建议从今天开始连续 7 天打卡，每天只做一个微小动作；读完自测卷若低于 7 分，重读"核心心智模型"与"精讲"第 1、3 模块，把方法落到你自己的生意上。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第 1 天</span> 写下你业务里"用户真正的痛点"，不是你以为的。</li><li><span class="day">第 2 天</span> 挑一个产品/服务，砍掉一个非核心功能，做减法。</li><li><span class="day">第 3 天</span> 设计一个"免费钩子"：让人零门槛体验你的价值。</li><li><span class="day">第 4 天</span> 列出 3 个你能跨界触达的相邻场景。</li><li><span class="day">第 5 天</span> 去一线听一个真实用户反馈，记下来。</li><li><span class="day">第 6 天</span> 建或加入一个用户社群，先提供价值再要忠诚。</li><li><span class="day">第 7 天</span> 看一遍本周核心数据，定一个下周要改的点。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 互联网思维最核心的出发点是？", "o": ["A. 我想卖什么", "B. 用户要什么", "C. 同行做什么", "D. 政策导向"], "a": 1, "tip": "互联网思维要求从\"用户要什么\"倒推决策，而非从自身供给出发。"}, {"q": "2. \"羊毛出在狗身上\"指的是？", "o": ["A. 产品劣质", "B. 让付费方补贴免费方", "C. 偷工减料", "D. 广告欺诈"], "a": 1, "tip": "免费模式靠第三方或付费用户来补贴免费用户，实现整体盈利。"}, {"q": "3. 互联网竞争中\"第二\"通常？", "o": ["A. 活得最好", "B. 很难存活", "C. 利润最高", "D. 最安全"], "a": 1, "tip": "头部效应极强，非头部的玩家往往很难存活，所以要冲到品类最前。"}, {"q": "4. 跨界打劫最关键的武器是？", "o": ["A. 低价", "B. 用户数据", "C. 广告", "D. 人脉"], "a": 1, "tip": "谁掌握用户画像，谁就更容易跨到别人的地盘。"}, {"q": "5. 免费模式的根本目的是？", "o": ["A. 做慈善", "B. 最终在别处变现", "C. 挤垮对手", "D. 提升股价"], "a": 1, "tip": "免费是引流手段，核心是把注意力和信任攒下来，再在别处赚钱。"}, {"q": "6. 粉丝经济中粉丝的主要作用是？", "o": ["A. 一次性消费", "B. 复购、口碑与共创", "C. 只提意见", "D. 不相关"], "a": 1, "tip": "粉丝直接产生价值：复购、口碑传播、参与内容共创。"}, {"q": "7. 平台思维最强调？", "o": ["A. 一家通吃", "B. 共赢生态", "C. 封闭", "D. 等级森严"], "a": 1, "tip": "平台靠共建、共享、互利、开放、平等走得更远。"}, {"q": "8. 用户体验应当？", "o": ["A. 只管功能", "B. 贯穿沟通全链条", "C. 次要", "D. 交给售后"], "a": 1, "tip": "用户体验至上要贯穿品牌与消费者沟通的整个链条。"}, {"q": "9. 判断：互联网时代凭经验决策就够，数据并不重要。", "o": ["A. 对", "B. 错"], "a": 1, "tip": "答案：错。真实行为数据应优先于经验，替你做关键决定。"}, {"q": "10. 判断：好产品可以自己传播，是新媒体营销的重要观点。", "o": ["A. 对", "B. 错"], "a": 0, "tip": "答案：对。好产品自带传播力，但仍需配合方法和渠道放大。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《一本书读懂互联网思维：每个人都看得懂的互联网思维入门书》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《一本书读懂互联网思维：每个人都看得懂的互联网思维入门书》】", "维度：商业赚钱", "一句话定位：用互联网思维重做一遍生意，看清趋势与方法", "", "核心心智模型（5 个）：", "1. 用户至上——一切决策从\"用户要什么\"出发，而不是\"我想卖什么\"。 用法：每次定方案前先写下用户的真实痛点。", "2. 单品极致——在一个点上做到最好，比面面俱到更能赢。 用法：砍掉边缘功能，把 80% 资源压到核心体验。", "3. 免费引流——用免费环节换用户的注意力和信任，再在别处变现。 用法：设计一个零门槛进来、又愿付费升级的钩子。", "4. 跨界打劫——别只守本行，用新连接去抢别人的盘子。 用法：列出和用户重叠、但你没做的相邻场景。", "5. 数据驱动——让真实行为数据替你做决定，而不是拍脑袋。 用法：每周看一次核心转化数据，据此迭代。", "", "精讲要点：", "· 1. 用户不是数据点，是活生生的人：结论：把\"用户至上\"从口号变成每次决策的起点。", "· 2. 极简与极致，是同一枚硬币的两面：结论：少即是多，把一件事做到极致比做十件平庸的事更值钱。", "· 3. 免费不是慈善，是最贵的引流：结论：免费是手段，最终要在别处把钱赚回来。", "· 4. 跨界：守着一亩三分地最危险：结论：边界正在消失，你不跨界，别人就来跨界打劫你。", "· 5. 粉丝与社群：让用户替你说话：结论：一个真心粉丝，抵得过一百个一次性顾客。", "· 6. 平台思维：你不是在单打独斗：结论：搭一个让各方共赢的平台，比自己通吃走得更远。", "", "带走三句话：", "1. 用户至上不是口号，是每次决策都先问\"用户要什么\"。", "2. 极简极致 + 免费引流 + 跨界打劫，是互联网时代的三把增长钥匙。", "3. 粉丝和平台思维告诉你：让他人替你赚钱、替你传播，才是长久生意。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：用户至上、单品极致、免费引流、跨界打劫、数据驱动），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b13_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b13_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b13_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b13_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
