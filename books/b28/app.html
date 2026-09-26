@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>谁是谷歌想要的人才？破解世界最顶尖公司的面试密码 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>谁是谷歌想要的人才？破解世界最顶尖公司的面试密码 · 书智能体</b><span>成事执行｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">成事执行</span>
+      <h1>《谁是谷歌想要的人才？破解世界最顶尖公司的面试密码》</h1>
+      <p class="pos">拆解顶尖公司面试逻辑，把"难住你"变成"想通它"。</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">你碰到烧脑的开放题就慌，遇到没标准答案的场面就卡壳，总觉得自己"不够聪明"。其实这类题考的不是知识库存，而是你敢不敢换角度、会不会拆问题、能不能边试边改。这份笔记把面试背后的思维方式，翻译成日常就能练的功夫。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">跳出框框</div><p class="md"></p><p class="mu"></p></div><div class="mcard"><div class="mt">没有标准答案</div><p class="md"></p><p class="mu"></p></div><div class="mcard"><div class="mt">费米拆解法</div><p class="md"></p><p class="mu"></p></div><div class="mcard"><div class="mt">发散+收敛双引擎</div><p class="md"></p><p class="mu"></p></div><div class="mcard"><div class="mt">试错迭代</div><p class="md"></p><p class="mu"></p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">第一章 让最挑剔的公司选中你</div><ul><li>搅拌机谜题：尺度变化效应，缩小后超人般强壮</li><li>"密度"是线索，换尺度看问题才能跳出框框</li></ul></div><div class="ochap"><div class="ot">第二章 为什么偏爱创意</div><ul><li>传统面试预测绩效本就糟糕</li><li>要的是脑筋转得快、能接住怪问题的人</li></ul></div><div class="ochap"><div class="ot">第三章 刁钻题成主流</div><ul><li>试金石问题用来筛掉"被宠坏的废物"</li><li>招聘始终是概率游戏，没有百分百标准</li></ul></div><div class="ochap"><div class="ot">第四章 招聘机制</div><ul><li>找天生爱合作的聪明人，警惕"误报"</li><li>集体面试、多轮评估，减少个人偏见</li></ul></div><div class="ochap"><div class="ot">第五章 工程师思维不流行了</div><ul><li>别用最难的笨办法，要设身处地</li><li>创意无非是常识，加上一点换位</li></ul></div><div class="ochap"><div class="ot">第六章 题型分类</div><ul><li>逻辑/洞察力/横向/发散/费米/算法六类</li><li>先定性题型，再作答，省时间</li></ul></div><div class="ochap"><div class="ot">第七章 图形思维与第八至十章</div><ul><li>把逻辑画出来，视觉化打通思路</li><li>60 秒找思路、寻找聪明替代解法、卡壳投入试错</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>模块一 搅拌机谜题：跳出框框的尺度思维</h3><p>结论先行：被缩小进搅拌机，最佳答案不是躲刀片，而是直接跳出来——因为缩小后你会像超人一样强壮。</p><p><span class="k">关键：</span>题目特意提到"密度"，就是线索。小动物力量按身高平方长、体重按立方减，缩小后相对力量暴增。多数难题的答案，藏在"换个尺度或前提"里，别被第一反应锁死。</p></div><div class="blk"><h3>模块二 没有绝对正确答案：面试官买的是思路</h3><p>结论先行：顶尖公司的怪题往往没有唯一解，面试官看的是你推导的过程、想象力和表达，而不是最终对错。</p><p><span class="k">怎么做：</span>别急着赌一个"标准答案"，先把思路有条理地铺开，再给两三个各有道理的方案。过程比目的地重要——你能展示"怎么想"，比"想出什么"更加分。</p></div><div class="blk"><h3>模块三 创意是可训练的：发散+收敛双引擎</h3><p>结论先行：创新不是天赋灵光，而是"先发散一堆、再收敛收口"这套动作。</p><p><span class="k">两步走：</span>发散阶段像头脑风暴，尽量多想砖头的不寻常用途，不自我否定；收敛阶段用逻辑判断哪个最可行。只发散会怪、只收敛会平庸，两者配合才是创新家。</p></div><div class="blk"><h3>模块四 费米拆解法：把大问题拆成常识</h3><p>结论先行：像"上海一年卖多少冰激凌"这类估算题，不需要精确数据，只要会拆。</p><p><span class="k">拆法：</span>把大问号切成人口、人均消费频次、单价等小块，每块用常识估一个范围，再相乘相加。企业家估市场、成本、利润也是这套——能快速否决烂点子、留下值得深做的。</p></div><div class="blk"><h3>模块五 题型识破：先定性再作答</h3><p>结论先行：面试题大致分六类——逻辑谜题、洞察力、横向思维、发散思维、费米估算、算法。先判断它属于哪类，再选对应打法。</p><p><span class="k">好处：</span>同类题套路相通。横向思维题要换相对角度，洞察力题靠"灵机一动"，算法题要可执行计划。定性清楚，省下瞎撞的时间。</p></div><div class="blk"><h3>模块六 卡壳不慌：图形化 + 试错</h3><p>结论先行：大脑一片空白时，别硬扛，把问题画出来，或先抛一个粗糙方案去求反馈。</p><p><span class="k">两招：</span>一是在纸上画流程、画关系，视觉化常能打通思路；二是别憋完美，先把不完美的答案摆出来，靠面试官/同伴的反馈迭代。试错比空想快得多。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 最难的题往往不在题里，而在你敢不敢换个尺度、换个前提重新看它。</p><p><b>2.</b> 没有标准答案的世界里，能展示清晰思路、能拆能估能试错的人，才是被抢着要的人。</p><p><b>3.</b> 创意不是天赋，是"先发散一堆、再收敛收口、靠试错迭代"这套可训练的动作。</p></div>
+    <p>建议按"尺度思维→无标准答案→创意双引擎→费米→题型→卡壳"顺序读；自测低于 7 分，重读"费米拆解法"与"卡壳不慌"；7 天打卡每天 1 条，第 3 条（费米）和第 7 条（试错）最值得反复练。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第1天</span> 遇难题先问自己"尺度/前提换一下会怎样"，练跳出框框。</li><li><span class="day">第2天</span> 做任何事先把"过程"说出来再给结论，习惯展示思路。</li><li><span class="day">第3天</span> 挑一个身边问题，用费米法估算（拆几块+常识），不查答案。</li><li><span class="day">第4天</span> 头脑风暴时不自我否定，先列 10 个点子再挑最好的。</li><li><span class="day">第5天</span> 遇陌生题先判断它属哪类（逻辑/洞察/横向/发散/费米/算法）再作答。</li><li><span class="day">第6天</span> 卡住时把问题画成图（流程/关系），视觉化常能打通。</li><li><span class="day">第7天</span> 主动抛一个"不完美方案"去求反馈，练试错迭代而非憋完美。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 被缩小进搅拌机，最佳思路是？", "o": ["A. 躺平等结束", "B. 利用尺度效应直接跳出来", "C. 打电话求救", "D. 躲开刀片"], "a": 1, "tip": "缩小后相对力量暴增，跳出搅拌机才最稳。"}, {"q": "2. 顶尖公司面试题常\"没有绝对正确答案\"，因为？", "o": ["A. 面试官偷懒", "B. 想看你的推导思路与想象力", "C. 题目太难无解", "D. 根本没有标准"], "a": 1, "tip": "过程比结果重要，思路清晰比猜中答案更加分。"}, {"q": "3. 费米估算题（如\"上海年售多少冰激凌\"）主要考察？", "o": ["A. 背数据的能力", "B. 把大问题拆成可估算的小块", "C. 运气", "D. 算得快不快"], "a": 1, "tip": "拆成人口、频次、单价等小块，用常识逼近真相。"}, {"q": "4. 创新需要哪两种思维配合？", "o": ["A. 只发散", "B. 只收敛", "C. 发散 + 收敛", "D. 都不需要"], "a": 2, "tip": "先想一堆点子，再用逻辑收口，两者缺一不可。"}, {"q": "5. 面试官问\"你会怎样移动大山\"，重点在？", "o": ["A. 真去移山", "B. 你的解决过程与创意", "C. 体力够不够", "D. 听不听话"], "a": 1, "tip": "开放题考的是思路与想象力，不是真去搬山。"}, {"q": "6. 横向思维题的关键是？", "o": ["A. 死算到底", "B. 换个相对/非常规角度", "C. 背诵公式", "D. 直接放弃"], "a": 1, "tip": "横向思维靠\"相对性\"和非常规视角破局。"}, {"q": "7. 面对难题卡壳，文中所建议的是？", "o": ["A. 直接放弃", "B. 把逻辑画出来 + 试错迭代", "C. 装懂糊弄", "D. 保持沉默"], "a": 1, "tip": "图形化打通思路，粗糙方案靠反馈打磨。"}, {"q": "8. 顶尖公司最看重的，通常不是哪类人？", "o": ["A. 聪明且爱合作", "B. 能接住怪问题", "C. 孤僻单打独斗、拒绝协作", "D. 对某件事有持久激情"], "a": 2, "tip": "它们偏爱天生爱合作的聪明人，而非孤僻怪才。"}, {"q": "9. 传统面试预测员工日后绩效的效果？", "o": ["A. 极好", "B. 糟糕透顶", "C. 中等偏上", "D. 无法判断"], "a": 1, "tip": "研究普遍认为面试在绩效预测上很差，所以才用多种信号互补。"}, {"q": "10. 判断：遇到怪题，第一个冒出来的答案通常就是最好的。", "o": ["A. 对", "B. 错"], "a": 1, "tip": "别满足于第一答案，要打磨出更出彩的方案。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《谁是谷歌想要的人才？破解世界最顶尖公司的面试密码》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《谁是谷歌想要的人才？破解世界最顶尖公司的面试密码》】", "维度：成事执行", "一句话定位：拆解顶尖公司面试逻辑，把\"难住你\"变成\"想通它\"。", "", "核心心智模型（5 个）：", "1. 跳出框框—— ", "2. 没有标准答案—— ", "3. 费米拆解法—— ", "4. 发散+收敛双引擎—— ", "5. 试错迭代—— ", "", "精讲要点：", "· 模块一 搅拌机谜题：跳出框框的尺度思维：结论先行：被缩小进搅拌机，最佳答案不是躲刀片，而是直接跳出来——因为缩小后你会像超人一样强壮。", "· 模块二 没有绝对正确答案：面试官买的是思路：结论先行：顶尖公司的怪题往往没有唯一解，面试官看的是你推导的过程、想象力和表达，而不是最终对错。", "· 模块三 创意是可训练的：发散+收敛双引擎：结论先行：创新不是天赋灵光，而是\"先发散一堆、再收敛收口\"这套动作。", "· 模块四 费米拆解法：把大问题拆成常识：结论先行：像\"上海一年卖多少冰激凌\"这类估算题，不需要精确数据，只要会拆。", "· 模块五 题型识破：先定性再作答：结论先行：面试题大致分六类——逻辑谜题、洞察力、横向思维、发散思维、费米估算、算法。先判断它属于哪类，再选对应打法。", "· 模块六 卡壳不慌：图形化 + 试错：结论先行：大脑一片空白时，别硬扛，把问题画出来，或先抛一个粗糙方案去求反馈。", "", "带走三句话：", "1. 最难的题往往不在题里，而在你敢不敢换个尺度、换个前提重新看它。", "2. 没有标准答案的世界里，能展示清晰思路、能拆能估能试错的人，才是被抢着要的人。", "3. 创意不是天赋，是\"先发散一堆、再收敛收口、靠试错迭代\"这套可训练的动作。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：跳出框框、没有标准答案、费米拆解法、发散+收敛双引擎、试错迭代），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b28_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b28_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b28_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b28_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
