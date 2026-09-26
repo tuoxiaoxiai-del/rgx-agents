@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一定要教给孩子的60个安全自救细节 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>一定要教给孩子的60个安全自救细节 · 书智能体</b><span>未来与身心｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">未来与身心</span>
+      <h1>《一定要教给孩子的60个安全自救细节》</h1>
+      <p class="pos">把最关键的60个安全自救细节，变成孩子遇事能脱险的本能反应</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">新闻里那些孩子被拐、溺水、烫伤、走失的事故，多半不是孩子"笨"，而是从没人认真教过他具体怎么做。这份笔记把分散在六十个场景里的要点，收成一套家长能立刻带娃演练的安全课：从记牢家庭信息，到守住陌生人边界，再到灾难来了怎么逃。安全意识 + 实操细节，才是给孩子最实在的保护。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">信息备案</div><p class="md">让孩子早早记牢父母电话和家庭住址，走失或被拐后能求救、能联系家人。</p><p class="mu">用法：用"聪明孩子智斗人贩子"之类游戏反复练，背熟了是光荣的事。</p></div><div class="mcard"><div class="mt">陌生人边界</div><p class="md">不跟走、不吃食、不给开门、不透露家庭信息——四条硬规矩，平时演练成反射。</p><p class="mu">用法：教孩子一句"我不认识你"，以及"爸爸在睡觉，等他醒了再来"。</p></div><div class="mcard"><div class="mt">冷静脱险</div><p class="md">被跟踪往人多处跑并报警；被拐先装乖、抓一切机会逃，并留下线索。</p><p class="mu">用法：和孩子走一遍逃跑路线，明确"超市、保安、警察"是可求助对象。</p></div><div class="mcard"><div class="mt">不硬拼，保命第一</div><p class="md">遇到歹徒不哭不闹不正面冲突，小偷只为财就装睡，打不过就先保命再报警。</p><p class="mu">用法：教"装睡、装晕、伺机报警"，千万别让孩子跟坏人搏斗。</p></div><div class="mcard"><div class="mt">灾难预案</div><p class="md">地震躲坚固三角、火灾低姿捂鼻逃、雷雨远离高处与大树——演练过才不慌。</p><p class="mu">用法：家庭做一次疏散演练，让孩子知道哪个房间有窗、哪里能打电话。</p></div><div class="mcard"><div class="mt">父母做样板</div><p class="md">孩子模仿大人。你守"红灯停绿灯行"，他才会在独自过马路时守住自己。</p><p class="mu">用法：自己先做到，再用游戏和模拟带孩子练，而不是只靠说教。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">第一章　防拐防骗</div><ul><li>不跟陌生人走，大声喊"我不认识你"</li><li>被跟踪：往人多处跑、打电话或报警</li><li>陌生食物：家长不在场一口不吃</li><li>被拐后：设法逃跑、假装听话留线索</li></ul></div><div class="ochap"><div class="ot">第二章　防不速之客</div><ul><li>独自在家：不认识就不开门，用猫眼观察</li><li>家中进陌生人/小偷：躲起来报警，不硬拼</li><li>宿舍发现小偷：不动声色找老师报告</li></ul></div><div class="ochap"><div class="ot">第三章　防偷防抢与水火电</div><ul><li>不向陌生人泄露家庭信息，谨慎填问卷</li><li>遇"保护费"不硬给也不硬扛，找大人</li><li>安全游泳、燃放、灭火、用电的底线</li></ul></div><div class="ochap"><div class="ot">第四章　道路、网络、性与日常意外</div><ul><li>过马路走人行横道，铁路边危险</li><li>网络防黄防骗、交友安全</li><li>防熟人性侵、危险玩具文具、工地与高压设备</li></ul></div><div class="ochap"><div class="ot">第五章　运动、受伤、走失与灾难</div><ul><li>运动保护与野外、球类安全</li><li>手脚伤、头磕破、流鼻血、中暑的自救</li><li>走失回家、饮食安全、身体保护、心态</li><li>地震、雷雨、火灾、龙卷风、沙尘暴逃生</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>一、从"信息备案"开始</h3><p><span class="k">结论先行：</span>孩子一旦走失或被拐，能不能回家，往往取决于他记不记得父母电话和住址。这是所有安全课的第一课。</p><p>用玩具电话让孩子反复拨打你的号码，每次奖励前先背一遍；背得流利要大力夸，让他觉得"记牢信息很光荣"。还要教他：真遇到困难，把写有电话的纸条从车窗或窗口扔出去，越远越好。</p><p>记住——约 80% 的事故如果具备基本自救能力是可以避免的。第一步就是把"家"装进孩子脑子里。</p></div><div class="blk"><h3>二、守住陌生人边界</h3><p><span class="k">结论先行：</span>孩子分不清好人和坏人。与其事后怕，不如立四条硬规矩：不跟走、不吃食、不给开门、不透露家里情况。</p><p>有人搭话带他走，立刻大声喊"我不认识你"并跑向家长老师。家长不在场时，所有陌生人的食物都不要吃，可以说"我留着回家吃"把东西收下拖延。</p><p>被问到家的情况，教孩子回"不知道""这是秘密"。谨慎对待任何要填家庭信息的"小调查"。</p></div><div class="blk"><h3>三、被跟踪与被拐：冷静脱险</h3><p><span class="k">结论先行：</span>发现被跟踪，千万别慌、别往偏僻处走。拼命跑进商场、超市、银行，向工作人员或警察求助；有手机立刻打给父母或 110。</p><p>若是已经被拐，硬拼一定输，逃跑才是最好的办法：利用坏人吃饭、换岗、上厕所的所有空当溜走，往人多处跑并边跑边喊"后面有坏人"。</p><p>暂时逃不掉，就假装很听话、不哭不闹，让对方放松看管，再伺机逃脱。记住：爸爸妈妈一直在家里等，永远别放弃逃的念头。</p></div><div class="blk"><h3>四、家里来了不速之客</h3><p><span class="k">结论先行：</span>独自在家，无论门外是谁，不认识就不开门。可以用"爸爸在睡觉，等他醒了你再来"或"我给爸爸打电话"把人挡回去。</p><p>若陌生人已经闯进家，孩子不要惊慌大叫，应悄悄躲进有电话的房间反锁房门，打 110 说清小区、单元、门牌和情况。报警前先熟悉哪个房间有窗、哪个有电话。</p><p>家中发现小偷，正在睡就继续装睡；醒了碰上，不哭不叫不正面冲突，趁没被发现溜出门找人求救。孩子和小偷搏斗，是最危险的。</p></div><div class="blk"><h3>五、不硬拼，保命第一</h3><p><span class="k">结论先行：</span>面对穷凶极恶的歹徒，孩子的首要目标不是"抓坏人"，而是保全自己。不哭不闹、不直视眼睛、不阻挡盗窃，往往最安全。</p><p>被打倒在地就装晕装死，绝不还手。宿舍里发现可疑陌生人，不动声色退出去找老师或保安报告，抓小偷是成年人的事。</p><p>这一条家长一定要反复强调：任何东西都换不来孩子的平安和健康，保命永远排第一。</p></div><div class="blk"><h3>六、灾难与日常意外预案</h3><p><span class="k">结论先行：</span>地震、火灾、雷雨这些事，孩子没演练过就会只会哭。把"怎么办"练成反射，灾难来了才不慌。</p><p>地震躲在坚固家具旁的三角区；火灾低姿捂鼻、沿安全通道逃，绝不乘电梯；雷雨远离高处、大树和水面。运动受伤先止血冷敷，流鼻血低头捏鼻翼，中暑先移到阴凉处。</p><p>日常还有：过马路走人行横道并左右瞧；不碰危险玩具和"带毒"文具；防熟人越界、护好隐私部位；野菇野果不生吃。每一条都是用案例换来的教训。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 安全意识加实操细节，才是对孩子最实在的保护——记牢家庭信息，是所有自救的第一课。</p><p><b>2.</b> 立住四条陌生人硬规矩，并和孩子反复演练脱险动作，危险来了他才不会懵。</p><p><b>3.</b> 遇到歹徒保命第一、不硬拼；灾难来临，演练过的逃生动作能救命。</p></div>
+    <p>这份资料怎么用：挑一个场景每天带娃演练一项，7 天打卡连做一遍；自测卷低于 8 分，重读"精讲"第一、二、四节，把信息备案和陌生人边界补扎实。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第1天</span> 和孩子玩"背电话"游戏，让他流利说出父母手机号与家庭住址。</li><li><span class="day">第2天</span> 演练"陌生人带我走"：教孩子大声喊"我不认识你"并跑向家长。</li><li><span class="day">第3天</span> 演练独自在家：不认识就不开门，学说"爸爸在睡觉，等他醒了再来"。</li><li><span class="day">第4天</span> 带孩子走一遍从家到附近的超市、保安亭、派出所，明确求助点。</li><li><span class="day">第5天</span> 讲"装睡脱险"与"不硬拼"：遇到小偷/歹徒先保命再报警。</li><li><span class="day">第6天</span> 做一次家庭火灾疏散演练：低姿捂鼻、走楼梯、指定集合点。</li><li><span class="day">第7天</span> 和孩子约法三章：过马路走斑马线、不吃陌生食物、遇保护费找大人。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 防止孩子走失、被拐后无法回家，最基础的一步是？", "o": ["<span>A. 给孩子带定位手表</span>", "<span>B. 让孩子早早记牢父母电话和家庭住址</span>", "<span>C. 不让孩子出门</span>", "<span>D. 让孩子背古诗</span>"], "a": 1, "tip": "信息备案是所有安全自救的第一课。"}, {"q": "2. 有人带孩子说\"买糖、坐碰碰车\"，孩子应该？", "o": ["<span>A. 大声喊\"我不认识你\"并跑向家长</span>", "<span>B. 高兴地跟走</span>", "<span>C. 先问问再决定</span>", "<span>D. 站着不动</span>"], "a": 0, "tip": "陌生人搭话带人走，先喊\"我不认识你\"再找家长老师。"}, {"q": "3. 家长不在场时，陌生人的食物应该？", "o": ["<span>A. 一律不吃</span>", "<span>B. 只要看着干净就吃</span>", "<span>C. 全部收下当面吃</span>", "<span>D. 随便</span>"], "a": 0, "tip": "家长不在场，所有陌生人的食物都不要吃，除非获父母许可。"}, {"q": "4. 孩子独自在家，陌生人敲门，恰当的做法是？", "o": ["<span>A. 开门看看是谁</span>", "<span>B. 不认识就不开，用猫眼观察并联系家长</span>", "<span>C. 直接说\"爸爸妈妈不在\"</span>", "<span>D. 开门请进</span>"], "a": 1, "tip": "无论对方说什么，不认识就不开门，可用\"爸爸在睡觉\"等话挡回。"}, {"q": "5. 家中发现小偷正在行窃，孩子最安全的做法是？", "o": ["<span>A. 装睡或悄悄溜走求救，不正面冲突</span>", "<span>B. 冲上去抓小偷</span>", "<span>C. 大声斥责</span>", "<span>D. 装死不动</span>"], "a": 0, "tip": "孩子与小偷硬拼极危险，装睡或脱身报警才是上策。"}, {"q": "6. 孩子被拐后暂时无法逃脱，应该？", "o": ["<span>B. 假装听话不哭不闹，伺机逃跑留线索</span>", "<span>A. 大哭大闹反抗</span>", "<span>C. 放弃挣扎</span>", "<span>D. 吃喝玩乐</span>"], "a": 0, "tip": "装乖降低对方警惕，再抓空当逃，并写信条留线索。"}, {"q": "7. 被陌生人跟踪，下列做法更安全的是？", "o": ["<span>A. 往商场、超市、银行等人多处跑并求助</span>", "<span>B. 往偏僻小路跑</span>", "<span>C. 原地哭</span>", "<span>D. 跟对方理论</span>"], "a": 0, "tip": "人多处有工作人员和警察可求助，跟踪者不敢声张。"}, {"q": "8. 遇到歹徒，孩子首要的原则是？", "o": ["<span>A. 保命第一，不硬拼</span>", "<span>B. 誓死护财</span>", "<span>C. 正面搏斗</span>", "<span>D. 大声指责</span>"], "a": 0, "tip": "孩子的安全高于一切财物，不硬拼、不直视、不阻挡。"}, {"q": "9. 关于火灾逃生，正确的是？", "o": ["<span>A. 低姿捂鼻，沿安全通道撤离，不乘电梯</span>", "<span>B. 乘电梯快速下楼</span>", "<span>C. 回去拿贵重物品</span>", "<span>D. 躲在床底</span>"], "a": 0, "tip": "火灾用低姿捂鼻、走楼梯逃生，电梯断电会困人。"}, {"q": "10. 家长进行安全教育最有效的方式是？", "o": ["<span>B. 自己先做样板，再用游戏和演练带孩子练</span>", "<span>A. 只靠口头说教</span>", "<span>C. 吓唬孩子</span>", "<span>D. 完全交给学校</span>"], "a": 0, "tip": "父母以身作则 + 游戏演练，比说教和吓唬管用得多。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《一定要教给孩子的60个安全自救细节》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《一定要教给孩子的60个安全自救细节》】", "维度：未来与身心", "一句话定位：把最关键的60个安全自救细节，变成孩子遇事能脱险的本能反应", "", "核心心智模型（6 个）：", "1. 信息备案——让孩子早早记牢父母电话和家庭住址，走失或被拐后能求救、能联系家人。 用法：用\"聪明孩子智斗人贩子\"之类游戏反复练，背熟了是光荣的事。", "2. 陌生人边界——不跟走、不吃食、不给开门、不透露家庭信息——四条硬规矩，平时演练成反射。 用法：教孩子一句\"我不认识你\"，以及\"爸爸在睡觉，等他醒了再来\"。", "3. 冷静脱险——被跟踪往人多处跑并报警；被拐先装乖、抓一切机会逃，并留下线索。 用法：和孩子走一遍逃跑路线，明确\"超市、保安、警察\"是可求助对象。", "4. 不硬拼，保命第一——遇到歹徒不哭不闹不正面冲突，小偷只为财就装睡，打不过就先保命再报警。 用法：教\"装睡、装晕、伺机报警\"，千万别让孩子跟坏人搏斗。", "5. 灾难预案——地震躲坚固三角、火灾低姿捂鼻逃、雷雨远离高处与大树——演练过才不慌。 用法：家庭做一次疏散演练，让孩子知道哪个房间有窗、哪里能打电话。", "6. 父母做样板——孩子模仿大人。你守\"红灯停绿灯行\"，他才会在独自过马路时守住自己。 用法：自己先做到，再用游戏和模拟带孩子练，而不是只靠说教。", "", "精讲要点：", "· 一、从\"信息备案\"开始：结论先行：孩子一旦走失或被拐，能不能回家，往往取决于他记不记得父母电话和住址。这是所有安全课的第一课。", "· 二、守住陌生人边界：结论先行：孩子分不清好人和坏人。与其事后怕，不如立四条硬规矩：不跟走、不吃食、不给开门、不透露家里情况。", "· 三、被跟踪与被拐：冷静脱险：结论先行：发现被跟踪，千万别慌、别往偏僻处走。拼命跑进商场、超市、银行，向工作人员或警察求助；有手机立刻打给父母或 110。", "· 四、家里来了不速之客：结论先行：独自在家，无论门外是谁，不认识就不开门。可以用\"爸爸在睡觉，等他醒了你再来\"或\"我给爸爸打电话\"把人挡回去。", "· 五、不硬拼，保命第一：结论先行：面对穷凶极恶的歹徒，孩子的首要目标不是\"抓坏人\"，而是保全自己。不哭不闹、不直视眼睛、不阻挡盗窃，往往最安全。", "· 六、灾难与日常意外预案：结论先行：地震、火灾、雷雨这些事，孩子没演练过就会只会哭。把\"怎么办\"练成反射，灾难来了才不慌。", "", "带走三句话：", "1. 安全意识加实操细节，才是对孩子最实在的保护——记牢家庭信息，是所有自救的第一课。", "2. 立住四条陌生人硬规矩，并和孩子反复演练脱险动作，危险来了他才不会懵。", "3. 遇到歹徒保命第一、不硬拼；灾难来临，演练过的逃生动作能救命。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：信息备案、陌生人边界、冷静脱险、不硬拼，保命第一、灾难预案、父母做样板），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b31_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b31_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b31_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b31_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
