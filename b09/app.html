@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>世界如此险恶，你要内心强大2 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>世界如此险恶，你要内心强大2 · 书智能体</b><span>心理内驱｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">心理内驱</span>
+      <h1>《世界如此险恶，你要内心强大2》</h1>
+      <p class="pos">看清心理运作的暗逻辑，把情绪的主控权拿回来</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">我们常以为自己是被外界伤害，其实多半是被自己的心理反应困住——一受刺激就情绪上头、事后又后悔。读完这份笔记，你会学会在关键时刻用理性稳住自己，不再被莫名的恐惧、愤怒和自卑牵着走，把人生的控制权重新握回手里。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">心理保护</div><p class="md">人在感到心理受威胁时自动启动的防御机制，本意是保护你，却常常反向伤人。</p><p class="mu">用法：察觉自己突然愤怒、逃避、辩解时，先问"我在保护什么"，而不是顺着它行动。</p></div><div class="mcard"><div class="mt">心理动物</div><p class="md">当保护机制接管了你、理性退场，你就退化成只凭情绪反应的"动物"状态。</p><p class="mu">用法：在冲突现场提醒自己"别沦为心理动物"，把话在脑子里过一遍再出口。</p></div><div class="mcard"><div class="mt">双结构视角</div><p class="md">人同时有智力结构（理性）和心理结构（情绪），前者负责看清，后者负责反应。</p><p class="mu">用法：遇到刺激，先让智力结构出场，用事实描述发生了什么，而非用"我觉得"下结论。</p></div><div class="mcard"><div class="mt">心理三层论</div><p class="md">深层是性格（最难改），中层是心理倾向（固执、自恋等），表层是情绪，越深层越决定你是谁。</p><p class="mu">用法：想改变自己，从可调整的中层倾向入手，发展另一种性格来弱化原有短板。</p></div><div class="mcard"><div class="mt">三指数自检</div><p class="md">内心强大指数高、心理保护指数低、心理动物指数低，三者综合决定一个人的精神档次。</p><p class="mu">用法：定期给自己的"三指数"打分，哪条偏高就去修哪条。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">一、理性起步：用理性武装自己</div><ul><li>心理分析是头脑与心理的防身利器，能保护自己也能改变自己</li><li>一切都有方法可循，从理性中得到的改变才扎实，不靠鸡汤</li></ul></div><div class="ochap"><div class="ot">二、沦为心理动物：看清被操控的状态</div><ul><li>人最大的悲剧不是没认识自己，而是害怕认识自己</li><li>忽悠者的最高境界是让你自我说服，而非说服你</li><li>"我觉得"句式会让很多机会从身边溜走</li></ul></div><div class="ochap"><div class="ot">三、在心理上求生：破解保护机制</div><ul><li>心理保护是打开心理秘密的钥匙，但盲目运作会反伤自己</li><li>用智力结构去应对，才是真正保护自己的方式</li><li>恶性循环：用心理保护来疗伤，反而越缠越紧</li></ul></div><div class="ochap"><div class="ot">四、内心深处：三层心理结构</div><ul><li>性格在深层、心理倾向在中层、情绪在表层，各司其职</li><li>把持住性格，把它转化为改变自己和世界的驱动力</li></ul></div><div class="ochap"><div class="ot">五、心理指数：给自己打分</div><ul><li>内心强大 / 心理保护 / 心理动物三指数，综合看清层次</li><li>真正强大的人是拿理性武装存在、不轻易被激怒的人</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>1. 你以为的"性格不好"，其实是保护机制在干活</h3><p><span class="k">结论：</span>人遇到刺激时，几乎都会自动启动心理保护，这是写在心理结构里的本能，目的是在心理上"求生"。问题在于，它常常用错误的方式保护你——比如愤怒、逃避、自我辩解，表面上让你占了上风，实际上是在杀伤自己。</p><p>所以先别急着骂自己"没出息"或骂别人"有病"。当你或别人做出莫名其妙的反应时，先问一句：这是在保护什么？看穿了这层，你就从被操控的状态里醒了一半。</p></div><div class="blk"><h3>2. 冲突现场，最忌讳变成"心理动物"</h3><p><span class="k">结论：</span>在商场吵架、夫妻争执、职场对峙里，很多小事搞到不可收拾，是因为双方都变成了心理动物——情绪刺激情绪，越吵越凶。</p><p>破解办法只有一个：用你的智力结构（理性）去应对，不刺激对方的心理结构。对方发火时你淡定，他的心理防御弦就松了，蓄积的能量转不成攻击，问题自然降温。真正的淡定，就是让理性先出场。</p></div><div class="blk"><h3>3. "我觉得"是一个会漏财漏机会的句式</h3><p><span class="k">结论：</span>总把"我觉得"挂在嘴边，本质是一种自我保护——害怕说错、不敢下判断。但别人期待的是你准确描述事实并做判断，你却只给了一个模糊的感觉。</p><p>长期玩这个句式，你的洞察力和分析力会越来越迟钝，别人也会默认你"心里没底、控制不了局面"。除非在敷衍或博弈，否则干脆一点、直接一点，别把机会拱手让人。</p></div><div class="blk"><h3>4. 别人攻击你，往往是因为你的存在威胁到了他</h3><p><span class="k">结论：</span>一个人莫名其妙地疏远你、攻击你，常常不是因为你做错了什么，而是你的存在在对比中贬低了他存在的价值，让他不安。他的攻击、冷漠，都是他自己的心理保护。</p><p>明白了这一点，你就不用内耗去自证清白。面对亲近人的"莫名其妙"，最正确的反应是放下道德评判，去破译他行为背后的心理动机——那才是真正的理解与爱的能力。</p></div><div class="blk"><h3>5. 嫉妒、自恋、固执，背后是同一套剧本</h3><p><span class="k">结论：</span>嫉妒，往往是看不起自己却绝不允许自己意识到，于是把心理能量投射到刺激你的人身上；自恋，是没法靠别人肯定自己，转而自己肯定自己；固执，是怕被说服就意味着"自我"被交出去。</p><p>它们都是心理保护的不同剧目。看穿之后你会发现：把本该用来改变自己、提高自己的能量，浪费在攻击和防御上，才是最大的亏。</p></div><div class="blk"><h3>6. 把性格从牢笼变成引擎</h3><p><span class="k">结论：</span>性格藏在心理结构最深处，几乎改不了，但你可以"发展另一种性格来弱化它"，或者把它把持住、转化为改变世界的驱动力。一个自卑的人若把那份动力升华成做事的引擎，反而能做出大出息。</p><p>最可惜的人，是让心理保护一直替自己活着——用疗伤的方式反复杀伤自己。最牛的人，是拿理性武装存在，刺激来了也激不出他的保护机制。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 你最大的敌人往往不是外界，而是被刺激就自动启动、却反向伤你的心理保护机制。</p><p><b>2.</b> 真正的强大，是让理性先出场、把情绪主控权拿回来，不轻易沦为被本能劫持的"心理动物"。</p><p><b>3.</b> 看清自己和他人的心理剧本，不是用来评判，而是用来把性格变成改变生活的引擎。</p></div>
+    <p>这份资料建议从今天就开始用：先翻到自测卷自测，低于 7 分就重读"精讲"第 1、2、6 节；7 天打卡从你读到这一页的第二天起连续做，别断。把它当成随身的心理防身手册，遇到情绪波动就翻一翻。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第 1 天</span> 今天起，每当自己突然愤怒或想辩解，先默念一句"我在保护什么"，记录一次。</li><li><span class="day">第 2 天</span> 把一句"我觉得"换成对事实的直接描述，试试看对方反应有什么不同。</li><li><span class="day">第 3 天</span> 遇到冲突，刻意淡定三秒再回应，体会对方防御松下来的感觉。</li><li><span class="day">第 4 天</span> 列出一个你嫉妒或反感的人，写下"他触发了我哪部分对自己的不满"。</li><li><span class="day">第 5 天</span> 给自己的"三指数"打分：内心强大、心理保护、心理动物，各 1–5 分。</li><li><span class="day">第 6 天</span> 选一个想改的中层倾向（如固执），今天刻意用一次相反的回应。</li><li><span class="day">第 7 天</span> 把一件一直用情绪应对的事，用"事实+判断"写下来，交给智力结构处理。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 一个人在冲突中\"愤怒反击\"，从心理角度看，主要起什么作用？", "o": ["A. 说明他性格刚强、有原则", "B. 是一种心理保护，用力量感覆盖被侮辱的虚弱", "C. 以上都对，愤怒的本质是心理能量的转换", "D. 愤怒和恐惧无关，是天生的脾气"], "a": 2, "tip": "愤怒把被侮辱、恐惧的心理能量夺过来，让人感到有力量、处于进攻态势，本质是一次心理能量的转换与保护。"}, {"q": "2. 所谓\"心理动物\"，指的是哪种状态？", "o": ["A. 喜欢养宠物的人", "B. 心理保护被启动时失去理性、被情绪和本能驱动的状态", "C. 智商偏低的人", "D. 从事动物相关工作的人"], "a": 1, "tip": "心理动物是被心理保护接管、理性退场、只凭情绪反应的人，与智力高低无关。"}, {"q": "3. 为什么总说\"我觉得\"会让你吃亏？", "o": ["A. 因为\"我觉得\"显得不礼貌", "B. 因为它太口语化，不适合正式场合", "C. 它本质是自我保护，阻止自己把问题搞清楚，长期削弱洞察力", "D. 因为它会让别人讨厌你"], "a": 2, "tip": "\"我觉得\"是一种自我保护式表达，阻止自己厘清事实，长期会钝化分析能力，也让人觉得你心里没底。"}, {"q": "4. 面对一个愤怒攻击你的人，最稳妥的应对是？", "o": ["A. 立刻回骂，压住对方气势", "B. 用理性（智力结构）应对，不刺激对方，让他的防御松下来", "C. 默默忍受，事后报复", "D. 当众揭穿他的逻辑漏洞"], "a": 1, "tip": "用智力结构淡定应对、不刺激对方心理结构，蓄积的攻击能量失去出口，情绪自然冷却，问题和平解决。"}, {"q": "5. 心理结构的三层，从深到浅依次是？", "o": ["A. 情绪、心理倾向、性格", "B. 性格、心理倾向、情绪", "C. 心理倾向、性格、情绪", "D. 情绪、性格、心理倾向"], "a": 1, "tip": "深层是性格（最难改、力量最大），中层是心理倾向（固执、自恋等），表层是情绪，越深层越决定你是谁。"}, {"q": "6. 关于\"心理保护\"，下列哪句话是对的？", "o": ["A. 心理保护全是坏事，应该彻底消除", "B. 心理保护只在受威胁时启动，盲目且强大，需要被看清和把持", "C. B 正确，且爱一个人不属于心理保护", "D. 心理保护越频繁说明人越强大"], "a": 2, "tip": "心理保护在心理生存受威胁时才启动，盲目而强大；而爱一个人时心理生存未受威胁，不属于保护机制。"}, {"q": "7. 一个人嫉妒别人，深层心理往往是？", "o": ["A. 单纯看对方不顺眼", "B. 看不起自己却不允许自己意识到，把能量投射到刺激自己的人身上", "C. 想成为对方那样的人", "D. 和对方有私人恩怨"], "a": 1, "tip": "嫉妒是一种隐秘的心理保护：把本该用于改变自己的心理能量，投射到刺激自己的人身上，以获得平衡。"}, {"q": "8. 想改变自己，最现实的做法是？", "o": ["A. 彻底推翻自己的性格", "B. 从可调整的中层心理倾向入手，发展另一种性格来弱化短板", "C. 只靠意志力压制情绪", "D. 等环境变好自然就好"], "a": 1, "tip": "性格极难改变，更可行的路是发展另一种性格来弱化它，或把性格的心理动力转化为做事的引擎。"}, {"q": "9. 别人突然疏远或攻击你，更可能的原因是？", "o": ["A. 你真的做错了什么", "B. 你的存在在对比中贬低了他存在的价值，触发了他的心理保护", "C. 他性格天生恶劣", "D. 纯粹是巧合"], "a": 1, "tip": "很多疏远和攻击并非因为你做错，而是你的存在让他不安，他需要靠攻击或回避来保护自己。"}, {"q": "10. 真正内心强大的人，最核心的特征是？", "o": ["A. 永远不生气", "B. 拿理性武装存在，刺激来了也激不出他的保护机制", "C. 什么都无所谓", "D. 从不与人发生冲突"], "a": 1, "tip": "内心强大的人心理保护指数低，能用理性把信息拦截在智力结构里解读，很难沦为被情绪劫持的心理动物。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《世界如此险恶，你要内心强大2》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《世界如此险恶，你要内心强大2》】", "维度：心理内驱", "一句话定位：看清心理运作的暗逻辑，把情绪的主控权拿回来", "", "核心心智模型（5 个）：", "1. 心理保护——人在感到心理受威胁时自动启动的防御机制，本意是保护你，却常常反向伤人。 用法：察觉自己突然愤怒、逃避、辩解时，先问\"我在保护什么\"，而不是顺着它行动。", "2. 心理动物——当保护机制接管了你、理性退场，你就退化成只凭情绪反应的\"动物\"状态。 用法：在冲突现场提醒自己\"别沦为心理动物\"，把话在脑子里过一遍再出口。", "3. 双结构视角——人同时有智力结构（理性）和心理结构（情绪），前者负责看清，后者负责反应。 用法：遇到刺激，先让智力结构出场，用事实描述发生了什么，而非用\"我觉得\"下结论。", "4. 心理三层论——深层是性格（最难改），中层是心理倾向（固执、自恋等），表层是情绪，越深层越决定你是谁。 用法：想改变自己，从可调整的中层倾向入手，发展另一种性格来弱化原有短板。", "5. 三指数自检——内心强大指数高、心理保护指数低、心理动物指数低，三者综合决定一个人的精神档次。 用法：定期给自己的\"三指数\"打分，哪条偏高就去修哪条。", "", "精讲要点：", "· 1. 你以为的\"性格不好\"，其实是保护机制在干活：结论：人遇到刺激时，几乎都会自动启动心理保护，这是写在心理结构里的本能，目的是在心理上\"求生\"。问题在于，它常常用错误的方式保护你——比如愤怒、逃避、自我辩解，表面上让你占了上风，实际上是在杀伤自己。", "· 2. 冲突现场，最忌讳变成\"心理动物\"：结论：在商场吵架、夫妻争执、职场对峙里，很多小事搞到不可收拾，是因为双方都变成了心理动物——情绪刺激情绪，越吵越凶。", "· 3. \"我觉得\"是一个会漏财漏机会的句式：结论：总把\"我觉得\"挂在嘴边，本质是一种自我保护——害怕说错、不敢下判断。但别人期待的是你准确描述事实并做判断，你却只给了一个模糊的感觉。", "· 4. 别人攻击你，往往是因为你的存在威胁到了他：结论：一个人莫名其妙地疏远你、攻击你，常常不是因为你做错了什么，而是你的存在在对比中贬低了他存在的价值，让他不安。他的攻击、冷漠，都是他自己的心理保护。", "· 5. 嫉妒、自恋、固执，背后是同一套剧本：结论：嫉妒，往往是看不起自己却绝不允许自己意识到，于是把心理能量投射到刺激你的人身上；自恋，是没法靠别人肯定自己，转而自己肯定自己；固执，是怕被说服就意味着\"自我\"被交出去。", "· 6. 把性格从牢笼变成引擎：结论：性格藏在心理结构最深处，几乎改不了，但你可以\"发展另一种性格来弱化它\"，或者把它把持住、转化为改变世界的驱动力。一个自卑的人若把那份动力升华成做事的引擎，反而能做出大出息。", "", "带走三句话：", "1. 你最大的敌人往往不是外界，而是被刺激就自动启动、却反向伤你的心理保护机制。", "2. 真正的强大，是让理性先出场、把情绪主控权拿回来，不轻易沦为被本能劫持的\"心理动物\"。", "3. 看清自己和他人的心理剧本，不是用来评判，而是用来把性格变成改变生活的引擎。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：心理保护、心理动物、双结构视角、心理三层论、三指数自检），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b09_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b09_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b09_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b09_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
