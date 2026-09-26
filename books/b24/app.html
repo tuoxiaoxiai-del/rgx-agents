@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一分钟看透职场人 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>一分钟看透职场人 · 书智能体</b><span>人际影响｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">人际影响</span>
+      <h1>《一分钟看透职场人》</h1>
+      <p class="pos">一套看人、懂人、处好职场关系的实用心法</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">很多人在职场里栽跟头，不是能力不行，而是没看明白人——看不懂领导的真意、读不出同事的弦外之音、分不清客户的虚实。掌握一套从语言、神态、动作到心理的识人方法，你就能把一层层关系打通，让麻烦事变简单，让职业路走得更顺。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">四维识人法</div><p class="md">把识人拆成四层：对方说什么、脸上露什么、身体做什么、心里想什么。</p><p class="mu">用法：见人先别急着下结论，按"言—色—行—心"四格过一遍再判断。</p></div><div class="mcard"><div class="mt">先听后说</div><p class="md">倾听是职场第一大软实力，听懂比抢着表达更能赢得尊重与信息。</p><p class="mu">用法：对方开口时闭嘴、看着对方、听完再回应，别中途打断。</p></div><div class="mcard"><div class="mt">听弦外之音</div><p class="md">字面之下往往藏着真意，只听字面对方会让你误判形势。</p><p class="mu">用法：把前后话连起来想，看语气和表情是否一致，再决定怎么接。</p></div><div class="mcard"><div class="mt">看状态胜过看表态</div><p class="md">表情、眼神、站姿这些"身体语言"比嘴上的话更难伪装，更接近真实。</p><p class="mu">用法：对方嘴上说"好"，眼神却下垂或飘移，就别当真，换个时机再谈。</p></div><div class="mcard"><div class="mt">分层沟通</div><p class="md">对上级、同辈、下属、客户，以及亲疏、年龄不同的人，话题和语气要切换。</p><p class="mu">用法：职位高的给敬意，关系浅的不聊私事，年长的多敬语。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">一、听言：把话听进骨头里</div><ul><li>倾听不是不说话，而是给对方面子、给自己信息</li><li>听弦外之音：前后连起来想，看语气与表情是否对得上</li><li>口头禅是性格的窗口，"好呀好呀""你先听我说"各有含义</li></ul></div><div class="ochap"><div class="ot">二、观色：表情眼神是晴雨表</div><ul><li>喜怒哀乐写在脸上，表情比语言更诚实</li><li>眼神会"说话"：凝定、下垂、上扬各有信号</li><li>脸型、眉毛、嘴部动作也能辅助判断</li></ul></div><div class="ochap"><div class="ot">三、察行：姿态动作藏态度</div><ul><li>站姿是性格的镜子：叉腰、并脚、倚墙各不一样</li><li>小动作会泄密：摸鼻、撇嘴、掩口都别有意味</li></ul></div><div class="ochap"><div class="ot">四、明心：读懂对方真正想要什么</div><ul><li>把语言、神态、动作拼起来，推断对方真实诉求</li><li>不同场景（面试、带团队、带下属、对同事、对客户）各有识人重点</li></ul></div><div class="ochap"><div class="ot">五、把关系处长久的两条底线</div><ul><li>公开场合给台阶、留面子，私下再沟通</li><li>守住边界：不把私生活带进办公室，隔墙有耳</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>1. 先听后说：倾听是职场第一大软实力</h3><p>结论先行：在职场里，会不会听，比会不会说更决定你能走多远。很多人败在急着表达、武断打断，结果既漏了信息，又让人反感。</p><p><span class="k">怎么做：</span>对方说话时，把诚意亮出来——目光看着对方，别看表、别修指甲、别打哈欠；有耐心听完，哪怕你不认同也别急着评价；适当用"对""是这样"给对方反馈，让他愿意说下去。</p><p><span class="k">为什么值钱：</span>下属认真听，能少出偏差；领导认真听，能看清一个人的能力与品性。听，是成本最低的识人手段。</p></div><div class="blk"><h3>2. 听懂弦外之音：别只听字面</h3><p>结论先行：很多关键意思，对方不会直说。只听字面，容易错失信号甚至丢了机会。</p><p><span class="k">一个例子：</span>老板先夸你"能力强、可担更重职责"，紧接着问"若你当主管会裁员吗"，真意往往是在试探你的管理观和站位，而不是真要提拔。答得太满，反而露怯。</p><p><span class="k">练习方法：</span>把对方前后说的话连起来想；感受声音是自愿还是勉强；对比声调、用词、肢体是否一致；再结合在场环境做判断。</p></div><div class="blk"><h3>3. 观色识人：表情与眼神最诚实</h3><p>结论先行：脸是每个人的标签，表情和眼神比语言更难伪装，是判断心情与性格的"晴雨表"。</p><p><span class="k">表情速读：</span>总带愉快表情的人好相处、受欢迎；常显厌烦的多浮躁、虎头蛇尾；表情僵硬的偏主观强势、难合作；高傲姿态的固执自我、人缘差。</p><p><span class="k">眼神信号：</span>眼神"凝定"说明他认为你值得听，可继续说；眼神"下垂"说明内心痛苦，少说自己的事、多安慰；眼神"上扬"是不屑，趁早打住换策略；眼神"散乱"是已厌倦，赶紧收尾。</p></div><div class="blk"><h3>4. 看姿态读性格：站姿与微动作</h3><p>结论先行：人怎么站、怎么动，往往暴露性格底色，比自我介绍靠谱。</p><p><span class="k">站姿：</span>双手叉腰的多自信有魄力；双脚并拢的多诚实守规矩但偏保守；倚墙的多依赖、缺主见；手插裤袋的多城府深、谨慎少言；胸前抱手的多成竹在胸但攻击性强。</p><p><span class="k">微动作：</span>下唇前撇的多疑心重；咬嘴唇是在认真听或反思；常舔嘴唇是抑制紧张；上下唇前撅是对你有所防备，换轻松话题。</p></div><div class="blk"><h3>5. 分层沟通：对不同的人说不同的话</h3><p>结论先行：同一句话，对上级、同辈、下属、客户说出来，效果天差地别。沟通要按关系分层。</p><p><span class="k">按身份：</span>职位高于你的，首要是尊重与敬意；职位低于你的，和蔼平和、别摆架子、别用教训口气。</p><p><span class="k">按亲疏与年龄：</span>关系一般聊闲天不聊私事；交情深的可交流思想、关心生活；年长的多敬语、显尊重；年轻的别随意指手画脚。</p></div><div class="blk"><h3>6. 给面子与守边界：把关系处长久</h3><p>结论先行：职场关系的崩塌，大多源于"当面没面子"和"边界不清"。两条底线能保你长久。</p><p><span class="k">给台阶：</span>有分歧时，公开场合先给对方面子、留余地，私下再沟通。当众撕破脸，事后很难收场。</p><p><span class="k">守边界：</span>别把生活危机（失恋、婚变）带进办公室倾诉；对老板有意见也别在同事间毫无保留地讲——隔墙有耳。成熟的人都不"直率"到这个点。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 看人别只听嘴上说的，语言、神态、动作、心理四层一起读，才接近真实。</p><p><b>2.</b> 先听后说、听懂弦外之音，是成本最低也最被低估的职场竞争力。</p><p><b>3.</b> 关系长久靠两条：公开给面子、私下守边界，把人处顺了，事自然就顺了。</p></div>
+    <p>这份资料建议从今天起连续 7 天打卡；自测卷低于 7 分，重读"精讲"第 1、2、6 节，把倾听与分层沟通再练一遍。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第 1 天</span> 今天开会，刻意做到"对方说完我再开口"，并看着对方眼睛。</li><li><span class="day">第 2 天</span> 找一位同事，试着听出他一句"弦外之音"，记下来。</li><li><span class="day">第 3 天</span> 观察三个人或你说话时的眼神，判断他是"凝定/散乱/下垂"哪一种。</li><li><span class="day">第 4 天</span> 注意一个人的站姿与微动作，对照今天学的模型猜他的性格。</li><li><span class="day">第 5 天</span> 对职位高于你的人，练习用敬语与请示口吻沟通一次。</li><li><span class="day">第 6 天</span> 有分歧时，先在公开场合给对方留面子，留到私下再谈。</li><li><span class="day">第 7 天</span> 复盘本周：哪次"看人"帮了你，哪次误判了，写三句话。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 职场沟通里，什么往往比\"会说\"更关键？", "o": ["A. 穿得讲究", "B. 酒量好", "C. 会倾听", "D. 加班多"], "a": 2, "tip": "倾听是成本最低的识人手段，也最能赢得尊重。"}, {"q": "2. 老板先夸你\"能力强、可担更重职责\"，再问\"若你当主管会裁员吗\"，潜台词最可能是？", "o": ["A. 马上要提拔你", "B. 在试探你的管理观与站位", "C. 随便闲聊", "D. 真想听裁员建议"], "a": 1, "tip": "这类话常在试探，答得太满反而露怯。"}, {"q": "3. 常把\"好呀好呀\"挂嘴边的人，通常是？", "o": ["A. 主见极强", "B. 老好人、缺乏立场", "C. 城府很深", "D. 很冷漠"], "a": 1, "tip": "这类人热情随和，但往往缺乏主见、不懂拒绝。"}, {"q": "4. 一个人频繁变换站姿、身体显得紧张，一般说明？", "o": ["A. 性格急躁、处于紧张状态", "B. 非常放松", "C. 很聪明", "D. 很老实"], "a": 0, "tip": "频繁换站姿常对应急躁、易紧张的性格。"}, {"q": "5. 给领导提意见时，对方眼神\"凝定\"，意味着？", "o": ["A. 他不想听", "B. 他在走神", "C. 他认为值得听，可继续说", "D. 他生气了"], "a": 2, "tip": "凝定的眼神表示认可你在说、值得听。"}, {"q": "6. 和职位高于你的同事沟通，首要原则是？", "o": ["A. 随意些", "B. 给予尊重与敬意", "C. 压倒对方", "D. 不理会"], "a": 1, "tip": "对方能力、经验通常在你之上，先给敬意。"}, {"q": "7. 办公室里宣泄情绪，较稳妥的做法是？", "o": ["A. 当众大声吐槽老板", "B. 找同事倒尽苦水", "C. 尽量不把私生活带进工作场合", "D. 当众哭诉"], "a": 2, "tip": "隔墙有耳，私生活与情绪宜留在场外。"}, {"q": "8. 对方说话时，你正确的做法是？", "o": ["A. 不断打断显主动", "B. 看表显忙碌", "C. 目光专注、不打断、听完", "D. 同时玩手机"], "a": 2, "tip": "专注听完是倾听的基本功。"}, {"q": "9. 习惯说\"你先听我说\"的同事，通常特点是？", "o": ["A. 自信强、有控制欲、易打断人", "B. 很害羞", "C. 毫无主见", "D. 很冷漠"], "a": 0, "tip": "这类人很在意被重视，也常控制欲强、易激动。"}, {"q": "10. 处理职场冲突，公开场合应？", "o": ["A. 直接撕破脸", "B. 给台阶、留面子，私下再谈", "C. 当众批评", "D. 装没看见"], "a": 1, "tip": "公开给面子，私下了事，关系才长久。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《一分钟看透职场人》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《一分钟看透职场人》】", "维度：人际影响", "一句话定位：一套看人、懂人、处好职场关系的实用心法", "", "核心心智模型（5 个）：", "1. 四维识人法——把识人拆成四层：对方说什么、脸上露什么、身体做什么、心里想什么。 用法：见人先别急着下结论，按\"言—色—行—心\"四格过一遍再判断。", "2. 先听后说——倾听是职场第一大软实力，听懂比抢着表达更能赢得尊重与信息。 用法：对方开口时闭嘴、看着对方、听完再回应，别中途打断。", "3. 听弦外之音——字面之下往往藏着真意，只听字面对方会让你误判形势。 用法：把前后话连起来想，看语气和表情是否一致，再决定怎么接。", "4. 看状态胜过看表态——表情、眼神、站姿这些\"身体语言\"比嘴上的话更难伪装，更接近真实。 用法：对方嘴上说\"好\"，眼神却下垂或飘移，就别当真，换个时机再谈。", "5. 分层沟通——对上级、同辈、下属、客户，以及亲疏、年龄不同的人，话题和语气要切换。 用法：职位高的给敬意，关系浅的不聊私事，年长的多敬语。", "", "精讲要点：", "· 1. 先听后说：倾听是职场第一大软实力：结论先行：在职场里，会不会听，比会不会说更决定你能走多远。很多人败在急着表达、武断打断，结果既漏了信息，又让人反感。", "· 2. 听懂弦外之音：别只听字面：结论先行：很多关键意思，对方不会直说。只听字面，容易错失信号甚至丢了机会。", "· 3. 观色识人：表情与眼神最诚实：结论先行：脸是每个人的标签，表情和眼神比语言更难伪装，是判断心情与性格的\"晴雨表\"。", "· 4. 看姿态读性格：站姿与微动作：结论先行：人怎么站、怎么动，往往暴露性格底色，比自我介绍靠谱。", "· 5. 分层沟通：对不同的人说不同的话：结论先行：同一句话，对上级、同辈、下属、客户说出来，效果天差地别。沟通要按关系分层。", "· 6. 给面子与守边界：把关系处长久：结论先行：职场关系的崩塌，大多源于\"当面没面子\"和\"边界不清\"。两条底线能保你长久。", "", "带走三句话：", "1. 看人别只听嘴上说的，语言、神态、动作、心理四层一起读，才接近真实。", "2. 先听后说、听懂弦外之音，是成本最低也最被低估的职场竞争力。", "3. 关系长久靠两条：公开给面子、私下守边界，把人处顺了，事自然就顺了。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：四维识人法、先听后说、听弦外之音、看状态胜过看表态、分层沟通），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b24_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b24_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b24_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b24_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
