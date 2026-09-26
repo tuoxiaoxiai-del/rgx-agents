@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>《谁偷走了我的客户》</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1c1c1c; font-size: 14px; line-height: 1.78;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .wrap { width: 100%; }
+  h1, h2, h3 { font-weight: 800; letter-spacing: .5px; }
+  h2 { font-size: 19px; color: #143a32; margin: 26px 0 12px;
+       padding-left: 11px; border-left: 5px solid #c08438; }
+  h3 { font-size: 15.5px; color: #143a32; margin: 16px 0 6px; }
+
+  .cover { border: 1px solid #e3ddd0; border-radius: 14px; padding: 22px 24px;
+           background: linear-gradient(135deg,#143a32 0%,#1d5247 100%); color: #fff;
+           margin-bottom: 22px; }
+  .cover .dim { display: inline-block; font-size: 12px; background: #c08438; color: #1c1c1c;
+           padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: 1px; }
+  .cover h1 { font-size: 25px; margin: 12px 0 8px; line-height: 1.35; }
+  .cover .pos { font-size: 14.5px; opacity: .95; margin: 0; }
+  .cover .sign { margin-top: 14px; font-size: 12.5px; opacity: .85; }
+
+  .lead { background: #f6f3ec; border-radius: 10px; padding: 14px 16px; margin: 4px 0 6px; }
+  .lead b { color: #143a32; }
+
+  .models { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mcard { border: 1px solid #e3ddd0; border-radius: 10px; padding: 12px 14px;
+           background: #fcfbf7; break-inside: avoid; }
+  .mcard .mt { font-weight: 800; color: #143a32; font-size: 14.5px; margin-bottom: 4px; }
+  .mcard .md { font-size: 13px; color: #3a3a3a; margin: 0; }
+  .mcard .mu { font-size: 12.5px; color: #7a6a4a; margin: 6px 0 0; }
+
+  .outline { padding-left: 0; }
+  .ochap { break-inside: avoid; margin: 10px 0; }
+  .ochap .ot { font-weight: 800; color: #143a32; font-size: 14.5px; }
+  .ochap ul { margin: 4px 0 0; padding-left: 20px; }
+  .ochap li { margin: 2px 0; }
+
+  .lect .blk { break-inside: avoid; margin: 10px 0; }
+  .lect p { margin: 5px 0; }
+  .lect .k { color: #c08438; font-weight: 700; }
+
+  .quiz .q { break-inside: avoid; border: 1px solid #e3ddd0; border-radius: 10px;
+             padding: 12px 14px; margin: 10px 0; background: #fcfbf7; }
+  .quiz .qt { font-weight: 700; margin-bottom: 7px; }
+  .quiz label { display: block; padding: 4px 8px; border-radius: 6px; margin: 3px 0;
+                cursor: pointer; }
+  .quiz label:hover { background: #f0ece1; }
+  .quiz input { margin-right: 8px; }
+  .quiz .ans { font-size: 12.5px; color: #1d7a4d; margin-top: 6px; display: none; }
+  .quizbar { margin: 12px 0; }
+  .quizbar button { background: #143a32; color: #fff; border: 0; border-radius: 8px;
+                    padding: 9px 18px; font-size: 14px; cursor: pointer; font-weight: 700; }
+  .score { font-size: 16px; font-weight: 800; color: #143a32; margin-left: 12px; }
+
+  .check li { margin: 6px 0; break-inside: avoid; }
+  .check .day { font-weight: 800; color: #c08438; }
+
+  footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #e3ddd0;
+           font-size: 12.5px; color: #6a6a6a; text-align: center; }
+  footer .cta { display: flex; align-items: center; justify-content: center; gap: 18px;
+                background: #f6f3ec; border: 1px solid #e3ddd0; border-radius: 12px;
+                padding: 14px 18px; margin-bottom: 14px; }
+  footer .ctaqr { width: 92px; height: 92px; border-radius: 8px; }
+  footer .ctatxt { text-align: left; }
+  footer .ctabig { font-size: 16px; font-weight: 800; color: #143a32; }
+  footer .ctasub { font-size: 12.5px; color: #6a6a6a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="cover">
+    <span class="dim">商业赚钱</span>
+    <h1>《谁偷走了我的客户》</h1>
+    <p class="pos">从客户视角重建生意，把流失率降下来</p>
+    <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+  </section>
+
+  <section>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">客户说走就走，你却不知道他什么时候、为什么走的。不是对手太强，往往是我们习惯从自己出发，慢慢把人冷落了。这份笔记帮你把视角倒过来——从"客户得到什么"倒推动作，用一套可落地的框架堵住流失的每一个口子。</div>
+  </section>
+
+  <section>
+    <h2>核心心智模型</h2>
+    <div class="models">
+      <div class="mcard"><div class="mt">由外而内</div><p class="md">从"客户视角"倒推企业动作，而不是从自己出发。</p><p class="mu">用法：每个决策先问"客户因此得到什么"。</p></div>
+      <div class="mcard"><div class="mt">客户终身价值</div><p class="md">算一个客户一辈子能带来多少，不只看一单。</p><p class="mu">用法：把留存成本写进预算。</p></div>
+      <div class="mcard"><div class="mt">忠诚度漏斗</div><p class="md">客户会逐级流失，关键是找出在哪一级跑了。</p><p class="mu">用法：画出从接触到流失的全路径。</p></div>
+      <div class="mcard"><div class="mt">留存的敌人是忽视</div><p class="md">多数流失不是被对手抢走，是被你慢慢冷落。</p><p class="mu">用法：给老客户固定回访节奏。</p></div>
+      <div class="mcard"><div class="mt">客户协同</div><p class="md">让客户参与产品共创，黏性来自"有参与感"。</p><p class="mu">用法：建反馈直达改进的通道。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>内容提纲</h2>
+    <div class="outline">
+      <div class="ochap"><div class="ot">引言 从内向外到从外向内</div><ul><li>传统管理框架的局限</li><li>客户掌控市场的时代已经到来</li></ul></div>
+      <div class="ochap"><div class="ot">第 1-2 章 客户去哪了与精品战略</div><ul><li>流失的真相与被忽略的警示信号</li><li>以产品为中心的老路为何失效</li></ul></div>
+      <div class="ochap"><div class="ot">第 3-4 章 客户导向与价值衡量</div><ul><li>重构企业驱动力，文化先行</li><li>终身价值怎么算、该投入多少</li></ul></div>
+      <div class="ochap"><div class="ot">第 5-6 章 体验管理与忠诚度陷阱</div><ul><li>全触点体验与关键时刻</li><li>促销留不住人的常见误区</li></ul></div>
+      <div class="ochap"><div class="ot">第 7-9 章 预警、留住与协同</div><ul><li>用数据识别要走的人</li><li>关系维护与个性化</li><li>让客户参与共创</li></ul></div>
+      <div class="ochap"><div class="ot">第 10-11 章 协同创新与路线图</div><ul><li>新阶段的组织适配</li><li>从诊断到执行，持续改进</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="lect">
+      <div class="blk"><h3>1. 你以为在管企业，其实在赶客户</h3>
+        <p><span class="k">结论：</span>传统"由内向外"的管理习惯，正悄悄把客户推走。</p>
+        <p>旧框架只问"我们去哪、怎么去、怎么控"，唯独没问客户要什么。</p>
+        <p>今天市场掌握在消费者手里，供给过剩，客户随时能换人。</p>
+        <p>解法：把每个决策倒过来——先想"客户因此得到什么"。</p>
+      </div>
+      <div class="blk"><h3>2. 算清一笔账：客户终身价值</h3>
+        <p><span class="k">结论：</span>别只盯一单利润，要看这个人一辈子能带来多少。</p>
+        <p>一个留住十年的客户，价值远超十次一次性买卖。</p>
+        <p>很多企业为拉新砸钱，却不愿为留存花一分，本末倒置。</p>
+        <p>做法：给留存设预算，把"留住老客"当成和"拉新"同等重要的指标。</p>
+      </div>
+      <div class="blk"><h3>3. 客户不是被对手抢走，是被你冷走</h3>
+        <p><span class="k">结论：</span>多数流失源于长期忽视，而非竞品更香。</p>
+        <p>没有回访、没有更新、没有专属感，客户自然慢慢淡出。</p>
+        <p>促销打折留不住人，因为低价换不来忠诚，只换来比价。</p>
+        <p>做法：给老客户固定节奏的关怀，让他感觉"还被记得"。</p>
+      </div>
+      <div class="blk"><h3>4. 画出你的忠诚度漏斗</h3>
+        <p><span class="k">结论：</span>客户是逐级离开的，找到在哪一级跑了才能堵。</p>
+        <p>从接触到成交、复购、推荐，每一级都有自然损耗。</p>
+        <p>用数据标出掉得最狠的那一级，集中资源修补。</p>
+        <p>早期信号最便宜：一句差评、一次登录减少，都是要走的前兆。</p>
+      </div>
+      <div class="blk"><h3>5. 让客户参与进来，黏性自生</h3>
+        <p><span class="k">结论：</span>参与感才是最深的绑定，客户帮你改就走不了。</p>
+        <p>协同创新：把客户的反馈直接变成产品迭代的输入。</p>
+        <p>社群共建让客户有"这是我参与的东西"的归属感。</p>
+        <p>做法：开一个客户反馈直达改进的通道，且真的用起来。</p>
+      </div>
+      <div class="blk"><h3>6. 落地：从诊断到持续改进的闭环</h3>
+        <p><span class="k">结论：</span>客户导向不是一句文化口号，要变成可执行的路线图。</p>
+        <p>先诊断：你的客户现在卡在哪、流失在哪一级。</p>
+        <p>再重构：把客户视角写进流程、考核和激励，而不只是嘴上。</p>
+        <p>最后持续改进：每月看留存数据，像看体温一样常态化。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>自测卷 · 10 题当场出分</h2>
+    <div class="quiz" id="quiz">
+      <div class="q"><div class="qt">1. 传统管理框架最常漏掉？</div>
+        <label><input type="radio" name="q1"> A. 利润</label>
+        <label><input type="radio" name="q1" data-correct="1"> B. 客户</label>
+        <label><input type="radio" name="q1"> C. 流程</label>
+        <label><input type="radio" name="q1"> D. 员工</label>
+        <div class="ans">答案：B。旧框架只问企业自身，唯独没问客户要什么。</div></div>
+      <div class="q"><div class="qt">2. 客户终身价值强调？</div>
+        <label><input type="radio" name="q2"> A. 一单利润</label>
+        <label><input type="radio" name="q2" data-correct="1"> B. 一辈子总价值</label>
+        <label><input type="radio" name="q2"> C. 低价</label>
+        <label><input type="radio" name="q2"> D. 促销</label>
+        <div class="ans">答案：B。要看一个客户长期带来的总价值。</div></div>
+      <div class="q"><div class="qt">3. 多数客户流失因为？</div>
+        <label><input type="radio" name="q3"> A. 对手更香</label>
+        <label><input type="radio" name="q3" data-correct="1"> B. 被长期忽视</label>
+        <label><input type="radio" name="q3"> C. 搬家</label>
+        <label><input type="radio" name="q3"> D. 没钱</label>
+        <div class="ans">答案：B。多数流失源于忽视，而非竞品更强。</div></div>
+      <div class="q"><div class="qt">4. 促销打折能换来？</div>
+        <label><input type="radio" name="q4"> A. 真忠诚</label>
+        <label><input type="radio" name="q4" data-correct="1"> B. 比价客</label>
+        <label><input type="radio" name="q4"> C. 口碑</label>
+        <label><input type="radio" name="q4"> D. 免流失</label>
+        <div class="ans">答案：B。低价只换来得比价的客人，换不来忠诚。</div></div>
+      <div class="q"><div class="qt">5. 忠诚度漏斗用来？</div>
+        <label><input type="radio" name="q5"> A. 装饰</label>
+        <label><input type="radio" name="q5" data-correct="1"> B. 找流失哪一级</label>
+        <label><input type="radio" name="q5"> C. 涨价</label>
+        <label><input type="radio" name="q5"> D. 招人</label>
+        <div class="ans">答案：B。找出客户在哪一级掉得最狠。</div></div>
+      <div class="q"><div class="qt">6. 客户协同创新指？</div>
+        <label><input type="radio" name="q6" data-correct="1"> A. 让客户参与共创</label>
+        <label><input type="radio" name="q6"> B. 免费送</label>
+        <label><input type="radio" name="q6"> C. 外包</label>
+        <label><input type="radio" name="q6"> D. 压价</label>
+        <div class="ans">答案：A。把客户反馈变成产品迭代的输入。</div></div>
+      <div class="q"><div class="qt">7. 早期流失信号包括？</div>
+        <label><input type="radio" name="q7"> A. 好评</label>
+        <label><input type="radio" name="q7" data-correct="1"> B. 登录减少 / 差评</label>
+        <label><input type="radio" name="q7"> C. 涨价</label>
+        <label><input type="radio" name="q7"> D. 招人</label>
+        <div class="ans">答案：B。互动减少和差评是走人的前兆。</div></div>
+      <div class="q"><div class="qt">8. 客户导向落地要？</div>
+        <label><input type="radio" name="q8"> A. 喊口号</label>
+        <label><input type="radio" name="q8" data-correct="1"> B. 写进流程考核</label>
+        <label><input type="radio" name="q8"> C. 不管</label>
+        <label><input type="radio" name="q8"> D. 只营销</label>
+        <div class="ans">答案：B。要写进流程、考核与激励才真落地。</div></div>
+      <div class="q"><div class="qt">9. 判断：市场由企业供给主导，客户只能接受。</div>
+        <label><input type="radio" name="q9"> A. 对</label>
+        <label><input type="radio" name="q9" data-correct="1"> B. 错</label>
+        <div class="ans">答案：错。今天市场掌握在消费者手里，客户随时能换。</div></div>
+      <div class="q"><div class="qt">10. 判断：留住老客户和拉新一样重要。</div>
+        <label><input type="radio" name="q10" data-correct="1"> A. 对</label>
+        <label><input type="radio" name="q10"> B. 错</label>
+        <div class="ans">答案：对。留存与拉新同等重要，甚至更划算。</div></div>
+    </div>
+    <div class="quizbar">
+      <button onclick="grade()">交卷看分</button>
+      <span class="score" id="score"></span>
+    </div>
+  </section>
+
+  <section>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check">
+      <li><span class="day">第 1 天</span> 列出客户从接触到流失的全路径，标出损耗最大的一级。</li>
+      <li><span class="day">第 2 天</span> 算一个老客户的终身价值，写进你的预算逻辑。</li>
+      <li><span class="day">第 3 天</span> 给三位老客户做一次真诚回访，不推销。</li>
+      <li><span class="day">第 4 天</span> 找出一个"被冷落"的客户群，定个关怀节奏。</li>
+      <li><span class="day">第 5 天</span> 开通一条客户反馈直达改进的通道。</li>
+      <li><span class="day">第 6 天</span> 用数据看本周谁有流失前兆，提前干预。</li>
+      <li><span class="day">第 7 天</span> 把"客户视角"写进一条你明天的流程或考核。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead">
+      <p><b>1.</b> 客户是被你冷走的多、被对手抢走的少，留存要主动别等。</p>
+      <p><b>2.</b> 算清终身价值、画好忠诚度漏斗，才知道钱该花在哪儿。</p>
+      <p><b>3.</b> 让客户参与共创，把"被购买"变成"一起做"，黏性最深。</p>
+    </div>
+    <p>这份资料建议从今天起连续 7 天打卡，每天一个微小动作；读完自测卷若低于 7 分，重读"核心心智模型"与"精讲"第 1、2 模块，先画漏斗、再算终身价值。</p>
+  </section>
+
+  <footer>
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  </footer>
+
+</div>
+
+<script>
+function grade(){
+  var qs = document.querySelectorAll('#quiz .q');
+  var total = qs.length, right = 0;
+  qs.forEach(function(q){
+    var picked = q.querySelector('input:checked');
+    var correct = q.querySelector('input[data-correct="1"]');
+    var ans = q.querySelector('.ans');
+    if(ans) ans.style.display = 'block';
+    if(picked && picked === correct){ right++; }
+  });
+  var s = document.getElementById('score');
+  if(s) s.textContent = '得分 ' + right + ' / ' + total;
+}
+</script>
+</body>
+</html>
