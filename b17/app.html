@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一本书读懂财报：秒通财报，从本书开始 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>一本书读懂财报：秒通财报，从本书开始 · 书智能体</b><span>财富管理｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+      <span class="dim">财富管理</span>
+      <h1>《一本书读懂财报：秒通财报，从本书开始》</h1>
+      <p class="pos">用三张报表，把一家企业看明白、看实在</p>
+      <div class="sign">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">看不懂财报，看公司就像雾里看花：明明账面赚了钱，现金却不见了；明明规模很大，转眼却撑不住。这份资料帮你把三张报表读薄，用经营的眼光看懂数字背后那家真实的企业——它到底赚不赚、稳不稳、能不能长大。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">现金循环视角</div><p class="md">企业从现金出发，经过经营、投资、融资三类活动转一圈再回到现金，循环往复。</p><p class="mu">看任何一笔交易，先问它属于"进钱—花钱—回钱"循环的哪一段。</p></div><div class="mcard"><div class="mt">三表拼图</div><p class="md">资产负债表看"家底"（某一时点的资源与债务），利润表看"面子"（一段时期的盈亏），现金流量表看"日子"（真金白银的进出）。</p><p class="mu">三张表要合起来看，单看一张容易被账面手法带偏。</p></div><div class="mcard"><div class="mt">历史成本锚</div><p class="md">除金融资产、投资性房地产外，多数资产按买入时的花费记账，价值只减不增，减值才记、增值当没看见。</p><p class="mu">遇到资产大额"增值"要警惕，没发生新交易就增值，多半有水分。</p></div><div class="mcard"><div class="mt">比率体检法</div><p class="md">用毛利率、周转率、杠杆率等比率，把三张报表压缩成几个可比较的健康指标。</p><p class="mu">横向比同行、纵向比自己过去，单看绝对值没有意义。</p></div><div class="mcard"><div class="mt">现金流定生死</div><p class="md">利润可以修饰，现金很难造假；经营现金流持续为正，才说明生意能自我造血。</p><p class="mu">一家企业可以短期亏损，但不能长期失血。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">第一章　资产负债表——企业的单反相机</div><ul><li>资产分两栏：流动资产（很快变钱）与非流动资产（慢慢变钱），排序按"变成现金的速度"。</li><li>右边两件事：负债是迟早要还的，股东权益是永远不用还的本金与留利。</li></ul></div><div class="ochap"><div class="ot">第二章　利润表——企业的摄像机</div><ul><li>收入怎么来、成本怎么归集，利润是"卖得多"还是"管得省"的结果。</li><li>毛利率、净利率告诉你这门生意本身赚钱不赚钱。</li></ul></div><div class="ochap"><div class="ot">第三章　现金流量表——企业的验钞机</div><ul><li>现金分三条流：经营、投资、筹资，各自的进出含义不同。</li><li>为什么现金流比利润更难造假，也更难被账面手法美化。</li></ul></div><div class="ochap"><div class="ot">第四章　三表联动与财务分析</div><ul><li>同型分析看结构，比率分析看盈利、营运、偿债三类能力。</li><li>行业不同、战略不同，同样的数字背后的企业完全不一样。</li></ul></div><div class="ochap"><div class="ot">第五章　照镜子与控风险</div><ul><li>好公司的判断标准：资本回报高于资本成本，股东收益靠经营而非杠杆。</li><li>健康现金流的特征，以及哪类企业更该盯利润、哪类更该盯现金。</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>一、企业一辈子只做三件事：经营、投资、融资</h3><p>结论先行：不管什么行业、什么体量，把一家企业每天的交易抽象掉，它一辈子其实只忙三件事。</p><p><span class="k">经营</span>：生产、卖货、收钱，天天在发生；<span class="k">投资</span>：盖厂房、买设备、参股别家；<span class="k">融资</span>：缺钱了去银行借、找人投。</p><p>这三件事绕着"现金—现金"的圈循环：起点是一笔钱，转一圈又回到钱。带着这个圈去看报表，三张表就串起来了。</p></div><div class="blk"><h3>二、资产不等于财产物资，今天的资产是明天的费用</h3><p>结论先行：别把"资产"当成摆在面前看得见摸得着的家当，它很多时候是一种"权利"，而且迟早会变成费用。</p><p>应收账款、预付账款就不是实物，而是"向客户收钱、向供应商要货"的权利；租来的办公楼再结实也不算你的资产。</p><p>反过来，设备、长期待摊这些资产，用着用着就被磨损、被摊销，变成了经营里的成本。所以资产与费用常常只差一个"时间"。</p></div><div class="blk"><h3>三、历史成本：只减不增的记账逻辑</h3><p>结论先行：绝大多数资产按"当初花了多少钱"记账，这套体系天然保守——升值当没看见，减值才记下来。</p><p>因此一个铁律：没发生新的交易，资产价值只能减少不能增加。想让资产"增值"，正规路子只有重新发生一笔买卖。</p><p>这就给了识别虚增的抓手：一项资产凭空多出几亿，又找不到对应交易，基本可以打问号。</p></div><div class="blk"><h3>四、利润表与现金流量表的"时差"</h3><p>结论先行：利润表认"权利"，现金流量表认"到手"，两者之间存在天然的时差，这正是很多"账面赚钱、兜里没钱"的根源。</p><p>货卖出去了，利润表就记了收入，但钱可能要三个月后才收回；费用花出去了，现金立刻走，利润却分摊到以后。</p><p>所以看盈利不能只看利润表，要把它和现金流入对上，才知道赚的是"真金"还是"白条"。</p></div><div class="blk"><h3>五、用比率给企业做体检</h3><p>结论先行：三张表信息太多，普通人记不住，把它们压成几个比率，企业健康与否一眼可辨。</p><p><span class="k">盈利能力</span>看毛利率、净利率；<span class="k">营运能力</span>看各类资产的周转率（转得快不快）；<span class="k">偿债能力</span>看短期流动比、长期负债比。</p><p>比率本身没有标准答案，关键是跟同行比、跟自己往年比——脱离参照系的绝对值没有意义。</p></div><div class="blk"><h3>六、看现金流，判断企业真健康还是假繁荣</h3><p>结论先行：利润可以靠会计选择腾挪，现金的进出却难造假，所以现金流是判断企业生死的硬指标。</p><p>经营现金流为正且稳定，说明主业能自我造血；长期为负，再大的规模也是在靠外部输血续命。</p><p>投资现金流为负不一定是坏事（可能在扩产），但要结合经营现金流看；筹资现金流长期为正，往往意味着企业还在"找钱活下去"。三项合起来读，才不会误判。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 财报不是会计题，而是企业用数字讲给你听的经营故事，带着"看企业"的目的去读，才不会迷路。</p><p><b>2.</b> 三张报表缺一不可：家底、面子、日子合起来，才看清一家公司真不真、稳不稳、赚不赚。</p><p><b>3.</b> 现金流比利润更诚实，长期自我造血的能力，才是企业活着并长大的底气。</p></div>
+    <p>这份资料建议从今天开始连续 7 天打卡；自测低于 7 分，重读"三表拼图"与"现金流定生死"两节，再挑一家真实公司练一遍。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第 1 天</span> 拿一家你熟悉的公司，在纸上画出"现金—经营/投资/融资—回到现金"的循环。</li><li><span class="day">第 2 天</span> 找一份资产负债表，把项目分成"流动资产"和"非流动资产"两类。</li><li><span class="day">第 3 天</span> 读利润表，用（收入-成本）/收入算一下它的毛利率，想想高不髙、合不合理。</li><li><span class="day">第 4 天</span> 把现金流量表拆成经营、投资、筹资三块，分别判断是好消息还是坏消息。</li><li><span class="day">第 5 天</span> 挑一家企业，用毛利率、周转率、杠杆率和同行比一比，给它做个体检。</li><li><span class="day">第 6 天</span> 在生活里找一个"今天的资产是明天的费用"的例子（如预付房租、设备折旧）。</li><li><span class="day">第 7 天</span> 综合三表，写一句话结论：这家企业健康吗？赚的是真钱还是白条？</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 把企业的日常经济活动抽象掉，本质上可以归为几类？", "o": ["A. 两类：赚钱与花钱", "B. 三类：经营、投资、融资", "C. 四类：采购、生产、销售、分红", "D. 五类：人、财、物、产、销"], "a": 1, "tip": "无论行业与规模，企业活动可抽象为经营、投资、融资三类，并围绕现金循环往复。"}, {"q": "2. 资产负债表左边记录的是什么？", "o": ["A. 负债", "B. 股东权益", "C. 资产", "D. 利润"], "a": 2, "tip": "资产负债表左边说\"资产\"，右边说\"负债\"和\"股东权益\"两件事。"}, {"q": "3. 下列项目多半按\"历史成本\"计价、价值只减不增的是？", "o": ["A. 上市公司股票", "B. 投资性房地产", "C. 自用的机器设备", "D. 外汇资产"], "a": 2, "tip": "金融资产与投资性房地产可用公允价值，多数自用资产按历史成本计价，只减不增。"}, {"q": "4. 以下哪一项通常属于流动资产？", "o": ["A. 厂房", "B. 专利权", "C. 存货", "D. 长期股权投资"], "a": 2, "tip": "存货能在一年或一个营业周期内变现，属于流动资产；厂房、专利、长期股权多为非流动。"}, {"q": "5. 利润表主要反映的是？", "o": ["A. 某一时点的家底", "B. 一段时期的盈亏", "C. 现金的进出", "D. 负债总额"], "a": 1, "tip": "利润表是\"摄像机\"，记录一段时期的收入、成本与盈亏；资产负债表才是某一时点的家底。"}, {"q": "6. \"账面盈利但现金紧张\"最常见的原因是？", "o": ["A. 利润表完全不可信", "B. 收入已确认但钱还没收回", "C. 现金根本不进报表", "D. 税率突然提高"], "a": 1, "tip": "利润表认\"权利\"、现金流认\"到手\"，卖出货即记收入但回款滞后，造成账面赚、兜里紧。"}, {"q": "7. 衡量企业\"转得快不快\"的能力，看哪类比率？", "o": ["A. 盈利能力比率", "B. 营运能力比率（周转率）", "C. 偿债能力比率", "D. 估值比率"], "a": 1, "tip": "周转率等营运能力指标反映资产转化为收入、现金的速度，即\"转得快不快\"。"}, {"q": "8. 三张报表中，通常最难以被账面手法粉饰的是？", "o": ["A. 资产负债表", "B. 利润表", "C. 现金流量表", "D. 三张一样容易"], "a": 2, "tip": "现金的实进出很难长期造假，利润可通过会计选择腾挪，故现金流是更硬的底线指标。"}, {"q": "9. 判断一家企业是否\"自我造血\"，最该盯哪类现金流？", "o": ["A. 经营活动现金流为正且稳定", "B. 投资活动现金流为正", "C. 筹资活动现金流为正", "D. 三项都为负"], "a": 0, "tip": "经营现金流持续为正，说明主业能自我造血；长期为负则靠外部输血续命。"}, {"q": "10. 用比率给企业做体检时，正确的参照做法是？", "o": ["A. 只看绝对值大小", "B. 横向比同行、纵向比自己过去", "C. 越高一定越好", "D. 只看一年数据即可"], "a": 1, "tip": "比率要放在同行与历史参照系里看，脱离对比的绝对值没有判断意义。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《一本书读懂财报：秒通财报，从本书开始》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《一本书读懂财报：秒通财报，从本书开始》】", "维度：财富管理", "一句话定位：用三张报表，把一家企业看明白、看实在", "", "核心心智模型（5 个）：", "1. 现金循环视角——企业从现金出发，经过经营、投资、融资三类活动转一圈再回到现金，循环往复。 看任何一笔交易，先问它属于\"进钱—花钱—回钱\"循环的哪一段。", "2. 三表拼图——资产负债表看\"家底\"（某一时点的资源与债务），利润表看\"面子\"（一段时期的盈亏），现金流量表看\"日子\"（真金白银的进出）。 三张表要合起来看，单看一张容易被账面手法带偏。", "3. 历史成本锚——除金融资产、投资性房地产外，多数资产按买入时的花费记账，价值只减不增，减值才记、增值当没看见。 遇到资产大额\"增值\"要警惕，没发生新交易就增值，多半有水分。", "4. 比率体检法——用毛利率、周转率、杠杆率等比率，把三张报表压缩成几个可比较的健康指标。 横向比同行、纵向比自己过去，单看绝对值没有意义。", "5. 现金流定生死——利润可以修饰，现金很难造假；经营现金流持续为正，才说明生意能自我造血。 一家企业可以短期亏损，但不能长期失血。", "", "精讲要点：", "· 一、企业一辈子只做三件事：经营、投资、融资：结论先行：不管什么行业、什么体量，把一家企业每天的交易抽象掉，它一辈子其实只忙三件事。", "· 二、资产不等于财产物资，今天的资产是明天的费用：结论先行：别把\"资产\"当成摆在面前看得见摸得着的家当，它很多时候是一种\"权利\"，而且迟早会变成费用。", "· 三、历史成本：只减不增的记账逻辑：结论先行：绝大多数资产按\"当初花了多少钱\"记账，这套体系天然保守——升值当没看见，减值才记下来。", "· 四、利润表与现金流量表的\"时差\"：结论先行：利润表认\"权利\"，现金流量表认\"到手\"，两者之间存在天然的时差，这正是很多\"账面赚钱、兜里没钱\"的根源。", "· 五、用比率给企业做体检：结论先行：三张表信息太多，普通人记不住，把它们压成几个比率，企业健康与否一眼可辨。", "· 六、看现金流，判断企业真健康还是假繁荣：结论先行：利润可以靠会计选择腾挪，现金的进出却难造假，所以现金流是判断企业生死的硬指标。", "", "带走三句话：", "1. 财报不是会计题，而是企业用数字讲给你听的经营故事，带着\"看企业\"的目的去读，才不会迷路。", "2. 三张报表缺一不可：家底、面子、日子合起来，才看清一家公司真不真、稳不稳、赚不赚。", "3. 现金流比利润更诚实，长期自我造血的能力，才是企业活着并长大的底气。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：现金循环视角、三表拼图、历史成本锚、比率体检法、现金流定生死），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b17_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b17_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b17_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b17_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
