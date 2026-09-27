@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一看就懂思维不设限 · 书智能体</title><style>
+  :root{ --green:#143a32; --green2:#1d5247; --gold:#c08438; --cream:#f6f3ec; --ink:#1c1c1c; --muted:#6a6a6a; --ok:#1d7a4d; --bad:#b5453b; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif; color:var(--ink); font-size:15px; line-height:1.8; background:#fbfaf6; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .app{ max-width:760px; margin:0 auto; padding:0 16px 60px; }
+  /* 顶栏 */
+  .top{ position:sticky; top:0; z-index:20; background:#fff; border-bottom:1px solid #e7e0d2; }
+  .brand{ display:flex; align-items:center; gap:10px; padding:12px 16px 0; }
+  .brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--gold); }
+  .brand b{ font-size:15px; color:var(--green); letter-spacing:.5px; }
+  .brand span{ font-size:12px; color:var(--muted); margin-left:auto; }
+  .tabs{ display:flex; gap:4px; padding:8px 10px 0; overflow-x:auto; }
+  .tabs button{ flex:0 0 auto; border:0; background:transparent; color:var(--muted); font-size:14px; font-weight:700; padding:9px 12px; border-radius:10px 10px 0 0; cursor:pointer; }
+  .tabs button.on{ color:var(--green); background:var(--cream); }
+  /* 面板 */
+  .panel{ display:none; padding-top:18px; animation:fade .25s ease; }
+  .panel.on{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .cover{ border:1px solid #e3ddd0; border-radius:16px; padding:24px; background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%); color:#fff; }
+  .cover .dim{ display:inline-block; font-size:12px; background:var(--gold); color:#1c1c1c; padding:3px 12px; border-radius:20px; font-weight:700; letter-spacing:1px; }
+  .cover h1{ font-size:26px; margin:12px 0 8px; line-height:1.3; }
+  .cover .pos{ font-size:15px; opacity:.95; margin:0; }
+  .cover .sign{ margin-top:14px; font-size:12.5px; opacity:.85; }
+  h2{ font-size:19px; color:var(--green); margin:26px 0 12px; padding-left:11px; border-left:5px solid var(--gold); }
+  h3{ font-size:15.5px; color:var(--green); margin:16px 0 6px; }
+  .lead{ background:var(--cream); border-radius:10px; padding:14px 16px; margin:4px 0 6px; }
+  .lead b{ color:var(--green); }
+  /* 模型卡 */
+  .models{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mcard{ border:1px solid #e3ddd0; border-radius:10px; padding:12px 14px; background:#fcfbf7; }
+  .mcard .mt{ font-weight:800; color:var(--green); font-size:14.5px; margin-bottom:4px; }
+  .mcard .md{ font-size:13px; color:#3a3a3a; margin:0; }
+  .mcard .mu{ font-size:12.5px; color:#7a6a4a; margin:6px 0 0; }
+  /* 提纲 */
+  .ochap{ margin:10px 0; }
+  .ochap .ot{ font-weight:800; color:var(--green); font-size:14.5px; }
+  .ochap ul{ margin:4px 0 0; padding-left:20px; } .ochap li{ margin:2px 0; }
+  /* 精讲 */
+  .blk{ margin:12px 0; } .blk p{ margin:5px 0; } .blk .k{ color:var(--gold); font-weight:700; }
+  /* 打卡 */
+  .check{ list-style:none; padding:0; margin:0; } .check li{ margin:8px 0; padding-left:64px; position:relative; }
+  .check .day{ position:absolute; left:0; top:0; font-weight:800; color:var(--gold); }
+  /* 结论 */
+  .take p{ margin:6px 0; }
+  /* 闯关 */
+  .qcard{ border:1px solid #e3ddd0; border-radius:14px; padding:18px; background:#fff; }
+  .qmeta{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .qno{ font-weight:800; color:#fff; background:var(--green); border-radius:8px; padding:3px 10px; font-size:13px; }
+  .qprog{ flex:1; height:8px; background:#ece6d8; border-radius:6px; overflow:hidden; }
+  .qprog > i{ display:block; height:100%; width:0; background:var(--gold); transition:width .3s; }
+  .qt{ font-weight:700; margin:6px 0 12px; }
+  .opt{ display:block; padding:11px 13px; border:1px solid #e3ddd0; border-radius:10px; margin:8px 0; cursor:pointer; transition:.15s; }
+  .opt:hover{ background:#f0ece1; }
+  .opt.sel{ border-color:var(--green); background:#eef4f0; }
+  .opt.ok{ border-color:var(--ok); background:#e9f5ee; }
+  .opt.no{ border-color:var(--bad); background:#fbecea; }
+  .opt input{ margin-right:9px; }
+  .tip{ margin-top:12px; padding:11px 13px; border-radius:10px; font-size:13.5px; display:none; }
+  .tip.show{ display:block; } .tip.ok{ background:#e9f5ee; color:#135c39; } .tip.no{ background:#fbecea; color:#8c3329; }
+  .qnav{ display:flex; gap:10px; margin-top:14px; }
+  .qnav button{ flex:1; border:0; border-radius:10px; padding:11px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btnp{ background:var(--green); color:#fff; } .btnp:disabled{ opacity:.4; cursor:not-allowed; }
+  .btns{ background:#ece6d8; color:var(--green); }
+  /* 结算 */
+  .scorebox{ text-align:center; padding:24px; border-radius:16px; background:linear-gradient(135deg,var(--green),var(--green2)); color:#fff; }
+  .scorebox .big{ font-size:46px; font-weight:800; }
+  .badge{ display:inline-block; margin:8px 5px 0; padding:5px 12px; border-radius:20px; background:var(--gold); color:#1c1c1c; font-weight:700; font-size:13px; }
+  .wrong{ margin-top:16px; } .wrong .w{ border-left:4px solid var(--bad); background:#fbecea; border-radius:8px; padding:10px 12px; margin:8px 0; font-size:14px; }
+  .wrong .w b{ color:var(--bad); }
+  /* 陪练 */
+  .agentbox{ border:1px solid #e3ddd0; border-radius:14px; background:#fcfbf7; padding:0; overflow:hidden; }
+  .agentbox .hd{ background:var(--green); color:#fff; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .agentbox pre{ margin:0; padding:16px; white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.7; color:#2a2a2a; max-height:420px; overflow:auto; }
+  .copy{ margin:12px 0 4px; }
+  .copy button{ border:0; background:var(--gold); color:#1c1c1c; font-weight:700; border-radius:10px; padding:10px 16px; cursor:pointer; font-size:14px; }
+  .note{ font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+  /* 页脚 */
+  footer{ margin-top:30px; padding-top:14px; border-top:1px solid #e7e0d2; font-size:12.5px; color:var(--muted); text-align:center; }
+  footer .cta{ display:flex; align-items:center; justify-content:center; gap:18px; background:var(--cream); border:1px solid #e3ddd0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  footer .ctaqr{ width:92px; height:92px; border-radius:8px; }
+  footer .ctatxt{ text-align:left; } footer .ctabig{ font-size:16px; font-weight:800; color:var(--green); }
+  footer .ctasub{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  @media(max-width:540px){ .models{ grid-template-columns:1fr; } }
+</style></head><body><div class="app">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>一看就懂思维不设限 · 书智能体</b><span>认知底盘｜张文昊</span></div>
+    <div class="tabs">
+      <button data-p="home" class="on">首页</button>
+      <button data-p="read">精读</button>
+      <button data-p="quiz">闯关自测</button>
+      <button data-p="agent">AI陪练</button>
+      <button data-p="recap">复盘</button>
+    </div>
+  </div>
+
+  <section class="panel on" id="home">
+    <div class="cover">
+    <div class="cover-bg" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);position:absolute;inset:0;border-radius:16px;overflow:hidden;">
+      <div style="position:absolute;top:20%;right:10%;font-size:80px;opacity:0.1;">🧠</div>
+      <div style="position:absolute;bottom:10%;left:10%;font-size:60px;opacity:0.15;">🧩</div>
+    </div>
+    <div class="cover-content" style="position:relative;z-index:1;padding:32px 24px;color:#fff;">
+      <span class="dim-badge" style="display:inline-block;font-size:12px;background:#c9a227;color:#1a1a2e;padding:4px 14px;border-radius:20px;font-weight:700;margin-bottom:16px;">🧩 认知底盘</span>
+      <h1 style="font-size:28px;margin:0 0 12px;line-height:1.3;font-weight:800;">一看就懂思维不设限</h1>
+      <p class="subtitle" style="font-size:15px;opacity:0.9;margin:0 0 20px;">逻辑的力量</p>
+      <div class="sign" style="font-size:12px;opacity:0.7;">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <div class="cover-accent" style="position:absolute;bottom:0;left:0;right:0;height:4px;background:#c9a227;"></div>
+  </div>
+      <div style="position:absolute;bottom:10%;left:10%;font-size:60px;opacity:0.15;">🧩</div>
+    </div>
+    <div class="cover-content" style="position:relative;z-index:1;padding:32px 24px;color:#fff;">
+      <span class="dim-badge" style="display:inline-block;font-size:12px;background:#c9a227;color:#1a1a2e;padding:4px 14px;border-radius:20px;font-weight:700;margin-bottom:16px;">🧩 认知底盘</span>
+      <h1 style="font-size:28px;margin:0 0 12px;line-height:1.3;font-weight:800;">一看就懂思维不设限</h1>
+      <p class="subtitle" style="font-size:15px;opacity:0.9;margin:0 0 20px;">逻辑的力量</p>
+      <div class="sign" style="font-size:12px;opacity:0.7;">拓销蜥人工智能研究院 · 张文昊</div>
+    </div>
+    <div class="cover-accent" style="position:absolute;bottom:0;left:0;right:0;height:4px;background:#c9a227;"></div>
+  </div>
+    </div>
+    <h2>这本书能帮你解决什么</h2>
+    <div class="lead">日常说话做事，常被别人绕晕、被人带偏，自己也想不清、讲不明——问题往往不在知识少，而在思维缺了"骨架"。读完这本，你会拿一套可练的思维工具，把问题拆开看清、把观点说准说透。</div>
+    <h2>核心心智模型</h2>
+    <div class="models"><div class="mcard"><div class="mt">概念厘清</div><p class="md">每个词都有"内涵"（它是什么）和"外延"（它指哪些）。先把概念钉死，后面的争论才不跑偏。</p><p class="mu">用法：讨论前先问一句"你说的这个词，到底指什么、不指什么"。</p></div><div class="mcard"><div class="mt">演绎链条</div><p class="md">从公认的大前提推到具体情形，结论必然跟随前提。前提假，结论再顺也站不住。</p><p class="mu">用法：听到"因为…所以…"，先查大前提是不是真的。</p></div><div class="mcard"><div class="mt">归纳防偏</div><p class="md">从多个个别现象提炼共性，是发现规律的第一步；但一次经验当普遍规律，最容易翻车。</p><p class="mu">用法：用"求同、求异、共变"交叉验证，别急着下结论。</p></div><div class="mcard"><div class="mt">假设排除</div><p class="md">列尽所有可能，逐一排除，剩下来就是答案；先假设、后验证，排查问题最省力。</p><p class="mu">用法：找不到原因时，从结果倒推原因链，再逐个排除。</p></div><div class="mcard"><div class="mt">识破诡辩</div><p class="md">偷换概念、曲解因果、模糊语境，是三种最常见的带偏套路。</p><p class="mu">用法：听到"因为A，所以你就是B"这类话，先停三秒。</p></div></div>
+    <div class="lead" style="margin-top:18px"><b>怎么用这个智能体：</b>先「精读」过一遍模型 → 进「闯关自测」当场找薄弱点 → 把不会的拿去「AI陪练」追问 → 最后「复盘」领 7 天打卡。</div>
+  </section>
+
+  <section class="panel" id="read">
+    <h2>内容提纲</h2>
+    <div class="ochap"><div class="ot">第一章 认识思维不设限</div><ul><li>思维是大脑加工信息的理性认知；逻辑研究"有效推论"的规则</li><li>思维不设限是确定、不自相矛盾的抽象思维，特征在抽象性与确定性</li></ul></div><div class="ochap"><div class="ot">第二章 思维不设限与生活</div><ul><li>合理不等于合乎逻辑：常识要坚持，但不固守归纳结论</li><li>逻辑让思想严密、表达准确，混乱的思想表达不出力量</li></ul></div><div class="ochap"><div class="ot">第三章 训练的有效准备</div><ul><li>全神贯注、确认事实、厘清观念与其对象</li><li>留意观念本源、把观念联系事实、付诸语言、逼近真相</li></ul></div><div class="ochap"><div class="ot">第四章 训练方法</div><ul><li>排除法、递推法、假设法、倒推法、分析法、作图法、类比法</li><li>综合法、计算法：从多个角度拆题、解题</li></ul></div><div class="ochap"><div class="ot">第五章 诡辩术</div><ul><li>了解诡辩是为了不被带偏</li><li>概念诡辩、曲解诡辩、判断诡辩、因果想当然、反驳诡辩、模糊语境</li></ul></div><div class="ochap"><div class="ot">第六章 逻辑的陷阱</div><ul><li>区分有意与无意、误解与曲解、真诚与强辩</li><li>保持清楚头脑与健康思考状态</li></ul></div><div class="ochap"><div class="ot">第七章 逻辑的妙用</div><ul><li>透过现象看本质、演绎与回溯推理、辏合显同</li><li>信息提取甄别、定义判断、条件判断、命题与模态推理、类比推理</li></ul></div>
+    <h2>精讲 · 把书读薄</h2>
+    <div class="blk"><h3>一、先把概念钉死</h3><p><span class="k">概念是思维的"细胞"。</span>它由内涵（本质属性）和外延（所指范围）两部分组成，"人"的内涵是"有理性感情的动物"，外延是古今中外所有人类。</p><p>讨论前先澄清：这个词到底指什么、不指什么。一旦概念在对话中悄悄漂移，后面的推理就全跑偏。</p><p>很多争吵不是观点不同，而是双方嘴里的同一个词根本不是一回事。</p></div><div class="blk"><h3>二、演绎：结论跟着前提走</h3><p>大前提 → 小前提 → 结论，前提为真，结论必然为真。这是最稳妥的推理形式。</p><p>检验一段逻辑，先看<b>大前提有没有被偷换</b>。顺溜的推理不等于对的结论，前提错了全盘皆输。</p><p>所以听到"因为…所以…"，别被节奏带走，先问前提站不站得住。</p></div><div class="blk"><h3>三、归纳：别把一次经验当规律</h3><p>从个别现象提炼共性，是发现规律的第一步——看到"眼珠转动就在做梦"，是归纳出来的洞见。</p><p>但简单枚举最容易翻车，一个反例就能击碎结论。用求同、求异、共变、剩余等方法交叉检验更稳妥。</p><p>我的建议：归纳出的结论，先标上"待验证"，别急着当成真理用。</p></div><div class="blk"><h3>四、分析与综合：双剑合璧</h3><p><span class="k">分析</span>是把整体拆成部分，找内部关联；<span class="k">综合</span>是把部分联回整体，看全局结构。</p><p>只分析不综合，只见树木不见森林；只综合不分析，是空谈。</p><p>认识事物就是"分析—综合—再分析—再综合"的循环，每一次循环都更深一层。</p></div><div class="blk"><h3>五、假设与排除：排查最省力</h3><p>遇到故障或谜题，先列尽所有可能，再逐一排除，剩下就是答案——这是排除法的精髓。</p><p>倒推法从结果反推原因链；假设法先设一个解释，再用事实去验证或推翻。</p><p>训练时养成"先假设、后验证"的习惯，别凭感觉直接下结论。</p></div><div class="blk"><h3>六、看穿诡辩的套路</h3><p><b>偷换概念：</b>话到中间悄悄改了词的意思。</p><p><b>因果想当然：</b>把"先后发生"当成"因为所以"。</p><p><b>模糊语境：</b>用含糊表述逃避明确立场，让人抓不住破绽。</p><p>记住一句话：凡是"因为A，所以你就是B"这种跳跃，先停三秒再接话。</p></div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <h2>闯关自测 · 找薄弱点</h2>
+    <div class="qcard" id="qcard"></div>
+  </section>
+
+  <section class="panel" id="agent">
+    <h2>AI 陪练 · 把知识练成反应</h2>
+    <div class="agentbox">
+      <div class="hd">📘 本书陪练提示词（复制后粘到任意 AI 对话框）</div>
+      <pre id="agentText"></pre>
+    </div>
+    <div class="copy"><button id="copyBtn">一键复制提示词</button></div>
+    <p class="note">提示词已内嵌本书全部知识底座，并加了「只依据本书、不编造」的约束。复制后去你的 AI（ChatGPT / Claude / WorkBuddy 等）开个新对话粘进去，它就成了专属本书的陪练——能考你、讲错题、带你做小练习。零 Key、可离线、随用随走。</p>
+  </section>
+
+  <section class="panel" id="recap">
+    <h2>结语 · 三句话带走这本书</h2>
+    <div class="lead take"><p><b>1.</b> 逻辑不是天赋，而是一套可以练出来的思维工具——先把概念钉死，结论才不会跑偏。</p><p><b>2.</b> 演绎看前提、归纳防以偏概全、分析综合双管齐下，这三招用熟，你就很难再被人带偏。</p><p><b>3.</b> 真正的逻辑力，是既能一眼看穿别人的诡辩，也能把自己的想法讲得清清楚楚。</p></div>
+    <p>这份资料建议从今天开始连续 7 天打卡，每天只做一个微小动作；自测卷低于 7 分，重点重读"概念厘清"与"演绎链条"两节，把 10 道题对应的模型再练一遍。</p>
+    <h2>7 天打卡 · 把知道变成做到</h2>
+    <ul class="check"><li><span class="day">第1天</span> 选一个你最近争论的话题，先写清楚"双方嘴里的那个词，分别指什么"。</li><li><span class="day">第2天</span> 把一个想不通的问题，用"因为…所以…"写成三段论，再检查它的大前提。</li><li><span class="day">第3天</span> 今天听到的任何一个"结论"，问自己：它是归纳来的还是演绎来的？</li><li><span class="day">第4天</span> 用排除法处理一件小事（比如找不到东西），先列尽可能，再逐一排除。</li><li><span class="day">第5天</span> 读一段新闻或听一段发言，圈出其中偷换概念或因果想当然的表达。</li><li><span class="day">第6天</span> 把一个复杂问题拆成3个部分分别想，再合起来看整体结构。</li><li><span class="day">第7天</span> 向一个人清楚讲明一个观点，刻意做到"前提真、推导顺、结论明"。</li></ul>
+  </section>
+
+  
+    <div class="cta">
+      <img class="ctaqr" src="../../wechat_qr.jpg" alt="微信二维码">
+      <div class="ctatxt">
+        <div class="ctabig">扫码加微信 · 备注「33本书」</div>
+        <div class="ctasub">领全套「33 本书带你开启新的人生」资料包 + AI 陪练</div>
+      </div>
+    </div>
+    拓销蜥人工智能研究院 · 张文昊 ｜ 「33 本书带你开启新的人生」系列资料包<br>
+    本资料为原创精读笔记，仅供个人成长使用。
+  
+</div>
+<script>
+/* ---------- 题库（逐字取自本书自测卷） ---------- */
+var Q = [{"q": "1. 思维不设限最核心的特征是？", "o": ["A. 发散跳跃", "B. 确定且不自相矛盾", "C. 情绪化表达", "D. 随机随性"], "a": 1, "tip": "思维不设限的两条基本准绳就是确定性与不自相矛盾。"}, {"q": "2. 一个清晰的概念由哪两部分构成？", "o": ["A. 名称和读音", "B. 内涵与外延", "C. 例子和引用", "D. 颜色和形状"], "a": 1, "tip": "内涵是\"是什么\"，外延是\"指哪些\"。"}, {"q": "3. 演绎推理里，结论可靠的关键取决于？", "o": ["A. 结论是否好听", "B. 前提是否真实", "C. 字数多少", "D. 是否押韵"], "a": 1, "tip": "前提真，结论才必然真；前提被偷换，推导再顺也错。"}, {"q": "4. 从\"我见过的天鹅都是白的\"推出\"所有天鹅都是白的\"，用了哪种思维？", "o": ["A. 演绎", "B. 归纳", "C. 计算", "D. 作图"], "a": 1, "tip": "从个别上升到一般，是归纳；但一次经验容易以偏概全。"}, {"q": "5. 下列哪种做法最容易犯\"以偏概全\"？", "o": ["A. 多样本交叉验证", "B. 把一次经验当普遍规律", "C. 求异法", "D. 剩余法"], "a": 1, "tip": "简单枚举没经反例检验，最容易翻车。"}, {"q": "6. 分析与综合的正确关系是？", "o": ["A. 只分析就够了", "B. 只综合就够了", "C. 互补互促、循环往复", "D. 毫无关系"], "a": 2, "tip": "分析是拆开看部分，综合是合起来看整体，缺一不可。"}, {"q": "7. 排查故障时\"列尽所有可能再逐一排除\"，用的是？", "o": ["A. 排除法", "B. 作图法", "C. 类比法", "D. 计算法"], "a": 0, "tip": "先穷尽可能，再逐个排除，剩下即答案。"}, {"q": "8. \"凡鹅都吃白菜，你吃白菜，所以你是鹅\"这类反驳，指出的是对方推理的什么错？", "o": ["A. 偷换概念", "B. 无效推理（中项不周延）", "C. 因果倒置", "D. 模糊语境"], "a": 1, "tip": "两个前提无法必然推出那个结论，是无效三段论。"}, {"q": "9. \"因为先发生了A、后发生了B，所以A导致B\"，这属于？", "o": ["A. 正确的因果", "B. 因果想当然", "C. 演绎", "D. 定义判断"], "a": 1, "tip": "先后不等于因果，这是诡辩常见套路。"}, {"q": "10. 保持思维不设限健康，下面哪种说法恰当？", "o": ["A. 固守归纳结论", "B. 坚持常识但不僵化", "C. 只信自己的情绪", "D. 回避矛盾"], "a": 1, "tip": "常识要坚持，但不能把归纳结论当成不可动摇的真理。"}];
+
+/* ---------- 陪练提示词（grounded，仅限本书知识） ---------- */
+var AGENT = ["你是《《思维不设限》》的 AI 陪练。只依据下面这份「本书知识底座」与用户对话，不编造本书之外的理论、人名、数据或案例。", "", "【本书知识底座｜《思维不设限》】", "维度：认知底盘", "一句话定位：读懂逻辑，告别被绕晕、被带偏、说不清", "", "核心心智模型（5 个）：", "1. 概念厘清——每个词都有\"内涵\"（它是什么）和\"外延\"（它指哪些）。先把概念钉死，后面的争论才不跑偏。 用法：讨论前先问一句\"你说的这个词，到底指什么、不指什么\"。", "2. 演绎链条——从公认的大前提推到具体情形，结论必然跟随前提。前提假，结论再顺也站不住。 用法：听到\"因为…所以…\"，先查大前提是不是真的。", "3. 归纳防偏——从多个个别现象提炼共性，是发现规律的第一步；但一次经验当普遍规律，最容易翻车。 用法：用\"求同、求异、共变\"交叉验证，别急着下结论。", "4. 假设排除——列尽所有可能，逐一排除，剩下来就是答案；先假设、后验证，排查问题最省力。 用法：找不到原因时，从结果倒推原因链，再逐个排除。", "5. 识破诡辩——偷换概念、曲解因果、模糊语境，是三种最常见的带偏套路。 用法：听到\"因为A，所以你就是B\"这类话，先停三秒。", "", "精讲要点：", "· 一、先把概念钉死：概念是思维的\"细胞\"。它由内涵（本质属性）和外延（所指范围）两部分组成，\"人\"的内涵是\"有理性感情的动物\"，外延是古今中外所有人类。", "· 二、演绎：结论跟着前提走：大前提 → 小前提 → 结论，前提为真，结论必然为真。这是最稳妥的推理形式。", "· 三、归纳：别把一次经验当规律：从个别现象提炼共性，是发现规律的第一步——看到\"眼珠转动就在做梦\"，是归纳出来的洞见。", "· 四、分析与综合：双剑合璧：分析是把整体拆成部分，找内部关联；综合是把部分联回整体，看全局结构。", "· 五、假设与排除：排查最省力：遇到故障或谜题，先列尽所有可能，再逐一排除，剩下就是答案——这是排除法的精髓。", "· 六、看穿诡辩的套路：偷换概念：话到中间悄悄改了词的意思。", "", "带走三句话：", "1. 逻辑不是天赋，而是一套可以练出来的思维工具——先把概念钉死，结论才不会跑偏。", "2. 演绎看前提、归纳防以偏概全、分析综合双管齐下，这三招用熟，你就很难再被人带偏。", "3. 真正的逻辑力，是既能一眼看穿别人的诡辩，也能把自己的想法讲得清清楚楚。", "", "【你的任务】", "1. 用户提问时，先用本书模型解释，再给一个「今天就能做」的小动作。", "2. 主动出题考用户（范围：概念厘清、演绎链条、归纳防偏、假设排除、识破诡辩），答错时引用对应模型讲清「为什么」，并给替代做法，不讲「不行」。", "3. 用户说「卡住了」，用最合适的模型带他做一个小练习。", "4. 绝不超出本书知识底座编造；不确定时如实说「这一点书里没细讲」。", "", "开始：先问用户最近在为什么事犯愁，用一个本书小练习带他热热身。"].join("\n");
+
+/* ---------- 面板切换 ---------- */
+var tabs = document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.p); }; });
+function show(p){
+  tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  document.querySelectorAll('.panel').forEach(function(s){ s.classList.toggle('on', s.id===p); });
+  if(p==='agent'){ document.getElementById('agentText').textContent = AGENT; }
+  window.scrollTo(0,0);
+}
+
+/* ---------- 闯关逻辑 ---------- */
+var cur=0, picked=[], answered=[], wrong=[];
+var qc = document.getElementById('qcard');
+function render(){
+  if(cur>=Q.length){ return finish(); }
+  var it=Q[cur], html='';
+  html+='<div class="qmeta"><span class="qno">第 '+(cur+1)+' 题</span><div class="qprog"><i style="width:'+((cur)/Q.length)*100+'%"></i></div><span style="font-size:12px;color:#6a6a6a">'+cur+'/'+Q.length+'</span></div>';
+  html+='<div class="qt">'+it.q+'</div>';
+  it.o.forEach(function(op,i){
+    var cls='opt'; if(answered[cur]){ if(i===it.a) cls+=' ok'; else if(picked[cur]===i) cls+=' no'; }
+    else if(picked[cur]===i) cls+=' sel';
+    html+='<label class="'+cls+'" data-i="'+i+'"><input type="radio" name="q'+(cur+1)+'" '+(picked[cur]===i?'checked':'')+'>'+String.fromCharCode(65+i)+'. '+op+'</label>';
+  });
+  if(answered[cur]){
+    var ok = picked[cur]===it.a;
+    html+='<div class="tip show '+(ok?'ok':'no')+'">'+(ok?'✅ 答对了。':'❌ 正确选项：'+String.fromCharCode(65+it.a)+'。')+it.tip+'</div>';
+  }
+  html+='<div class="qnav">';
+  html+='<button class="btns" '+(cur===0?'disabled':'')+' onclick="go(-1)">上一题</button>';
+  if(answered[cur]) html+='<button class="btnp" onclick="go(1)">'+(cur===Q.length-1?'查看成绩':'下一题')+'</button>';
+  else html+='<button class="btnp" onclick="submit()">确定</button>';
+  html+='</div>';
+  qc.innerHTML=html;
+  qc.querySelectorAll('.opt').forEach(function(l){
+    l.onclick=function(){ if(answered[cur]) return; picked[cur]=parseInt(l.dataset.i); render(); };
+  });
+}
+function submit(){
+  if(picked[cur]===undefined){ alert('先选一个选项'); return; }
+  answered[cur]=true;
+  if(picked[cur]!==Q[cur].a) wrong.push(cur);
+  save(); render();
+}
+function go(d){
+  cur+=d; if(cur<0) cur=0; if(cur>Q.length) cur=Q.length; render();
+}
+function finish(){
+  var right=Q.length-wrong.length, pct=Math.round(right/Q.length*100);
+  var badges = pct>=90?'🌟 跨界高手':pct>=70?'💡 思维开窍':pct>=50?'🌱 起步扎实':'🔧 重读精讲';
+  var html='<div class="scorebox"><div class="big">'+right+' / '+Q.length+'</div><div style="opacity:.9">正确率 '+pct+'%</div><div style="margin-top:10px"><span class="badge">'+badges+'</span></div></div>';
+  if(localStorage.getItem('b02_best')) html+='<p class="note" style="text-align:center">历史最佳：'+localStorage.getItem('b02_best')+' / '+Q.length+'</p>';
+  if(wrong.length){
+    html+='<div class="wrong"><h3 style="color:#b5453b">错题复盘（'+wrong.length+' 道）</h3>';
+    wrong.forEach(function(i){ html+='<div class="w"><b>第'+(i+1)+'题</b> '+Q[i].q+'<br>'+Q[i].tip+'</div>'; });
+    html+='</div>';
+  } else { html+='<div class="lead" style="margin-top:16px">全对！把书里「最小可执行步」挑一个今天就用一次。</div>'; }
+  html+='<div class="qnav"><button class="btnp" onclick="restart()">再闯一次</button><button class="btns" onclick="show(\'agent\')">拿错题去陪练</button></div>';
+  qc.innerHTML=html;
+}
+function restart(){ cur=0; picked=[]; answered=[]; wrong=[]; render(); }
+function save(){ var best=parseInt(localStorage.getItem('b02_best')||'0'); var now=Q.length-wrong.length; if(now>best){ localStorage.setItem('b02_best', now); } }
+render();
+
+/* ---------- 复制 ---------- */
+document.getElementById('copyBtn').onclick=function(){
+  var t=AGENT; var btn=this;
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ btn.textContent='已复制 ✓'; setTimeout(function(){btn.textContent='一键复制提示词';},1800); }); }
+  else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); btn.textContent='已复制 ✓';}catch(e){} document.body.removeChild(ta); setTimeout(function(){btn.textContent='一键复制提示词';},1800); }
+};
+</script></body></html>
